@@ -15,7 +15,7 @@ const BLACK = 0x000000;
 
 function Galaxy() {
     const orthCamera = new THREE.OrthographicCamera(- d, d, d, d, 1, 200)
-    orthCamera.position.set(0, 0, 30);
+    orthCamera.position.set(0, 0, 100);
     orthCamera.zoom = 50
 
     return (
@@ -34,6 +34,7 @@ function Galaxy() {
             <Belt radius={0.5} distance={17} speed={0.1} />
             <Planet radius={0.4} distance={25} speed={0.08} />
             <Planet radius={0.45} distance={33} speed={0.06} />
+            <Planet radius={0.2} distance={43} speed={0.1} />
         </Canvas >
     )
 }
