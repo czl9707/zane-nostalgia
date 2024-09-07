@@ -14,9 +14,12 @@ const LIGHTGREY = 0x222222;
 const BLACK = 0x000000;
 
 function Galaxy() {
-    const orthCamera = new THREE.OrthographicCamera(- d, d, d, d, 1, 200)
-    orthCamera.position.set(0, 0, 100);
-    orthCamera.zoom = 50
+    const orthCamera = React.useMemo(() => {
+        const orthCamera = new THREE.OrthographicCamera(- d, d, d, d, 1, 200)
+        orthCamera.position.set(0, 0, 100);
+        orthCamera.zoom = 50
+        return orthCamera;
+    }, []);
 
     return (
         <Canvas
@@ -197,7 +200,6 @@ function OrbitTrackCurve(radius: number, incline: number) {
     tempMesh.rotateY(-incline);
     tempMesh.updateMatrixWorld(true);
 
-    console.log(tempMesh.matrixWorld)
     return new THREE.CatmullRomCurve3(points.map(p => p.applyMatrix4(tempMesh.matrixWorld)), true);
 }
 
