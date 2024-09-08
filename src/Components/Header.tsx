@@ -121,7 +121,7 @@ function SceneMenu({ open, toggle }: {
     () => scenes.map(({ iconSvg, name, path }) => {
       const IconComponent = createSvgIcon(iconSvg, name);
       return (
-        <MenuItem dense
+        <MenuItem dense key={name}
           onClick={() => {
             toggle(false);
             navigate(path);

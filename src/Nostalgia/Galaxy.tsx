@@ -8,6 +8,7 @@ import { Bloom, EffectComposer, Selection, Select } from '@react-three/postproce
 const SunSize = 1
 const d = 20;
 const outlinesThickness = 0.01;
+
 const WHITE = 0xffffff;
 const DARKGREY = 0x666666;
 const LIGHTGREY = 0x222222;
@@ -78,6 +79,12 @@ function Planet({ radius, distance, speed, incline = 0.2 }: PlanetProps) {
     const orbitTrackCurve = React.useMemo(
         () => OrbitTrackCurve(distance + SunSize, incline),
         [distance, incline])
+    const orbitTrackGeometry = React.useMemo(
+        () => new THREE.BufferGeometry().setFromPoints(
+            orbitTrackCurve.getSpacedPoints((distance + SunSize) * 20)
+        ),
+        [orbitTrackCurve, distance])
+
 
     useFrame(() => {
         setCurrentStep(currentStep + (speed / 2000));
@@ -102,9 +109,7 @@ function Planet({ radius, distance, speed, incline = 0.2 }: PlanetProps) {
                 <meshStandardMaterial color={WHITE} />
                 <Outlines screenspace thickness={outlinesThickness} color={WHITE} />
             </mesh>
-            <lineLoop geometry={new THREE.BufferGeometry().setFromPoints(
-                orbitTrackCurve.getSpacedPoints((distance + SunSize) * 20)
-            )}>
+            <lineLoop geometry={orbitTrackGeometry}>
                 <lineBasicMaterial color={0x444444} linewidth={1} />
             </lineLoop>
         </>
@@ -202,6 +207,5 @@ function OrbitTrackCurve(radius: number, incline: number) {
 
     return new THREE.CatmullRomCurve3(points.map(p => p.applyMatrix4(tempMesh.matrixWorld)), true);
 }
-
 
 export default Galaxy;
