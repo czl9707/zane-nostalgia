@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from 'react'
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Outlines, Point, PointMaterial, Points } from '@react-three/drei'
@@ -14,7 +16,7 @@ const DARKGREY = 0x666666;
 const LIGHTGREY = 0x222222;
 const BLACK = 0x000000;
 
-function Galaxy() {
+function Page() {
     const orthCamera = React.useMemo(() => {
         const orthCamera = new THREE.OrthographicCamera(- d, d, d, d, 1, 200)
         orthCamera.position.set(0, 0, 100);
@@ -23,23 +25,25 @@ function Galaxy() {
     }, []);
 
     return (
-        <Canvas
-            scene={{ background: new THREE.Color(0x000000) }}
-            camera={orthCamera}
-        >
-            <Sun />
-            <Background />
+        <div style={{ zIndex: 0, width: "100%", height: "100%", position: "fixed" }}>
+            <Canvas
+                scene={{ background: new THREE.Color(0x000000) }}
+                camera={orthCamera}
+            >
+                <Sun />
+                <Background />
 
-            <Planet radius={0.1} distance={0.5} speed={0.5} />
-            <Planet radius={0.13} distance={1.25} speed={0.7} />
-            <Planet radius={0.15} distance={3} speed={0.4} />
-            <Planet radius={0.2} distance={7} speed={0.5} incline={0.17} />
-            <Planet radius={0.25} distance={12} speed={0.5} />
-            <Belt radius={0.5} distance={17} speed={0.1} />
-            <Planet radius={0.4} distance={25} speed={0.08} />
-            <Planet radius={0.45} distance={33} speed={0.06} />
-            <Planet radius={0.2} distance={43} speed={0.1} />
-        </Canvas >
+                <Planet radius={0.1} distance={0.5} speed={0.5} />
+                <Planet radius={0.13} distance={1.25} speed={0.7} />
+                <Planet radius={0.15} distance={3} speed={0.4} />
+                <Planet radius={0.2} distance={7} speed={0.5} incline={0.17} />
+                <Planet radius={0.25} distance={12} speed={0.5} />
+                <Belt radius={0.5} distance={17} speed={0.1} />
+                <Planet radius={0.4} distance={25} speed={0.08} />
+                <Planet radius={0.45} distance={33} speed={0.06} />
+                <Planet radius={0.2} distance={43} speed={0.1} />
+            </Canvas >
+        </div>
     )
 }
 
@@ -208,4 +212,4 @@ function OrbitTrackCurve(radius: number, incline: number) {
     return new THREE.CatmullRomCurve3(points.map(p => p.applyMatrix4(tempMesh.matrixWorld)), true);
 }
 
-export default Galaxy;
+export default Page;

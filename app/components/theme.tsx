@@ -1,3 +1,5 @@
+"use client"
+
 import { createTheme, TypographyVariantsOptions, ThemeProvider } from '@mui/material/styles';
 import { common } from '@mui/material/colors'
 import * as React from 'react';

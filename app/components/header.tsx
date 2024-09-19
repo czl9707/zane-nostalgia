@@ -1,11 +1,13 @@
+"use client"
+
 import * as React from 'react';
 import { AppBar, Box, Toolbar, Typography, Container, IconButton, Menu, createSvgIcon, ListItemIcon, ListItemText, Collapse, Button, MenuItem } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation'
 import MenuIcon from '@mui/icons-material/Menu';
-import scenes from '../Scenes'
+import scenes from '../scenes'
 
 function Header() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isHover, setIsHover] = React.useState<boolean>(true);
   React.useEffect(() => setIsHover(false), []);
 
@@ -22,7 +24,7 @@ function Header() {
       <Container maxWidth="xl">
         <Toolbar sx={{ px: 4 }}>
           <Typography noWrap variant='h6'
-            onClick={() => navigate("/")}
+            onClick={() => router.push("/")}
             sx={{ cursor: "pointer" }}>
             NOSTALGIA .Z
           </Typography>
@@ -38,7 +40,7 @@ function Header() {
 }
 
 function FullMenu() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElNav(event.currentTarget);
@@ -50,7 +52,7 @@ function FullMenu() {
         About Zane
       </Button>
       <Button variant='text' color="inherit"
-        onClick={() => navigate("/")}>
+        onClick={() => router.push("/")}>
         Next Scene
       </Button>
       <Button variant='text' color="inherit"
@@ -70,7 +72,7 @@ function FullMenu() {
 }
 
 function CollapsedMenu() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [isSceneMenuOpen, toggleSceneMenu] = React.useState<boolean>(false);
 
@@ -94,7 +96,7 @@ function CollapsedMenu() {
 
         <MenuItem dense
           onClick={() => {
-            navigate("/");
+            router.push("/");
             handleCloseNavMenu();
           }}>
           <Typography variant='button'>Next Scene</Typography>
@@ -115,16 +117,16 @@ function SceneMenu({ open, toggle }: {
   open: boolean,
   toggle: (open: boolean) => void,
 }) {
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const sceneListItemLists = React.useMemo(
-    () => scenes.map(({ iconSvg, name, path }) => {
+    () => scenes.map(({ iconSvg, name }) => {
       const IconComponent = createSvgIcon(iconSvg, name);
       return (
         <MenuItem dense key={name}
           onClick={() => {
             toggle(false);
-            navigate(path);
+            router.push("/");
           }}>
           <ListItemIcon><IconComponent /></ListItemIcon>
           <ListItemText primary={name} />
