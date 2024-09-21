@@ -5,6 +5,7 @@ import { AppBar, Box, Toolbar, Typography, Container, IconButton, Menu, createSv
 import { useRouter } from 'next/navigation'
 import MenuIcon from '@mui/icons-material/Menu';
 import scenes from '../scenes'
+import { backgroundContext, randomScenePath } from '../page';
 
 function Header() {
   const router = useRouter();
@@ -40,11 +41,12 @@ function Header() {
 }
 
 function FullMenu() {
-  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElNav(event.currentTarget);
   const handleCloseNavMenu = () => setAnchorElNav(null);
+
+  const updateScene = React.useContext(backgroundContext);
 
   return (
     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
@@ -52,7 +54,7 @@ function FullMenu() {
         About Zane
       </Button>
       <Button variant='text' color="inherit"
-        onClick={() => router.push("/")}>
+        onClick={() => updateScene(randomScenePath())}>
         Next Scene
       </Button>
       <Button variant='text' color="inherit"
@@ -72,12 +74,13 @@ function FullMenu() {
 }
 
 function CollapsedMenu() {
-  const router = useRouter();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [isSceneMenuOpen, toggleSceneMenu] = React.useState<boolean>(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElNav(event.currentTarget);
   const handleCloseNavMenu = () => setAnchorElNav(null);
+
+  const updateScene = React.useContext(backgroundContext);
 
   return (
     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
@@ -96,7 +99,7 @@ function CollapsedMenu() {
 
         <MenuItem dense
           onClick={() => {
-            router.push("/");
+            updateScene(randomScenePath());
             handleCloseNavMenu();
           }}>
           <Typography variant='button'>Next Scene</Typography>
@@ -117,7 +120,7 @@ function SceneMenu({ open, toggle }: {
   open: boolean,
   toggle: (open: boolean) => void,
 }) {
-  const router = useRouter();
+  const updateScene = React.useContext(backgroundContext);
 
   const sceneListItemLists = React.useMemo(
     () => scenes.map(({ iconSvg, name }) => {
@@ -126,7 +129,7 @@ function SceneMenu({ open, toggle }: {
         <MenuItem dense key={name}
           onClick={() => {
             toggle(false);
-            router.push("/");
+            updateScene(name);
           }}>
           <ListItemIcon><IconComponent /></ListItemIcon>
           <ListItemText primary={name} />
