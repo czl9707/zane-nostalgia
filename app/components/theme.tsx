@@ -1,7 +1,15 @@
+"use client"
+
 import { createTheme, TypographyVariantsOptions, ThemeProvider } from '@mui/material/styles';
 import { common } from '@mui/material/colors'
 import * as React from 'react';
+import { Lato } from 'next/font/google';
 
+const lato = Lato({
+    weight: ['100', '300', '400', '700', '900'],
+    style: ['italic', 'normal'],
+    subsets: ['latin-ext']
+});
 
 function ThemeProviderWrapper({ children }: { children: React.ReactNode }) {
     return (
@@ -12,7 +20,7 @@ function ThemeProviderWrapper({ children }: { children: React.ReactNode }) {
 }
 
 const APPTYPOGRAPHY: TypographyVariantsOptions = {
-    fontFamily: "Lato",
+    fontFamily: lato.style.fontFamily,
 };
 
 

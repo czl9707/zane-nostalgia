@@ -1,11 +1,14 @@
+"use client"
+
 import * as React from 'react';
 import { AppBar, Box, Toolbar, Typography, Container, IconButton, Menu, createSvgIcon, ListItemIcon, ListItemText, Collapse, Button, MenuItem } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useRouter } from 'next/navigation'
 import MenuIcon from '@mui/icons-material/Menu';
-import scenes from '../Scenes'
+import scenes from '../scenes'
+import { backgroundContext, randomScenePath } from '../page';
 
 function Header() {
-  const navigate = useNavigate();
+  const router = useRouter();
   const [isHover, setIsHover] = React.useState<boolean>(true);
   React.useEffect(() => setIsHover(false), []);
 
@@ -22,7 +25,7 @@ function Header() {
       <Container maxWidth="xl">
         <Toolbar sx={{ px: 4 }}>
           <Typography noWrap variant='h6'
-            onClick={() => navigate("/")}
+            onClick={() => router.push("/")}
             sx={{ cursor: "pointer" }}>
             NOSTALGIA .Z
           </Typography>
@@ -38,11 +41,12 @@ function Header() {
 }
 
 function FullMenu() {
-  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElNav(event.currentTarget);
   const handleCloseNavMenu = () => setAnchorElNav(null);
+
+  const updateScene = React.useContext(backgroundContext);
 
   return (
     <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
@@ -50,7 +54,7 @@ function FullMenu() {
         About Zane
       </Button>
       <Button variant='text' color="inherit"
-        onClick={() => navigate("/")}>
+        onClick={() => updateScene(randomScenePath())}>
         Next Scene
       </Button>
       <Button variant='text' color="inherit"
@@ -70,12 +74,13 @@ function FullMenu() {
 }
 
 function CollapsedMenu() {
-  const navigate = useNavigate();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [isSceneMenuOpen, toggleSceneMenu] = React.useState<boolean>(false);
 
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => setAnchorElNav(event.currentTarget);
   const handleCloseNavMenu = () => setAnchorElNav(null);
+
+  const updateScene = React.useContext(backgroundContext);
 
   return (
     <Box sx={{ display: { xs: 'block', sm: 'none' } }}>
@@ -94,7 +99,7 @@ function CollapsedMenu() {
 
         <MenuItem dense
           onClick={() => {
-            navigate("/");
+            updateScene(randomScenePath());
             handleCloseNavMenu();
           }}>
           <Typography variant='button'>Next Scene</Typography>
@@ -115,16 +120,16 @@ function SceneMenu({ open, toggle }: {
   open: boolean,
   toggle: (open: boolean) => void,
 }) {
-  const navigate = useNavigate();
+  const updateScene = React.useContext(backgroundContext);
 
   const sceneListItemLists = React.useMemo(
-    () => scenes.map(({ iconSvg, name, path }) => {
+    () => scenes.map(({ iconSvg, name }) => {
       const IconComponent = createSvgIcon(iconSvg, name);
       return (
         <MenuItem dense key={name}
           onClick={() => {
             toggle(false);
-            navigate(path);
+            updateScene(name);
           }}>
           <ListItemIcon><IconComponent /></ListItemIcon>
           <ListItemText primary={name} />
