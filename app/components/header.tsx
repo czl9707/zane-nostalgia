@@ -4,8 +4,8 @@ import * as React from 'react';
 import { AppBar, Box, Toolbar, Typography, Container, IconButton, Menu, createSvgIcon, ListItemIcon, ListItemText, Collapse, Button, MenuItem } from '@mui/material';
 import { useRouter } from 'next/navigation'
 import MenuIcon from '@mui/icons-material/Menu';
-import scenes from '../scenes'
-import { backgroundContext, randomScenePath } from '../page';
+import scenes from '../utils/scenes'
+import { backgroundContext, randomScenePath } from '../nostalgia/sceneUtil';
 
 function Header() {
   const router = useRouter();
