@@ -148,40 +148,33 @@
 //   )
 // }
 
-import { styled } from "@pigment-css/react";
+"use client"
+
 import { H4Typography } from "./Typography";
-import Section from "./Section";
+import HeaderBar from "./HeaderBar";
+import { useRouter } from "next/navigation";
+import ButtonBase from "./ButtonBase";
+import React from "react";
+import { css } from "@pigment-css/react";
 
-const HeaderBar = styled(Section)(({ theme }) => ({
-  position: "fixed", backgroundColor: theme.vars.colors.primary.background,
-
-  opacity: "0",
-  transition: "all 2s ease 2s",
-  animation: "showOnLoad 2s ease 2s backwards",
-
-  "&:hover": {
-    transitionDuration: "0.7s", transitionDelay: "0s",
-    opacity: 1,
-  },
-  "@keyframes showOnLoad": {
-    "0%": {
-      opacity: 1
-    },
-    "100%": {
-      opacity: 0
-    }
-  }
-}));
+const opacity1 = css({ opacity: 1 });
 
 export default function Header() {
-
+  const router = useRouter();
+  const barOnSet = React.useCallback((node: HTMLElement | null) => {
+    node?.classList.remove(opacity1);
+  }, []);
 
   return (
-    <HeaderBar>
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <H4Typography color="primary">NOSTALGIA .Z</H4Typography>
-        <div style={{ flex: "1 1" }} />
-      </div>
+    <HeaderBar className={opacity1} ref={barOnSet}>
+      <H4Typography color="primary" onClick={() => router.replace("/")}
+        style={{ cursor: "pointer" }}>
+        NOSTALGIA .Z
+      </H4Typography>
+      <div style={{ flex: "1 1" }} />
+      <ButtonBase color="tranparent" variant="filled">About</ButtonBase>
+      <ButtonBase color="tranparent" variant="filled">Playground</ButtonBase>
+      <ButtonBase color="tranparent" variant="filled">Scenes</ButtonBase>
     </HeaderBar>
   )
 };

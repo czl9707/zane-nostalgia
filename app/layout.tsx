@@ -1,6 +1,8 @@
+import * as React from "react"
+
 import '@pigment-css/react/styles.css';
 import { Lato, Caveat } from 'next/font/google';
-import { globalCss } from '@pigment-css/react';
+import { css } from '@pigment-css/react';
 
 import Header from './components/Header';
 
@@ -17,12 +19,16 @@ const caveat = Caveat({
   subsets: ['latin-ext']
 });
 
-const globalVars = globalCss`
-:root{
-  --lato-font-family: ${lato.style.fontFamily};
-  --caveat-font-family: ${caveat.style.fontFamily};
+const bodyProps = css(({ theme }) => ({
+  margin: 0, padding: 0, width: "100%",
+  backgroundColor: theme.vars.colors.primary.background,
+}));
+
+const globalVars = {
+  "--lato-font-family": lato.style.fontFamily,
+  "--caveat-font-family": caveat.style.fontFamily,
 }
-`
+
 
 export default function RootLayout({
   children,
@@ -38,7 +44,7 @@ export default function RootLayout({
         <link rel="icon" href="/favicon.svg" type="/src/image/svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
-      <body style={{ margin: 0, padding: 0 }} className={globalVars}>
+      <body className={bodyProps} style={globalVars}>
         <Header />
         {children}
       </body>

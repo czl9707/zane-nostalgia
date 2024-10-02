@@ -1,16 +1,33 @@
 import { styled } from '@pigment-css/react'
+import * as React from 'react';
 
-const Section = styled("section")(({ theme }) => {
+const Inner = styled("div")(({ theme }) => {
     return {
-        paddingTop: ".75rem", paddingBottom: ".75rem",
+        paddingTop: "1rem", paddingBottom: "1rem",
         paddingLeft: "4rem", paddingRight: "4rem",
-        margin: 0, width: "100%",
-        "@media (max-width: var(--breakpoints-sm)px)": {
+        marginTop: 0, marginBottom: 0,
+        marginLeft: "auto", marginRight: "auto",
+        boxSizing: "border-box", position: "relative",
+        [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+            width: "100%",
         },
-        "@media (max-width: var(--breakpoints-md)px)": {
-            width: `${theme.breakpoints.sm}px`,
+        [`@media (min-width: ${theme.breakpoints.md}px)`]: {
+            width: `${theme.breakpoints.md}px`,
         },
     };
 });
+
+const Container = styled("div")({
+    width: "100%", display: "flex",
+    flexDirection: "column", alignItems: "center"
+});
+
+const Section = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
+    function Section(props, ref) {
+        return (<Container>
+            <Inner {...props} ref={ref} />
+        </Container>)
+    }
+);
 
 export default Section;

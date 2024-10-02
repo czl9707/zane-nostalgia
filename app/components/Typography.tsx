@@ -1,7 +1,6 @@
-import { CSSObjectNoCallback, styled } from "@pigment-css/react";
+import { CSSPropertiesWithCallback, styled } from "@pigment-css/react";
 
 import { ColorVariation, ThemeArgs, TypographyVairation } from "@pigment-css/react/theme";
-import * as React from "react";
 
 interface TypographyProps {
     color: ColorVariation
@@ -9,23 +8,14 @@ interface TypographyProps {
 
 function styledTypographyPropsFactory(
     typographyVariation: TypographyVairation
-): ((themeArgs: ThemeArgs) => CSSObjectNoCallback) {
+): ((themeArgs: ThemeArgs) => CSSPropertiesWithCallback<TypographyProps>) {
     return ({ theme }: ThemeArgs) => ({
-        margin: 0, padding: 0,
+        margin: 0, padding: 0, whiteSpace: "nowrap",
         fontFamily: theme.typographies[typographyVariation].fontFamily,
         fontSize: theme.typographies[typographyVariation].fontSize,
         fontWeight: theme.typographies[typographyVariation].fontWeight,
         lineHeight: theme.typographies[typographyVariation].lineHeight,
-        variants: [
-            {
-                props: { color: 'primary' },
-                style: { color: theme.vars.colors.primary.contrastText },
-            },
-            {
-                props: { color: 'secondary' },
-                style: { color: theme.vars.colors.secondary.contrastText },
-            },
-        ]
+        color: (({ color }: TypographyProps) => theme.vars.colors[color].contrastText),
     });
 }
 
