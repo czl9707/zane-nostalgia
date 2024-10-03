@@ -25,8 +25,8 @@ export default withPigment(
             },
             breakpoints: {
                 sm: 600,
-                md: 900,
-                lg: 1200,
+                md: 1000,
+                lg: 1400,
             },
             typographies: {
                 body: { fontFamily: "var(--lato-font-family)", fontWeight: 400, fontSize: "1.125rem", lineHeight: 1.2, },

@@ -29,12 +29,12 @@ const globalVars = {
   "--caveat-font-family": caveat.style.fontFamily,
 }
 
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+
   return (
     <html lang="en">
       <head>
