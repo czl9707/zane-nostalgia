@@ -10,7 +10,7 @@ const HeaderBar = styled(Section)({
   transition: "opacity 2s ease 3s",
 
   "&:hover": {
-    transitionDuration: "0.5s", transitionDelay: "0s",
+    transitionDuration: "0.3s", transitionDelay: "0s",
     opacity: 1,
   },
 });
