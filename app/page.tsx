@@ -4,11 +4,11 @@ import { QuoteTypography } from "./ui-components/Typography";
 
 const StatementPanel = styled(Panel)(({ theme }) => ({
     position: "fixed", top: 0, right: 0,
-    width: `calc(${theme.breakpoints.md} - 8rem)`,
+    width: `calc(${theme.breakpoints.sm} - 8rem)`,
     margin: "4rem", boxSizing: "border-box",
     padding: "1.5rem",
 
-    [`@media(max-width: ${theme.breakpoints.md})`]: {
+    [`@media(max-width: ${theme.breakpoints.sm})`]: {
         left: 0, width: "auto",
     }
 }));
