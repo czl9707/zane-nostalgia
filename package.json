@@ -4,25 +4,23 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@emotion/react": "^11.13.0",
-    "@emotion/styled": "^11.13.0",
-    "@mui/icons-material": "^5.16.5",
-    "@mui/material": "^5.16.7",
+    "@pigment-css/react": "^0.0.24",
     "@react-three/drei": "^9.111.5",
     "@react-three/fiber": "^8.17.6",
     "@react-three/postprocessing": "^2.16.2",
+    "next": "^14",
     "react": "^18",
     "react-dom": "^18",
-    "next": "^14",
     "three": "^0.168.0"
   },
   "devDependencies": {
+    "@pigment-css/nextjs-plugin": "^0.0.24",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "typescript": "^5",
-    "eslint-config-next": "14.2.11"
+    "eslint-config-next": "14.2.11",
+    "typescript": "^5"
   },
   "scripts": {
     "dev": "next dev",

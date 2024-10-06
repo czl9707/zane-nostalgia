@@ -25,7 +25,7 @@ function Page() {
     }, []);
 
     return (
-        <div style={{ zIndex: 0, width: "100%", height: "100%", position: "fixed" }}>
+        <div style={{ zIndex: -1, width: "100%", height: "100%", position: "fixed" }}>
             <Canvas
                 scene={{ background: new THREE.Color(0x000000) }}
                 camera={orthCamera}

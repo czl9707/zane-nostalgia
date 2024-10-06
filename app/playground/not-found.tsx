@@ -2,7 +2,6 @@
 
 import { redirect } from 'next/navigation';
 
-
 export default function GlobalError() {
-    redirect("/nostalgia");
+    redirect("/");
 }
