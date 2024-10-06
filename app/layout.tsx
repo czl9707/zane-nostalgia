@@ -1,10 +1,10 @@
 import * as React from "react"
 
 import '@pigment-css/react/styles.css';
-import { Lato, Caveat } from 'next/font/google';
+import { Lato, Dancing_Script } from 'next/font/google';
 import { css } from '@pigment-css/react';
 
-import Header from './components/Header';
+import NavigationPanel from "./NavigationPanel";
 
 
 const lato = Lato({
@@ -13,20 +13,20 @@ const lato = Lato({
   subsets: ['latin-ext']
 });
 
-const caveat = Caveat({
+const dancing = Dancing_Script({
   weight: ["400"],
   style: ['normal'],
   subsets: ['latin-ext']
 });
 
 const bodyProps = css(({ theme }) => ({
-  margin: 0, padding: 0, width: "100%",
+  margin: 0, padding: 0, width: "100vw", height: "100vh",
   backgroundColor: theme.vars.colors.primary.background,
 }));
 
 const globalVars = {
   "--lato-font-family": lato.style.fontFamily,
-  "--caveat-font-family": caveat.style.fontFamily,
+  "--dancing-font-family": dancing.style.fontFamily,
 }
 
 export default function RootLayout({
@@ -45,7 +45,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={bodyProps} style={globalVars}>
-        <Header />
+        <NavigationPanel />
         {children}
       </body>
     </html>

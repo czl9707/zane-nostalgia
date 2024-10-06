@@ -18,9 +18,9 @@ declare module '@pigment-css/react/theme' {
             secondary: ColorToken,
         },
         breakpoints: {
-            sm: number,
-            md: number,
-            lg: number,
+            sm: string,
+            md: string,
+            lg: string,
         }
         typographies: {
             h1: TypographyToken,
@@ -32,6 +32,10 @@ declare module '@pigment-css/react/theme' {
             button: TypographyToken,
             body: TypographyToken,
             quote: TypographyToken,
+        }
+        transition: {
+            short: string,
+            long: string,
         }
     }
 

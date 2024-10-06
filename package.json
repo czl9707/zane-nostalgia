@@ -8,19 +8,19 @@
     "@react-three/drei": "^9.111.5",
     "@react-three/fiber": "^8.17.6",
     "@react-three/postprocessing": "^2.16.2",
+    "next": "^14",
     "react": "^18",
     "react-dom": "^18",
-    "next": "^14",
     "three": "^0.168.0"
   },
   "devDependencies": {
+    "@pigment-css/nextjs-plugin": "^0.0.24",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "eslint": "^8",
-    "typescript": "^5",
     "eslint-config-next": "14.2.11",
-    "@pigment-css/nextjs-plugin": "^0.0.24"
+    "typescript": "^5"
   },
   "scripts": {
     "dev": "next dev",

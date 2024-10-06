@@ -8,11 +8,11 @@ const Inner = styled("div")(({ theme }) => {
         marginTop: 0, marginBottom: 0,
         marginLeft: "auto", marginRight: "auto",
         boxSizing: "border-box", position: "relative",
-        [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+        [`@media (max-width: ${theme.breakpoints.md})`]: {
             width: "100%",
         },
-        [`@media (min-width: ${theme.breakpoints.md}px)`]: {
-            width: `${theme.breakpoints.md}px`,
+        [`@media (min-width: ${theme.breakpoints.md})`]: {
+            width: `${theme.breakpoints.md}`,
         },
     };
 });
