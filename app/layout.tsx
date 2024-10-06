@@ -27,7 +27,7 @@ const bodyProps = css(({ theme }) => ({
 const globalVars = {
   "--lato-font-family": lato.style.fontFamily,
   "--dancing-font-family": dancing.style.fontFamily,
-}
+} as React.CSSProperties;
 
 export default function RootLayout({
   children,
