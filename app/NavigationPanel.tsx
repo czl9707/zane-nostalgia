@@ -29,15 +29,15 @@ const NavigationPanelContainer = styled(Panel)(({ theme }) => ({
         },
     },
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
-        transition: `max-height ${theme.transition.short} ease,
-                    opacity ${theme.transition.short} ease ${theme.transition.short},
+        transition: `max-height ${theme.transition.long} ease,
+                    opacity ${theme.transition.short} ease ${theme.transition.long},
                     margin ${theme.transition.short} ease`,
         position: "relative", float: "right", opacity: 1,
         margin: "4rem 4rem 0 4rem", maxHeight: "100vh",
         "&.noshow": {
-            transition: `max-height ${theme.transition.short} ease ${theme.transition.short},
+            transition: `max-height ${theme.transition.long} ease ${theme.transition.short},
                         opacity ${theme.transition.short} ease,
-                        margin ${theme.transition.short} ease ${theme.transition.short}`,
+                        margin ${theme.transition.short} ease ${theme.transition.long}`,
             overflowY: "hidden", opacity: 0,
             margin: "0 4rem 0 4rem", maxHeight: 0
         }
