@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from "react"
 
 import '@pigment-css/react/styles.css';
@@ -5,6 +7,9 @@ import { Lato, Dancing_Script } from 'next/font/google';
 import { css } from '@pigment-css/react';
 
 import NavigationPanel from "./NavigationPanel";
+import Header from "./Header";
+import FlippingIcon from "./ui-components/Icons/FlippingIcon";
+import { Close, Menu } from "./ui-components/Icons/Icons";
 
 
 const lato = Lato({
@@ -20,7 +25,7 @@ const dancing = Dancing_Script({
 });
 
 const bodyProps = css(({ theme }) => ({
-  margin: 0, padding: 0, width: "100vw", height: "100vh",
+  margin: 0, padding: 0, width: "100vw", height: "100vh", overflow: "hidden",
   backgroundColor: theme.vars.colors.primary.background,
 }));
 
@@ -29,11 +34,14 @@ const globalVars = {
   "--dancing-font-family": dancing.style.fontFamily,
 } as React.CSSProperties;
 
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const [isNavOpen, setNavIsOpen] = React.useState<boolean>(false);
+  const toggleNav = () => setNavIsOpen((isNavOpen) => !isNavOpen)
 
   return (
     <html lang="en">
@@ -45,7 +53,21 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={bodyProps} style={globalVars}>
-        <NavigationPanel />
+        <Header>
+          <div style={{ flex: "1 1" }} />
+          <FlippingIcon
+            className={css(
+              ({ theme }) => ({
+                [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
+              })
+            )}
+            onClick={toggleNav}
+            isFlipped={isNavOpen}
+            before={<Menu />}
+            after={<Close />}
+          />
+        </Header>
+        <NavigationPanel isShow={isNavOpen} onClose={() => setNavIsOpen(false)} />
         {children}
       </body>
     </html>

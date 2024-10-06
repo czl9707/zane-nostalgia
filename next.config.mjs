@@ -8,6 +8,9 @@ const nextConfig = {};
 export default withPigment(
     nextConfig,
     {
+        css: {
+            defaultDirection: 'ltr',
+        },
         theme: extendTheme({
             colorSchemes: {
                 light: {
@@ -24,9 +27,9 @@ export default withPigment(
                 }
             },
             breakpoints: {
-                sm: "600px",
-                md: "1000px",
-                lg: "1400px",
+                sm: "450px",
+                md: "700px",
+                lg: "1150px", // always sum of sm and md
             },
             typographies: {
                 body: { fontFamily: "var(--lato-font-family)", fontWeight: 400, fontSize: "1.125rem", lineHeight: 1.4, },

@@ -39,6 +39,24 @@ const KeyboardArrowDown = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
+const Menu = React.forwardRef<SVGSVGElement, IconProps>(
+    function KeyboardArrowDown(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M140-254.62v-59.99h680v59.99H140ZM140-450v-60h680v60H140Zm0-195.39v-59.99h680v59.99H140Z" />
+            </SvgIcon>
+        );
+    }
+)
+const Close = React.forwardRef<SVGSVGElement, IconProps>(
+    function KeyboardArrowDown(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M256-213.85 213.85-256l224-224-224-224L256-746.15l224 224 224-224L746.15-704l-224 224 224 224L704-213.85l-224-224-224 224Z" />
+            </SvgIcon>
+        );
+    }
+)
 
 
-export { Orbit, KeyboardArrowDown, DummyIcon }
+export { Orbit, KeyboardArrowDown, DummyIcon, Menu, Close }
