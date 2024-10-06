@@ -4,26 +4,20 @@ import * as React from 'react';
 
 import ButtonBase from "./ButtonBase"
 import { styled } from '@pigment-css/react';
-import { DummyIcon, KeyboardArrowDown } from './Icons';
+import { DummyIcon, KeyboardArrowDown } from './Icons/Icons';
+import FlippingIcon from './Icons/FlippingIcon';
 
 const AccordingHierachyContext = React.createContext<number>(0);
 
 interface AccordinProps {
     children?: React.ReactNode,
     buttonContent: React.ReactNode,
+    defaultOpen?: boolean,
 }
-
-const KeyboardArrowDownWithAnimation = styled(KeyboardArrowDown)(({ theme }) => ({
-    transform: "scaleY(-100%)",
-    transition: `all ${theme.transition.short} cubic-bezier(0.5, -1, 0.5, 2)`,
-    "&.closed": {
-        transform: "scaleY(100%)",
-    }
-}));
 
 const AccordinContentContainer = styled("div")(({ theme }) => ({
     display: "grid", gridTemplateRows: "1fr",
-    transition: `all ${theme.transition.long} ease-out`,
+    transition: `grid-template-rows ${theme.transition.short} linear`,
     transformOrigin: "top",
     "&>div": {
         display: "flex", flexDirection: "column", alignItems: "stretch",
@@ -32,14 +26,17 @@ const AccordinContentContainer = styled("div")(({ theme }) => ({
         opacity: 1,
         boxShadow: `0 -0.1px 0 ${theme.vars.colors.primary.contrastText}`,
         padding: ".5rem 0 .5rem 0",
-        transition: `opacity ${theme.transition.short} ease-in ${theme.transition.short},
-                    padding ${theme.transition.long} ease-out,
-                    boxShadow ${theme.transition.short} ease-in`,
+        transition: `opacity ${theme.transition.short} linear ${theme.transition.short},
+                    padding ${theme.transition.short} linear,
+                    box-shadow ${theme.transition.short} linear`,
     },
-    "&.closed": {
+    [`&.closed`]: {
         gridTemplateRows: "0fr",
+        transition: `grid-template-rows ${theme.transition.short} linear ${theme.transition.short}`,
         ">div": {
-            transition: `opacity ${theme.transition.short} ease-in`,
+            transition: `opacity ${theme.transition.short} linear,
+                    padding ${theme.transition.short} linear  ${theme.transition.short},
+                    box-shadow ${theme.transition.short} linear`,
             opacity: 0, boxShadow: "none", padding: 0
         }
     }
@@ -67,8 +64,8 @@ const AccordinButton = React.forwardRef<HTMLDivElement, Omit<AccordinButtonProps
     }
 )
 
-function Accordin({ children, buttonContent }: AccordinProps) {
-    const [isOpen, setIsOpen] = React.useState<boolean>(false)
+function Accordin({ children, buttonContent, defaultOpen = false }: AccordinProps) {
+    const [isOpen, setIsOpen] = React.useState<boolean>(defaultOpen)
     const toggle = () => setIsOpen((isOpen) => !isOpen)
 
     const currentHierachy = React.useContext(AccordingHierachyContext);
@@ -79,8 +76,10 @@ function Accordin({ children, buttonContent }: AccordinProps) {
                 <div style={{ width: `${currentHierachy}rem` }} />
                 {buttonContent}
                 <div style={{ flex: "1 1 5rem" }} />
-                <KeyboardArrowDownWithAnimation style={{ flex: "none" }}
-                    className={isOpen ? undefined : "closed"} />
+                <FlippingIcon
+                    before={<KeyboardArrowDown style={{ flex: "none" }} />}
+                    isFlipped={!isOpen}
+                />
             </ButtonBase>
             <AccordinContentContainer className={isOpen ? undefined : "closed"} >
                 <div>

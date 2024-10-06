@@ -1,21 +1,9 @@
-import { styled } from "@pigment-css/react";
-import Panel from "./ui-components/Panel";
+import InformationPanel from "./InformationPanel";
 import { QuoteTypography } from "./ui-components/Typography";
-
-const StatementPanel = styled(Panel)(({ theme }) => ({
-    position: "fixed", top: 0, right: 0,
-    width: `calc(${theme.breakpoints.sm} - 8rem)`,
-    margin: "4rem", boxSizing: "border-box",
-    padding: "1.5rem",
-
-    [`@media(max-width: ${theme.breakpoints.sm})`]: {
-        left: 0, width: "auto",
-    }
-}));
 
 export default function Page() {
     return (
-        <StatementPanel>
+        <InformationPanel style={{ padding: "1.5rem" }}>
             <QuoteTypography color="secondary" style={{ textWrap: "balance", fontSize: "1.5rem" }}>
                 Once an architect of spaces, now a sculptor of code. <br />
                 my journey has shifted, but the passion remains. <br />
@@ -27,6 +15,6 @@ export default function Page() {
                 <br />
                 -- Zane
             </QuoteTypography>
-        </StatementPanel>
+        </InformationPanel>
     );
 }
