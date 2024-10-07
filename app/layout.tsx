@@ -1,16 +1,11 @@
-'use client'
-
 import * as React from "react"
 
 import '@pigment-css/react/styles.css';
 import { Lato, Dancing_Script } from 'next/font/google';
 import { css } from '@pigment-css/react';
 
-import NavigationPanel from "./NavigationPanel";
-import Header from "./Header";
-import FlippingIcon from "./ui-components/Icons/FlippingIcon";
-import { Close, Menu } from "./ui-components/Icons/Icons";
-
+import InformationThread, { InformationThreadContextProvider } from "./components/InformationThread";
+import { FixedNavigationPanel } from './components/NavigationPanel'
 
 const lato = Lato({
   weight: ['300', '400', '700', '900'],
@@ -40,9 +35,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [isNavOpen, setNavIsOpen] = React.useState<boolean>(false);
-  const toggleNav = () => setNavIsOpen((isNavOpen) => !isNavOpen)
-
   return (
     <html lang="en">
       <head>
@@ -53,22 +45,11 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={bodyProps} style={globalVars}>
-        <Header>
-          <div style={{ flex: "1 1" }} />
-          <FlippingIcon
-            className={css(
-              ({ theme }) => ({
-                [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
-              })
-            )}
-            onClick={toggleNav}
-            isFlipped={isNavOpen}
-            before={<Menu />}
-            after={<Close />}
-          />
-        </Header>
-        <NavigationPanel isShow={isNavOpen} onClose={() => setNavIsOpen(false)} />
-        {children}
+        <InformationThreadContextProvider>
+          {children}
+          <FixedNavigationPanel />
+          <InformationThread />
+        </InformationThreadContextProvider>
       </body>
     </html>
   )

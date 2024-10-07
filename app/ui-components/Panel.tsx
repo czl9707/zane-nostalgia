@@ -2,12 +2,12 @@ import * as React from 'react';
 import { styled } from "@pigment-css/react";
 
 const PanelContainer = styled("div")({
-    boxSizing: "border-box"
+    boxSizing: "border-box", position: "relative",
 });
 
 const PanelBackground = styled("div")(({ theme }) => ({
     backgroundColor: `${theme.vars.colors.primary.contrastText}`,
-    opacity: 0.1, position: "absolute", inset: 0,
+    opacity: 0.1, position: "absolute", inset: 0, overflowY: "hidden",
 }))
 
 const Panel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
@@ -20,6 +20,5 @@ const Panel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivEleme
         )
     }
 )
-
 
 export default Panel;
