@@ -28,7 +28,7 @@ export default function Page() {
         )
 
         return () => setPanels([]);
-    })
+    }, [])
 
     return (
         <></>

@@ -35,12 +35,28 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
 
     display: "inline-flex", flexDirection: "column", flexWrap: "nowrap",
 
+
     [`@media(min-width: ${theme.breakpoints.md})`]: {
         width: theme.breakpoints.md,
     },
     [`@media(max-width: ${theme.breakpoints.md})`]: {
         width: "100%",
-    }
+    },
+
+    // Scroll Bar
+    "&::-webkit-scrollbar": {
+        width: "10px", padding: "0 3px",
+    },
+    "&::-webkit-scrollbar-track": {
+        backgroundColor: "transparent",
+    },
+    "&::-webkit-scrollbar-thumb": {
+        backgroundColor: theme.vars.colors.secondary.background,
+        borderRadius: "5px",
+    },
+    "&::-webkit-scrollbar-button": {
+        backgroundColor: "transparent", height: "5px",
+    },
 }));
 
 

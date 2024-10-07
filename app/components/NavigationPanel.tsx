@@ -10,47 +10,6 @@ import { H4Typography } from "../ui-components/Typography";
 import { Orbit } from "../ui-components/Icons/Icons";
 
 
-// const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
-//     margin: "4rem", boxSizing: "border-box",
-
-//     // lg -> stick to left
-//     // md <-> lg hidden by default stick to right
-//     // <- md hidden by default take full screen
-//     [`@media(min-width: ${theme.breakpoints.lg})`]: {
-//         position: "fixed", top: 0, left: 0,
-//         width: `calc(${theme.breakpoints.sm} - 8rem)`,
-
-//         opacity: "0", transition: `opacity 2s ease 3s,
-//                                     width 2s ease`,
-//         "&:hover": {
-//             transition: `opacity ${theme.transition.short} ease,
-//                         width 2s ease`,
-//             opacity: 1,
-//         },
-//     },
-//     [`@media(max-width: ${theme.breakpoints.lg})`]: {
-//         transition: `max-height ${theme.transition.long} ease,
-//                     opacity ${theme.transition.short} ease ${theme.transition.long},
-//                     margin ${theme.transition.short} ease`,
-//         position: "relative", float: "right", opacity: 1,
-//         margin: "4rem 4rem 0 4rem", maxHeight: "100vh",
-//         "&.noshow": {
-//             transition: `max-height ${theme.transition.long} ease ${theme.transition.short},
-//                         opacity ${theme.transition.short} ease,
-//                         margin ${theme.transition.short} ease ${theme.transition.long}`,
-//             overflowY: "hidden", opacity: 0,
-//             margin: "0 4rem 0 4rem", maxHeight: 0
-//         }
-//     },
-//     [`@media(min-width: ${theme.breakpoints.md}) and (max-width: ${theme.breakpoints.lg})`]: {
-//         width: `calc(${theme.breakpoints.md} - 8rem)`,
-//     },
-//     [`@media(max-width: ${theme.breakpoints.md})`]: {
-//         width: "calc(100% - 8rem)",
-//     },
-
-// }));
-
 const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
     margin: "4rem", boxSizing: "border-box",
     position: "fixed", top: 0, left: 0,
