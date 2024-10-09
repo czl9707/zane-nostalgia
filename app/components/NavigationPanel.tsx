@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import Panel from "../ui-components/Panel";
 import { Accordin, AccordinButton } from "../ui-components/Accordin";
 import { H4Typography } from "../ui-components/Typography";
-import { Orbit } from "../ui-components/Icons/Icons";
+import { MeteorShower, Orbit } from "../ui-components/Icons/Icons";
 
 
 const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
@@ -57,6 +57,13 @@ const playgroundContents = [
     }
 ]
 
+const sceneContents = [
+    {
+        icon: <MeteorShower />,
+        name: "Meteor Shower",
+    }
+]
+
 function PanelContent({ onNavigate }: { onNavigate?: () => void }) {
     const router = useRouter();
     return (
@@ -70,14 +77,24 @@ function PanelContent({ onNavigate }: { onNavigate?: () => void }) {
                 if (onNavigate) onNavigate();
                 router.push("/");
             }} />
-            <Accordin buttonContent={"Scenes"}></Accordin>
+            <Accordin buttonContent={"Scenes"}>
+                {
+                    sceneContents.map(({ icon, name }) => (
+                        <AccordinButton text={name} icon={icon} key={name}
+                            onClick={() => {
+                                if (onNavigate) onNavigate();
+                                router.push(`/scene/${name.replace(" ", "-").toLowerCase()}`);
+                            }} />
+                    ))
+                }
+            </Accordin>
             <Accordin buttonContent={"Playground"}>
                 {
                     playgroundContents.map(({ icon, name }) => (
                         <AccordinButton text={name} icon={icon} key={name}
                             onClick={() => {
                                 if (onNavigate) onNavigate();
-                                router.push(`/playground/${name.toLowerCase()}`);
+                                router.push(`/playground/${name.replace(" ", "-").toLowerCase()}`);
                             }} />
                     ))
                 }
