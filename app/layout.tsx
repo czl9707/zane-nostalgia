@@ -4,8 +4,8 @@ import '@pigment-css/react/styles.css';
 import { Lato, Dancing_Script } from 'next/font/google';
 import { css } from '@pigment-css/react';
 
-import InformationThread, { InformationThreadContextProvider } from "./components/InformationThread";
-import { FixedNavigationPanel } from './components/NavigationPanel'
+import InformationThread from "./ui-components/layout/information-thread";
+import { FixedNavigationPanel } from './ui-components/layout/navigation-panel'
 
 const lato = Lato({
   weight: ['300', '400', '700', '900'],
@@ -31,25 +31,26 @@ const globalVars = {
 
 
 export default function RootLayout({
-  children,
+  children, panels
 }: {
-  children: React.ReactNode
+  children: React.ReactNode,
+  panels: React.ReactNode,
 }) {
   return (
     <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <title>Zane&apos;s Nostalgia Moments</title>
-        <meta name="description" content="Zane's Nostalgia Moments" />
+        <meta name="description" content="Zane is an architect turn developer, Zane's Nostalgia is a collection of svg background created when he is Nostalgia." />
         <link rel="icon" href="/favicon.svg" type="/src/image/svg" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={bodyProps} style={globalVars}>
-        <InformationThreadContextProvider>
-          {children}
-          <FixedNavigationPanel />
-          <InformationThread />
-        </InformationThreadContextProvider>
+        {children}
+        <FixedNavigationPanel />
+        <InformationThread>
+          {panels}
+        </InformationThread>
       </body>
     </html>
   )

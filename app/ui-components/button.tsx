@@ -1,6 +1,6 @@
 import * as React from "react";
-import ButtonBase from "./ButtonBase";
-import { ButtonBaseProps } from "./ButtonBase";
+import ButtonBase from "./button-base";
+import { ButtonBaseProps } from "./button-base";
 
 type ButtonProps = Omit<React.HTMLAttributes<HTMLDivElement> & ButtonBaseProps & { text: string }, "children">;
 

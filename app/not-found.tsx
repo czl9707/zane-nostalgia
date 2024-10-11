@@ -2,6 +2,6 @@
 
 import { redirect } from 'next/navigation';
 
-export default function GlobalError() {
-    redirect("/");
+export default function NotFound() {
+    // redirect("/");
 }

@@ -10,8 +10,8 @@ interface MeteorShowerProps {
     width?: number,
 }
 
-function MeteorShower({
-    color = "white",
+export default function MeteorShower({
+    color = "grey",
     backgroundColor = "black",
     rotateDegree = 45,
     dense = 1,
@@ -31,18 +31,15 @@ function MeteorShower({
 
     return (<svg viewBox={`0 0 ${realWidth} 500`} height={`${height}px`} width={`${width}px`}>
         <defs>
-            <linearGradient id="tailGradient" gradientTransform="rotate(0)">
-                <stop offset="0%" stopColor={color} />
-                <stop offset="100%" stopColor={backgroundColor} />
-            </linearGradient>
-            <radialGradient id="meteorGradient">
+            <linearGradient id="tailGradient" gradientTransform={`rotate(0)`}>
                 <stop offset="0%" stopColor={color} />
                 <stop offset="100%" stopColor="transparent" />
-            </radialGradient>
+            </linearGradient>
+
 
             <g id='meteorGeo'>
-                <circle cx="0" cy="0" r="4" fill="url('#meteorGradient')" />
-                <rect y={-0.5} width={300} height={1} opacity={0.6} fill="url('#tailGradient')" />
+                <polygon points="0,-1 0,1 300,0" opacity={0.5} fill="url('#tailGradient')" />
+                <rect x={-1} y={-1} width={2} height={2} fill={color} />
             </g>
 
             {
@@ -75,8 +72,4 @@ function MeteorShower({
 
 function randomInt(range: number, start: number = 0): number {
     return Math.floor(Math.random() * range + start);
-}
-
-export default function Page() {
-    return <MeteorShower />
 }

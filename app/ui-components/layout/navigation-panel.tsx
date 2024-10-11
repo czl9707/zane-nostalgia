@@ -4,10 +4,10 @@ import * as React from 'react';
 import { css, styled } from "@pigment-css/react";
 import { useRouter } from "next/navigation";
 
-import Panel from "../ui-components/Panel";
-import { Accordin, AccordinButton } from "../ui-components/Accordin";
-import { H4Typography } from "../ui-components/Typography";
-import { MeteorShower, Orbit } from "../ui-components/Icons/Icons";
+import Panel from "../panel";
+import { Accordin, AccordinButton } from "../accordin";
+import { H4Typography } from "../typography";
+import { MeteorShower, Orbit } from "../icons/icons";
 
 
 const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
@@ -35,13 +35,13 @@ const ThreadNavigationPanelContainer = styled(Panel)(({ theme }) => ({
                 max-height ${theme.transition.long} ease`,
 
     "&.noshow": {
-        marginBottom: 0, opacity: 0, maxHeight: 0,
+        marginBottom: 0, opacity: 0, maxHeight: 0, pointerEvents: "none",
         transition: `opacity ${theme.transition.short} ease,
                     margin-bottom ${theme.transition.short} ease ${theme.transition.long},
                     max-height ${theme.transition.long} ease ${theme.transition.short}`,
     },
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        marginBottom: 0, opacity: 0, maxHeight: 0,
+        marginBottom: 0, opacity: 0, maxHeight: 0, pointerEvents: "none",
         transition: `opacity ${theme.transition.short} ease,
                     margin-bottom ${theme.transition.short} ease ${theme.transition.long},
                     max-height ${theme.transition.long} ease ${theme.transition.short}`,
@@ -64,7 +64,7 @@ const sceneContents = [
     }
 ]
 
-function PanelContent({ onNavigate }: { onNavigate?: () => void }) {
+function PanelContent() {
     const router = useRouter();
     return (
         <Accordin defaultOpen buttonContent={
@@ -73,18 +73,12 @@ function PanelContent({ onNavigate }: { onNavigate?: () => void }) {
                 NOSTALGIA .Z
             </H4Typography>
         }>
-            <AccordinButton text={"Home"} onClick={() => {
-                if (onNavigate) onNavigate();
-                router.push("/");
-            }} />
+            <AccordinButton text={"Home"} onClick={() => router.push("/")} />
             <Accordin buttonContent={"Scenes"}>
                 {
                     sceneContents.map(({ icon, name }) => (
                         <AccordinButton text={name} icon={icon} key={name}
-                            onClick={() => {
-                                if (onNavigate) onNavigate();
-                                router.push(`/scene/${name.replace(" ", "-").toLowerCase()}`);
-                            }} />
+                            onClick={() => router.push(`/scenes/${name.replace(" ", "-").toLowerCase()}`)} />
                     ))
                 }
             </Accordin>
@@ -92,10 +86,7 @@ function PanelContent({ onNavigate }: { onNavigate?: () => void }) {
                 {
                     playgroundContents.map(({ icon, name }) => (
                         <AccordinButton text={name} icon={icon} key={name}
-                            onClick={() => {
-                                if (onNavigate) onNavigate();
-                                router.push(`/playground/${name.replace(" ", "-").toLowerCase()}`);
-                            }} />
+                            onClick={() => router.push(`/playground/${name.replace(" ", "-").toLowerCase()}`)} />
                     ))
                 }
             </Accordin>
@@ -115,10 +106,10 @@ function FixedNavigationPanel() {
     )
 }
 
-function ThreadNavigationPanel({ onNavigate, isShow }: { onNavigate?: () => void, isShow: boolean }) {
+function ThreadNavigationPanel({ isShow }: { isShow: boolean }) {
     return (
         <ThreadNavigationPanelContainer className={isShow ? undefined : "noshow"}>
-            <PanelContent onNavigate={onNavigate} />
+            <PanelContent />
         </ThreadNavigationPanelContainer>
     )
 }
