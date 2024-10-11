@@ -8,9 +8,9 @@ interface MeteorShowerProps {
     dense?: number,
     height?: number,
     width?: number,
-}
+};
 
-export default function MeteorShower({
+function MeteorShower({
     color = "grey",
     backgroundColor = "black",
     rotateDegree = 45,
@@ -73,3 +73,8 @@ export default function MeteorShower({
 function randomInt(range: number, start: number = 0): number {
     return Math.floor(Math.random() * range + start);
 }
+
+export default function Page() {
+    return <MeteorShower />
+};
+export type { MeteorShowerProps };
