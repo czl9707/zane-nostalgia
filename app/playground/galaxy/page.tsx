@@ -25,25 +25,23 @@ function Page() {
     }, []);
 
     return (
-        <div style={{ zIndex: -1, width: "100%", height: "100%", position: "fixed" }}>
-            <Canvas
-                scene={{ background: new THREE.Color(0x000000) }}
-                camera={orthCamera}
-            >
-                <Sun />
-                <Background />
+        <Canvas
+            scene={{ background: new THREE.Color(0x000000) }}
+            camera={orthCamera}
+        >
+            <Sun />
+            <Background />
 
-                <Planet radius={0.1} distance={0.5} speed={0.5} />
-                <Planet radius={0.13} distance={1.25} speed={0.7} />
-                <Planet radius={0.15} distance={3} speed={0.4} />
-                <Planet radius={0.2} distance={7} speed={0.5} incline={0.17} />
-                <Planet radius={0.25} distance={12} speed={0.5} />
-                <Belt radius={0.5} distance={17} speed={0.1} />
-                <Planet radius={0.4} distance={25} speed={0.08} />
-                <Planet radius={0.45} distance={33} speed={0.06} />
-                <Planet radius={0.2} distance={43} speed={0.1} />
-            </Canvas >
-        </div>
+            <Planet radius={0.1} distance={0.5} speed={0.5} />
+            <Planet radius={0.13} distance={1.25} speed={0.7} />
+            <Planet radius={0.15} distance={3} speed={0.4} />
+            <Planet radius={0.2} distance={7} speed={0.5} incline={0.17} />
+            <Planet radius={0.25} distance={12} speed={0.5} />
+            <Belt radius={0.5} distance={17} speed={0.1} />
+            <Planet radius={0.4} distance={25} speed={0.08} />
+            <Planet radius={0.45} distance={33} speed={0.06} />
+            <Planet radius={0.2} distance={43} speed={0.1} />
+        </Canvas >
     )
 }
 

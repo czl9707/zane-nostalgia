@@ -3,30 +3,10 @@
 import * as React from 'react';
 import { css, styled } from "@pigment-css/react";
 
-import HeaderBar from './HeaderBar';
-import { ThreadNavigationPanel } from './NavigationPanel'
-import FlippingIcon from '../ui-components/Icons/FlippingIcon';
-import { Close, Menu } from '../ui-components/Icons/Icons';
-
-
-const InformationThreadContext = React.createContext<{
-    panels: Array<React.ReactNode>,
-    setPanels: (panels: Array<React.ReactNode>) => void,
-}>({
-    panels: [],
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    setPanels: (_) => { }
-});
-
-
-function InformationThreadContextProvider({ children }: { children: React.ReactNode }) {
-    const [panels, setPanels] = React.useState<Array<React.ReactNode>>([]);
-
-    return <InformationThreadContext.Provider value={{ panels, setPanels }}>
-        {children}
-    </InformationThreadContext.Provider>
-}
-
+import HeaderBar from './header-bar';
+import { ThreadNavigationPanel } from './navigation-panel'
+import FlippingIcon from '../icons/flippingIcon';
+import { Close, Menu } from '../icons/icons';
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
     padding: "4rem", boxSizing: "border-box",
@@ -60,11 +40,9 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
 }));
 
 
-function InformationThread() {
+function InformationThread({ children }: { children: React.ReactNode }) {
     const [navIsOpen, setNavIsOpen] = React.useState<boolean>(false);
     const toggleNav = () => setNavIsOpen((isOpen) => !isOpen);
-
-    const { panels } = React.useContext(InformationThreadContext);
 
     return (
         <InformationThreadContainer >
@@ -82,17 +60,11 @@ function InformationThread() {
                     after={<Close />}
                 />
             </HeaderBar>
-            {<ThreadNavigationPanel isShow={navIsOpen} onNavigate={() => setNavIsOpen(false)} />}
-            {panels.map((panel, i) => (
-                <React.Fragment key={i}>
-                    {panel}
-                    <div style={{ height: "4rem" }} />
-                </React.Fragment>
-            ))}
+            {<ThreadNavigationPanel isShow={navIsOpen} />}
+            {children}
         </InformationThreadContainer >
     )
 }
 
 
 export default InformationThread;
-export { InformationThreadContextProvider, InformationThreadContext }
