@@ -21,18 +21,19 @@ function MeteorShower({
     height = DEFAULT_SVG_HEIGHT,
     width = DEFAULT_SVG_WIDTH,
 }: MeteorShowerProps) {
-    const realWidth = Math.floor(500 / height * width);
-    const meteorInitRange = realWidth + Math.floor(500 * Math.tan((rotation * Math.PI) / 180));
-    const meteorInitRangeStart = rotation > 0 ? 0 : - Math.floor(500 * Math.tan((rotation * Math.PI) / 180));
+    const realHeight = 500;
+    const realWidth = Math.floor(realHeight / height * width);
 
-    const meteorCount = Math.floor(meteorInitRange * density * 0.01);
+    const meteorCountY = Math.floor(realHeight * density * 0.01);
+    const meteorCountX = Math.floor(realWidth * density * 0.01);
+
 
     const meteorAnimationTimeRange = 60;
 
     const METEORSIZEVARIENTS = 3;
     const METEORINITVARIANTS = Math.floor(meteorAnimationTimeRange / 3);
 
-    return (<svg viewBox={`0 0 ${realWidth} 500`} height={`${height}px`} width={`${width}px`}>
+    return (<svg viewBox={`0 0 ${realWidth} ${realHeight}`} height={`${height}px`} width={`${width}px`}>
         <defs>
             <linearGradient id="tailGradient" gradientTransform={`rotate(0)`}>
                 <stop offset="0%" stopColor={color} />
@@ -63,10 +64,16 @@ function MeteorShower({
             }
         </defs>
 
-        <rect width={`${realWidth}px`} height="500px" fill={backgroundColor} />
+        <rect width={`${realWidth}px`} height={`${realHeight}px`} fill={backgroundColor} />
         {
-            [...Array(meteorCount)].map((_, i) => (
-                <use x={randomInt(meteorInitRange, meteorInitRangeStart)} y={randomInt(50, -55)}
+            [...Array(meteorCountX)].map((_, i) => (
+                <use x={randomInt(realWidth, 0)} y={randomInt(50, -55)}
+                    href={`#meteor${randomInt(METEORSIZEVARIENTS)}${randomInt(METEORINITVARIANTS)}`} key={i} />
+            ))
+        }
+        {
+            [...Array(meteorCountY)].map((_, i) => (
+                <use x={randomInt(50, rotation <= 90 ? realWidth + 5 : -55)} y={randomInt(realHeight, 0)}
                     href={`#meteor${randomInt(METEORSIZEVARIENTS)}${randomInt(METEORINITVARIANTS)}`} key={i} />
             ))
         }

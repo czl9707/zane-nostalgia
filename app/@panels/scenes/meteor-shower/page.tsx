@@ -37,7 +37,7 @@ export default function Panels() {
             <SliderBar min={5} max={20} step={1} defaultValue={10} label="Density"
                 onChange={routingFactory("density")} />
             <Divider />
-            <SliderBar min={0} max={85} step={5} defaultValue={45} label="Rotation"
+            <SliderBar min={0} max={180} step={5} defaultValue={45} label="Rotation"
                 onChange={routingFactory("rotation")} />
             <Divider />
             <ColorInput label="Color" defaultColor="#888888"
