@@ -4,8 +4,9 @@ import '@pigment-css/react/styles.css';
 import { Lato, Dancing_Script } from 'next/font/google';
 import { css } from '@pigment-css/react';
 
-import InformationThread from "./ui-components/layout/information-thread";
-import { FixedNavigationPanel } from './ui-components/layout/navigation-panel'
+import InformationThread from "@/app/ui-components/layout/information-thread";
+import { FixedNavigationPanel } from '@/app/ui-components/layout/navigation-panel'
+import ThemeCorrector from "./ui-components/utils/theme-corrector";
 
 const lato = Lato({
   weight: ['300', '400', '700', '900'],
@@ -46,6 +47,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body className={bodyProps} style={globalVars}>
+        <ThemeCorrector />
         {children}
         <FixedNavigationPanel />
         <InformationThread>

@@ -4,16 +4,17 @@ import * as React from 'react';
 import { css, styled } from "@pigment-css/react";
 import { useRouter } from "next/navigation";
 
-import Panel from "../panel";
-import { Accordin, AccordinButton } from "../accordin";
-import { H4Typography } from "../typography";
+import Panel from "../basics/panel";
+import { Accordin, AccordinButton } from "../basics/accordin";
+import { H4Typography } from "../basics/typography";
 import { MeteorShower, Orbit } from "../icons/icons";
 
 
 const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
-    margin: "4rem", boxSizing: "border-box",
+    margin: theme.padding.thread, padding: 0,
+    width: `calc(${theme.breakpoints.sm} - 2 * ${theme.padding.thread})`,
+    boxSizing: "border-box",
     position: "fixed", top: 0, left: 0,
-    width: `calc(${theme.breakpoints.sm} - 8rem)`,
 
     opacity: "0", transition: `opacity 2s ease 3s,
                                 width 2s ease`,
@@ -29,19 +30,21 @@ const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
 }));
 
 const ThreadNavigationPanelContainer = styled(Panel)(({ theme }) => ({
-    opacity: 1, marginBottom: "4rem", maxHeight: "100vh",
+    opacity: 1, maxHeight: "100vh", padding: 0,
     transition: `opacity ${theme.transition.short} ease ${theme.transition.long},
                 margin-bottom ${theme.transition.short} ease ,
                 max-height ${theme.transition.long} ease`,
 
     "&.noshow": {
-        marginBottom: 0, opacity: 0, maxHeight: 0, pointerEvents: "none",
+        marginBottom: `-${theme.padding.thread}`, // workaround the gap in thread
+        opacity: 0, maxHeight: 0, pointerEvents: "none",
         transition: `opacity ${theme.transition.short} ease,
                     margin-bottom ${theme.transition.short} ease ${theme.transition.long},
                     max-height ${theme.transition.long} ease ${theme.transition.short}`,
     },
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        marginBottom: 0, opacity: 0, maxHeight: 0, pointerEvents: "none",
+        marginBottom: `-${theme.padding.thread}`, // workaround the gap in thread
+        opacity: 0, maxHeight: 0, pointerEvents: "none",
         transition: `opacity ${theme.transition.short} ease,
                     margin-bottom ${theme.transition.short} ease ${theme.transition.long},
                     max-height ${theme.transition.long} ease ${theme.transition.short}`,
@@ -69,7 +72,7 @@ function PanelContent() {
     return (
         <Accordin defaultOpen buttonContent={
             <H4Typography
-                style={{ cursor: "pointer", padding: '.5rem' }}>
+                style={{ cursor: "pointer", padding: '.5rem', userSelect: "none", }}>
                 NOSTALGIA .Z
             </H4Typography>
         }>

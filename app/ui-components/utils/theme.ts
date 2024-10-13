@@ -36,7 +36,11 @@ declare module '@pigment-css/react/theme' {
         transition: {
             short: string,
             long: string,
-        }
+        },
+        padding: {
+            thread: string,
+            panel: string,
+        },
     }
 
     type ColorVariation = keyof ThemeToken["colors"];

@@ -30,7 +30,7 @@ const OnClickMask = styled("div")({
 })
 
 const ButtonBaseDiv = styled("div")<ButtonBaseProps>(({ theme }) => ({
-    margin: 0, cursor: "pointer", position: "relative",
+    margin: 0, position: "relative", cursor: "pointer", userSelect: "none",
     display: "flex", alignItems: "center",
     paddingLeft: "1rem", paddingRight: "1rem",
     paddingTop: ".5rem", paddingBottom: ".5rem",
