@@ -12,6 +12,7 @@ export default withPigment(
             defaultDirection: 'ltr',
         },
         theme: extendTheme({
+            getSelector: (colorScheme) => colorScheme ? `.theme-${colorScheme}` : ':root',
             colorSchemes: {
                 light: {
                     colors: {
@@ -45,6 +46,10 @@ export default withPigment(
             transition: {
                 short: ".3s",
                 long: ".6s",
+            },
+            padding: {
+                thread: "4rem",
+                panel: "1.5rem",
             }
         })
     }

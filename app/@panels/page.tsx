@@ -1,12 +1,11 @@
-"use client"
+import Panel from "../ui-components/basics/panel";
+import { QuoteTypography } from "../ui-components/basics/typography";
 
-import Panel from "../ui-components/panel";
-import { QuoteTypography } from "../ui-components/typography";
 
 export default function HomePanels() {
     return (
         [
-            <Panel style={{ padding: "1.5rem" }} key={"home"}>
+            <Panel key={"home"}>
                 <QuoteTypography color="secondary" style={{ textWrap: "balance", fontSize: "1.5rem" }}>
                     Once an architect of spaces, now a sculptor of code. <br />
                     my journey has shifted, but the passion remains. <br />

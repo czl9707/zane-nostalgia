@@ -9,7 +9,9 @@ import FlippingIcon from '../icons/flippingIcon';
 import { Close, Menu } from '../icons/icons';
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
-    padding: "4rem", boxSizing: "border-box",
+    padding: theme.padding.thread,
+    gap: theme.padding.thread,
+    boxSizing: "border-box",
     position: "fixed", overflowY: "scroll",
     right: 0, top: 0, bottom: 0,
 
