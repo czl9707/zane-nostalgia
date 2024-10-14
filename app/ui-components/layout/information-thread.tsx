@@ -4,7 +4,7 @@ import * as React from 'react';
 import { css, styled } from "@pigment-css/react";
 
 import HeaderBar from './header-bar';
-import { ThreadNavigationPanel } from './navigation-panel'
+import { FixedNavigationPanel, NavigationInfo, ThreadNavigationPanel } from './navigation-panel'
 import FlippingIcon from '../icons/flippingIcon';
 import { Close, Menu } from '../icons/icons';
 
@@ -42,29 +42,35 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
 }));
 
 
-function InformationThread({ children }: { children: React.ReactNode }) {
+function InformationThread({ children, sceneNavInfo }: {
+    children: React.ReactNode,
+    sceneNavInfo: NavigationInfo
+}) {
     const [navIsOpen, setNavIsOpen] = React.useState<boolean>(false);
     const toggleNav = () => setNavIsOpen((isOpen) => !isOpen);
 
     return (
-        <InformationThreadContainer >
-            <HeaderBar>
-                <div style={{ flex: "1 1" }} />
-                <FlippingIcon
-                    className={css(
-                        ({ theme }) => ({
-                            [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
-                        })
-                    )}
-                    onClick={toggleNav}
-                    isFlipped={navIsOpen}
-                    before={<Menu />}
-                    after={<Close />}
-                />
-            </HeaderBar>
-            {<ThreadNavigationPanel isShow={navIsOpen} />}
-            {children}
-        </InformationThreadContainer >
+        <>
+            <FixedNavigationPanel sceneNavInfo={sceneNavInfo} />
+            <InformationThreadContainer >
+                <HeaderBar>
+                    <div style={{ flex: "1 1" }} />
+                    <FlippingIcon
+                        className={css(
+                            ({ theme }) => ({
+                                [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
+                            })
+                        )}
+                        onClick={toggleNav}
+                        isFlipped={navIsOpen}
+                        before={<Menu />}
+                        after={<Close />}
+                    />
+                </HeaderBar>
+                {<ThreadNavigationPanel isShow={navIsOpen} sceneNavInfo={sceneNavInfo} />}
+                {children}
+            </InformationThreadContainer >
+        </>
     )
 }
 

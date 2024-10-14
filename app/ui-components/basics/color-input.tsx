@@ -62,3 +62,4 @@ const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps & Omit<Rea
 )
 
 export default ColorInput;
+export type { ColorInputProps }

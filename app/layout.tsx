@@ -3,8 +3,9 @@ import { Lato, Dancing_Script } from 'next/font/google';
 import { css } from '@pigment-css/react';
 
 import InformationThread from "@/app/ui-components/layout/information-thread";
-import { FixedNavigationPanel } from '@/app/ui-components/layout/navigation-panel'
 import ThemeCorrector from "./ui-components/utils/theme-corrector";
+import React from 'react';
+import { fetchSceneMetas } from './scene-components/utils/fetch-scenes';
 
 const lato = Lato({
   weight: ['300', '400', '700', '900'],
@@ -28,13 +29,14 @@ const globalVars = {
   "--dancing-font-family": dancing.style.fontFamily,
 } as React.CSSProperties;
 
-
-export default function RootLayout({
+export default async function RootLayout({
   children, panels
 }: {
   children: React.ReactNode,
   panels: React.ReactNode,
 }) {
+  const sceneNavigationInfo = await fetchSceneMetas();
+
   return (
     <html lang="en">
       <head>
@@ -47,8 +49,7 @@ export default function RootLayout({
       <body className={bodyProps} style={globalVars}>
         <ThemeCorrector />
         {children}
-        <FixedNavigationPanel />
-        <InformationThread>
+        <InformationThread sceneNavInfo={sceneNavigationInfo}>
           {panels}
         </InformationThread>
       </body>

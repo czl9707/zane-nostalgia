@@ -2,6 +2,7 @@ interface BaseParamMetaToken {
     name: string,
     type: string,
     default: unknown,
+    controlOrder: number,
 }
 
 interface ColorParamMetaToken extends BaseParamMetaToken {

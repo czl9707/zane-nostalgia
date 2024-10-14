@@ -114,3 +114,4 @@ const SliderBar = React.forwardRef<HTMLDivElement, SliderBarProps>(
 
 
 export default SliderBar;
+export type { SliderBarProps }

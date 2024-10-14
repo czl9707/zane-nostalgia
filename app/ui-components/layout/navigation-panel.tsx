@@ -7,8 +7,13 @@ import { useRouter } from "next/navigation";
 import Panel from "../basics/panel";
 import { Accordin, AccordinButton } from "../basics/accordin";
 import { H4Typography } from "../basics/typography";
-import { MeteorShower, Orbit } from "../icons/icons";
+import { Orbit } from "../icons/icons";
 
+type NavigationInfo = {
+    Icon: React.ElementType;
+    name: string;
+    route: string;
+}[]
 
 const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
     margin: theme.padding.thread, padding: 0,
@@ -61,15 +66,8 @@ const playgroundContents = [
     }
 ]
 
-const sceneContents = [
-    {
-        icon: <MeteorShower />,
-        name: "Meteor Shower",
-        route: "meteors"
-    }
-]
 
-function PanelContent() {
+function PanelContent({ sceneNavInfo }: { sceneNavInfo: NavigationInfo }) {
     const router = useRouter();
     return (
         <Accordin defaultOpen buttonContent={
@@ -81,8 +79,8 @@ function PanelContent() {
             <AccordinButton text={"Home"} onClick={() => router.push("/")} />
             <Accordin buttonContent={"Scenes"}>
                 {
-                    sceneContents.map(({ icon, name, route }) => (
-                        <AccordinButton text={name} icon={icon} key={name}
+                    sceneNavInfo.map(({ Icon, name, route }) => (
+                        <AccordinButton text={name} icon={<Icon />} key={name}
                             onClick={() => router.push(`/scenes/${route}`)} />
                     ))
                 }
@@ -99,24 +97,25 @@ function PanelContent() {
     )
 }
 
-function FixedNavigationPanel() {
+function FixedNavigationPanel({ sceneNavInfo }: { sceneNavInfo: NavigationInfo }) {
     const containerOnset = React.useCallback((node: HTMLElement | null) => {
         node?.classList.remove(opacity1cls)
     }, []);
 
     return (
         <FixedNavigationPanelContainer className={opacity1cls} ref={containerOnset}>
-            <PanelContent />
+            <PanelContent sceneNavInfo={sceneNavInfo} />
         </FixedNavigationPanelContainer>
     )
 }
 
-function ThreadNavigationPanel({ isShow }: { isShow: boolean }) {
+function ThreadNavigationPanel({ isShow, sceneNavInfo }: { isShow: boolean, sceneNavInfo: NavigationInfo }) {
     return (
         <ThreadNavigationPanelContainer className={isShow ? undefined : "noshow"}>
-            <PanelContent />
+            <PanelContent sceneNavInfo={sceneNavInfo} />
         </ThreadNavigationPanelContainer>
     )
 }
 
 export { FixedNavigationPanel, ThreadNavigationPanel };
+export type { NavigationInfo }

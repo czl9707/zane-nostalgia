@@ -1,6 +1,4 @@
-// import fs from 'fs';
-// import path from 'path';
-
+import { fetchScene } from "@/app/scene-components/utils/fetch-scenes";
 import { defaultParameterResolver, resolveParameterConstraints } from "@/app/scene-components/utils/resolver";
 import { SceneComponentPropsWithSize, SceneModule } from "@/app/scene-components/utils/types";
 
@@ -14,7 +12,7 @@ import { SceneComponentPropsWithSize, SceneModule } from "@/app/scene-components
 // }
 
 export default async function Page({ params, searchParams }: { params: { scene: string }, searchParams: object }) {
-    const sceneModule: SceneModule = await import(`../../scene-components/${params.scene}`);
+    const sceneModule: SceneModule = await fetchScene(params.scene);
     const SceneComponent = sceneModule.SceneComponent;
     const meta = sceneModule.meta;
 

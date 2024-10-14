@@ -18,11 +18,15 @@ export const meta: SceneModule["meta"] = {
         name: "Color",
         type: "color",
         default: "#888888",
+
+        controlOrder: 0,
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
+
+        controlOrder: 1,
     },
     rotation: {
         name: "Rotation",
@@ -31,6 +35,8 @@ export const meta: SceneModule["meta"] = {
         min: 0,
         max: 180,
         step: 5,
+
+        controlOrder: 2,
     },
     density: {
         name: "Density",
@@ -39,6 +45,8 @@ export const meta: SceneModule["meta"] = {
         min: 5,
         max: 20,
         step: 1,
+
+        controlOrder: 3,
     },
 };
 
