@@ -1,26 +1,63 @@
-"use client"
+import * as React from "react";
 
-import React from 'react'
+import { MeteorShower as MeteorShowerIcon } from "@/app/ui-components/icons/icons"
+import { ColorParamMetaToken, NumberParamMetaToken, SceneMetaData, SceneComponentPropsWithSize, SceneModule } from "./utils/types";
 
-import { DEFAULT_SVG_HEIGHT, DEFAULT_SVG_WIDTH } from '../constants'
 
-interface MeteorShowerProps {
-    color?: string,
-    backgroundColor?: string,
-    rotation?: number,
-    density?: number,
-    height?: number,
-    width?: number,
+interface MeteroShowerMeta extends SceneMetaData {
+    color: ColorParamMetaToken,
+    backgroundColor: ColorParamMetaToken,
+    rotation: NumberParamMetaToken,
+    density: NumberParamMetaToken,
+}
+
+export const SceneIcon: SceneModule["SceneIcon"] = MeteorShowerIcon;
+export const name: SceneModule["name"] = "Meteor Shower";
+export const meta: SceneModule["meta"] = {
+    color: {
+        name: "Color",
+        type: "color",
+        default: "#888888",
+
+        controlOrder: 0,
+    },
+    backgroundColor: {
+        name: "Background Color",
+        type: "color",
+        default: "#000000",
+
+        controlOrder: 1,
+    },
+    rotation: {
+        name: "Rotation",
+        type: "number",
+        default: 45,
+        min: 0,
+        max: 180,
+        step: 5,
+
+        controlOrder: 2,
+    },
+    density: {
+        name: "Density",
+        type: "number",
+        default: 10,
+        min: 5,
+        max: 20,
+        step: 1,
+
+        controlOrder: 3,
+    },
 };
 
 function MeteorShower({
-    color = "#888888",
-    backgroundColor = "#000000",
-    rotation = 45,
-    density = 10,
-    height = DEFAULT_SVG_HEIGHT,
-    width = DEFAULT_SVG_WIDTH,
-}: MeteorShowerProps) {
+    color,
+    backgroundColor,
+    rotation,
+    density,
+    height,
+    width,
+}: SceneComponentPropsWithSize<MeteroShowerMeta>) {
     const realHeight = 500;
     const realWidth = Math.floor(realHeight / height * width);
 
@@ -80,20 +117,8 @@ function MeteorShower({
     </svg>)
 }
 
+export const SceneComponent: SceneModule["SceneComponent"] = MeteorShower;
+
 function randomInt(range: number, start: number = 0): number {
     return Math.floor(Math.random() * range + start);
 }
-
-export default function Page({ searchParams }: { searchParams: { [k in keyof MeteorShowerProps]: string } }) {
-    const params: MeteorShowerProps = {};
-
-    for (const key in searchParams) {
-        if (["color", "backgroundColor"].includes(key))
-            params[key as "color" | "backgroundColor"] = searchParams[key as keyof MeteorShowerProps];
-        else if (["rotation", "height", "width", "density"].includes(key))
-            params[key as "rotation" | "height" | "width" | "density"] = parseInt(searchParams[key as keyof MeteorShowerProps] as string);
-    }
-
-    return <MeteorShower {...params} />
-};
-export type { MeteorShowerProps };
