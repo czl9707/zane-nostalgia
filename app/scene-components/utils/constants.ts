@@ -8,6 +8,8 @@ export const defaultSceneSizeMetaData: SceneSizeMetaData = {
         min: 400,
         max: 2400,
         step: 200,
+
+        controlOrder: 998,
     },
     width: {
         name: "Width",
@@ -16,6 +18,8 @@ export const defaultSceneSizeMetaData: SceneSizeMetaData = {
         min: 600,
         max: 3600,
         step: 200,
+
+        controlOrder: 999,
     },
 }
 

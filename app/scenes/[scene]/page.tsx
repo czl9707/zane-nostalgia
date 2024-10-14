@@ -1,15 +1,12 @@
-import { fetchScene } from "@/app/scene-components/utils/fetch-scenes";
+import { fetchScene, fetchSceneMetas } from "@/app/scene-components/utils/fetch-scenes";
 import { defaultParameterResolver, resolveParameterConstraints } from "@/app/scene-components/utils/resolver";
 import { SceneComponentPropsWithSize, SceneModule } from "@/app/scene-components/utils/types";
 
 
-// export function generateStaticParams(): { scene: string }[] {
-//     const currentDir = path.dirname(process.cwd());
-//     const sceneDir = path.join(path.basename(path.basename(currentDir)), "scene-components");
-//     const scenes = fs.readdirSync(sceneDir);
-//     console.log(scenes.map(s => ({ scene: s.slice(0, s.indexOf(".")) })));
-//     return scenes.map(s => ({ scene: s.slice(0, s.indexOf(".")) }));
-// }
+export async function generateStaticParams(): Promise<{ scene: string }[]> {
+    const scenes = await fetchSceneMetas();
+    return scenes.map(s => ({ scene: s.route }));
+}
 
 export default async function Page({ params, searchParams }: { params: { scene: string }, searchParams: object }) {
     const sceneModule: SceneModule = await fetchScene(params.scene);

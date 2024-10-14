@@ -2,11 +2,16 @@ import * as React from 'react';
 
 import { SceneComponentPropsWithSize, SceneMetaData, SceneModule } from '@/app/scene-components/utils/types';
 import { defaultParameterResolver, resolveParameterConstraints } from '@/app/scene-components/utils/resolver';
-import { fetchScene } from '@/app/scene-components/utils/fetch-scenes';
+import { fetchScene, fetchSceneMetas } from '@/app/scene-components/utils/fetch-scenes';
 import Divider from '@/app/ui-components/basics/divider';
 import Panel from '@/app/ui-components/basics/panel';
 import { ColorInputRouterUpdater, SliderBarRouterUpdater } from './controls-router-updator';
 
+
+export async function generateStaticParams(): Promise<{ scene: string }[]> {
+    const scenes = await fetchSceneMetas();
+    return scenes.map(s => ({ scene: s.route }));
+}
 
 export default async function Panels({ params, searchParams }: { params: { scene: string }, searchParams: Partial<SceneComponentPropsWithSize<SceneMetaData>> }) {
     const sceneModule: SceneModule = await fetchScene(params.scene);
