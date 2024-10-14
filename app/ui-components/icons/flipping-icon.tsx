@@ -1,7 +1,6 @@
 import { styled } from "@pigment-css/react";
 import React from "react";
 
-// work around variable in css function
 const FlippingIconContainer = styled("div")(({ theme }) => ({
     lineHeight: 0,
     transform: "scaleY(-100%)",

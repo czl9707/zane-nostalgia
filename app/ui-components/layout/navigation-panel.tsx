@@ -8,11 +8,12 @@ import Panel from "../basics/panel";
 import { Accordin, AccordinButton } from "../basics/accordin";
 import { H4Typography } from "../basics/typography";
 import { Orbit } from "../icons/icons";
+import IconHolder from '../icons/icon-holder';
 
 type NavigationInfo = {
-    Icon: React.ElementType;
-    name: string;
-    route: string;
+    iconStr: string,
+    name: string,
+    route: string,
 }[]
 
 const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
@@ -79,8 +80,8 @@ function PanelContent({ sceneNavInfo }: { sceneNavInfo: NavigationInfo }) {
             <AccordinButton text={"Home"} onClick={() => router.push("/")} />
             <Accordin buttonContent={"Scenes"}>
                 {
-                    sceneNavInfo.map(({ Icon, name, route }) => (
-                        <AccordinButton text={name} icon={<Icon />} key={name}
+                    sceneNavInfo.map(({ iconStr, name, route }) => (
+                        <AccordinButton text={name} icon={<IconHolder dangerouslySetInnerHTML={{ __html: iconStr }} />} key={name}
                             onClick={() => router.push(`/scenes/${route}`)} />
                     ))
                 }

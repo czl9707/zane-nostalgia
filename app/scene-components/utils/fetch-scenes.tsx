@@ -10,6 +10,8 @@ async function fetchScene(scene: string) {
 }
 
 async function fetchSceneMetas() {
+    const renderToString = (await import('react-dom/server')).renderToString;
+
     const sceneDir = path.join(process.cwd(), "app/scene-components");
     const scenes = await fs.readdir(sceneDir);
 
@@ -19,7 +21,8 @@ async function fetchSceneMetas() {
         .map(async s => {
             const sceneModule: SceneModule = await import(`../${s}`);
             return {
-                Icon: sceneModule.SceneIcon,
+                // Work around the ServerComponent => ClientComponent
+                iconStr: renderToString(<sceneModule.SceneIcon />),
                 name: sceneModule.name,
                 route: s,
             }

@@ -5,7 +5,7 @@ import { css, styled } from "@pigment-css/react";
 
 import HeaderBar from './header-bar';
 import { FixedNavigationPanel, NavigationInfo, ThreadNavigationPanel } from './navigation-panel'
-import FlippingIcon from '../icons/flippingIcon';
+import FlippingIcon from '../icons/flipping-icon';
 import { Close, Menu } from '../icons/icons';
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
