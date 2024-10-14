@@ -1,6 +1,10 @@
 import * as React from 'react'
 
-import { DEFAULT_SVG_HEIGHT, DEFAULT_SVG_WIDTH } from './constants'
+import { defaultSceneSizeMetaData } from '@/app/scene-components/utils/constants'
+
+const DEFAULT_SVG_HEIGHT = defaultSceneSizeMetaData.height.default;
+const DEFAULT_SVG_WIDTH = defaultSceneSizeMetaData.width.default;
+
 
 export default function SceneLayout({
     children

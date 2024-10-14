@@ -57,6 +57,7 @@ const playgroundContents = [
     {
         icon: <Orbit />,
         name: "Galaxy",
+        route: "galaxy"
     }
 ]
 
@@ -64,6 +65,7 @@ const sceneContents = [
     {
         icon: <MeteorShower />,
         name: "Meteor Shower",
+        route: "meteors"
     }
 ]
 
@@ -79,17 +81,17 @@ function PanelContent() {
             <AccordinButton text={"Home"} onClick={() => router.push("/")} />
             <Accordin buttonContent={"Scenes"}>
                 {
-                    sceneContents.map(({ icon, name }) => (
+                    sceneContents.map(({ icon, name, route }) => (
                         <AccordinButton text={name} icon={icon} key={name}
-                            onClick={() => router.push(`/scenes/${name.replace(" ", "-").toLowerCase()}`)} />
+                            onClick={() => router.push(`/scenes/${route}`)} />
                     ))
                 }
             </Accordin>
             <Accordin buttonContent={"Playground"}>
                 {
-                    playgroundContents.map(({ icon, name }) => (
+                    playgroundContents.map(({ icon, name, route }) => (
                         <AccordinButton text={name} icon={icon} key={name}
-                            onClick={() => router.push(`/playground/${name.replace(" ", "-").toLowerCase()}`)} />
+                            onClick={() => router.push(`/playground/${route}`)} />
                     ))
                 }
             </Accordin>

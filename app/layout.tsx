@@ -1,5 +1,3 @@
-import * as React from "react"
-
 import '@pigment-css/react/styles.css';
 import { Lato, Dancing_Script } from 'next/font/google';
 import { css } from '@pigment-css/react';
