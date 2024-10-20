@@ -1,3 +1,4 @@
+import { defaultSceneSizeMetaData } from "@/app/scene-components/utils/constants";
 import { fetchScene, fetchSceneMetas } from "@/app/scene-components/utils/fetch-scenes";
 import { defaultParameterResolver, resolveParameterConstraints } from "@/app/scene-components/utils/resolver";
 import { SceneModule } from "@/app/scene-components/utils/types";
@@ -14,7 +15,11 @@ export default async function Page({ params, searchParams }: { params: { scene: 
     const meta = sceneModule.meta;
 
     let resolved = defaultParameterResolver(searchParams, meta);
-    resolved = resolveParameterConstraints(resolved, meta);
+    const sizeParam = {
+        height: defaultSceneSizeMetaData.height.default,
+        width: defaultSceneSizeMetaData.width.default,
+    }
+    resolved = resolveParameterConstraints({ ...resolved, ...sizeParam }, meta);
 
     return (
         <SceneComponent {...resolved} />
