@@ -10,6 +10,7 @@ function defaultParameterResolver<M extends SceneMetaData>(
     for (const param in metaData) {
         if (props[param] == null) {
             resolved[param] = metaData[param]["default"];
+            continue;
         }
 
         if (metaData[param].type == "number")
