@@ -1,7 +1,7 @@
 import { fetchScene } from "@/app/scene-components/utils/fetch-scenes";
 import { defaultParameterResolver, resolveParameterConstraints } from "@/app/scene-components/utils/resolver";
 import { SceneComponentPropsWithSize, SceneModule } from "@/app/scene-components/utils/types";
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest, context: { params: { scene: string } }) {
     const sceneModule: SceneModule = await fetchScene(context.params.scene);
@@ -12,7 +12,10 @@ export async function GET(request: NextRequest, context: { params: { scene: stri
     params = resolveParameterConstraints(searchParams as SceneComponentPropsWithSize<typeof sceneModule.meta>, sceneModule.meta);
 
     const result = renderToString(<sceneModule.SceneComponent {...params} />);
-    const response = NextResponse.json(result);
-    response.headers.set("content-type", "image/svg+xml; charset=utf-8");
+    const response = new Response(result, {
+        headers: {
+            "content-type": "image/svg+xml; charset=utf-8",
+        },
+    });
     return response;
 }
