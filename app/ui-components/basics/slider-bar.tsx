@@ -4,6 +4,7 @@ import * as React from 'react';
 import useForkRef from '../utils/useForkRef';
 import { styled } from '@pigment-css/react';
 import { H6Typography } from './typography';
+import InputInfo from './input-info';
 
 interface SliderBarProps {
     label: string,
@@ -26,7 +27,7 @@ const SliderBarContainer = styled("div")(({ theme }) => ({
     },
     "&:active": {
         [`${SliderBarButton}`]: {
-            backgroundColor: theme.vars.colors.primary.background,
+            backgroundColor: theme.vars.colors.primary.background.solid,
             boxShadow: `0 0 4px ${theme.vars.colors.primary.contrastText}`,
         }
     },
@@ -37,13 +38,13 @@ const SliderBarButton = styled("div")(({ theme }) => ({
     transform: "translateX(-50%)",
     transition: `background-color ${theme.transition.short} linear,
                 box-shadow ${theme.transition.short} linear`,
-    backgroundColor: theme.vars.colors.secondary.background,
+    backgroundColor: theme.vars.colors.secondary.background.solid,
     boxShadow: `0 0 1.5px ${theme.vars.colors.secondary.contrastText}`,
 }));
 
 const SliderBarTrack = styled("div")(({ theme }) => ({
     position: "relative", width: "100%", height: ".8rem",
-    backgroundColor: theme.vars.colors.primary.background,
+    backgroundColor: theme.vars.colors.primary.background.solid,
     boxShadow: `0 0 1px ${theme.vars.colors.primary.contrastText}`,
 }));
 
@@ -97,11 +98,10 @@ const SliderBar = React.forwardRef<HTMLDivElement, SliderBarProps>(
 
         return (
             <>
-                <div style={{ width: "100%", display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+                <InputInfo>
                     <H6Typography>{label}</H6Typography>
-                    <div style={{ flex: "1 1" }} />
                     <H6Typography>{value}</H6Typography>
-                </div>
+                </InputInfo>
                 <SliderBarContainer ref={composedRef} onMouseDown={handleMouseDown}>
                     <SliderBarTrack />
                     <SliderBarButton style={{ left: `${(value - min) / (max - min) * 100}%` }} />

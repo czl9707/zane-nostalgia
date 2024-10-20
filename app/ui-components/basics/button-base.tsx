@@ -40,7 +40,7 @@ const ButtonBaseDiv = styled("div")<ButtonBaseProps>(({ theme }) => ({
     overflow: "hidden",
     backgroundColor: ({ color = "transparent" }) => {
         if (color === "transparent") return "transparent";
-        else return theme.vars.colors[color].background;
+        else return theme.vars.colors[color].background.solid;
     },
     color: ({ color = "transparent" }) => {
         if (color === "transparent") color = "primary";

@@ -2,7 +2,11 @@ import type { ExtendTheme } from '@pigment-css/react/theme';
 
 declare module '@pigment-css/react/theme' {
     interface ColorToken {
-        background: string,
+        background: {
+            solid: string,
+            opaque: string,
+            contrastOpaque: string,
+        },
         contrastText: string,
     }
     interface TypographyToken {
