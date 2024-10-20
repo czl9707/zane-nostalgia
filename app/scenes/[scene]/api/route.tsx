@@ -12,5 +12,7 @@ export async function GET(request: NextRequest, context: { params: { scene: stri
     params = resolveParameterConstraints(searchParams as SceneComponentPropsWithSize<typeof sceneModule.meta>, sceneModule.meta);
 
     const result = renderToString(<sceneModule.SceneComponent {...params} />);
-    return NextResponse.json(result);
+    const response = NextResponse.json(result);
+    response.headers.set("content-type", "image/svg+xml; charset=utf-8");
+    return response;
 }
