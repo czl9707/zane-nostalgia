@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { MeteorShower as MeteorShowerIcon } from "@/app/ui-components/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, SceneMetaData, SceneComponentPropsWithSize, SceneModule } from "./utils/types";
+import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
 import { defaultSceneSizeMetaData } from "./utils/constants";
 
 
@@ -60,7 +60,7 @@ function MeteorShower({
     density,
     height,
     width,
-}: SceneComponentPropsWithSize<MeteroShowerMeta>) {
+}: SceneComponentProps<MeteroShowerMeta & SceneSizeMetaData>) {
     const meteorCountY = rotation === 90 ? 0 :
         Math.abs(Math.floor(
             height * density * METEOR_DENSITY_FACTOR * Math.cos(rotation * Math.PI / 180)
@@ -74,28 +74,12 @@ function MeteorShower({
     const METEORSIZEVARIENTS = 3;
     const METEORINITVARIANTS = Math.floor(METEOR_ANIMATION_TIME_RANGE / 4);
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`}>
-        <style>
-            {
-                `
-use {animation: fadeInAnimation 0.8s ease-in-out forwards;}
-
-@keyframes fadeInAnimation {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}`
-            }
-        </style>
+    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <linearGradient id="tailGradient" gradientTransform={`rotate(0)`}>
                 <stop offset="0%" stopColor={color} />
                 <stop offset="100%" stopColor="transparent" />
             </linearGradient>
-
 
             <g id='meteorGeo'>
                 <polygon points="0,-2 0,2 600,0" opacity={0.5} fill="url('#tailGradient')" />
