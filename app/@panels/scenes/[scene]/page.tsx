@@ -22,7 +22,7 @@ export default async function Panels({ params, searchParams }: { params: { scene
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const metaEntries = Object.entries(meta).sort(([pn, metaEntry]) => metaEntry.controlOrder)
-    console.log(resolved)
+
     return (<Panel>
         {
             metaEntries.map(([paramName, metaEntry], i) => {
