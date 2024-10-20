@@ -82,6 +82,8 @@ const SliderBar = React.forwardRef<HTMLDivElement, SliderBarProps>(
                 document.removeEventListener("mousemove", handleMouseMove);
                 document.removeEventListener("mouseup", handleMouseUp);
                 // using setting to avoid racing condition
+                console.log("remove")
+
                 if (onChange) setValue(v => {
                     onChange(v);
                     return v;
@@ -90,6 +92,7 @@ const SliderBar = React.forwardRef<HTMLDivElement, SliderBarProps>(
             function handleMouseDown() {
                 document.addEventListener("mousemove", handleMouseMove);
                 document.addEventListener("mouseup", handleMouseUp);
+                console.log("add")
             }
             return handleMouseDown;
         }, [max, min, step, onChange]);
