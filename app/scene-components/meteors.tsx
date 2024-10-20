@@ -75,6 +75,7 @@ function MeteorShower({
     const METEORINITVARIANTS = Math.floor(METEOR_ANIMATION_TIME_RANGE / 4);
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`}>
+        <style />
         <defs>
             <linearGradient id="tailGradient" gradientTransform={`rotate(0)`}>
                 <stop offset="0%" stopColor={color} />
@@ -95,7 +96,7 @@ function MeteorShower({
                                 <g id={`meteor${i}${j}`} key={j}>
                                     <use href="#meteorGeo" transform={`rotate(-${rotation})`} opacity={0.5 + i * 0.2}>
                                         <animate attributeName="x" values={`0;-${height + width}`} dur={`${METEOR_ANIMATION_TIME_RANGE * (1 - i * 0.25)}s`}
-                                            begin={`-${j * 3}s`} repeatCount="indefinite" />
+                                            begin={`-${j * 4}s`} repeatCount="indefinite" />
                                     </use>
                                 </g>
                             )))
