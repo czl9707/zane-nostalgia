@@ -1,36 +1,54 @@
 import { defaultSceneSizeMetaData } from "./constants";
-import { SceneMetaData, SceneComponentPropsWithSize, NumberParamMetaToken } from "./types";
+import { SceneMetaData, SceneComponentProps, NumberParamMetaToken, SceneSizeMetaData } from "./types";
 
-function defaultParameterResolver<M extends SceneMetaData, P extends Partial<SceneComponentPropsWithSize<M>>>(
-    props: P,
+function defaultParameterResolver<M extends SceneMetaData>(
+    props: Partial<{ [key: string]: string }>,
     metaData: M
-): SceneComponentPropsWithSize<M> {
+): SceneComponentProps<M> {
+    const resolved: SceneComponentProps<M> = {} as SceneComponentProps<M>;
+
     for (const param in metaData) {
         if (props[param] == null) {
-            props[param] = metaData[param]["default"] as P[typeof param];
+            resolved[param] = metaData[param]["default"];
+        }
+
+        if (metaData[param].type == "number")
+            resolved[param] = parseInt(props[param] as string);
+        else
+            resolved[param] = props[param] as string;
+    }
+
+    return resolved;
+}
+
+function defaultSizeParameterResolver(
+    props: Partial<{ [key: string]: string }>,
+): SceneComponentProps<SceneSizeMetaData> {
+    const resolved: SceneComponentProps<SceneSizeMetaData> = {} as SceneComponentProps<SceneSizeMetaData>;
+
+    for (const param in defaultSceneSizeMetaData) {
+        if (props[param] == null) {
+            resolved[param] = defaultSceneSizeMetaData[param]["default"];
+        }
+        else {
+            resolved[param] = parseInt(props[param] as string);
         }
     }
 
-    if (props.width == null) props.width = defaultSceneSizeMetaData.width.default;
-    if (props.height == null) props.height = defaultSceneSizeMetaData.height.default;
-
-    return props as SceneComponentPropsWithSize<M>;
+    return resolved;
 }
 
-function resolveParameterConstraints<M extends SceneMetaData, P extends SceneComponentPropsWithSize<M>>(props: P, metaData: M): P {
+function resolveParameterConstraints<M extends SceneMetaData>(props: SceneComponentProps<M>, metaData: M): SceneComponentProps<M> {
     for (const param in metaData) {
         if (metaData[param].type == "number") {
             const meta = metaData[param] as NumberParamMetaToken;
-
-            if (typeof props[param] === "string")
-                props[param] = parseInt(props[param]) as P[typeof param];
 
             props[param] = fitInStep(
                 props[param] as number,
                 meta.min,
                 meta.max,
                 meta.step
-            ) as P[typeof param];
+            );
         }
     }
 
@@ -42,4 +60,4 @@ function fitInStep(v: number, min: number, max: number, step: number): number {
     return v - ((v - min) % step);
 }
 
-export { defaultParameterResolver, resolveParameterConstraints }
+export { defaultParameterResolver, resolveParameterConstraints, defaultSizeParameterResolver }

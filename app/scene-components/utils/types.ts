@@ -27,11 +27,10 @@ interface SceneSizeMetaData extends SceneMetaData {
     height: NumberParamMetaToken,
 }
 
+
 type SceneComponentProps<M extends SceneMetaData> = {
     [key in keyof (M)]: M[key]["default"]
 }
-
-type SceneComponentPropsWithSize<M extends SceneMetaData> = SceneComponentProps<M> & SceneComponentProps<SceneSizeMetaData>
 
 interface SceneModule {
     SceneComponent: React.ElementType,
@@ -46,6 +45,5 @@ export type {
     SceneMetaData,
     SceneSizeMetaData,
     SceneComponentProps,
-    SceneComponentPropsWithSize,
     SceneModule,
 }

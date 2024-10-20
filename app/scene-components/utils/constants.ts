@@ -23,4 +23,5 @@ export const defaultSceneSizeMetaData: SceneSizeMetaData = {
     },
 }
 
+
 export const ALL_SCENES = ["meteor"] as const;

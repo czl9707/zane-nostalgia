@@ -1,6 +1,7 @@
+import { defaultSceneSizeMetaData } from "@/app/scene-components/utils/constants";
 import { fetchScene } from "@/app/scene-components/utils/fetch-scenes";
-import { defaultParameterResolver, resolveParameterConstraints } from "@/app/scene-components/utils/resolver";
-import { SceneComponentPropsWithSize, SceneModule } from "@/app/scene-components/utils/types";
+import { defaultParameterResolver, defaultSizeParameterResolver, resolveParameterConstraints } from "@/app/scene-components/utils/resolver";
+import { SceneModule } from "@/app/scene-components/utils/types";
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest, context: { params: { scene: string } }) {
@@ -8,10 +9,11 @@ export async function GET(request: NextRequest, context: { params: { scene: stri
     const renderToString = (await import('react-dom/server')).renderToString;
 
     const searchParams = Object.fromEntries(new URL(request.url).searchParams);
-    let params = defaultParameterResolver(searchParams, sceneModule.meta);
-    params = resolveParameterConstraints(searchParams as SceneComponentPropsWithSize<typeof sceneModule.meta>, sceneModule.meta);
+    const resolvedParam = defaultParameterResolver(searchParams, sceneModule.meta);
+    const resolvedSizeParam = defaultSizeParameterResolver(searchParams);
+    const resolved = resolveParameterConstraints({ ...resolvedParam, ...resolvedSizeParam }, { ...sceneModule.meta, ...defaultSceneSizeMetaData });
 
-    const result = renderToString(<sceneModule.SceneComponent {...params} />);
+    const result = renderToString(<sceneModule.SceneComponent {...resolved} />);
     const response = new Response(result, {
         headers: {
             "content-type": "image/svg+xml; charset=utf-8",
