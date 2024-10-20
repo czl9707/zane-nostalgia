@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { MeteorShower as MeteorShowerIcon } from "@/app/ui-components/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneMetaData, SceneComponentPropsWithSize, SceneModule } from "./utils/types";
-import { defaultSceneSizeMetaData, FadeInAnimationString } from "./utils/constants";
+import { defaultSceneSizeMetaData } from "./utils/constants";
 
 
 interface MeteroShowerMeta extends SceneMetaData {
