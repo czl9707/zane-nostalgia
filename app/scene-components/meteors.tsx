@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { MeteorShower as MeteorShowerIcon } from "@/app/ui-components/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneMetaData, SceneComponentPropsWithSize, SceneModule } from "./utils/types";
-import { defaultSceneSizeMetaData } from "./utils/constants";
+import { defaultSceneSizeMetaData, FadeInAnimationString } from "./utils/constants";
 
 
 interface MeteroShowerMeta extends SceneMetaData {
@@ -75,7 +75,21 @@ function MeteorShower({
     const METEORINITVARIANTS = Math.floor(METEOR_ANIMATION_TIME_RANGE / 4);
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`}>
-        <style />
+        <style>
+            {
+                `
+use {animation: fadeInAnimation 0.8s ease-in-out forwards;}
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}`
+            }
+        </style>
         <defs>
             <linearGradient id="tailGradient" gradientTransform={`rotate(0)`}>
                 <stop offset="0%" stopColor={color} />
