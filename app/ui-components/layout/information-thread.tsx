@@ -6,7 +6,8 @@ import { css, styled } from "@pigment-css/react";
 import HeaderBar from './header-bar';
 import { FixedNavigationPanel, NavigationInfo, ThreadNavigationPanel } from './navigation-panel'
 import FlippingIcon from '../icons/flipping-icon';
-import { Close, Menu } from '../icons/icons';
+import { Close, DummyIcon, Github, Menu } from '../icons/icons';
+import Link from 'next/link';
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
     padding: theme.padding.thread,
@@ -39,18 +40,29 @@ function InformationThread({ children, sceneNavInfo }: {
             <FixedNavigationPanel sceneNavInfo={sceneNavInfo} />
             <InformationThreadContainer >
                 <HeaderBar>
-                    <div style={{ flex: "1 1" }} />
-                    <FlippingIcon
-                        className={css(
-                            ({ theme }) => ({
-                                [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
-                            })
-                        )}
-                        onClick={toggleNav}
-                        isFlipped={navIsOpen}
-                        before={<Menu />}
-                        after={<Close />}
-                    />
+                    <Link href={"https://github.com/czl9707/zane-nostalgia"} target="_blank" rel="noopener noreferrer">
+                        <Github />
+                    </Link>
+
+                    <>
+                        <FlippingIcon
+                            className={css(
+                                ({ theme }) => ({
+                                    [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
+                                })
+                            )}
+                            onClick={toggleNav}
+                            isFlipped={navIsOpen}
+                            before={<Menu />}
+                            after={<Close />}
+                        />
+                        <DummyIcon
+                            className={css(
+                                ({ theme }) => ({
+                                    [`@media(max-width: ${theme.breakpoints.lg})`]: { display: "none" }
+                                })
+                            )} />
+                    </>
                 </HeaderBar>
                 {<ThreadNavigationPanel isShow={navIsOpen} sceneNavInfo={sceneNavInfo} />}
                 {children}
