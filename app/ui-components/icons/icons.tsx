@@ -60,6 +60,26 @@ const Close = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
+const Copy = React.forwardRef<SVGSVGElement, IconProps>(
+    function Copy(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M362.31-260Q332-260 311-281q-21-21-21-51.31v-455.38Q290-818 311-839q21-21 51.31-21h335.38Q728-860 749-839q21 21 21 51.31v455.38Q770-302 749-281q-21 21-51.31 21H362.31Zm0-60h335.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-455.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H362.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85Zm-140 200Q192-120 171-141q-21-21-21-51.31v-515.38h60v515.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85h395.38v60H222.31ZM350-320v-480 480Z" />
+            </SvgIcon>
+        );
+    }
+)
+
+const Check = React.forwardRef<SVGSVGElement, IconProps>(
+    function Check(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M382-253.85 168.62-467.23 211.38-510 382-339.38 748.62-706l42.76 42.77L382-253.85Z" />
+            </SvgIcon>
+        );
+    }
+)
+
 const MeteorShower = React.forwardRef<SVGSVGElement, IconProps>(
     function MeteorShower(props, ref) {
         return (
@@ -71,4 +91,13 @@ const MeteorShower = React.forwardRef<SVGSVGElement, IconProps>(
 )
 
 
-export { Orbit, KeyboardArrowDown, DummyIcon, Menu, Close, MeteorShower }
+export {
+    Orbit,
+    KeyboardArrowDown,
+    DummyIcon,
+    Menu,
+    Close,
+    MeteorShower,
+    Copy,
+    Check
+}

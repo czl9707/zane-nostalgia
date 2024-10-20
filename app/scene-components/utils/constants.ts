@@ -5,7 +5,7 @@ export const defaultSceneSizeMetaData: SceneSizeMetaData = {
         name: "Height",
         type: "number",
         default: 1200,
-        min: 400,
+        min: 200,
         max: 2400,
         step: 200,
 
@@ -15,7 +15,7 @@ export const defaultSceneSizeMetaData: SceneSizeMetaData = {
         name: "Width",
         type: "number",
         default: 1600,
-        min: 600,
+        min: 400,
         max: 3600,
         step: 200,
 

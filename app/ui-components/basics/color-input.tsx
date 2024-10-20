@@ -1,8 +1,10 @@
 "use client"
+
 import * as React from 'react';
 import { styled } from "@pigment-css/react";
 
 import { H6Typography } from './typography';
+import InputInfo from './input-info';
 
 const ColorInputEL = styled("input")({
     "&[type=\"color\" i]": {
@@ -44,11 +46,10 @@ const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps & Omit<Rea
 
         return (
             <>
-                <div style={{ width: "100%", display: "flex", alignItems: "center", marginBottom: "1rem" }}>
+                <InputInfo>
                     <H6Typography>{label}</H6Typography>
-                    <div style={{ flex: "1 1" }} />
                     <H6Typography>{color}</H6Typography>
-                </div>
+                </InputInfo>
                 <ColorInputContainer>
                     <ColorInputEL type="color" value={color} name={label} {...other} ref={ref}
                         onChange={(e) => {
