@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { MeteorShower as MeteorShowerIcon } from "@/app/ui-components/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneMetaData, SceneComponentPropsWithSize, SceneModule } from "./utils/types";
+import { defaultSceneSizeMetaData } from "./utils/constants";
 
 
 interface MeteroShowerMeta extends SceneMetaData {
@@ -11,9 +12,8 @@ interface MeteroShowerMeta extends SceneMetaData {
     density: NumberParamMetaToken,
 }
 
-export const SceneIcon: SceneModule["SceneIcon"] = MeteorShowerIcon;
-export const name: SceneModule["name"] = "Meteor Shower";
-export const meta: SceneModule["meta"] = {
+
+export const meteorMeta: MeteroShowerMeta = {
     color: {
         name: "Color",
         type: "color",
@@ -50,6 +50,9 @@ export const meta: SceneModule["meta"] = {
     },
 };
 
+const METEOR_DENSITY_FACTOR = 0.005;
+const METEOR_ANIMATION_TIME_RANGE = 60;
+
 function MeteorShower({
     color,
     backgroundColor,
@@ -58,19 +61,20 @@ function MeteorShower({
     height,
     width,
 }: SceneComponentPropsWithSize<MeteroShowerMeta>) {
-    const realHeight = 500;
-    const realWidth = Math.floor(realHeight / height * width);
+    const meteorCountY = rotation === 90 ? 0 :
+        Math.abs(Math.floor(
+            height * density * METEOR_DENSITY_FACTOR * Math.cos(rotation * Math.PI / 180)
+        ));
+    const meteorCountX = rotation % 180 === 0 ? 0 :
+        Math.abs(Math.floor(
+            width * density * METEOR_DENSITY_FACTOR * Math.sin(rotation * Math.PI / 180)
+        ));
 
-    const meteorCountY = Math.floor(realHeight * density * 0.01);
-    const meteorCountX = Math.floor(realWidth * density * 0.01);
-
-
-    const meteorAnimationTimeRange = 60;
 
     const METEORSIZEVARIENTS = 3;
-    const METEORINITVARIANTS = Math.floor(meteorAnimationTimeRange / 3);
+    const METEORINITVARIANTS = Math.floor(METEOR_ANIMATION_TIME_RANGE / 4);
 
-    return (<svg viewBox={`0 0 ${realWidth} ${realHeight}`} height={`${height}px`} width={`${width}px`}>
+    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`}>
         <defs>
             <linearGradient id="tailGradient" gradientTransform={`rotate(0)`}>
                 <stop offset="0%" stopColor={color} />
@@ -79,8 +83,8 @@ function MeteorShower({
 
 
             <g id='meteorGeo'>
-                <polygon points="0,-1 0,1 300,0" opacity={0.5} fill="url('#tailGradient')" />
-                <rect x={-1} y={-1} width={2} height={2} fill={color} />
+                <polygon points="0,-2 0,2 600,0" opacity={0.5} fill="url('#tailGradient')" />
+                <rect x={-2} y={-2} width={4} height={4} fill={color} />
             </g>
 
             {
@@ -90,7 +94,7 @@ function MeteorShower({
                             [...Array(METEORINITVARIANTS)].map(((_, j) => (
                                 <g id={`meteor${i}${j}`} key={j}>
                                     <use href="#meteorGeo" transform={`rotate(-${rotation})`} opacity={0.5 + i * 0.2}>
-                                        <animate attributeName="x" values="0;-1500" dur={`${meteorAnimationTimeRange * (1 - i * 0.25)}s`}
+                                        <animate attributeName="x" values={`0;-${height + width}`} dur={`${METEOR_ANIMATION_TIME_RANGE * (1 - i * 0.25)}s`}
                                             begin={`-${j * 3}s`} repeatCount="indefinite" />
                                     </use>
                                 </g>
@@ -101,24 +105,36 @@ function MeteorShower({
             }
         </defs>
 
-        <rect width={`${realWidth}px`} height={`${realHeight}px`} fill={backgroundColor} />
+        <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         {
-            [...Array(meteorCountX)].map((_, i) => (
-                <use x={randomInt(realWidth, 0)} y={randomInt(50, -55)}
-                    href={`#meteor${randomInt(METEORSIZEVARIENTS)}${randomInt(METEORINITVARIANTS)}`} key={i} />
-            ))
+            METEOR_PREBUILD.slice(0, meteorCountX)
+                .map(([x, y, a, b], i) => (
+                    <use x={toInt(x, width)} y={toInt(y, 100, -105)}
+                        href={`#meteor${toInt(a, METEORSIZEVARIENTS)}${toInt(b, METEORINITVARIANTS)}`} key={i} />
+                ))
         }
         {
-            [...Array(meteorCountY)].map((_, i) => (
-                <use x={randomInt(50, rotation <= 90 ? realWidth + 5 : -55)} y={randomInt(realHeight, 0)}
-                    href={`#meteor${randomInt(METEORSIZEVARIENTS)}${randomInt(METEORINITVARIANTS)}`} key={i} />
-            ))
+            METEOR_PREBUILD.slice(0, meteorCountY)
+                .map(([x, y, a, b], i) => (
+                    <use x={toInt(x, 100, rotation <= 90 ? width + 5 : -105)} y={toInt(y, height)}
+                        href={`#meteor${toInt(a, METEORSIZEVARIENTS)}${toInt(b, METEORINITVARIANTS)}`} key={i} />
+                ))
         }
     </svg>)
 }
 
-export const SceneComponent: SceneModule["SceneComponent"] = MeteorShower;
 
-function randomInt(range: number, start: number = 0): number {
-    return Math.floor(Math.random() * range + start);
+
+function toInt(num: number, range: number, start: number = 0): number {
+    return Math.floor(num * range + start);
 }
+
+const MAX_METEOR_COUNT = Math.floor(defaultSceneSizeMetaData.width.max * meteorMeta.density.max * METEOR_DENSITY_FACTOR);
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const METEOR_PREBUILD = [...Array(MAX_METEOR_COUNT)].map((_) => [Math.random(), Math.random(), Math.random(), Math.random()])
+
+
+export const SceneComponent: SceneModule["SceneComponent"] = MeteorShower;
+export const SceneIcon: SceneModule["SceneIcon"] = MeteorShowerIcon;
+export const name: SceneModule["name"] = "Meteor Shower";
+export const meta: SceneModule["meta"] = meteorMeta;
