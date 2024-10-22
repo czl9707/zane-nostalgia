@@ -3,6 +3,7 @@ import * as React from "react";
 import { MeteorShower as MeteorShowerIcon } from "@/app/ui-components/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
 import { defaultSceneSizeMetaData } from "./utils/constants";
+import { randomFitToInt, randomMatrix } from "./utils/math-utils";
 
 
 interface MeteroShowerMeta extends SceneMetaData {
@@ -50,7 +51,7 @@ export const meteorMeta: MeteroShowerMeta = {
     },
 };
 
-const METEOR_DENSITY_FACTOR = 0.005;
+const DENSITY_FACTOR = 0.005;
 const METEOR_ANIMATION_TIME_RANGE = 60;
 
 function MeteorShower({
@@ -63,16 +64,16 @@ function MeteorShower({
 }: SceneComponentProps<MeteroShowerMeta & SceneSizeMetaData>) {
     const meteorCountY = rotation === 90 ? 0 :
         Math.abs(Math.floor(
-            height * density * METEOR_DENSITY_FACTOR * Math.cos(rotation * Math.PI / 180)
+            height * density * DENSITY_FACTOR * Math.cos(rotation * Math.PI / 180)
         ));
     const meteorCountX = rotation % 180 === 0 ? 0 :
         Math.abs(Math.floor(
-            width * density * METEOR_DENSITY_FACTOR * Math.sin(rotation * Math.PI / 180)
+            width * density * DENSITY_FACTOR * Math.sin(rotation * Math.PI / 180)
         ));
 
 
-    const METEORSIZEVARIENTS = 3;
-    const METEORINITVARIANTS = Math.floor(METEOR_ANIMATION_TIME_RANGE / 4);
+    const METEOR_SIZE_VARIENTS = 3;
+    const METEOR_INIT_VARIANTS = Math.floor(METEOR_ANIMATION_TIME_RANGE / 4);
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -87,10 +88,10 @@ function MeteorShower({
             </g>
 
             {
-                [...Array(METEORSIZEVARIENTS)].map(((_, i) => (
+                [...Array(METEOR_SIZE_VARIENTS)].map(((_, i) => (
                     <React.Fragment key={i}>
                         {
-                            [...Array(METEORINITVARIANTS)].map(((_, j) => (
+                            [...Array(METEOR_INIT_VARIANTS)].map(((_, j) => (
                                 <g id={`meteor${i}${j}`} key={j}>
                                     <use href="#meteorGeo" transform={`rotate(-${rotation})`} opacity={0.5 + i * 0.2}>
                                         <animate attributeName="x" values={`0;-${height + width}`} dur={`${METEOR_ANIMATION_TIME_RANGE * (1 - i * 0.25)}s`}
@@ -105,32 +106,28 @@ function MeteorShower({
         </defs>
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
+
         {
             METEOR_PREBUILD.slice(0, meteorCountX)
-                .map(([x, y, a, b], i) => (
-                    <use x={toInt(x, width)} y={toInt(y, 100, -105)}
-                        href={`#meteor${toInt(a, METEORSIZEVARIENTS)}${toInt(b, METEORINITVARIANTS)}`} key={i} />
+                .map(([x, y, size, init], i) => (
+                    <use x={randomFitToInt(x, width + 100)} y={randomFitToInt(y, 100, -105)}
+                        href={`#meteor${randomFitToInt(size, METEOR_SIZE_VARIENTS)}${randomFitToInt(init, METEOR_INIT_VARIANTS)}`} key={i} />
                 ))
         }
         {
             METEOR_PREBUILD.slice(0, meteorCountY)
-                .map(([x, y, a, b], i) => (
-                    <use x={toInt(x, 100, rotation <= 90 ? width + 5 : -105)} y={toInt(y, height)}
-                        href={`#meteor${toInt(a, METEORSIZEVARIENTS)}${toInt(b, METEORINITVARIANTS)}`} key={i} />
+                .map(([x, y, size, init], i) => (
+                    <use x={randomFitToInt(x, 100, rotation <= 90 ? width + 5 : -105)} y={randomFitToInt(y, height)}
+                        href={`#meteor${randomFitToInt(size, METEOR_SIZE_VARIENTS)}${randomFitToInt(init, METEOR_INIT_VARIANTS)}`} key={i} />
                 ))
         }
     </svg>)
 }
 
 
-
-function toInt(num: number, range: number, start: number = 0): number {
-    return Math.floor(num * range + start);
-}
-
-const MAX_METEOR_COUNT = Math.floor(defaultSceneSizeMetaData.width.max * meteorMeta.density.max * METEOR_DENSITY_FACTOR);
+const MAX_METEOR_COUNT = Math.floor(defaultSceneSizeMetaData.width.max * meteorMeta.density.max * DENSITY_FACTOR);
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const METEOR_PREBUILD = [...Array(MAX_METEOR_COUNT)].map((_) => [Math.random(), Math.random(), Math.random(), Math.random()])
+const METEOR_PREBUILD = randomMatrix(MAX_METEOR_COUNT, 4);
 
 
 export const SceneComponent: SceneModule["SceneComponent"] = MeteorShower;

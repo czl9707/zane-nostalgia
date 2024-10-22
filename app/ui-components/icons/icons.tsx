@@ -18,19 +18,9 @@ const SvgIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-const DummyIcon = SvgIcon;
+export const DummyIcon = SvgIcon;
 
-const Orbit = React.forwardRef<SVGSVGElement, IconProps>(
-    function Orbit(props, ref) {
-        return (
-            <SvgIcon {...props} style={{ transform: "scale(0.75)" }} ref={ref}>
-                <path d="M240-100q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 22-6.5 42.5T354-159v-27q30 13 62 19.5t64 6.5q134 0 227-93t93-227h80q0 83-31.5 156T763-197q-54 54-127 85.5T480-80q-45 0-88-9.5T309-118q-16 9-33.5 13.5T240-100Zm0-80q25 0 42.5-17.5T300-240q0-25-17.5-42.5T240-300q-25 0-42.5 17.5T180-240q0 25 17.5 42.5T240-180Zm240-160q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 58-41 99t-99 41ZM80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q45 0 88 9.5t83 28.5q16-9 33.5-13.5T720-860q58 0 99 41t41 99q0 58-41 99t-99 41q-58 0-99-41t-41-99q0-22 6.5-42.5T606-801v27q-30-13-62-19.5t-64-6.5q-134 0-227 93t-93 227H80Zm640-180q25 0 42.5-17.5T780-720q0-25-17.5-42.5T720-780q-25 0-42.5 17.5T660-720q0 25 17.5 42.5T720-660ZM240-240Zm480-480Z" />
-            </SvgIcon>
-        );
-    }
-)
-
-const KeyboardArrowDown = React.forwardRef<SVGSVGElement, IconProps>(
+export const KeyboardArrowDown = React.forwardRef<SVGSVGElement, IconProps>(
     function KeyboardArrowDown(props, ref) {
         return (
             <SvgIcon {...props} ref={ref}>
@@ -40,7 +30,7 @@ const KeyboardArrowDown = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-const Menu = React.forwardRef<SVGSVGElement, IconProps>(
+export const Menu = React.forwardRef<SVGSVGElement, IconProps>(
     function Menu(props, ref) {
         return (
             <SvgIcon {...props} ref={ref}>
@@ -50,7 +40,7 @@ const Menu = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-const Close = React.forwardRef<SVGSVGElement, IconProps>(
+export const Close = React.forwardRef<SVGSVGElement, IconProps>(
     function Close(props, ref) {
         return (
             <SvgIcon {...props} ref={ref}>
@@ -60,7 +50,7 @@ const Close = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-const Copy = React.forwardRef<SVGSVGElement, IconProps>(
+export const Copy = React.forwardRef<SVGSVGElement, IconProps>(
     function Copy(props, ref) {
         return (
             <SvgIcon {...props} ref={ref}>
@@ -70,7 +60,7 @@ const Copy = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-const Check = React.forwardRef<SVGSVGElement, IconProps>(
+export const Check = React.forwardRef<SVGSVGElement, IconProps>(
     function Check(props, ref) {
         return (
             <SvgIcon {...props} ref={ref}>
@@ -80,7 +70,28 @@ const Check = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-const MeteorShower = React.forwardRef<SVGSVGElement, IconProps>(
+export const Error = React.forwardRef<SVGSVGElement, IconProps>(
+    function Error(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M480-290.77q13.73 0 23.02-9.29t9.29-23.02q0-13.73-9.29-23.02-9.29-9.28-23.02-9.28t-23.02 9.28q-9.29 9.29-9.29 23.02t9.29 23.02q9.29 9.29 23.02 9.29Zm-30-146.15h60v-240h-60v240ZM480.07-100q-78.84 0-148.21-29.92t-120.68-81.21q-51.31-51.29-81.25-120.63Q100-401.1 100-479.93q0-78.84 29.92-148.21t81.21-120.68q51.29-51.31 120.63-81.25Q401.1-860 479.93-860q78.84 0 148.21 29.92t120.68 81.21q51.31 51.29 81.25 120.63Q860-558.9 860-480.07q0 78.84-29.92 148.21t-81.21 120.68q-51.29 51.31-120.63 81.25Q558.9-100 480.07-100Zm-.07-60q134 0 227-93t93-227q0-134-93-227t-227-93q-134 0-227 93t-93 227q0 134 93 227t227 93Zm0-320Z" />
+            </SvgIcon>
+        );
+    }
+);
+
+
+export const Orbit = React.forwardRef<SVGSVGElement, IconProps>(
+    function Orbit(props, ref) {
+        return (
+            <SvgIcon {...props} style={{ transform: "scale(0.75)" }} ref={ref}>
+                <path d="M240-100q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 22-6.5 42.5T354-159v-27q30 13 62 19.5t64 6.5q134 0 227-93t93-227h80q0 83-31.5 156T763-197q-54 54-127 85.5T480-80q-45 0-88-9.5T309-118q-16 9-33.5 13.5T240-100Zm0-80q25 0 42.5-17.5T300-240q0-25-17.5-42.5T240-300q-25 0-42.5 17.5T180-240q0 25 17.5 42.5T240-180Zm240-160q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 58-41 99t-99 41ZM80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q45 0 88 9.5t83 28.5q16-9 33.5-13.5T720-860q58 0 99 41t41 99q0 58-41 99t-99 41q-58 0-99-41t-41-99q0-22 6.5-42.5T606-801v27q-30-13-62-19.5t-64-6.5q-134 0-227 93t-93 227H80Zm640-180q25 0 42.5-17.5T780-720q0-25-17.5-42.5T720-780q-25 0-42.5 17.5T660-720q0 25 17.5 42.5T720-660ZM240-240Zm480-480Z" />
+            </SvgIcon>
+        );
+    }
+)
+
+export const MeteorShower = React.forwardRef<SVGSVGElement, IconProps>(
     function MeteorShower(props, ref) {
         return (
             <SvgIcon {...props} viewBoxSize='0 0 256 256' style={{ transform: "scale(0.75)" }} ref={ref} >
@@ -90,14 +101,12 @@ const MeteorShower = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-
-export {
-    Orbit,
-    KeyboardArrowDown,
-    DummyIcon,
-    Menu,
-    Close,
-    MeteorShower,
-    Copy,
-    Check
-}
+export const Github = React.forwardRef<SVGSVGElement, IconProps>(
+    function Github(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref} viewBoxSize="0 0 24 24">
+                <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" />
+            </SvgIcon>
+        );
+    }
+)

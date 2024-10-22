@@ -6,6 +6,7 @@ const HeaderBar = styled("div")({
     height: "4rem", top: "0", left: 0, right: 0,
     position: "absolute", color: "transparent",
     display: "flex", flexDirection: "row", alignItems: "center",
+    gap: "1rem", justifyContent: "flex-end",
 });
 
 export default HeaderBar;
