@@ -105,10 +105,11 @@ function MeteorShower({
         </defs>
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
+
         {
             METEOR_PREBUILD.slice(0, meteorCountX)
                 .map(([x, y, a, b], i) => (
-                    <use x={toInt(x, width)} y={toInt(y, 100, -105)}
+                    <use x={toInt(x, width + 100)} y={toInt(y, 100, -105)}
                         href={`#meteor${toInt(a, METEORSIZEVARIENTS)}${toInt(b, METEORINITVARIANTS)}`} key={i} />
                 ))
         }
