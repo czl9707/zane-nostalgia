@@ -1,5 +1,7 @@
 'use client'
 
+import { redirect } from "next/navigation"
+
 export default function NotFound() {
-    return null;
+    redirect("/scenes/404")
 }
