@@ -7,3 +7,7 @@ export default function Page() {
         <Galaxy />
     );
 }
+
+
+export const dynamicParams = false;
+export const dynamic = 'error';
