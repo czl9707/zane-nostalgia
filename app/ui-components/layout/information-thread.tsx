@@ -11,7 +11,6 @@ import Link from 'next/link';
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
     padding: theme.padding.thread,
-    marginTop: theme.padding.thread,
     gap: theme.padding.thread,
     boxSizing: "border-box",
     position: "fixed", overflowY: "scroll",
