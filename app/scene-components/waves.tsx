@@ -4,14 +4,14 @@ import { defaultSceneSizeMetaData } from "./utils/constants";
 import { randomFitToInt, randomMatrix } from "./utils/math-utils";
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneModule, SceneSizeMetaData } from "./utils/types";
 
-interface RiverMeta extends SceneMetaData {
+interface WavesMeta extends SceneMetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
 }
 
 
-export const riverMeta: RiverMeta = {
+export const wavesMeta: WavesMeta = {
     color: {
         name: "Color",
         type: "color",
@@ -46,13 +46,13 @@ const OPACITY_VARIENT = [0.6, 0.8, 1];
 const SCALE_VARIENT = [1, 1.3, 1.4];
 
 
-function River({
+function Wave({
     color,
     backgroundColor,
     density,
     height,
     width,
-}: SceneComponentProps<RiverMeta & SceneSizeMetaData>) {
+}: SceneComponentProps<WavesMeta & SceneSizeMetaData>) {
     const ROW_LENGTH = Math.ceil(width / WAVE_WIDTH) + 1;
     const ROW_COUNT = Math.floor(height * density * DENSITY_FACTOR);
     const ROW_HEIGHT = Math.floor(height / ROW_COUNT)
@@ -130,7 +130,7 @@ function River({
     </svg>)
 }
 
-const MAX_ROW_COUNT = Math.floor(defaultSceneSizeMetaData.height.max * riverMeta.density.max * DENSITY_FACTOR);
+const MAX_ROW_COUNT = Math.floor(defaultSceneSizeMetaData.height.max * wavesMeta.density.max * DENSITY_FACTOR);
 const rowPrebuild = randomMatrix(MAX_ROW_COUNT, 4);
 
 const WaterIcon = React.forwardRef<SVGSVGElement, IconProps>(
@@ -144,7 +144,7 @@ const WaterIcon = React.forwardRef<SVGSVGElement, IconProps>(
 )
 
 
-export const SceneComponent: SceneModule["SceneComponent"] = River;
+export const SceneComponent: SceneModule["SceneComponent"] = Wave;
 export const SceneIcon: SceneModule["SceneIcon"] = WaterIcon;
-export const name: SceneModule["name"] = "River";
-export const meta: SceneModule["meta"] = riverMeta;
+export const name: SceneModule["name"] = "Waves";
+export const meta: SceneModule["meta"] = wavesMeta;

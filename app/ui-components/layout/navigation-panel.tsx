@@ -1,7 +1,7 @@
 'use client'
 
 import * as React from 'react';
-import { css, styled } from "@pigment-css/react";
+import { styled } from "@pigment-css/react";
 import { useRouter } from "next/navigation";
 
 import Panel from "../basics/panel";
