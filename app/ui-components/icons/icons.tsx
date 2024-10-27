@@ -5,9 +5,9 @@ interface IconOwnProps {
     size?: number
     viewBoxSize?: string
 }
-type IconProps = IconOwnProps & React.HTMLAttributes<SVGSVGElement>;
+export type IconProps = IconOwnProps & React.HTMLAttributes<SVGSVGElement>;
 
-const SvgIcon = React.forwardRef<SVGSVGElement, IconProps>(
+export const SvgIcon = React.forwardRef<SVGSVGElement, IconProps>(
     function SvgIcon({ size = 1, viewBoxSize = "0 -960 960 960", ...other }, ref) {
         return (
             <svg xmlns="http://www.w3.org/2000/svg"
@@ -86,16 +86,6 @@ export const Orbit = React.forwardRef<SVGSVGElement, IconProps>(
         return (
             <SvgIcon {...props} style={{ transform: "scale(0.75)" }} ref={ref}>
                 <path d="M240-100q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 22-6.5 42.5T354-159v-27q30 13 62 19.5t64 6.5q134 0 227-93t93-227h80q0 83-31.5 156T763-197q-54 54-127 85.5T480-80q-45 0-88-9.5T309-118q-16 9-33.5 13.5T240-100Zm0-80q25 0 42.5-17.5T300-240q0-25-17.5-42.5T240-300q-25 0-42.5 17.5T180-240q0 25 17.5 42.5T240-180Zm240-160q-58 0-99-41t-41-99q0-58 41-99t99-41q58 0 99 41t41 99q0 58-41 99t-99 41ZM80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q45 0 88 9.5t83 28.5q16-9 33.5-13.5T720-860q58 0 99 41t41 99q0 58-41 99t-99 41q-58 0-99-41t-41-99q0-22 6.5-42.5T606-801v27q-30-13-62-19.5t-64-6.5q-134 0-227 93t-93 227H80Zm640-180q25 0 42.5-17.5T780-720q0-25-17.5-42.5T720-780q-25 0-42.5 17.5T660-720q0 25 17.5 42.5T720-660ZM240-240Zm480-480Z" />
-            </SvgIcon>
-        );
-    }
-)
-
-export const MeteorShower = React.forwardRef<SVGSVGElement, IconProps>(
-    function MeteorShower(props, ref) {
-        return (
-            <SvgIcon {...props} viewBoxSize='0 0 256 256' style={{ transform: "scale(0.75)" }} ref={ref} >
-                <path d="M96 124a36 36 0 1 0 36 36a36 36 0 0 0-36-36m0 48a12 12 0 1 1 12-12a12 12 0 0 1-12 12m128.49-52.49a12 12 0 0 1 0 17l-48 48a12 12 0 0 1-17-17l48-48a12 12 0 0 1 17 0m-36-20a12 12 0 0 1 0 17l-20 20a12 12 0 0 1-17-17l20-20a12 12 0 0 1 17 0m44-27l-16 16a12 12 0 0 1-17-17l16-16a12 12 0 0 1 17 17m-113 15l72-72a12 12 0 0 1 17 17l-72 72a12 12 0 1 1-17-17m30.23 109.26a12 12 0 0 1 0 17A76 76 0 1 1 42.26 106.26L125 23.51a12 12 0 1 1 17 17l-82.77 82.72a52 52 0 0 0 73.54 73.54a12 12 0 0 1 16.97 0Z" />
             </SvgIcon>
         );
     }

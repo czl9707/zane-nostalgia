@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { MeteorShower as MeteorShowerIcon } from "@/app/ui-components/icons/icons"
+import { IconProps, SvgIcon } from "@/app/ui-components/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
 import { defaultSceneSizeMetaData } from "./utils/constants";
 import { randomFitToInt, randomMatrix } from "./utils/math-utils";
@@ -18,7 +18,7 @@ export const meteorMeta: MeteroShowerMeta = {
     color: {
         name: "Color",
         type: "color",
-        default: "#888888",
+        default: "#ffff00",
 
         controlOrder: 0,
     },
@@ -126,9 +126,17 @@ function MeteorShower({
 
 
 const MAX_METEOR_COUNT = Math.floor(defaultSceneSizeMetaData.width.max * meteorMeta.density.max * DENSITY_FACTOR);
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const METEOR_PREBUILD = randomMatrix(MAX_METEOR_COUNT, 4);
 
+const MeteorShowerIcon = React.forwardRef<SVGSVGElement, IconProps>(
+    function MeteorShower(props, ref) {
+        return (
+            <SvgIcon {...props} viewBoxSize='0 0 256 256' style={{ transform: "scale(0.75)" }} ref={ref} >
+                <path d="M96 124a36 36 0 1 0 36 36a36 36 0 0 0-36-36m0 48a12 12 0 1 1 12-12a12 12 0 0 1-12 12m128.49-52.49a12 12 0 0 1 0 17l-48 48a12 12 0 0 1-17-17l48-48a12 12 0 0 1 17 0m-36-20a12 12 0 0 1 0 17l-20 20a12 12 0 0 1-17-17l20-20a12 12 0 0 1 17 0m44-27l-16 16a12 12 0 0 1-17-17l16-16a12 12 0 0 1 17 17m-113 15l72-72a12 12 0 0 1 17 17l-72 72a12 12 0 1 1-17-17m30.23 109.26a12 12 0 0 1 0 17A76 76 0 1 1 42.26 106.26L125 23.51a12 12 0 1 1 17 17l-82.77 82.72a52 52 0 0 0 73.54 73.54a12 12 0 0 1 16.97 0Z" />
+            </SvgIcon>
+        );
+    }
+)
 
 export const SceneComponent: SceneModule["SceneComponent"] = MeteorShower;
 export const SceneIcon: SceneModule["SceneIcon"] = MeteorShowerIcon;

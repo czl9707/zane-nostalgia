@@ -14,7 +14,7 @@ export const fourOFourMeta: FourOFourMeta = {
     color: {
         name: "Color",
         type: "color",
-        default: "#550000",
+        default: "#940000",
 
         controlOrder: 0,
     },
