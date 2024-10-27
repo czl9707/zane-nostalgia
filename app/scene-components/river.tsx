@@ -15,7 +15,7 @@ export const riverMeta: RiverMeta = {
     color: {
         name: "Color",
         type: "color",
-        default: "#006b6b",
+        default: "#0082ad",
 
         controlOrder: 0,
     },

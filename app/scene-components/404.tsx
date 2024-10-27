@@ -64,7 +64,6 @@ function FourOFour({
                 }
                 text {
                     fill: ${color};
-                    stroke: ${backgroundColor};
                     stroke-width: 1px;
                     font: bold 1em var(--serious-font-family);
                     animation-name: blink;

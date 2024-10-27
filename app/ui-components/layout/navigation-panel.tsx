@@ -21,14 +21,7 @@ const FixedNavigationPanelContainer = styled(Panel)(({ theme }) => ({
     width: `calc(${theme.breakpoints.sm} - 2 * ${theme.padding.thread})`,
     boxSizing: "border-box",
     position: "fixed", top: 0, left: 0,
-
-    opacity: "0", transition: `opacity 2s ease 3s,
-                                width 2s ease`,
-    "&:hover": {
-        transition: `opacity ${theme.transition.short} ease,
-                    width 2s ease`,
-        opacity: 1,
-    },
+    transition: `width 2s ease`,
 
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
         display: "none",
@@ -57,7 +50,6 @@ const ThreadNavigationPanelContainer = styled(Panel)(({ theme }) => ({
     },
 }));
 
-const opacity1cls = css({ opacity: 1 });
 
 const playgroundContents = [
     {
@@ -99,12 +91,8 @@ function PanelContent({ sceneNavInfo }: { sceneNavInfo: NavigationInfo }) {
 }
 
 function FixedNavigationPanel({ sceneNavInfo }: { sceneNavInfo: NavigationInfo }) {
-    const containerOnset = React.useCallback((node: HTMLElement | null) => {
-        node?.classList.remove(opacity1cls)
-    }, []);
-
     return (
-        <FixedNavigationPanelContainer className={opacity1cls} ref={containerOnset}>
+        <FixedNavigationPanelContainer>
             <PanelContent sceneNavInfo={sceneNavInfo} />
         </FixedNavigationPanelContainer>
     )
