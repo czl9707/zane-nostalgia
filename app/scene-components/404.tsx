@@ -14,7 +14,7 @@ export const fourOFourMeta: FourOFourMeta = {
     color: {
         name: "Color",
         type: "color",
-        default: "#550000",
+        default: "#940000",
 
         controlOrder: 0,
     },
@@ -64,7 +64,6 @@ function FourOFour({
                 }
                 text {
                     fill: ${color};
-                    stroke: ${backgroundColor};
                     stroke-width: 1px;
                     font: bold 1em var(--serious-font-family);
                     animation-name: blink;

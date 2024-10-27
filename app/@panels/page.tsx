@@ -8,12 +8,16 @@ export default function HomePanels() {
             <Panel key={"home"}>
                 <QuoteTypography color="secondary" style={{ textWrap: "balance", fontSize: "1.1rem" }}>
                     <i>
-                        Once an architect of spaces, now a sculptor of code. <br />
-                        my journey has shifted, but the passion remains. <br />
-                        Z. Nostalgia is a tribute to the past—a collection of background effects, born from moments where memory and creativity collide. <br />
-                        A whisper from the past, a memory in motion, combining the structure of engineering with the artistry of my earlier days. <br />
-                        Step into where logic and beauty dance, and let nostalgia wash over you. <br />
-                        <br />
+                        Nostalgia is a collection of <b>SVG patterns and backgrounds</b>, available via <b>HTTP endpoints</b>, designed for easy integration into projects.
+                        Use them to add unique visuals to <b>GitHub READMEs, websites, and more</b> by simply embedding the provided URLs.
+                        <span style={{ textAlign: "right", display: "block" }}>
+                            -- Nostalgia.Z
+                        </span>
+
+                        <br /><br />
+
+                        Zane, Once an architect of spaces, now a sculptor of code. <br />
+                        From moments where memory and creativity collide, logic and beauty dance. <br />
                         <span style={{ textAlign: "right", display: "block" }}>
                             -- Zane
                         </span>
