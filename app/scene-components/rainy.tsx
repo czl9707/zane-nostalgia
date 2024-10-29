@@ -42,9 +42,9 @@ export const rainyMeta: RainyMeta = {
 
 const DROP_TIME = 0.4;
 const CYCLE_DURATION = 1.5;
-const DENSITY_FACTOR = 0.0002;
+const DENSITY_FACTOR = 0.0005;
 
-function Drops({
+function Rainy({
     color,
     backgroundColor,
     density,
@@ -87,7 +87,7 @@ function Drops({
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         {
-            DROP_PREBUILD.slice(DROP_COUNT).map(([x, y, time], i) => {
+            DROP_PREBUILD.slice(0, DROP_COUNT).map(([x, y, time], i) => {
                 x = randomFitToInt(x, width);
                 y = randomFitToInt(y, height);
                 time = randomFitToInt(time, TIME_INVARIANT);
@@ -120,7 +120,7 @@ const LightRainyIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-export const SceneComponent: SceneModule["SceneComponent"] = Drops;
+export const SceneComponent: SceneModule["SceneComponent"] = Rainy;
 export const SceneIcon: SceneModule["SceneIcon"] = LightRainyIcon;
 export const name: SceneModule["name"] = "Rainy";
 export const meta: SceneModule["meta"] = rainyMeta;
