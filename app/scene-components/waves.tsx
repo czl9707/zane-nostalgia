@@ -1,7 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import * as React from "react";
 import { SvgIcon, IconProps } from "../ui-components/icons/icons";
-import { defaultSceneSizeMetaData } from "./utils/constants";
-import { randomFitToInt, randomMatrix } from "./utils/math-utils";
+import { randomFitToInt } from "./utils/math-utils";
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneModule, SceneSizeMetaData } from "./utils/types";
 
 interface WavesMeta extends SceneMetaData {
@@ -39,13 +39,6 @@ export const wavesMeta: WavesMeta = {
 };
 
 
-const DENSITY_FACTOR = 0.0015;
-const WAVE_WIDTH = 150;
-const SPEED_UNIT_VARIENT = [1, 1.4, 1.8, 2.2];
-const OPACITY_VARIENT = [0.6, 0.8, 1];
-const SCALE_VARIENT = [1, 1.3, 1.4];
-
-
 function Wave({
     color,
     backgroundColor,
@@ -53,85 +46,11 @@ function Wave({
     height,
     width,
 }: SceneComponentProps<WavesMeta & SceneSizeMetaData>) {
-    const ROW_LENGTH = Math.ceil(width / WAVE_WIDTH) + 1;
-    const ROW_COUNT = Math.floor(height * density * DENSITY_FACTOR);
-    const ROW_HEIGHT = Math.floor(height / ROW_COUNT)
-
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
-        <style>
-            {
-                `@keyframes flowing { 
-                    from {transform: translateX(${(ROW_LENGTH - 1) * WAVE_WIDTH}px);} 
-                    to {transform: translateX(-${WAVE_WIDTH}px);} 
-                }
-                @keyframes floating { from {transform: none;} to {transform: translateY(-20px);} }`
-                +
-                SPEED_UNIT_VARIENT.map((unit, i) => {
-                    return [...Array(ROW_LENGTH)].map((_, j) => `.wave${i}${j} {animation: flowing ${unit * (ROW_LENGTH)}s linear -${unit * j}s infinite;}`).join('\n')
-                }).join('\n')
-                +
-                `
-                    .wave path { transition: all .4s ease-out; animation-delay: inherit; }
-                    .wave path:nth-child(1) {
-                        d: path("M151 90.0004C142.308 90.0004 137.036 87.1304 133.949 83.0001C126.028 72.4006 132.5 53.5001 132.5 53.5001C132.5 53.5001 120.829 59.4171 103 66.4863C76.5486 76.975 36.544 90.0004 1 90.0004");
-                        stroke: ${color};
-                        fill: none;
-                    }
-                    .wave:hover path:nth-child(1) {
-                        d: path("M151 89.5008C98.0001 89.5008 78.4995 54 51.5001 54C24.5007 54 26.0001 74.4999 26.0001 74.4999C26.0001 74.4999 37.8582 64.4999 42.5007 74.4999C46.2147 82.4999 35 89.5008 1 89.5008");
-                    }
-                    .wave path:nth-child(2) {
-                        d: path("M151 220V90.0003C142.308 90.0003 137.036 87.1303 133.949 83C126.028 72.4005 132.5 53.5 132.5 53.5C132.5 53.5 120.829 59.417 103 66.4862C76.5486 76.9749 36.544 90.0003 1 90.0003V220");
-                        fill: url('#tailGradient');
-                        opacity: 0.3;
-                    }
-                    .wave:hover path:nth-child(2) {
-                        d: path("M151 219.501V89.5008C97.9998 89.5008 78.4991 54 51.4998 54C24.5004 54 25.9998 74.4999 25.9998 74.4999C25.9998 74.4999 37.8579 64.4999 42.5004 74.4999C46.2144 82.4999 34.9997 89.5008 0.999634 89.5008V219.501");
-                    }
-                `
-            }
-        </style>
-        <defs>
-            <linearGradient id="tailGradient" gradientUnits="userSpaceOnUse"
-                x1="0" y1="40" x2="0" y2="200">
-                <stop offset="0%" stopColor={color} />
-                <stop offset="100%" stopColor="transparent" />
-            </linearGradient>
-        </defs>
-
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
-
-        {
-            rowPrebuild.slice(0, ROW_COUNT)
-                .map(([yI, scaleI, opacityI, speedI], i) => {
-                    const scale = SCALE_VARIENT[randomFitToInt(scaleI, SCALE_VARIENT.length)];
-                    const opacity = OPACITY_VARIENT[randomFitToInt(opacityI, OPACITY_VARIENT.length)];
-                    const speed = randomFitToInt(speedI, SPEED_UNIT_VARIENT.length);
-                    const y = ROW_HEIGHT * i + randomFitToInt(yI, ROW_HEIGHT, - ROW_HEIGHT / 2) - 100;
-                    const x = -randomFitToInt(yI, WAVE_WIDTH);
-
-                    return (
-                        <g style={{ animation: `floating 4s ease-in-out ${yI * 4}s infinite alternate` }} key={i}>
-                            <g transform={`translate(${x},${y}) scale(${scale}, 1)`} opacity={opacity} >
-                                {
-                                    [...Array(ROW_LENGTH)].map((_, c) => (
-                                        <g key={c} className={`wave wave${speed}${ROW_LENGTH - c - 1}`}>
-                                            <path /><path />
-                                        </g>
-                                    ))
-                                }
-                            </g>
-                        </g>
-                    )
-                }
-                )
-        }
-
     </svg>)
 }
 
-const MAX_ROW_COUNT = Math.floor(defaultSceneSizeMetaData.height.max * wavesMeta.density.max * DENSITY_FACTOR);
-const rowPrebuild = randomMatrix(MAX_ROW_COUNT, 4);
 
 const WaterIcon = React.forwardRef<SVGSVGElement, IconProps>(
     function WaterIcon(props, ref) {

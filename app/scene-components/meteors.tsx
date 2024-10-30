@@ -2,8 +2,8 @@ import * as React from "react";
 
 import { IconProps, SvgIcon } from "@/app/ui-components/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
-import { defaultSceneSizeMetaData } from "./utils/constants";
-import { randomFitToInt, randomMatrix } from "./utils/math-utils";
+import { randomFitToInt } from "./utils/math-utils";
+import seedrandom from 'seedrandom';
 
 
 interface MeteroShowerMeta extends SceneMetaData {
@@ -54,6 +54,12 @@ export const meteorMeta: MeteroShowerMeta = {
 const DENSITY_FACTOR = 0.005;
 const METEOR_ANIMATION_TIME_RANGE = 60;
 
+const METEOR_OPACITY_DUR_VARIENTS = [...Array(3)].map((_, i) => ({
+    opacity: 0.6 + i * 0.2,
+    dur: METEOR_ANIMATION_TIME_RANGE * (1 - i * 0.25)
+}));
+const METEOR_INIT_VARIANTS = [...Array(METEOR_ANIMATION_TIME_RANGE / 4)].map((_, i) => -i * 4);
+
 function MeteorShower({
     color,
     backgroundColor,
@@ -70,10 +76,9 @@ function MeteorShower({
         Math.abs(Math.floor(
             width * density * DENSITY_FACTOR * Math.sin(rotation * Math.PI / 180)
         ));
+    const randomGeneratorX = seedrandom("MeteorShower");
+    const randomGeneratorY = seedrandom("MeteorShower");
 
-
-    const METEOR_SIZE_VARIENTS = 3;
-    const METEOR_INIT_VARIANTS = Math.floor(METEOR_ANIMATION_TIME_RANGE / 4);
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -88,14 +93,14 @@ function MeteorShower({
             </g>
 
             {
-                [...Array(METEOR_SIZE_VARIENTS)].map(((_, i) => (
+                METEOR_OPACITY_DUR_VARIENTS.map((({ opacity, dur }, i) => (
                     <React.Fragment key={i}>
                         {
-                            [...Array(METEOR_INIT_VARIANTS)].map(((_, j) => (
-                                <g id={`meteor${i}${j}`} key={j}>
-                                    <use href="#meteorGeo" transform={`rotate(-${rotation})`} opacity={0.5 + i * 0.2}>
-                                        <animate attributeName="x" values={`0;-${height + width}`} dur={`${METEOR_ANIMATION_TIME_RANGE * (1 - i * 0.25)}s`}
-                                            begin={`-${j * 4}s`} repeatCount="indefinite" />
+                            METEOR_INIT_VARIANTS.map(((init, j) => (
+                                <g id={`meteor-${i}-${j}`} key={j}>
+                                    <use href="#meteorGeo" transform={`rotate(-${rotation})`} opacity={opacity}>
+                                        <animate attributeName="x" values={`0;-${height + width}`} dur={`${dur}s`}
+                                            begin={`${init}s`} repeatCount="indefinite" />
                                     </use>
                                 </g>
                             )))
@@ -108,25 +113,30 @@ function MeteorShower({
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
 
         {
-            METEOR_PREBUILD.slice(0, meteorCountX)
-                .map(([x, y, size, init], i) => (
-                    <use x={randomFitToInt(x, width + 100)} y={randomFitToInt(y, 100, -105)}
-                        href={`#meteor${randomFitToInt(size, METEOR_SIZE_VARIENTS)}${randomFitToInt(init, METEOR_INIT_VARIANTS)}`} key={i} />
-                ))
+            [...Array(meteorCountX)].map((_, i) => {
+                const x = randomFitToInt(randomGeneratorX(), 0, width + 100);
+                const y = randomFitToInt(randomGeneratorX(), -105, 100);
+                const size = randomFitToInt(randomGeneratorX(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
+                const init = randomFitToInt(randomGeneratorX(), 0, METEOR_INIT_VARIANTS.length);
+                return (
+                    <use x={x} y={y} href={`#meteor-${size}-${init}`} key={i} />
+                )
+            })
         }
         {
-            METEOR_PREBUILD.slice(0, meteorCountY)
-                .map(([x, y, size, init], i) => (
-                    <use x={randomFitToInt(x, 100, rotation <= 90 ? width + 5 : -105)} y={randomFitToInt(y, height)}
-                        href={`#meteor${randomFitToInt(size, METEOR_SIZE_VARIENTS)}${randomFitToInt(init, METEOR_INIT_VARIANTS)}`} key={i} />
-                ))
+            [...Array(meteorCountY)].map((_, i) => {
+                const x = randomFitToInt(randomGeneratorY(), rotation <= 90 ? width + 5 : -105, 100);
+                const y = randomFitToInt(randomGeneratorY(), 0, height);
+                const size = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
+                const init = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
+                return (
+                    <use x={x} y={y} href={`#meteor-${size}-${init}`} key={i} />
+                )
+            })
         }
     </svg>)
 }
 
-
-const MAX_METEOR_COUNT = Math.floor(defaultSceneSizeMetaData.width.max * meteorMeta.density.max * DENSITY_FACTOR);
-const METEOR_PREBUILD = randomMatrix(MAX_METEOR_COUNT, 4);
 
 const MeteorShowerIcon = React.forwardRef<SVGSVGElement, IconProps>(
     function MeteorShower(props, ref) {
