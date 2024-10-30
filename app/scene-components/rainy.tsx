@@ -2,8 +2,8 @@ import * as React from "react";
 
 import { IconProps, SvgIcon } from "@/app/ui-components/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
-import { defaultSceneSizeMetaData } from "./utils/constants";
-import { randomFitToInt, randomMatrix } from "./utils/math-utils";
+import { randomFitToInt } from "./utils/math-utils";
+import seedrandom from "seedrandom";
 
 
 interface RainyMeta extends SceneMetaData {
@@ -51,8 +51,10 @@ function Rainy({
     height,
     width,
 }: SceneComponentProps<RainyMeta & SceneSizeMetaData>) {
-    const TIME_INVARIANT = Math.floor((CYCLE_DURATION + DROP_TIME) / 0.1)
+    const TIME_INVARIANT_NUM = Math.floor((CYCLE_DURATION + DROP_TIME) / 0.1)
     const DROP_COUNT = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
+    const randomGenerator = seedrandom("Rainy");
+
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -61,7 +63,7 @@ function Rainy({
             <ellipse id="ripple-geo3" cx="0" cy="0" rx="100" ry="40" fill="none" stroke={color} strokeWidth={1} strokeDasharray="100 20 30 20 80 20" />
 
             {
-                [...Array(TIME_INVARIANT + 2)].map((_, i) => (
+                [...Array(TIME_INVARIANT_NUM + 2)].map((_, i) => (
                     <use href={`#ripple-geo${i % 3}`} id={`ripple${i}`} key={`rip${i}`} opacity={0}>
                         <animateTransform attributeName="transform" type="scale" id={`ripple-tran${i}`}
                             values="0;3" dur={`${DROP_TIME}s`} begin={`${i / 10}s;ripple-tran${i}.end+${CYCLE_DURATION}s`} fill="freeze" />
@@ -71,7 +73,7 @@ function Rainy({
                 ))
             }
             {
-                [...Array(TIME_INVARIANT)].map((_, i) => (
+                [...Array(TIME_INVARIANT_NUM)].map((_, i) => (
                     <line stroke={color} strokeWidth={1} id={`drop${i}`} key={`drop${i}`}>
                         <animate attributeName="y1"
                             values="-2000;0;0" dur={`${DROP_TIME}s`} begin={`${i / 10}s;ripple-tran${i}.end+${CYCLE_DURATION}s`} fill="freeze" />
@@ -87,10 +89,11 @@ function Rainy({
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         {
-            DROP_PREBUILD.slice(0, DROP_COUNT).map(([x, y, time], i) => {
-                x = randomFitToInt(x, width);
-                y = randomFitToInt(y, height);
-                time = randomFitToInt(time, TIME_INVARIANT);
+            [...Array(DROP_COUNT)].map((_, i) => {
+                const x = randomFitToInt(randomGenerator(), 0, width);
+                const y = randomFitToInt(randomGenerator(), 0, height);
+                const time = randomFitToInt(randomGenerator(), 0, TIME_INVARIANT_NUM);
+
                 return (
                     <g key={i}>
                         <use href={`#ripple${time}`} x={x} y={y} />
@@ -104,10 +107,6 @@ function Rainy({
 
     </svg>)
 }
-
-const MAX_DROP_COUNT = Math.floor(defaultSceneSizeMetaData.width.max * defaultSceneSizeMetaData.height.max *
-    Math.pow(rainyMeta.density.max * DENSITY_FACTOR, 2));
-const DROP_PREBUILD = randomMatrix(MAX_DROP_COUNT, 3);
 
 
 const LightRainyIcon = React.forwardRef<SVGSVGElement, IconProps>(
