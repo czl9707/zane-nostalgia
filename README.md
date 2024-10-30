@@ -2,7 +2,7 @@
 
 Nostalgia is a collection of SVG patterns and backgrounds, available via HTTP endpoints, designed for easy integration into projects. Use them to add unique visuals to GitHub READMEs, websites, and more by simply embedding the provided URLs.
 
-Hosted at (Zane's Nostalgia)[https://zane-nostalgia.kiyo-n-zane.com/]
+Hosted at https://zane-nostalgia.kiyo-n-zane.com/
 
 ## Working Samples
 
