@@ -2,8 +2,8 @@ import '@pigment-css/react/styles.css';
 import { Lato, Delius } from 'next/font/google';
 import { globalCss } from '@pigment-css/react';
 
-import InformationThread from "@/app/ui-components/layout/information-thread";
-import ThemeCorrector from "./ui-components/utils/theme-corrector";
+import InformationThread from "@/app/components/layout/information-thread";
+import ThemeCorrector from "./components/utils/theme-corrector";
 import React from 'react';
 import { fetchSceneMetas } from './scene-components/utils/fetch-scenes';
 import type { Metadata } from 'next'

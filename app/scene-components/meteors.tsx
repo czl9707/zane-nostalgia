@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IconProps, SvgIcon } from "@/app/ui-components/icons/icons"
+import { IconProps, SvgIcon } from "@/app/components/ui/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
 import { randomFitToInt } from "./utils/math-utils";
 import seedrandom from 'seedrandom';

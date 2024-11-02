@@ -2,10 +2,10 @@
 
 import * as React from 'react';
 
-import ButtonBase from "./button-base"
+import ButtonBase from "./button/button-base"
 import { styled } from '@pigment-css/react';
-import { DummyIcon, KeyboardArrowDown } from '../icons/icons';
-import FlippingIcon from '../icons/flipping-icon';
+import { DummyIcon, KeyboardArrowDown } from './icons/icons';
+import FlippingIcon from './icons/flipping-icon';
 
 const AccordingHierachyContext = React.createContext<number>(0);
 

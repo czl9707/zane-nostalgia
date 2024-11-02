@@ -5,10 +5,10 @@ import { defaultParameterResolver, defaultSizeParameterResolver, resolveParamete
 import { fetchScene, fetchSceneMetas } from '@/app/scene-components/utils/fetch-scenes';
 import { defaultSceneSizeMetaData } from '@/app/scene-components/utils/constants';
 
-import Divider from '@/app/ui-components/basics/divider';
-import Panel from '@/app/ui-components/basics/panel';
-import { QuoteTypography } from '@/app/ui-components/basics/typography';
-import CopyPanel from '@/app/ui-components/basics/copy-panel';
+import Divider from '@/app/components/ui/divider';
+import Panel from '@/app/components/ui/panel';
+import { QuoteTypography } from '@/app/components/ui/typography';
+import CopyPanel from '@/app/components/controls/copy-panel';
 
 import { ColorInputRouterUpdater, SliderBarRouterUpdater } from './controls-router-updator';
 

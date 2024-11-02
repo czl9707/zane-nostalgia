@@ -3,7 +3,7 @@
 import * as React from 'react';
 import useForkRef from '../utils/useForkRef';
 import { styled } from '@pigment-css/react';
-import { H6Typography } from './typography';
+import { H6Typography } from '../ui/typography';
 import InputInfo from './input-info';
 
 interface SliderBarProps {

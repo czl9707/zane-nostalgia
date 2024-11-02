@@ -1,4 +1,4 @@
-import { Error as ErrorIcon } from "../ui-components/icons/icons";
+import { Error as ErrorIcon } from "../components/ui/icons/icons";
 import { randomFitToInt } from "./utils/math-utils";
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneModule, SceneSizeMetaData } from "./utils/types";
 import seedrandom from 'seedrandom';

@@ -3,9 +3,9 @@
 import * as React from 'react'
 import { styled } from "@pigment-css/react";
 
-import FlippingIcon from '../icons/flipping-icon';
-import { Copy, Check } from '../icons/icons';
-import { ButtonTypography, QuoteTypography } from './typography';
+import FlippingIcon from '../ui/icons/flipping-icon';
+import { Copy, Check } from '../ui/icons/icons';
+import { ButtonTypography, QuoteTypography } from '../ui/typography';
 import InputInfo from './input-info';
 
 interface CopyPanelProps {

@@ -1,5 +1,5 @@
-import Panel from "../ui-components/basics/panel";
-import { QuoteTypography } from "../ui-components/basics/typography";
+import Panel from "../components/ui/panel";
+import { QuoteTypography } from "../components/ui/typography";
 
 
 export default function HomePanels() {

@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { styled } from "@pigment-css/react";
 
-import { H6Typography } from './typography';
+import { H6Typography } from '../ui/typography';
 import InputInfo from './input-info';
 
 const ColorInputEL = styled("input")({

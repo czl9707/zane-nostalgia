@@ -4,11 +4,11 @@ import * as React from 'react';
 import { styled } from "@pigment-css/react";
 import { useRouter } from "next/navigation";
 
-import Panel from "../basics/panel";
-import { Accordin, AccordinButton } from "../basics/accordin";
-import { H4Typography } from "../basics/typography";
-import { Orbit } from "../icons/icons";
-import IconHolder from '../icons/icon-holder';
+import Panel from "../ui/panel";
+import { Accordin, AccordinButton } from "../controls/accordin";
+import { H4Typography } from "../ui/typography";
+import { Orbit } from "../ui/icons/icons";
+import IconHolder from '../ui/icons/icon-holder';
 
 type NavigationInfo = {
     iconStr: string,
