@@ -25,3 +25,4 @@ export default async function Page({ params, searchParams }: { params: { scene: 
         <SceneComponent {...resolved} />
     )
 }
+

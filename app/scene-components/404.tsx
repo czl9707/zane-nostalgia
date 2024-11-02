@@ -44,6 +44,9 @@ const BLINK_SIZE_VARIANTS = [...Array(10)].map((_, i) => 16 + 16 * i);
 const BLINK_DUR_VARIANTS = [...Array(3)].map((_, i) => 3 * i + 3);
 const BLINK_INIT_VARIANTS = [...Array(10)].map((_, i) => 3 * i);
 
+const BLINK_SIZE_CLASS = (sizeIndex: number) => `blink-size-${sizeIndex}`;
+const BLINK_DUR_CLASS = (durIndex: number) => `blink-dur-${durIndex}`;
+const BLINK_INIT_CLASS = (initIndex: number) => `blink-init-${initIndex}`;
 
 function FourOFour({
     color,
@@ -55,8 +58,27 @@ function FourOFour({
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom("FourOFour");
 
+    const visitedDurClass = new Set();
+    const visitedSizeClass = new Set();
+    const visitedInitClass = new Set();
+
+    const textEls = [...Array(textCount)].map((_, i) => {
+        const dur = randomFitToInt(randomGenerator(), 0, BLINK_DUR_VARIANTS.length);
+        const size = randomFitToInt(randomGenerator(), 0, BLINK_SIZE_VARIANTS.length);
+        const init = randomFitToInt(randomGenerator(), 0, BLINK_INIT_VARIANTS.length);
+        visitedDurClass.add(BLINK_DUR_CLASS(dur));
+        visitedSizeClass.add(BLINK_SIZE_CLASS(size));
+        visitedInitClass.add(BLINK_INIT_CLASS(init));
+
+        return (
+            <text key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
+                className={[`blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")}>
+                404
+            </text>
+        )
+    });
+
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
-        <style type="text/css">{"@import url('https://fonts.googleapis.com/css?family=Lato');"}</style>
         <style>
             {
                 `
@@ -68,44 +90,35 @@ function FourOFour({
                 text {
                     fill: ${color};
                     stroke-width: 1px;
-                    font: bold 1em lato;
+                    font: bold 1em;
+                    font-family: var(--serious-font-family), Arial;
                     animation-name: blink;
                     animation-direction: alternate;
                     animation-iteration-count: infinite;
                 }
                 `
                 +
-                BLINK_DUR_VARIANTS.map(
-                    (dur, i) => `.blink-dur-${i} { animation-duration:${dur}s; }`
-                ).join("\n")
+                BLINK_DUR_VARIANTS
+                    .filter((_, i) => visitedDurClass.has(BLINK_DUR_CLASS(i)))
+                    .map(
+                        (dur, i) => `.${BLINK_DUR_CLASS(i)} { animation-duration:${dur}s; }`
+                    ).join("\n")
                 + '\n' +
-                BLINK_INIT_VARIANTS.map(
-                    (init, i) => `.blink-init-${i} { animation-delay:-${init}s; }`
-                ).join("\n")
+                BLINK_INIT_VARIANTS
+                    .filter((_, i) => visitedInitClass.has(BLINK_INIT_CLASS(i)))
+                    .map(
+                        (init, i) => `.${BLINK_INIT_CLASS(i)} { animation-delay:-${init}s; }`
+                    ).join("\n")
                 + '\n' +
-                BLINK_SIZE_VARIANTS.map(
-                    (size, i) => `.blink-size-${i} { font-size:${size}px; }`
-                ).join("\n")
+                BLINK_SIZE_VARIANTS
+                    .filter((_, i) => visitedSizeClass.has(BLINK_SIZE_CLASS(i)))
+                    .map(
+                        (size, i) => `.${BLINK_SIZE_CLASS(i)} { font-size:${size}px; }`
+                    ).join("\n")
             }
         </style>
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
-
-
-        {
-            [...Array(textCount)].map((_, i) => {
-                return (
-                    <text key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
-                        className={[
-                            `blink-dur-${randomFitToInt(randomGenerator(), 0, BLINK_DUR_VARIANTS.length)}`,
-                            `blink-size-${randomFitToInt(randomGenerator(), 0, BLINK_SIZE_VARIANTS.length)}`,
-                            `blink-init-${randomFitToInt(randomGenerator(), 0, BLINK_INIT_VARIANTS.length)}`,
-                        ].join(" ")}
-                    >
-                        404</text>
-                )
-            })
-        }
-
+        {textEls}
     </svg>)
 }
 

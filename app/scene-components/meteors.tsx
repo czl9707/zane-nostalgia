@@ -60,6 +60,8 @@ const METEOR_OPACITY_DUR_VARIENTS = [...Array(3)].map((_, i) => ({
 }));
 const METEOR_INIT_VARIANTS = [...Array(METEOR_ANIMATION_TIME_RANGE / 4)].map((_, i) => -i * 4);
 
+const METEOR_CLASS = (durIndex: number, initIndex: number) => `meteor-${durIndex}-${initIndex}`
+
 function MeteorShower({
     color,
     backgroundColor,
@@ -79,6 +81,35 @@ function MeteorShower({
     const randomGeneratorX = seedrandom("MeteorShower");
     const randomGeneratorY = seedrandom("MeteorShower");
 
+    // Ideally should be a tuple, but hashset and array not works good.
+    const visitedClass = new Set<string>();
+
+    const meteorInstances = [
+        ...[...Array(meteorCountX)].map((_, i) => {
+            const x = randomFitToInt(randomGeneratorX(), 0, width + 100);
+            const y = randomFitToInt(randomGeneratorX(), -105, 100);
+            const durIndex = randomFitToInt(randomGeneratorX(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
+            const initIndex = randomFitToInt(randomGeneratorX(), 0, METEOR_INIT_VARIANTS.length);
+            visitedClass.add(METEOR_CLASS(durIndex, initIndex));
+            return (
+                <use x={x} y={y} href={"#" + METEOR_CLASS(durIndex, initIndex)} key={i} />
+            )
+        })
+        ,
+        ...
+        [...Array(meteorCountY)].map((_, i) => {
+            const x = randomFitToInt(randomGeneratorY(), rotation <= 90 ? width + 5 : -105, 100);
+            const y = randomFitToInt(randomGeneratorY(), 0, height);
+            const durIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
+            const initIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
+            visitedClass.add(METEOR_CLASS(durIndex, initIndex));
+            return (
+                <use x={x} y={y} href={"#" + METEOR_CLASS(durIndex, initIndex)} key={i} />
+            )
+        })
+
+    ]
+
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -93,47 +124,33 @@ function MeteorShower({
             </g>
 
             {
-                METEOR_OPACITY_DUR_VARIENTS.map((({ opacity, dur }, i) => (
-                    <React.Fragment key={i}>
-                        {
-                            METEOR_INIT_VARIANTS.map(((init, j) => (
-                                <g id={`meteor-${i}-${j}`} key={j}>
-                                    <use href="#meteorGeo" transform={`rotate(-${rotation})`} opacity={opacity}>
-                                        <animate attributeName="x" values={`0;-${height + width}`} dur={`${dur}s`}
-                                            begin={`${init}s`} repeatCount="indefinite" />
-                                    </use>
-                                </g>
-                            )))
-                        }
-                    </React.Fragment>
-                )))
+                METEOR_OPACITY_DUR_VARIENTS
+                    .map((({ opacity, dur }, durIndex) => (
+                        <React.Fragment key={durIndex}>
+                            {
+                                METEOR_INIT_VARIANTS.map(((init, initIndex) => {
+                                    return (
+                                        <React.Fragment key={initIndex}>
+                                            {
+                                                visitedClass.has(METEOR_CLASS(durIndex, initIndex)) &&
+                                                <g id={METEOR_CLASS(durIndex, initIndex)} key={initIndex}>
+                                                    <use href="#meteorGeo" transform={`rotate(-${rotation})`} opacity={opacity}>
+                                                        <animate attributeName="x" values={`0;-${height + width}`} dur={`${dur}s`}
+                                                            begin={`${init}s`} repeatCount="indefinite" />
+                                                    </use>
+                                                </g>
+                                            }
+                                        </React.Fragment>
+                                    )
+                                }))
+                            }
+                        </React.Fragment>
+                    )))
             }
         </defs>
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
-
-        {
-            [...Array(meteorCountX)].map((_, i) => {
-                const x = randomFitToInt(randomGeneratorX(), 0, width + 100);
-                const y = randomFitToInt(randomGeneratorX(), -105, 100);
-                const size = randomFitToInt(randomGeneratorX(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
-                const init = randomFitToInt(randomGeneratorX(), 0, METEOR_INIT_VARIANTS.length);
-                return (
-                    <use x={x} y={y} href={`#meteor-${size}-${init}`} key={i} />
-                )
-            })
-        }
-        {
-            [...Array(meteorCountY)].map((_, i) => {
-                const x = randomFitToInt(randomGeneratorY(), rotation <= 90 ? width + 5 : -105, 100);
-                const y = randomFitToInt(randomGeneratorY(), 0, height);
-                const size = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
-                const init = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
-                return (
-                    <use x={x} y={y} href={`#meteor-${size}-${init}`} key={i} />
-                )
-            })
-        }
+        {meteorInstances}
     </svg>)
 }
 

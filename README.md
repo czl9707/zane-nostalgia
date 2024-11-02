@@ -7,7 +7,7 @@ Hosted at https://zane-nostalgia.kiyo-n-zane.com/
 ## Working Samples
 
 ### Rainy
-<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/rainy/api?height=200&width=1200&color=%23444444&backgroundColor=%23000000&density=20" />
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/rainy/api?height=200&width=1200&color=%23888888&backgroundColor=%23000000&density=20" />
 
 ### Meteors
 <img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?height=200&width=1200&color=%23ffff00&backgroundColor=%23000000&rotation=30&density=15" />
