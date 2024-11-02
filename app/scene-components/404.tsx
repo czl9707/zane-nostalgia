@@ -34,7 +34,7 @@ export const fourOFourMeta: FourOFourMeta = {
         max: 10,
         step: 1,
 
-        controlOrder: 3,
+        controlOrder: 2,
     },
 };
 
