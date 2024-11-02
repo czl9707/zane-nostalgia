@@ -17,3 +17,7 @@ export default function SceneLayout({
         </svg>
     )
 }
+
+
+export const dynamicParams = false;
+export const dynamic = 'force-static';
