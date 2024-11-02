@@ -17,7 +17,7 @@ export const rainyMeta: RainyMeta = {
     color: {
         name: "Color",
         type: "color",
-        default: "#888888",
+        default: "#444444",
 
         controlOrder: 0,
     },
@@ -36,7 +36,7 @@ export const rainyMeta: RainyMeta = {
         max: 20,
         step: 1,
 
-        controlOrder: 3,
+        controlOrder: 2,
     },
 };
 

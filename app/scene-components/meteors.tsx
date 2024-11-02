@@ -18,7 +18,7 @@ export const meteorMeta: MeteroShowerMeta = {
     color: {
         name: "Color",
         type: "color",
-        default: "#ffff00",
+        default: "#444444",
 
         controlOrder: 0,
     },
