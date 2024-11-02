@@ -56,6 +56,7 @@ function FourOFour({
     const randomGenerator = seedrandom("FourOFour");
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+        <style type="text/css">{"@import url('https://fonts.googleapis.com/css?family=Lato');"}</style>
         <style>
             {
                 `
@@ -67,7 +68,7 @@ function FourOFour({
                 text {
                     fill: ${color};
                     stroke-width: 1px;
-                    font: bold 1em var(--serious-font-family);
+                    font: bold 1em lato;
                     animation-name: blink;
                     animation-direction: alternate;
                     animation-iteration-count: infinite;
