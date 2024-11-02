@@ -17,7 +17,7 @@ export const wavesMeta: WavesMeta = {
     color: {
         name: "Color",
         type: "color",
-        default: "#888888",
+        default: "#444444",
 
         controlOrder: 0,
     },
