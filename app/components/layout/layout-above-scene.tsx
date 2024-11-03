@@ -8,8 +8,8 @@ import NavigationThreadContent from "./navigation-thread-content";
 import NavigationMenuContextProvider from "./navigation-menu-context-provider";
 
 const Container = styled("div")({
-    position: "fixed", inset: 0,
-    display: "flex",
+    position: "fixed", inset: 0, lineHeight: 0,
+    display: "inline-flex", overflowX: 'hidden', flexWrap: "nowrap"
 })
 
 export default function LayoutAboveScene({ children }: { children: React.ReactNode }) {

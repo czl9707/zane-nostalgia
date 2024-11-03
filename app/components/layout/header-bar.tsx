@@ -4,7 +4,7 @@ import { css, styled } from "@pigment-css/react";
 import Link from 'next/link';
 import * as React from 'react';
 
-import { Close, Github, Menu } from '../ui/icons/icons';
+import { DoubleArrow, Github } from '../ui/icons/icons';
 import FlippingIcon from "../ui/icons/flipping-icon";
 
 
@@ -25,16 +25,15 @@ const HeaderBarDiv = styled("div")({
 function HeaderBar({ toggleMenu, isMenuOpen }: HeaderBarProps) {
     return (
         <HeaderBarDiv>
-            <FlippingIcon
+            <FlippingIcon direction="horizontal"
                 className={css(
                     ({ theme }) => ({
                         [`@media(min-width: ${theme.breakpoints.md})`]: { display: "none" }
                     })
                 )}
                 onClick={toggleMenu}
-                isFlipped={isMenuOpen}
-                before={<Menu />}
-                after={<Close />}
+                isFlipped={!isMenuOpen}
+                before={<DoubleArrow />}
             />
             <div style={{ flex: "1 1" }} />
             <Link href={"https://github.com/czl9707/zane-nostalgia"} target="_blank" rel="noopener noreferrer">

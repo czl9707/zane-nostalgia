@@ -7,19 +7,20 @@ import { MenuContext } from './navigation-menu-context-provider';
 
 
 const NavigationThreadContainer = styled("div")(({ theme }) => ({
+    height: "100%",
     padding: `${theme.padding.thread} 0 ${theme.padding.thread} ${theme.padding.thread}`,
-    boxSizing: "border-box", width: theme.breakpoints.sm,
-    overflowY: "scroll",
-    display: "inline-flex", flexDirection: "column", flexWrap: "nowrap",
+    boxSizing: "border-box", width: theme.breakpoints.sm, overflowY: "scroll",
+    flexShrink: "0",
 
+    display: "flex", flexDirection: "column", flexWrap: "nowrap",
     transition: `all ${theme.transition.short} linear`,
 
     [`@media(max-width: ${theme.breakpoints.md})`]: {
-        padding: `${theme.padding.thread} 0`, transform: "translateX(-100%)",
-        width: 0,
+        marginLeft: `max(-100%, -${theme.breakpoints.sm})`,
+        width: "100%", maxWidth: theme.breakpoints.sm,
         "&.menu-open": {
-            transform: "none",
-            width: "100%", padding: theme.padding.thread,
+            marginRight: `calc(100% - min(100%, ${theme.breakpoints.sm}))`,
+            padding: theme.padding.thread, marginLeft: 0,
         }
     },
 }));

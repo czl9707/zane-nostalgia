@@ -2,33 +2,34 @@
 
 import * as React from 'react';
 import { styled } from "@pigment-css/react";
-
-import { MenuContext } from './navigation-menu-context-provider';
+import { usePathname } from 'next/navigation';
 
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
-    padding: theme.padding.thread, gap: theme.padding.thread,
-    boxSizing: "border-box", width: "100%", flex: "1 1",
-    overflowY: "scroll",
-    display: "inline-flex", flexDirection: "column", flexWrap: "nowrap",
-
-    transform: "none",
+    height: "100%",
+    padding: theme.padding.thread, gap: theme.padding.thread, boxSizing: "border-box",
+    flexShrink: "0",
+    display: "flex", flexDirection: "column",
+    flexWrap: "nowrap", overflowY: "scroll",
     transition: `all ${theme.transition.short} linear`,
 
+    [`@media(min-width: ${theme.breakpoints.md})`]: {
+        width: `calc(100% - ${theme.breakpoints.sm})`,
+        paddingLeft: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), ${theme.padding.thread})`,
+        "&.is-home": {
+            paddingLeft: theme.padding.thread,
+        },
+    },
     [`@media(max-width: ${theme.breakpoints.md})`]: {
-        "&.menu-open": {
-            transform: "translateX(100%)",
-            padding: `${theme.padding.thread} 0`
-        }
+        width: `100%`,
     },
 }));
 
 
 function InformationThread({ children }: { children: React.ReactNode }) {
-    const isMenuOpen = React.useContext(MenuContext);
-
+    const currentPath = usePathname();
     return (
-        <InformationThreadContainer className={isMenuOpen ? "menu-open" : undefined}>
+        <InformationThreadContainer className={currentPath == '/' ? "is-home" : undefined}>
             {children}
         </InformationThreadContainer >
     )
