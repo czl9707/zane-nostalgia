@@ -5,7 +5,6 @@ interface DividerProps {
 }
 
 const Divider = styled("div")<DividerProps>(({ theme }) => ({
-    margin: `${theme.padding.panel} 0`,
     padding: 0, height: .1, width: "100%",
 
     boxShadow: ({ direction = "horizontal" }) =>

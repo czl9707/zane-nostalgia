@@ -6,6 +6,8 @@ import ButtonBase from "./button/button-base"
 import { styled } from '@pigment-css/react';
 import { DummyIcon, KeyboardArrowDown } from './icons/icons';
 import FlippingIcon from './icons/flipping-icon';
+import Divider from './divider';
+import { useRouter } from 'next/navigation';
 
 const AccordingHierachyContext = React.createContext<number>(0);
 
@@ -14,6 +16,16 @@ interface AccordinProps {
     buttonContent: React.ReactNode,
     defaultOpen?: boolean,
 }
+
+interface AccordinButtonProps {
+    children: React.ReactNode,
+}
+
+interface AccordinLinkProps {
+    href: string,
+    children: React.ReactNode,
+}
+
 
 const AccordinContentContainer = styled("div")(({ theme }) => ({
     display: "grid", gridTemplateRows: "1fr",
@@ -24,41 +36,42 @@ const AccordinContentContainer = styled("div")(({ theme }) => ({
         boxSizing: "border-box", overflow: "hidden",
 
         opacity: 1,
-        boxShadow: `0 -0.1px 0 ${theme.vars.colors.primary.contrastText}`,
-        padding: ".5rem 0 .5rem 0",
-        transition: `opacity ${theme.transition.short} linear ${theme.transition.short},
-                    padding ${theme.transition.short} linear,
-                    box-shadow ${theme.transition.short} linear`,
+        transition: `opacity ${theme.transition.short} linear ${theme.transition.short}`,
     },
     [`&.closed`]: {
         gridTemplateRows: "0fr",
         transition: `grid-template-rows ${theme.transition.short} linear ${theme.transition.short}`,
         ">div": {
-            transition: `opacity ${theme.transition.short} linear,
-                    padding ${theme.transition.short} linear  ${theme.transition.short},
-                    box-shadow ${theme.transition.short} linear`,
-            opacity: 0, boxShadow: "none", padding: 0
+            transition: `opacity ${theme.transition.short} linear`,
+            opacity: 0
         }
     }
 }));
 
-interface AccordinButtonProps {
-    text: string,
-    icon?: React.ReactNode,
-}
+
 
 const AccordinButton = React.forwardRef<HTMLDivElement, Omit<AccordinButtonProps & React.HTMLAttributes<HTMLDivElement>, "color">>(
-    function AccordinButton({ text, icon, ...other }, ref) {
+    function AccordinButton({ children, ...other }, ref) {
         const currentHierachy = React.useContext(AccordingHierachyContext);
 
         return (
-            <ButtonBase variant='filled' color="transparent" {...other} ref={ref}>
-                <div style={{ width: `${currentHierachy}rem` }} />
-                {text}
-                <div style={{ flex: "1 1 5rem" }} />
-                {
-                    icon ? icon : <DummyIcon />
-                }
+            <ButtonBase variant='filled' color="transparent" {...other} ref={ref}
+                style={{ paddingLeft: `${currentHierachy * 2 + 1}rem` }}>
+                {children}
+            </ButtonBase>
+        )
+    }
+)
+
+const AccordinLink = React.forwardRef<HTMLDivElement, Omit<AccordinLinkProps & React.HTMLAttributes<HTMLDivElement>, "color">>(
+    function AccordinButton({ children, href, ...other }, ref) {
+        const router = useRouter();
+        const currentHierachy = React.useContext(AccordingHierachyContext);
+
+        return (
+            <ButtonBase variant='filled' color="transparent" {...other} ref={ref}
+                onClick={() => router.push(href)} style={{ paddingLeft: `${currentHierachy * 2 + 1}rem` }}>
+                {children}
             </ButtonBase>
         )
     }
@@ -72,15 +85,15 @@ function Accordin({ children, buttonContent, defaultOpen = false }: AccordinProp
 
     return (
         <AccordingHierachyContext.Provider value={currentHierachy + 1}>
-            <ButtonBase variant='filled' color="transparent" onClick={toggle}>
-                <div style={{ width: `${currentHierachy}rem` }} />
+            <ButtonBase variant='filled' color="transparent" onClick={toggle}
+                style={{ paddingLeft: `${currentHierachy * 2 + 1}rem` }}>
                 {buttonContent}
-                <div style={{ flex: "1 1 5rem" }} />
                 <FlippingIcon
                     before={<KeyboardArrowDown style={{ flex: "none" }} />}
                     isFlipped={!isOpen}
                 />
             </ButtonBase>
+            {isOpen && <Divider />}
             <AccordinContentContainer className={isOpen ? undefined : "closed"} >
                 <div>
                     {children}
@@ -90,4 +103,4 @@ function Accordin({ children, buttonContent, defaultOpen = false }: AccordinProp
     )
 }
 
-export { AccordinButton, Accordin }
+export { AccordinLink, AccordinButton, Accordin }

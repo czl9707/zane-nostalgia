@@ -101,7 +101,7 @@ function Rainy({
             }
             {
                 [...Array(TIME_INVARIANT_NUM)]
-                    .filter((_, i) => visitedRippleClasses.has(DROP_CLASS(i)))
+                    .filter((_, i) => visitedDropClasses.has(DROP_CLASS(i)))
                     .map((_, i) => (
                         <line stroke={color} strokeWidth={1} id={DROP_CLASS(i)} key={DROP_CLASS(i)}>
                             <animate attributeName="y1"

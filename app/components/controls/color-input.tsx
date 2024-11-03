@@ -45,7 +45,7 @@ const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps & Omit<Rea
         const [color, setColor] = React.useState<string>(defaultColor);
 
         return (
-            <>
+            <div>
                 <InputInfo>
                     <H6Typography>{label}</H6Typography>
                     <H6Typography>{color}</H6Typography>
@@ -57,7 +57,7 @@ const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps & Omit<Rea
                             if (onChange) onChange(e.target.value);
                         }} />
                 </ColorInputContainer>
-            </>
+            </div>
         )
     }
 )

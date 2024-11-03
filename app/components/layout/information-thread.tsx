@@ -1,73 +1,36 @@
 "use client"
 
 import * as React from 'react';
-import { css, styled } from "@pigment-css/react";
+import { styled } from "@pigment-css/react";
 
-import HeaderBar from './header-bar';
-import { FixedNavigationPanel, NavigationInfo, ThreadNavigationPanel } from './navigation-panel'
-import FlippingIcon from '../ui/icons/flipping-icon';
-import { Close, DummyIcon, Github, Menu } from '../ui/icons/icons';
-import Link from 'next/link';
+import { MenuContext } from './navigation-menu-context-provider';
+
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
-    padding: theme.padding.thread,
-    gap: theme.padding.thread,
-    boxSizing: "border-box",
-    position: "fixed", overflowY: "scroll",
-    right: 0, top: 0, bottom: 0,
-
+    padding: theme.padding.thread, gap: theme.padding.thread,
+    boxSizing: "border-box", width: "100%", flex: "1 1",
+    overflowY: "scroll",
     display: "inline-flex", flexDirection: "column", flexWrap: "nowrap",
 
+    transform: "none",
+    transition: `all ${theme.transition.short} linear`,
 
-    [`@media(min-width: ${theme.breakpoints.md})`]: {
-        width: theme.breakpoints.md,
-    },
     [`@media(max-width: ${theme.breakpoints.md})`]: {
-        width: "100%",
+        "&.menu-open": {
+            transform: "translateX(100%)",
+            padding: `${theme.padding.thread} 0`
+        }
     },
 }));
 
 
-function InformationThread({ children, sceneNavInfo }: {
-    children: React.ReactNode,
-    sceneNavInfo: NavigationInfo
-}) {
-    const [navIsOpen, setNavIsOpen] = React.useState<boolean>(false);
-    const toggleNav = () => setNavIsOpen((isOpen) => !isOpen);
+function InformationThread({ children }: { children: React.ReactNode }) {
+    const isMenuOpen = React.useContext(MenuContext);
 
     return (
-        <>
-            <FixedNavigationPanel sceneNavInfo={sceneNavInfo} />
-            <InformationThreadContainer >
-                <HeaderBar>
-                    <Link href={"https://github.com/czl9707/zane-nostalgia"} target="_blank" rel="noopener noreferrer">
-                        <Github />
-                    </Link>
-
-                    <>
-                        <FlippingIcon
-                            className={css(
-                                ({ theme }) => ({
-                                    [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
-                                })
-                            )}
-                            onClick={toggleNav}
-                            isFlipped={navIsOpen}
-                            before={<Menu />}
-                            after={<Close />}
-                        />
-                        <DummyIcon
-                            className={css(
-                                ({ theme }) => ({
-                                    [`@media(max-width: ${theme.breakpoints.lg})`]: { display: "none" }
-                                })
-                            )} />
-                    </>
-                </HeaderBar>
-                {<ThreadNavigationPanel isShow={navIsOpen} sceneNavInfo={sceneNavInfo} />}
-                {children}
-            </InformationThreadContainer >
-        </>
+        <InformationThreadContainer className={isMenuOpen ? "menu-open" : undefined}>
+            {children}
+        </InformationThreadContainer >
     )
 }
 

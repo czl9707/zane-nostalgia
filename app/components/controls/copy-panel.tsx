@@ -55,7 +55,7 @@ const CopyPanel = React.forwardRef<HTMLDivElement, CopyPanelProps & Omit<React.H
         }
 
         return (
-            <>
+            <div>
                 <InputInfo>
                     <ButtonTypography>{label}</ButtonTypography>
                 </InputInfo>
@@ -67,7 +67,7 @@ const CopyPanel = React.forwardRef<HTMLDivElement, CopyPanelProps & Omit<React.H
                         {children}
                     </QuoteTypography>
                 </CopyPanelContainer>
-            </>
+            </div>
         );
     }
 )
