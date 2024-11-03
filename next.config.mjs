@@ -77,7 +77,7 @@ export default withPigment(
                 long: ".6s",
             },
             padding: {
-                thread: "4rem",
+                thread: "min(4rem, 8%)",
                 panel: "1.5rem",
             }
         })

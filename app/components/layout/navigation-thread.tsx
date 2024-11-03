@@ -8,7 +8,7 @@ import { MenuContext } from './navigation-menu-context-provider';
 
 const NavigationThreadContainer = styled("div")(({ theme }) => ({
     height: "100%",
-    padding: `${theme.padding.thread} 0 ${theme.padding.thread} ${theme.padding.thread}`,
+    padding: `var(--header-height) 0 ${theme.padding.thread} ${theme.padding.thread}`,
     boxSizing: "border-box", width: theme.breakpoints.sm, overflowY: "scroll",
     flexShrink: "0",
 

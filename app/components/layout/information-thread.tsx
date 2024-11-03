@@ -7,7 +7,8 @@ import { usePathname } from 'next/navigation';
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
     height: "100%",
-    padding: theme.padding.thread, gap: theme.padding.thread, boxSizing: "border-box",
+    padding: `var(--header-height) ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
+    gap: theme.padding.thread, boxSizing: "border-box",
     flexShrink: "0",
     display: "flex", flexDirection: "column",
     flexWrap: "nowrap", overflowY: "scroll",
