@@ -1,22 +1,30 @@
 import * as React from 'react';
 
+// dont know why only relative works for some module...
+
 import { SceneMetaData, SceneModule } from '@/app/scene-components/utils/types';
 import { defaultParameterResolver, defaultSizeParameterResolver, resolveParameterConstraints } from '@/app/scene-components/utils/resolver';
-import { fetchScene, fetchSceneMetas } from '@/app/scene-components/utils/fetch-scenes';
 import { defaultSceneSizeMetaData } from '@/app/scene-components/utils/constants';
+import { fetchScene, fetchSceneMetas } from '../../../scene-components/utils/fetch-scenes';
 
-import Divider from '@/app/ui-components/basics/divider';
-import Panel from '@/app/ui-components/basics/panel';
-import { QuoteTypography } from '@/app/ui-components/basics/typography';
-import CopyPanel from '@/app/ui-components/basics/copy-panel';
+import Divider from '@/app/components/ui/divider';
+import Panel from '../../../components/ui/panel';
+import { QuoteTypography } from '@/app/components/ui/typography';
+import CopyPanel from '@/app/components/controls/copy-panel';
 
 import { ColorInputRouterUpdater, SliderBarRouterUpdater } from './controls-router-updator';
+import { styled } from '@pigment-css/react';
 
 
 export async function generateStaticParams(): Promise<{ scene: string }[]> {
     const scenes = await fetchSceneMetas();
     return scenes.map(s => ({ scene: s.route }));
 }
+
+const PanelWrapper = styled(Panel)(({ theme }) => ({
+    display: "flex", flexDirection: "column",
+    gap: `${theme.padding.panel}`,
+}));
 
 export default async function Panels({ params, searchParams }: { params: { scene: string }, searchParams: { [key: string]: string } }) {
     const renderToString = (await import('react-dom/server')).renderToString;
@@ -34,7 +42,7 @@ export default async function Panels({ params, searchParams }: { params: { scene
 
     return (
         <>
-            <Panel>
+            <PanelWrapper>
                 {
                     metaEntries.map(([paramName, metaEntry], i) => {
                         if (metaEntry.type === "color")
@@ -56,8 +64,8 @@ export default async function Panels({ params, searchParams }: { params: { scene
                             )
                     })
                 }
-            </Panel>
-            <Panel>
+            </PanelWrapper>
+            <PanelWrapper>
                 <QuoteTypography color="secondary" style={{ marginBottom: ".7rem" }}>
                     * Window size Parameters won&apos;t applies to preview.
                 </QuoteTypography>
@@ -79,7 +87,7 @@ export default async function Panels({ params, searchParams }: { params: { scene
                 <CopyPanel label={"Raw SVG:"}>
                     {renderToString(<sceneModule.SceneComponent {...resolvedSize} {...resolved} />)}
                 </CopyPanel>
-            </Panel>
+            </PanelWrapper>
         </>
     );
 }

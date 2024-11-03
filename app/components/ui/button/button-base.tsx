@@ -31,7 +31,7 @@ const OnClickMask = styled("div")({
 
 const ButtonBaseDiv = styled("div")<ButtonBaseProps>(({ theme }) => ({
     margin: 0, position: "relative", cursor: "pointer", userSelect: "none",
-    display: "flex", alignItems: "center",
+    display: "flex", alignItems: "center", justifyContent: "space-between",
     paddingLeft: "1rem", paddingRight: "1rem",
     paddingTop: ".5rem", paddingBottom: ".5rem",
     fontFamily: theme.typographies.button.fontFamily,

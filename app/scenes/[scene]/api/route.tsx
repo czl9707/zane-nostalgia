@@ -16,7 +16,8 @@ export async function GET(request: NextRequest, context: { params: { scene: stri
     const result = renderToString(<sceneModule.SceneComponent {...resolved} />);
     const response = new Response(result, {
         headers: {
-            "content-type": "image/svg+xml; charset=utf-8",
+            "Content-type": "image/svg+xml; charset=utf-8",
+            "Cache-Control": "public, max-age=7200",
         },
     });
     return response;

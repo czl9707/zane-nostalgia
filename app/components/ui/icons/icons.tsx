@@ -100,3 +100,13 @@ export const Github = React.forwardRef<SVGSVGElement, IconProps>(
         );
     }
 )
+
+export const DoubleArrow = React.forwardRef<SVGSVGElement, IconProps>(
+    function DoubleArrow(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="m262.77-210 193.08-270-193.08-270h73.38l193.08 270-193.08 270h-73.38Zm234.92 0 193.08-270-193.08-270h73.39l193.07 270-193.07 270h-73.39Z" />
+            </SvgIcon>
+        );
+    }
+)

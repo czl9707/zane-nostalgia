@@ -2,8 +2,8 @@
 
 import * as React from 'react'
 
-import ColorInput, { ColorInputProps } from '@/app/ui-components/basics/color-input';
-import SliderBar, { SliderBarProps } from '@/app/ui-components/basics/slider-bar';
+import ColorInput, { ColorInputProps } from '@/app/components/controls/color-input';
+import SliderBar, { SliderBarProps } from '@/app/components/controls/slider-bar';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 

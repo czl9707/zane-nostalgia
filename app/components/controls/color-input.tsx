@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { styled } from "@pigment-css/react";
 
-import { H6Typography } from './typography';
+import { H6Typography } from '../ui/typography';
 import InputInfo from './input-info';
 
 const ColorInputEL = styled("input")({
@@ -45,7 +45,7 @@ const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps & Omit<Rea
         const [color, setColor] = React.useState<string>(defaultColor);
 
         return (
-            <>
+            <div>
                 <InputInfo>
                     <H6Typography>{label}</H6Typography>
                     <H6Typography>{color}</H6Typography>
@@ -57,7 +57,7 @@ const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps & Omit<Rea
                             if (onChange) onChange(e.target.value);
                         }} />
                 </ColorInputContainer>
-            </>
+            </div>
         )
     }
 )

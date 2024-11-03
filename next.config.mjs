@@ -58,8 +58,8 @@ export default withPigment(
             },
             breakpoints: {
                 sm: "450px",
-                md: "700px",
-                lg: "1150px", // always sum of sm and md
+                md: "900px",
+                lg: "1350px",
             },
             typographies: {
                 body: { fontFamily: "var(--serious-font-family)", fontWeight: 400, fontSize: "1.125rem", lineHeight: 1.4, },

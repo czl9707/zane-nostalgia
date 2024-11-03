@@ -3,7 +3,7 @@
 import * as React from 'react';
 import useForkRef from '../utils/useForkRef';
 import { styled } from '@pigment-css/react';
-import { H6Typography } from './typography';
+import { H6Typography } from '../ui/typography';
 import InputInfo from './input-info';
 
 interface SliderBarProps {
@@ -97,7 +97,7 @@ const SliderBar = React.forwardRef<HTMLDivElement, SliderBarProps>(
         }, [max, min, step, onChange]);
 
         return (
-            <>
+            <div>
                 <InputInfo>
                     <H6Typography>{label}</H6Typography>
                     <H6Typography>{value}</H6Typography>
@@ -106,7 +106,7 @@ const SliderBar = React.forwardRef<HTMLDivElement, SliderBarProps>(
                     <SliderBarTrack />
                     <SliderBarButton style={{ left: `${(value - min) / (max - min) * 100}%` }} />
                 </SliderBarContainer>
-            </>
+            </div>
         )
     }
 );

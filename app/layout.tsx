@@ -1,13 +1,11 @@
 import '@pigment-css/react/styles.css';
 import { Lato, Delius } from 'next/font/google';
 import { globalCss } from '@pigment-css/react';
-
-import InformationThread from "@/app/ui-components/layout/information-thread";
-import ThemeCorrector from "./ui-components/utils/theme-corrector";
 import React from 'react';
-import { fetchSceneMetas } from './scene-components/utils/fetch-scenes';
-import type { Metadata } from 'next'
 
+import ThemeCorrector from "./components/utils/theme-corrector";
+import type { Metadata } from 'next'
+import LayoutAboveScene from './components/layout/layout-above-scene';
 
 
 const lato = Lato({
@@ -50,14 +48,12 @@ globalCss(({ theme }) => ({
   }
 }));
 
-export default async function RootLayout({
+export default function RootLayout({
   children, panels
 }: {
   children: React.ReactNode,
   panels: React.ReactNode,
 }) {
-  const sceneNavigationInfo = await fetchSceneMetas();
-
   return (
     <html lang="en">
       <head>
@@ -70,9 +66,9 @@ export default async function RootLayout({
       <body style={globalVars}>
         <ThemeCorrector />
         {children}
-        <InformationThread sceneNavInfo={sceneNavigationInfo}>
+        <LayoutAboveScene>
           {panels}
-        </InformationThread>
+        </LayoutAboveScene>
       </body>
     </html>
   )
