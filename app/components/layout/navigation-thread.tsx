@@ -20,7 +20,8 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
         width: "100%", maxWidth: theme.breakpoints.sm,
         "&.menu-open": {
             marginRight: `calc(100% - min(100%, ${theme.breakpoints.sm}))`,
-            padding: theme.padding.thread, marginLeft: 0,
+            padding: `var(--header-height) ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
+            marginLeft: 0,
         }
     },
 }));
