@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import ButtonBase from "./button/button-base"
 import { styled } from '@pigment-css/react';
-import { DummyIcon, KeyboardArrowDown } from './icons/icons';
+import { KeyboardArrowDown } from './icons/icons';
 import FlippingIcon from './icons/flipping-icon';
 import Divider from './divider';
 import { useRouter } from 'next/navigation';
