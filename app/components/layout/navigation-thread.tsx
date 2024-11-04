@@ -15,7 +15,7 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
     display: "flex", flexDirection: "column", flexWrap: "nowrap",
     transition: `all ${theme.transition.short} linear`,
 
-    [`@media(max-width: ${theme.breakpoints.md})`]: {
+    [`@media(max-width: ${theme.breakpoints.lg})`]: {
         marginLeft: `max(-100%, -${theme.breakpoints.sm})`,
         width: "100%", maxWidth: theme.breakpoints.sm,
         "&.menu-open": {

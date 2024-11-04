@@ -28,7 +28,7 @@ function HeaderBar({ toggleMenu, isMenuOpen }: HeaderBarProps) {
             <FlippingIcon direction="horizontal"
                 className={css(
                     ({ theme }) => ({
-                        [`@media(min-width: ${theme.breakpoints.md})`]: { display: "none" }
+                        [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
                     })
                 )}
                 onClick={toggleMenu}

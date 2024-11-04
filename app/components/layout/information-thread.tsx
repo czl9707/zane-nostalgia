@@ -14,14 +14,14 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
     flexWrap: "nowrap", overflowY: "scroll",
     transition: `all ${theme.transition.short} linear`,
 
-    [`@media(min-width: ${theme.breakpoints.md})`]: {
+    [`@media(min-width: ${theme.breakpoints.lg})`]: {
         width: `calc(100% - ${theme.breakpoints.sm})`,
         paddingLeft: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), ${theme.padding.thread})`,
         "&.is-home": {
             paddingLeft: theme.padding.thread,
         },
     },
-    [`@media(max-width: ${theme.breakpoints.md})`]: {
+    [`@media(max-width: ${theme.breakpoints.lg})`]: {
         width: `100%`,
     },
 }));
