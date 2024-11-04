@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { fetchSceneMetas } from '@/app/scene-components/utils/fetch-scenes';
+import { fetchSceneMetas } from '../../scene-components/utils/fetch-scenes';
 import { Accordin, AccordinLink } from "../ui/accordin";
 import { H4Typography } from "../ui/typography";
 import { DummyIcon, Orbit } from "../ui/icons/icons";

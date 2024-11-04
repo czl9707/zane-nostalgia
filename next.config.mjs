@@ -58,8 +58,8 @@ export default withPigment(
             },
             breakpoints: {
                 sm: "450px",
-                md: "900px",
-                lg: "1350px",
+                md: "600px",
+                lg: "1050px",
             },
             typographies: {
                 body: { fontFamily: "var(--serious-font-family)", fontWeight: 400, fontSize: "1.125rem", lineHeight: 1.4, },
@@ -77,7 +77,7 @@ export default withPigment(
                 long: ".6s",
             },
             padding: {
-                thread: "4rem",
+                thread: "min(4rem, 8%)",
                 panel: "1.5rem",
             }
         })

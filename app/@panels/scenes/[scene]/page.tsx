@@ -1,16 +1,16 @@
 import * as React from 'react';
 
-// dont know why only relative works for some module...
+// dont know why only relative works ......
 
-import { SceneMetaData, SceneModule } from '@/app/scene-components/utils/types';
-import { defaultParameterResolver, defaultSizeParameterResolver, resolveParameterConstraints } from '@/app/scene-components/utils/resolver';
-import { defaultSceneSizeMetaData } from '@/app/scene-components/utils/constants';
+import { SceneMetaData, SceneModule } from '../../../scene-components/utils/types';
+import { defaultSceneSizeMetaData } from '../../../scene-components/utils/constants';
+import { defaultParameterResolver, defaultSizeParameterResolver, resolveParameterConstraints } from '../../../scene-components/utils/resolver';
 import { fetchScene, fetchSceneMetas } from '../../../scene-components/utils/fetch-scenes';
 
-import Divider from '@/app/components/ui/divider';
 import Panel from '../../../components/ui/panel';
-import { QuoteTypography } from '@/app/components/ui/typography';
-import CopyPanel from '@/app/components/controls/copy-panel';
+import Divider from '../../../components/ui/divider';
+import { QuoteTypography } from '../../../components/ui/typography';
+import CopyPanel from '../../../components/controls/copy-panel';
 
 import { ColorInputRouterUpdater, SliderBarRouterUpdater } from './controls-router-updator';
 import { styled } from '@pigment-css/react';

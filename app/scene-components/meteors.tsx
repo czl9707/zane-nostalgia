@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { IconProps, SvgIcon } from "@/app/components/ui/icons/icons"
+import { IconProps, SvgIcon } from "../components/ui/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
 import { randomFitToInt } from "./utils/math-utils";
 import seedrandom from 'seedrandom';
@@ -101,7 +101,7 @@ function MeteorShower({
             const x = randomFitToInt(randomGeneratorY(), rotation <= 90 ? width + 5 : -105, 100);
             const y = randomFitToInt(randomGeneratorY(), 0, height);
             const durIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
-            const initIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
+            const initIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_INIT_VARIANTS.length);
             visitedClass.add(METEOR_CLASS(durIndex, initIndex));
             return (
                 <use x={x} y={y} href={"#" + METEOR_CLASS(durIndex, initIndex)} key={i} />

@@ -13,13 +13,13 @@ interface HeaderBarProps {
     isMenuOpen: boolean,
 }
 
-const HeaderBarDiv = styled("div")({
-    padding: "0 4rem", zIndex: 1000,
-    height: "4rem", top: "0", left: 0, right: 0,
+const HeaderBarDiv = styled("div")(({ theme }) => ({
+    padding: `0 ${theme.padding.thread}`, zIndex: 1000,
+    height: "var(--header-height)", top: "0", left: 0, right: 0,
     position: "fixed", backgroundColor: "transparent",
     display: "flex", flexDirection: "row", alignItems: "center",
     gap: "1rem",
-});
+}));
 
 
 function HeaderBar({ toggleMenu, isMenuOpen }: HeaderBarProps) {
@@ -28,7 +28,7 @@ function HeaderBar({ toggleMenu, isMenuOpen }: HeaderBarProps) {
             <FlippingIcon direction="horizontal"
                 className={css(
                     ({ theme }) => ({
-                        [`@media(min-width: ${theme.breakpoints.md})`]: { display: "none" }
+                        [`@media(min-width: ${theme.breakpoints.lg})`]: { display: "none" }
                     })
                 )}
                 onClick={toggleMenu}

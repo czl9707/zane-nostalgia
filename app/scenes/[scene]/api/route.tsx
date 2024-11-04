@@ -1,7 +1,8 @@
-import { defaultSceneSizeMetaData } from "@/app/scene-components/utils/constants";
-import { fetchScene } from "@/app/scene-components/utils/fetch-scenes";
-import { defaultParameterResolver, defaultSizeParameterResolver, resolveParameterConstraints } from "@/app/scene-components/utils/resolver";
-import { SceneModule } from "@/app/scene-components/utils/types";
+import { defaultSceneSizeMetaData } from "../../../scene-components/utils/constants";
+import { fetchScene } from "../../../scene-components/utils/fetch-scenes";
+import { defaultParameterResolver, defaultSizeParameterResolver, resolveParameterConstraints } from "../../../scene-components/utils/resolver";
+import { SceneModule } from "../../../scene-components/utils/types";
+
 import { NextRequest } from "next/server";
 
 export async function GET(request: NextRequest, context: { params: { scene: string } }) {
