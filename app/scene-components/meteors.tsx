@@ -101,7 +101,7 @@ function MeteorShower({
             const x = randomFitToInt(randomGeneratorY(), rotation <= 90 ? width + 5 : -105, 100);
             const y = randomFitToInt(randomGeneratorY(), 0, height);
             const durIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
-            const initIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_OPACITY_DUR_VARIENTS.length);
+            const initIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_INIT_VARIANTS.length);
             visitedClass.add(METEOR_CLASS(durIndex, initIndex));
             return (
                 <use x={x} y={y} href={"#" + METEOR_CLASS(durIndex, initIndex)} key={i} />
