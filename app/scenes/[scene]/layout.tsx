@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from 'react'
-import Panel from '@/app/components/ui/panel';
+import Panel from '../../components/ui/panel';
 
 export default function SceneLayout({ children }: {
     children: React.ReactNode,
