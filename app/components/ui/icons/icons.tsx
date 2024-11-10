@@ -110,3 +110,23 @@ export const DoubleArrow = React.forwardRef<SVGSVGElement, IconProps>(
         );
     }
 )
+
+export const FloatLandscape2 = React.forwardRef<SVGSVGElement, IconProps>(
+    function FloatLandscape2(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M512.31-392.31h200v-240h-200v240ZM172.31-180Q142-180 121-201q-21-21-21-51.31v-455.38Q100-738 121-759q21-21 51.31-21h615.38Q818-780 839-759q21 21 21 51.31v455.38Q860-222 839-201q-21 21-51.31 21H172.31Zm0-60h615.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-455.38q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H172.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v455.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85ZM160-240v-480 480Z" />
+            </SvgIcon>
+        );
+    }
+)
+
+export const FitScreen = React.forwardRef<SVGSVGElement, IconProps>(
+    function FitScreen(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M800-600v-107.69q0-4.62-3.85-8.46-3.84-3.85-8.46-3.85H680v-60h107.69Q818-780 839-759q21 21 21 51.31V-600h-60Zm-700 0v-107.69Q100-738 121-759q21-21 51.31-21H280v60H172.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46V-600h-60Zm580 420v-60h107.69q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-360h60v107.69Q860-222 839-201q-21 21-51.31 21H680Zm-507.69 0Q142-180 121-201q-21-21-21-51.31V-360h60v107.69q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85H280v60H172.31Zm84.61-156.92v-286.16h446.16v286.16H256.92Zm60-60h326.16v-166.16H316.92v166.16Zm0 0v-166.16 166.16Z" />
+            </SvgIcon>
+        );
+    }
+)

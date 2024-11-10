@@ -18,7 +18,7 @@ const ColorInputRouterUpdater = React.forwardRef<HTMLInputElement, Omit<ColorInp
             const updatedSP = new URLSearchParams(searchParam.toString());
             updatedSP.set(paramName, value);
 
-            router.replace(path + '?' + updatedSP.toString())
+            router.replace(path + '?' + updatedSP.toString(), { scroll: false })
         }
 
         return <ColorInput {...other} ref={ref} onChange={handleOnChange} />
@@ -35,7 +35,7 @@ const SliderBarRouterUpdater = React.forwardRef<HTMLDivElement, Omit<SliderBarPr
             const updatedSP = new URLSearchParams(searchParam.toString());
             updatedSP.set(paramName, value.toString());
 
-            router.replace(path + '?' + updatedSP.toString())
+            router.replace(path + '?' + updatedSP.toString(), { scroll: false })
         }
 
         return <SliderBar {...other} ref={ref} onChange={handleOnChange} />
