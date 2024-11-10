@@ -92,7 +92,7 @@ function MeteorShower({
             const initIndex = randomFitToInt(randomGeneratorX(), 0, METEOR_INIT_VARIANTS.length);
             visitedClass.add(METEOR_CLASS(durIndex, initIndex));
             return (
-                <use x={x} y={y} href={"#" + METEOR_CLASS(durIndex, initIndex)} key={i} />
+                <use x={x} y={y} href={"#" + METEOR_CLASS(durIndex, initIndex)} key={`x-${i}`} />
             )
         })
         ,
@@ -104,7 +104,7 @@ function MeteorShower({
             const initIndex = randomFitToInt(randomGeneratorY(), 0, METEOR_INIT_VARIANTS.length);
             visitedClass.add(METEOR_CLASS(durIndex, initIndex));
             return (
-                <use x={x} y={y} href={"#" + METEOR_CLASS(durIndex, initIndex)} key={i} />
+                <use x={x} y={y} href={"#" + METEOR_CLASS(durIndex, initIndex)} key={`y-${i}`} />
             )
         })
 
@@ -126,14 +126,14 @@ function MeteorShower({
             {
                 METEOR_OPACITY_DUR_VARIENTS
                     .map((({ opacity, dur }, durIndex) => (
-                        <React.Fragment key={durIndex}>
+                        <React.Fragment key={`DUR${durIndex}`}>
                             {
                                 METEOR_INIT_VARIANTS.map(((init, initIndex) => {
                                     return (
-                                        <React.Fragment key={initIndex}>
+                                        <React.Fragment key={`INIT${initIndex}`}>
                                             {
                                                 visitedClass.has(METEOR_CLASS(durIndex, initIndex)) &&
-                                                <g id={METEOR_CLASS(durIndex, initIndex)} key={initIndex}>
+                                                <g id={METEOR_CLASS(durIndex, initIndex)}>
                                                     <use href="#meteorGeo" transform={`rotate(-${rotation})`} opacity={opacity}>
                                                         <animate attributeName="x" values={`0;-${height + width}`} dur={`${dur}s`}
                                                             begin={`${init}s`} repeatCount="indefinite" />
