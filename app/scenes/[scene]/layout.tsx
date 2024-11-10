@@ -43,15 +43,21 @@ function SceneHelper({ children }: {
     children: React.ReactNode,
 }) {
     const searchParams = useSearchParams();
-    const width = searchParams.get("width") ?? defaultSceneSizeMetaData.width.default;
-    const height = searchParams.get("height") ?? defaultSceneSizeMetaData.height.default;
+    const width = parseInt(
+        searchParams.get("width") ?? defaultSceneSizeMetaData.width.default.toString());
+    const height = parseInt(
+        searchParams.get("height") ?? defaultSceneSizeMetaData.height.default.toString());
 
     const isFullScreen = React.useContext(FullScreenContext);
 
     return (
-
         <SVGContainerDiv className={isFullScreen ? "fullscreen" : undefined}>
-            <SVGWrapper className={isFullScreen ? "fullscreen" : undefined}
+            <SVGWrapper style={{
+                maxWidth: isFullScreen ? "300%" : "100%",
+                maxHeight: isFullScreen ? "300%" : "100%",
+                minWidth: isFullScreen ? "100%" : "0",
+                minHeight: isFullScreen ? "100%" : "0",
+            }}
                 viewBox={`0 0 ${width} ${height}`}
                 preserveAspectRatio={"xMidYMid slice"}>
                 {children}
