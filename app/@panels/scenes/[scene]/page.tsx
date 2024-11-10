@@ -12,7 +12,7 @@ import Divider from '../../../components/ui/divider';
 import { QuoteTypography } from '../../../components/ui/typography';
 import CopyPanel from '../../../components/controls/copy-panel';
 
-import { ColorInputRouterUpdater, SliderBarRouterUpdater } from './controls-router-updator';
+import { ColorInputRouterUpdater, SliderRouterUpdater } from './controls-router-updator';
 import { styled } from '@pigment-css/react';
 
 
@@ -57,7 +57,7 @@ export default async function Panels({ params, searchParams }: { params: { scene
                             return (
                                 <React.Fragment key={paramName}>
                                     {i > 0 && <Divider />}
-                                    <SliderBarRouterUpdater paramName={paramName}
+                                    <SliderRouterUpdater paramName={paramName}
                                         min={metaEntry.min} max={metaEntry.max} step={metaEntry.step}
                                         label={metaEntry.name} defaultValue={resolved[paramName] as number} />
                                 </React.Fragment>
@@ -70,11 +70,11 @@ export default async function Panels({ params, searchParams }: { params: { scene
                     * Window size Parameters won&apos;t applies to preview.
                 </QuoteTypography>
 
-                <SliderBarRouterUpdater paramName={"height"}
+                <SliderRouterUpdater paramName={"height"}
                     min={defaultSceneSizeMetaData.height.min} max={defaultSceneSizeMetaData.height.max} step={defaultSceneSizeMetaData.height.step}
                     label={defaultSceneSizeMetaData.height.name} defaultValue={resolvedSize["height"]} />
                 <Divider />
-                <SliderBarRouterUpdater paramName={"width"}
+                <SliderRouterUpdater paramName={"width"}
                     min={defaultSceneSizeMetaData.width.min} max={defaultSceneSizeMetaData.width.max} step={defaultSceneSizeMetaData.width.step}
                     label={defaultSceneSizeMetaData.width.name} defaultValue={resolvedSize["width"]} />
                 <Divider />

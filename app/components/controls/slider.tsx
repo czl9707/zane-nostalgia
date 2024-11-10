@@ -5,10 +5,10 @@ import { styled } from '@pigment-css/react';
 
 import InputInfo from './input-info';
 import { H6Typography } from '../ui/typography';
-import * as Slider from '@radix-ui/react-slider';
+import * as SliderPrimitive from '@radix-ui/react-slider';
 
 
-interface SliderBarProps {
+interface SliderProps {
     label: string,
     min: number,
     max: number,
@@ -17,7 +17,7 @@ interface SliderBarProps {
     defaultValue: number,
 }
 
-const SliderContainer = styled(Slider.Root)(({ theme }) => ({
+const SliderContainer = styled(SliderPrimitive.Root)(({ theme }) => ({
     userSelect: "none", display: "flex", alignItems: "center",
     position: "relative", height: "2rem",
     boxSizing: "border-box",
@@ -35,7 +35,7 @@ const SliderContainer = styled(Slider.Root)(({ theme }) => ({
     },
 }));
 
-const SliderThumb = styled(Slider.Thumb)(({ theme }) => ({
+const SliderThumb = styled(SliderPrimitive.Thumb)(({ theme }) => ({
     position: "absolute", width: "1rem", height: "2rem", top: 0, zIndex: 1,
     transform: "translateX(-50%) translateY(-50%)",
     transition: `background-color ${theme.transition.short} linear,
@@ -44,15 +44,15 @@ const SliderThumb = styled(Slider.Thumb)(({ theme }) => ({
     boxShadow: `0 0 1.5px ${theme.vars.colors.secondary.contrastText}`,
 }));
 
-const SliderTrack = styled(Slider.Track)(({ theme }) => ({
+const SliderTrack = styled(SliderPrimitive.Track)(({ theme }) => ({
     position: "relative", width: "100%", height: ".8rem",
     backgroundColor: theme.vars.colors.primary.background.solid,
     boxShadow: `0 0 1px ${theme.vars.colors.primary.contrastText}`,
 }));
 
 
-const SliderBar = React.forwardRef<HTMLDivElement, SliderBarProps>(
-    function SliderBar({
+const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
+    function Slider({
         label = "",
         min,
         max,
@@ -86,5 +86,5 @@ const SliderBar = React.forwardRef<HTMLDivElement, SliderBarProps>(
 
 
 
-export default SliderBar;
-export type { SliderBarProps }
+export default Slider;
+export type { SliderProps }

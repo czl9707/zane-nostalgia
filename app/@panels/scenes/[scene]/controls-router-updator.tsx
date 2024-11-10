@@ -3,7 +3,7 @@
 import * as React from 'react'
 
 import ColorInput, { ColorInputProps } from '../../../components/controls/color-input';
-import SliderBar, { SliderBarProps } from '../../../components/controls/slider-bar';
+import Slider, { SliderProps } from '../../../components/controls/slider';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
@@ -25,8 +25,8 @@ const ColorInputRouterUpdater = React.forwardRef<HTMLInputElement, Omit<ColorInp
     }
 )
 
-const SliderBarRouterUpdater = React.forwardRef<HTMLDivElement, Omit<SliderBarProps, "onChange"> & { paramName: string }>(
-    function SliderBarRouterUpdater({ paramName, ...other }, ref) {
+const SliderRouterUpdater = React.forwardRef<HTMLDivElement, Omit<SliderProps, "onChange"> & { paramName: string }>(
+    function SliderRouterUpdater({ paramName, ...other }, ref) {
         const router = useRouter();
         const path = usePathname();
         const searchParam = useSearchParams();
@@ -38,8 +38,8 @@ const SliderBarRouterUpdater = React.forwardRef<HTMLDivElement, Omit<SliderBarPr
             router.replace(path + '?' + updatedSP.toString(), { scroll: false })
         }
 
-        return <SliderBar {...other} ref={ref} onChange={handleOnChange} />
+        return <Slider {...other} ref={ref} onChange={handleOnChange} />
     }
 )
 
-export { SliderBarRouterUpdater, ColorInputRouterUpdater }
+export { SliderRouterUpdater, ColorInputRouterUpdater }
