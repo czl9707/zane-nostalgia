@@ -8,7 +8,7 @@ import Panel from '../../components/ui/panel';
 import { defaultSceneSizeMetaData } from '../../scene-components/utils/constants';
 import { FullScreenContext } from '../../components/layout/header-bar-with-context-provider';
 
-const SVGContainer = styled('div')(({ theme }) => ({
+const SVGContainerDiv = styled('div')(({ theme }) => ({
     position: "fixed", left: 0, top: 0, bottom: 0,
     boxSizing: "border-box", display: "flex",
     justifyContent: "center", alignItems: "center",
@@ -38,7 +38,8 @@ const SVGWrapper = styled('svg')(({ theme }) => ({
     transition: `all ${theme.transition.short} linear`,
 }))
 
-export default function SceneLayout({ children }: {
+// wrapped in Suspense
+function SceneHelper({ children }: {
     children: React.ReactNode,
 }) {
     const searchParams = useSearchParams();
@@ -48,20 +49,32 @@ export default function SceneLayout({ children }: {
     const isFullScreen = React.useContext(FullScreenContext);
 
     return (
+
+        <SVGContainerDiv className={isFullScreen ? "fullscreen" : undefined}>
+            <SVGWrapper className={isFullScreen ? "fullscreen" : undefined}
+                viewBox={`0 0 ${width} ${height}`}
+                preserveAspectRatio={"xMidYMid slice"}>
+                {children}
+            </SVGWrapper>
+        </SVGContainerDiv>
+    )
+}
+
+export default function SceneLayout({ children }: {
+    children: React.ReactNode,
+}) {
+    return (
         <>
             <Panel style={{ position: "fixed", inset: 0 }} />
             <React.Suspense >
-                <SVGContainer className={isFullScreen ? "fullscreen" : undefined}>
-                    <SVGWrapper className={isFullScreen ? "fullscreen" : undefined}
-                        viewBox={`0 0 ${width} ${height}`}
-                        preserveAspectRatio={"xMidYMid slice"}>
-                        {children}
-                    </SVGWrapper>
-                </SVGContainer>
+                <SceneHelper>
+                    {children}
+                </SceneHelper>
             </React.Suspense >
         </>
     )
 }
+
 
 
 export const dynamicParams = false;
