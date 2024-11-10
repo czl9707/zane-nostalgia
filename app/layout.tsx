@@ -5,7 +5,8 @@ import React from 'react';
 
 import ThemeCorrector from "./components/utils/theme-corrector";
 import type { Metadata } from 'next'
-import LayoutAboveScene from './components/layout/layout-above-scene';
+import LayoutOtherThanScene from './components/layout/layout-other-than-scene';
+import HeaderBarWithContextProvider from './components/layout/header-bar-with-context-provider';
 
 
 const lato = Lato({
@@ -66,10 +67,12 @@ export default function RootLayout({
       </head>
       <body style={globalVars}>
         <ThemeCorrector />
-        {children}
-        <LayoutAboveScene>
-          {panels}
-        </LayoutAboveScene>
+        <HeaderBarWithContextProvider>
+          {children}
+          <LayoutOtherThanScene>
+            {panels}
+          </LayoutOtherThanScene>
+        </HeaderBarWithContextProvider>
       </body>
     </html>
   )

@@ -4,21 +4,34 @@ import * as React from 'react';
 import { styled } from "@pigment-css/react";
 import { usePathname } from 'next/navigation';
 
+import { MenuContext } from './header-bar-with-context-provider';
+
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
     height: "100%",
     padding: `var(--header-height) ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
-    gap: theme.padding.thread, boxSizing: "border-box",
-    flexShrink: "0",
+    boxSizing: "border-box", flexShrink: "0",
+    gap: theme.padding.thread,
+
     display: "flex", flexDirection: "column",
     flexWrap: "nowrap", overflowY: "scroll",
     transition: `all ${theme.transition.short} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        width: `calc(100% - ${theme.breakpoints.sm})`,
-        paddingLeft: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), ${theme.padding.thread})`,
+        paddingLeft: 0,
+        width: `min(${theme.breakpoints.md}, 100% - ${theme.breakpoints.sm})`,
+        marginLeft: `calc(100% - ${theme.breakpoints.md})`,
+        "&.menu-open": {
+            marginLeft: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), 0px)`,
+        },
         "&.is-home": {
+            width: "100%",
+            marginLeft: 0,
             paddingLeft: theme.padding.thread,
+            "&.menu-open": {
+                width: `calc(100% - ${theme.breakpoints.sm})`,
+                paddingLeft: 0,
+            }
         },
     },
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
@@ -29,8 +42,13 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
 
 function InformationThread({ children }: { children: React.ReactNode }) {
     const currentPath = usePathname();
+    const isMenuOpen = React.useContext(MenuContext);
+
+    const classes = []
+    if (isMenuOpen) classes.push("menu-open");
+    if (currentPath == "/") classes.push("is-home");
     return (
-        <InformationThreadContainer className={currentPath == '/' ? "is-home" : undefined}>
+        <InformationThreadContainer className={classes.join(" ")}>
             {children}
         </InformationThreadContainer >
     )
