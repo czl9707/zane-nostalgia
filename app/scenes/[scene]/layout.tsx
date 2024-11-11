@@ -17,6 +17,10 @@ const SVGContainerDiv = styled('div')(({ theme }) => ({
     "&.fullscreen": {
         padding: 0,
     },
+
+    [`@media(max-width: ${theme.breakpoints.lg})`]: {
+        right: 0,
+    },
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
         right: theme.breakpoints.md,
         "&.fullscreen": {

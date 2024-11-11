@@ -2,7 +2,7 @@ import { keyframes, styled } from "@pigment-css/react";
 import { ColorVariation } from "@pigment-css/react/theme";
 import * as React from "react";
 
-interface ButtonBaseProps {
+interface ButtonProps {
     variant: "outline" | "filled"
     color?: ColorVariation | 'transparent'
 }
@@ -29,7 +29,7 @@ const OnClickMask = styled("div")({
     visibility: "hidden", opacity: 0
 })
 
-const ButtonBaseDiv = styled("div")<ButtonBaseProps>(({ theme }) => ({
+const ButtonContainer = styled("div")<ButtonProps>(({ theme }) => ({
     margin: 0, position: "relative", cursor: "pointer", userSelect: "none",
     display: "flex", alignItems: "center", justifyContent: "space-between",
     paddingLeft: "1rem", paddingRight: "1rem",
@@ -63,15 +63,15 @@ const ButtonBaseDiv = styled("div")<ButtonBaseProps>(({ theme }) => ({
     }
 }));
 
-const ButtonBase = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & ButtonBaseProps>(
-    function ButtonBase({ children, ...other }, ref) {
-        return <ButtonBaseDiv {...other} ref={ref}>
+const Button = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & ButtonProps>(
+    function Button({ children, ...other }, ref) {
+        return <ButtonContainer {...other} ref={ref}>
             <OnHoverMask />
             <OnClickMask />
             {children}
-        </ButtonBaseDiv>
+        </ButtonContainer>
     }
 )
 
-export default ButtonBase;
-export type { ButtonBaseProps }
+export default Button;
+export type { ButtonProps }

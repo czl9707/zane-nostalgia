@@ -12,13 +12,15 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
     boxSizing: "border-box", overflowY: "scroll", flexShrink: "0",
 
     display: "flex", flexDirection: "column", flexWrap: "nowrap",
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.long} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
         width: theme.breakpoints.sm,
         marginLeft: `-${theme.breakpoints.sm}`,
+        marginRight: `calc(100% - ${theme.breakpoints.md})`,
         "&.menu-open": {
             marginLeft: 0,
+            marginRight: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), 0px)`,
         }
     },
 
