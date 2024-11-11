@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import { fetchSceneMetas } from '../../scene-components/utils/fetch-scenes';
-import { Accordin, AccordinLink } from "../ui/accordin";
+import { Accordion, AccordionLink, AccordionGroup } from "../ui/accordion";
 import { H4Typography } from "../ui/typography";
 import { DummyIcon, Orbit } from "../ui/icons/icons";
 import Divider from '../ui/divider';
@@ -27,40 +27,41 @@ export default async function NavigationThreadContent() {
             </H4Typography>
             <Divider />
 
-            <AccordinLink href={"/"}>
+            <AccordionLink href={"/"}>
                 Home
                 <DummyIcon />
-            </AccordinLink>
+            </AccordionLink>
             <Divider />
+            <AccordionGroup type="multiple" defaultValue={["Scenes"]}>
+                <Accordion name={"Scenes"}>
+                    {
+                        sceneMetas.map(({ Icon, name, route }) => (
+                            <React.Fragment key={name}>
+                                <Divider />
+                                <AccordionLink href={`/scenes/${route}`}>
+                                    {name}
+                                    <Icon />
+                                </AccordionLink>
+                            </React.Fragment>
+                        ))
+                    }
+                </Accordion>
+                <Divider />
 
-            <Accordin defaultOpen buttonContent={"Scenes"}>
-                {
-                    sceneMetas.map(({ Icon, name, route }, i) => (
-                        <React.Fragment key={name}>
-                            {i != 0 && <Divider />}
-                            <AccordinLink href={`/scenes/${route}`}>
-                                {name}
-                                <Icon />
-                            </AccordinLink>
-                        </React.Fragment>
-                    ))
-                }
-            </Accordin>
-            <Divider />
-
-            <Accordin buttonContent={"Playground"}>
-                {
-                    playgroundContents.map(({ icon, name, route }, i) => (
-                        <React.Fragment key={name}>
-                            {i != 0 && <Divider />}
-                            <AccordinLink href={`/playground/${route}`}>
-                                {name} {icon}
-                            </AccordinLink>
-                        </React.Fragment>
-                    ))
-                }
-            </Accordin>
-            <Divider />
+                <Accordion name={"Playground"}>
+                    {
+                        playgroundContents.map(({ icon, name, route }) => (
+                            <React.Fragment key={name}>
+                                <Divider />
+                                <AccordionLink href={`/playground/${route}`}>
+                                    {name} {icon}
+                                </AccordionLink>
+                            </React.Fragment>
+                        ))
+                    }
+                </Accordion>
+                <Divider />
+            </AccordionGroup>
         </>
     )
 }

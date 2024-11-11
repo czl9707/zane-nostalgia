@@ -15,18 +15,13 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
 
     display: "flex", flexDirection: "column",
     flexWrap: "nowrap", overflowY: "scroll",
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.long} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
         paddingLeft: 0,
-        width: `min(${theme.breakpoints.md}, 100% - ${theme.breakpoints.sm})`,
-        marginLeft: `calc(100% - ${theme.breakpoints.md})`,
-        "&.menu-open": {
-            marginLeft: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), 0px)`,
-        },
+        width: `min(${theme.breakpoints.md}, calc(100% - ${theme.breakpoints.sm}))`,
         "&.is-home": {
             width: "100%",
-            marginLeft: 0,
             paddingLeft: theme.padding.thread,
             "&.menu-open": {
                 width: `calc(100% - ${theme.breakpoints.sm})`,

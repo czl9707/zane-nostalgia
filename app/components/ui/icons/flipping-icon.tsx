@@ -16,7 +16,7 @@ const FlippingIconContainer = styled("div")<{ direction?: 'vertical' | 'horizont
 interface FlippingIconProps {
     before: React.ReactElement,
     after?: React.ReactElement,
-    isFlipped: boolean,
+    isFlipped?: boolean,
     direction?: 'vertical' | 'horizontal',
 }
 

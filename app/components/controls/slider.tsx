@@ -76,7 +76,7 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
                         onChange(vs[0]);
                     }} >
                     <SliderTrack />
-                    <SliderThumb />
+                    <SliderThumb aria-label={label} />
                 </SliderContainer>
             </div>
         )
