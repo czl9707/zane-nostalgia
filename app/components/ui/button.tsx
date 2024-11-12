@@ -31,20 +31,21 @@ const OnClickMask = styled("div")({
 
 const ButtonContainer = styled("div")<ButtonProps>(({ theme }) => ({
     margin: 0, position: "relative", cursor: "pointer", userSelect: "none",
-    display: "flex", alignItems: "center", justifyContent: "space-between",
+    display: "inline-flex", alignItems: "center", justifyContent: "space-between",
     paddingLeft: "1rem", paddingRight: "1rem",
     paddingTop: ".5rem", paddingBottom: ".5rem",
+    boxSizing: "border-box",
     fontFamily: theme.typographies.button.fontFamily,
     lineHeight: theme.typographies.button.lineHeight,
     fontSize: theme.typographies.button.fontSize,
     overflow: "hidden",
     backgroundColor: ({ color = "transparent" }) => {
         if (color === "transparent") return "transparent";
-        else return theme.vars.colors[color].background.solid;
+        else return theme.vars.colors[color].contrastText;
     },
     color: ({ color = "transparent" }) => {
-        if (color === "transparent") color = "primary";
-        return theme.vars.colors[color].contrastText;
+        if (color === "transparent") return theme.vars.colors.primary.contrastText;
+        return theme.vars.colors[color].background.solid;
     },
     border: ({ variant }) => variant === "outline" ? ".5px solid grey" : undefined,
 

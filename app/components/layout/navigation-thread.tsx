@@ -4,6 +4,7 @@ import * as React from 'react';
 import { styled } from "@pigment-css/react";
 
 import { MenuContext } from './header-bar-with-context-provider';
+import { usePathname } from 'next/navigation';
 
 
 const NavigationThreadContainer = styled("div")(({ theme }) => ({
@@ -12,7 +13,7 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
     boxSizing: "border-box", overflowY: "scroll", flexShrink: "0",
 
     display: "flex", flexDirection: "column", flexWrap: "nowrap",
-    transition: `all ${theme.transition.long} linear`,
+    transition: `all ${theme.transition.short} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
         width: theme.breakpoints.sm,
@@ -21,7 +22,10 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
         "&.menu-open": {
             marginLeft: 0,
             marginRight: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), 0px)`,
-        }
+        },
+        "&.is-home": {
+            marginRight: 0,
+        },
     },
 
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
@@ -36,10 +40,15 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
 
 
 export default function NavigationThread({ children }: { children: React.ReactNode }) {
-    const isMenuOpen = React.useContext(MenuContext);
+    const currentPath = usePathname();
+    const { isMenuOpen } = React.useContext(MenuContext);
+
+    const classes = []
+    if (isMenuOpen) classes.push("menu-open");
+    if (currentPath == "/") classes.push("is-home");
 
     return (
-        <NavigationThreadContainer className={isMenuOpen ? "menu-open" : undefined}>
+        <NavigationThreadContainer className={classes.join(" ")}>
             {children}
         </NavigationThreadContainer>
     )

@@ -3,7 +3,7 @@ import { CSSPropertiesWithCallback, styled } from "@pigment-css/react";
 import { ColorVariation, ThemeArgs, TypographyVairation } from "@pigment-css/react/theme";
 
 interface TypographyProps {
-    color?: ColorVariation
+    color?: ColorVariation | "inherit"
 }
 
 function styledTypographyPropsFactory(
@@ -15,7 +15,7 @@ function styledTypographyPropsFactory(
         fontSize: theme.typographies[typographyVariation].fontSize,
         fontWeight: theme.typographies[typographyVariation].fontWeight,
         lineHeight: theme.typographies[typographyVariation].lineHeight,
-        color: (({ color = "primary" }: TypographyProps) => theme.vars.colors[color].contrastText),
+        color: (({ color = "inherit" }: TypographyProps) => color === "inherit" ? color : theme.vars.colors[color].contrastText),
     });
 }
 

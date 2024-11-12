@@ -15,7 +15,7 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
 
     display: "flex", flexDirection: "column",
     flexWrap: "nowrap", overflowY: "scroll",
-    transition: `all ${theme.transition.long} linear`,
+    transition: `all ${theme.transition.short} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
         paddingLeft: 0,
@@ -37,7 +37,7 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
 
 function InformationThread({ children }: { children: React.ReactNode }) {
     const currentPath = usePathname();
-    const isMenuOpen = React.useContext(MenuContext);
+    const { isMenuOpen } = React.useContext(MenuContext);
 
     const classes = []
     if (isMenuOpen) classes.push("menu-open");
