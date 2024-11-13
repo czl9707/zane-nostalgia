@@ -23,7 +23,7 @@ function NextContentState({ index, length, step, curserShow }: ContentState, con
                 step = 0;
             else {
                 curserShow++;
-                if (curserShow > 6) {
+                if (curserShow > 15) {
                     curserShow = 1
                     step = -1
                 }
@@ -31,7 +31,6 @@ function NextContentState({ index, length, step, curserShow }: ContentState, con
         }
     }
 
-    console.log({ index, length, step, curserShow })
     return { index, length, step, curserShow };
 }
 
@@ -42,25 +41,29 @@ export default function TypingTypography({ contents }: { contents: string[] }) {
         step: 1,
         curserShow: 1,
     })
+    const timeoutRef = React.useRef<boolean>()
 
     const updateState = () => {
+        setTimeout(() => {
+            updateState();
+        }, 150);
         setState((currentState) => {
-            setTimeout(() => {
-                updateState();
-            }, currentState.step === 0 ? 600 : 150);
 
             return NextContentState(currentState, contents);
         });
     }
 
     React.useEffect(() => {
-        updateState();
+        if (!timeoutRef.current) {
+            timeoutRef.current = true;
+            updateState();
+        }
     }, []);
 
     return (
         <>
             {contents[state.index].substring(0, state.length)}
-            {state.curserShow % 2 == 1 ? "_" : " "}
+            <span style={{ opacity: state.curserShow % 3 }}>_</span>
         </>
     )
 }

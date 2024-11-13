@@ -3,12 +3,20 @@ import { styled } from "@pigment-css/react";
 import { ColorVariation } from '@pigment-css/react/theme';
 
 interface PanelProps {
-    color?: ColorVariation
+    color?: ColorVariation | 'transparent';
 }
 
 const PanelContainer = styled("div")<PanelProps>(({ theme }) => ({
-    backgroundColor: ({ color = "primary" }) => `${theme.vars.colors[color].background.contrastOpaque}`,
-    color: ({ color = "primary" }) => `${theme.vars.colors[color].contrastText}`,
+    backgroundColor: ({ color = "primary" }) => {
+        if (color === "transparent")
+            return "transparent";
+        return `${theme.vars.colors[color].background.contrastOpaque}`;
+    },
+    color: ({ color = "primary" }) => {
+        if (color === "transparent")
+            color = "primary";
+        return `${theme.vars.colors[color].contrastText}`;
+    },
     boxSizing: "border-box", position: "relative",
     padding: theme.padding.panel,
 }));

@@ -10,7 +10,7 @@ function styledTypographyPropsFactory(
     typographyVariation: TypographyVairation
 ): ((themeArgs: ThemeArgs) => CSSPropertiesWithCallback<TypographyProps>) {
     return ({ theme }: ThemeArgs) => ({
-        margin: 0, padding: 0, whiteSpace: "nowrap",
+        margin: 0, padding: 0, whiteSpace: "nowrap", textWrap: "wrap",
         fontFamily: theme.typographies[typographyVariation].fontFamily,
         fontSize: theme.typographies[typographyVariation].fontSize,
         fontWeight: theme.typographies[typographyVariation].fontWeight,

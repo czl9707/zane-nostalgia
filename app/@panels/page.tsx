@@ -1,8 +1,9 @@
-import { styled } from "@pigment-css/react";
+import { css, styled } from "@pigment-css/react";
 import Panel from "../components/ui/panel";
-import { H5Typography, H2Typography, ButtonTypography } from "../components/ui/typography";
+import { H2Typography, H4Typography, H5Typography, ButtonTypography, BodyTypography } from "../components/ui/typography";
 import Button from "../components/ui/button";
 import TypingTypography from "./typing-typography";
+import { Animation, Code, Tune } from "../components/ui/icons/icons";
 
 const CenteredSpacedDiv = styled("div")(({ theme }) => ({
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
@@ -29,61 +30,102 @@ const ExtendingButton = styled(Button)(({ theme }) => ({
     }
 }));
 
+const Spacer = () => <div style={{ height: "3rem" }} />;
+
+function HeroPanel() {
+    return (
+        <Panel color="transparent">
+            <CenteredSpacedDiv>
+                <Spacer />
+                <Spacer />
+                <H2Typography style={{
+                    textAlign: "center", textWrap: "balance"
+                }}>
+                    Animated and Embedable SVGs at Fingertips
+                </H2Typography>
+
+                <H5Typography color="secondary" style={{
+                    textAlign: "center", textWrap: "balance"
+                }}>
+                    <br />
+                    Nostalgia.Z is a web app for generating customizable, animated SVGs. <br />
+                    <TypingTypography contents={["Embed", "Copy", "Download"]} /> for effortless use anywhere.
+                    <br /><br />
+                </H5Typography>
+
+                <Spacer />
+                <ExtendingButton variant="filled" color="primary">
+                    <div style={{ width: "1.5rem" }} />
+                    <ButtonTypography>
+                        Start Customizing
+                    </ButtonTypography>
+                    <div className="former" />
+                    <ButtonTypography>{">"}</ButtonTypography>
+                    <div className="latter" />
+                </ExtendingButton>
+                <Spacer />
+                <Spacer />
+            </CenteredSpacedDiv>
+        </Panel>
+    )
+}
+
+const bullets = [
+    {
+        title: "Dynamic SVGs",
+        content: "SVGs with animated effects. Add movement and depth to your backgrounds.",
+        Icon: Animation,
+    },
+    {
+        title: "Customizable Patterns",
+        content: "Size, Color, Geometry, even Seeds. Customization never ends until until you're satisfied.",
+        Icon: Tune,
+    },
+    {
+        title: "Multiple Integration Options",
+        content: "Download, Copy, or Embed. Choose the best integration option suits your workflow.",
+        Icon: Code,
+    }
+]
+
+function BulletPanel() {
+    return (
+        <div className={css(({ theme }) => ({
+            [`@media(min-width: ${theme.breakpoints.lg})`]: {
+                gridTemplateColumns: `repeat(3, 1fr)`,
+            },
+            [`@media(max-width: ${theme.breakpoints.lg})`]: {
+                gridTemplateColumns: `repeat(1, 1fr)`,
+            },
+            display: "grid",
+            alignItems: "stretch", justifyContent: "space-between",
+            gap: theme.padding.panel
+        }))} key={"Bullets"}>
+            {
+                bullets.map(({ title, content, Icon }) => {
+                    return (
+                        <Panel style={{ flex: "1 1" }} key={title}>
+                            <div style={{ display: "inline-flex", alignItems: "center", marginBottom: ".3rem" }}>
+                                <Icon style={{ marginRight: "1rem" }} />
+                                <H4Typography>{title}</H4Typography>
+                            </div>
+                            <BodyTypography color="secondary" >
+                                {content}
+                            </BodyTypography>
+                        </Panel>
+                    )
+                })
+            }
+        </div>
+    )
+}
+
 
 export default function HomePanels() {
-    const Spacer = () => <div style={{ height: "2rem" }} />;
     return (
         [
-            <Panel key={"Head"}>
-                <CenteredSpacedDiv>
-                    <Spacer />
-                    <H2Typography style={{
-                        textAlign: "center", textWrap: "balance"
-                    }}>
-                        Animated and Embedable SVGs at Fingertips
-                    </H2Typography>
-
-                    <H5Typography color="secondary" style={{
-                        textAlign: "center", textWrap: "balance"
-                    }}>
-                        <br />
-                        Nostalgia.Z is a web app for generating customizable, animated SVGs. <br />
-                        <TypingTypography contents={["Embed", "Copy", "Download"]} /> for effortless use anywhere.
-                        <br /><br />
-                    </H5Typography>
-
-                    <Spacer />
-                    <ExtendingButton variant="filled" color="primary">
-                        <div style={{ width: "1.5rem" }} />
-                        <ButtonTypography>
-                            Start Customizing
-                        </ButtonTypography>
-                        <div className="former" />
-                        <ButtonTypography>{">"}</ButtonTypography>
-                        <div className="latter" />
-                    </ExtendingButton>
-                    <Spacer />
-
-                </CenteredSpacedDiv>
-
-                {/* <QuoteTypography color="secondary" style={{ textWrap: "balance", fontSize: "1.1rem" }}>
-                    <i>
-                        Nostalgia is a collection of <b>SVG patterns and backgrounds</b>, available via <b>HTTP endpoints</b>, designed for easy integration into projects.
-                        Use them to add unique visuals to <b>GitHub READMEs, websites, and more</b> by simply embedding the provided URLs.
-                        <span style={{ textAlign: "right", display: "block" }}>
-                            -- Nostalgia.Z
-                        </span>
-
-                        <br /><br />
-
-                        Zane, Once an architect of spaces, now a sculptor of code. <br />
-                        From moments where memory and creativity collide, logic and beauty dance. <br />
-                        <span style={{ textAlign: "right", display: "block" }}>
-                            -- Zane
-                        </span>
-                    </i>
-                </QuoteTypography> */}
-            </Panel>
+            <HeroPanel key="Hero" />,
+            <BulletPanel key="Bullet" />
         ]
     )
 }
