@@ -53,9 +53,12 @@ function SceneHelper({ children }: {
         searchParams.get("height") ?? defaultSceneSizeMetaData.height.default.toString());
 
     const isFullScreen = React.useContext(FullScreenContext);
-    const { isMenuOpen, toggleMenu } = React.useContext(MenuContext);
+    const { isMenuOpen, setMenuOpen } = React.useContext(MenuContext);
     React.useEffect(() => {
-        if (!isMenuOpen) toggleMenu();
+        const lgWidth = getComputedStyle(document.body).getPropertyValue('--breakpoints-lg');
+        const isWideScreen = window.matchMedia(`(min-width: ${lgWidth})`);
+        if (!isMenuOpen && isWideScreen.matches) setMenuOpen(true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (

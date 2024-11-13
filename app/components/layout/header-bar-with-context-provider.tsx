@@ -6,8 +6,8 @@ import HeaderBar from './header-bar';
 import { usePathname } from 'next/navigation';
 
 
-const MenuContext = React.createContext<{ isMenuOpen: boolean, toggleMenu: () => void }>(
-    { isMenuOpen: false, toggleMenu: () => { } }
+const MenuContext = React.createContext<{ isMenuOpen: boolean, setMenuOpen: (isMenuOpen: boolean) => void }>(
+    { isMenuOpen: false, setMenuOpen: () => { } }
 );
 const FullScreenContext = React.createContext<boolean>(true);
 
@@ -24,7 +24,7 @@ export default function HeaderBarWithContextProvider({ children }: { children: R
 
     return (
         <FullScreenContext.Provider value={isFullScreen}>
-            <MenuContext.Provider value={{ isMenuOpen, toggleMenu }}>
+            <MenuContext.Provider value={{ isMenuOpen, setMenuOpen }}>
                 <HeaderBar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}
                     isFullScreen={isFullScreen} toggleFullScreen={toggleFullScreen} />
                 {children}

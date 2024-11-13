@@ -1,7 +1,7 @@
 import { css, styled } from "@pigment-css/react";
 import Panel from "../components/ui/panel";
-import { H2Typography, H4Typography, H5Typography, ButtonTypography, BodyTypography } from "../components/ui/typography";
-import Button from "../components/ui/button";
+import { H2Typography, H4Typography, H5Typography, BodyTypography } from "../components/ui/typography";
+import ButtonLink from "../components/ui/button-link";
 import TypingTypography from "./typing-typography";
 import { Animation, Code, Tune } from "../components/ui/icons/icons";
 
@@ -15,7 +15,7 @@ const CenteredSpacedDiv = styled("div")(({ theme }) => ({
     display: "flex", flexDirection: "column", alignItems: "center"
 }));
 
-const ExtendingButton = styled(Button)(({ theme }) => ({
+const ExtendingLinkButton = styled(ButtonLink)(({ theme }) => ({
     ".former": {
         transition: `width ${theme.transition.short} ease-out`,
         width: ".5rem"
@@ -54,15 +54,13 @@ function HeroPanel() {
                 </H5Typography>
 
                 <Spacer />
-                <ExtendingButton variant="filled" color="primary">
+                <ExtendingLinkButton variant="filled" color="primary" href="/scenes/rainy">
                     <div style={{ width: "1.5rem" }} />
-                    <ButtonTypography>
-                        Start Customizing
-                    </ButtonTypography>
+                    {"Start Customizing"}
                     <div className="former" />
-                    <ButtonTypography>{">"}</ButtonTypography>
+                    {">"}
                     <div className="latter" />
-                </ExtendingButton>
+                </ExtendingLinkButton>
                 <Spacer />
                 <Spacer />
             </CenteredSpacedDiv>
