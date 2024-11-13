@@ -10,7 +10,7 @@ const PanelContainer = styled("div")<PanelProps>(({ theme }) => ({
     backgroundColor: ({ color = "primary" }) => {
         if (color === "transparent")
             return "transparent";
-        return `${theme.vars.colors[color].background.contrastOpaque}`;
+        return `color-mix(in srgb, ${theme.vars.colors[color].contrastText} 6%, transparent)`;
     },
     color: ({ color = "primary" }) => {
         if (color === "transparent")

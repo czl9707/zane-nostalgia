@@ -45,7 +45,7 @@ const ButtonContainer = styled("div")<ButtonProps>(({ theme }) => ({
     },
     color: ({ color = "transparent" }) => {
         if (color === "transparent") return theme.vars.colors.primary.contrastText;
-        return theme.vars.colors[color].background.solid;
+        return theme.vars.colors[color].background;
     },
     border: ({ variant }) => variant === "outline" ? ".5px solid grey" : undefined,
 

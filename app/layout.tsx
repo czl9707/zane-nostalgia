@@ -37,7 +37,7 @@ globalCss(({ theme }) => ({
     backgroundColor: "transparent",
   },
   "&::-webkit-scrollbar-thumb": {
-    backgroundColor: theme.vars.colors.secondary.background.opaque,
+    backgroundColor: `color-mix(in srgb, ${theme.vars.colors.secondary.background}, transparent)`,
     borderRadius: "5px",
   },
   "&::-webkit-scrollbar-button": {
@@ -46,7 +46,7 @@ globalCss(({ theme }) => ({
 
   "body": {
     margin: 0, padding: 0, width: "100vw", height: "100vh", overflow: "hidden",
-    backgroundColor: theme.vars.colors.primary.background.solid,
+    backgroundColor: theme.vars.colors.primary.background,
   }
 }));
 
