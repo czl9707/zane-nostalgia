@@ -135,6 +135,7 @@ function Belt({ radius, distance, speed, incline = 0.2 }: PlanetProps) {
                 )
             ).flat();
         },
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [],
     )
 
@@ -143,6 +144,7 @@ function Belt({ radius, distance, speed, incline = 0.2 }: PlanetProps) {
             beltRef.current.rotateZ(-incline)
             beltRef.current.rotateX(-incline);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     useFrame(() => {

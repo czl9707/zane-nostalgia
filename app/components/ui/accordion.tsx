@@ -64,7 +64,7 @@ const AccordionButton = React.forwardRef<HTMLDivElement, Omit<AccordionButtonPro
 
         return (
             <Button variant='filled' color="transparent" {...other} ref={ref}
-                style={{ paddingLeft: `${currentHierachy * 2 + 1}rem` }}>
+                style={{ paddingLeft: `${currentHierachy * 2 + 1}rem`, width: "100%" }}>
                 {children}
             </Button>
         )
@@ -91,7 +91,7 @@ function Accordion({ children, name }: AccordionProps) {
             <AccordionPrimitive.Item value={name}>
                 <AccordionTrigger asChild>
                     <Button variant='filled' color="transparent"
-                        style={{ paddingLeft: `${currentHierachy * 2 + 1}rem` }}>
+                        style={{ paddingLeft: `${currentHierachy * 2 + 1}rem`, width: "100%" }}>
                         {name}
                         <KeyboardArrowDown style={{ flex: "none" }} />
                     </Button>

@@ -29,7 +29,7 @@ const SliderContainer = styled(SliderPrimitive.Root)(({ theme }) => ({
     },
     "&:active": {
         [`${SliderThumb}`]: {
-            backgroundColor: theme.vars.colors.primary.background.solid,
+            backgroundColor: theme.vars.colors.primary.background,
             boxShadow: `0 0 4px ${theme.vars.colors.primary.contrastText}`,
         }
     },
@@ -40,13 +40,13 @@ const SliderThumb = styled(SliderPrimitive.Thumb)(({ theme }) => ({
     transform: "translateX(-50%) translateY(-50%)",
     transition: `background-color ${theme.transition.short} linear,
                 box-shadow ${theme.transition.short} linear`,
-    backgroundColor: theme.vars.colors.secondary.background.solid,
+    backgroundColor: theme.vars.colors.secondary.background,
     boxShadow: `0 0 1.5px ${theme.vars.colors.secondary.contrastText}`,
 }));
 
 const SliderTrack = styled(SliderPrimitive.Track)(({ theme }) => ({
     position: "relative", width: "100%", height: ".8rem",
-    backgroundColor: theme.vars.colors.primary.background.solid,
+    backgroundColor: theme.vars.colors.primary.background,
     boxShadow: `0 0 1px ${theme.vars.colors.primary.contrastText}`,
 }));
 

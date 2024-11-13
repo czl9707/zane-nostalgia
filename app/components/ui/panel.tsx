@@ -1,17 +1,31 @@
 import * as React from 'react';
 import { styled } from "@pigment-css/react";
+import { ColorVariation } from '@pigment-css/react/theme';
 
-const PanelContainer = styled("div")(({ theme }) => ({
-    backgroundColor: `${theme.vars.colors.primary.background.contrastOpaque}`,
+interface PanelProps {
+    color?: ColorVariation | 'transparent';
+}
+
+const PanelContainer = styled("div")<PanelProps>(({ theme }) => ({
+    backgroundColor: ({ color = "primary" }) => {
+        if (color === "transparent")
+            return "transparent";
+        return `color-mix(in srgb, ${theme.vars.colors[color].contrastText} 6%, transparent)`;
+    },
+    color: ({ color = "primary" }) => {
+        if (color === "transparent")
+            color = "primary";
+        return `${theme.vars.colors[color].contrastText}`;
+    },
     boxSizing: "border-box", position: "relative",
     padding: theme.padding.panel,
 }));
 
 
-const Panel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(
-    function Panel({ children, ...other }, ref) {
+const Panel = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement> & PanelProps>(
+    function Panel({ children, color, ...other }, ref) {
         return (
-            <PanelContainer {...other} ref={ref}>
+            <PanelContainer color={color} {...other} ref={ref}>
                 {children}
             </PanelContainer>
         )

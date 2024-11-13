@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 
 import Panel from '../../components/ui/panel';
 import { defaultSceneSizeMetaData } from '../../scene-components/utils/constants';
-import { FullScreenContext } from '../../components/layout/header-bar-with-context-provider';
+import { FullScreenContext, MenuContext } from '../../components/layout/header-bar-with-context-provider';
 
 const SVGContainerDiv = styled('div')(({ theme }) => ({
     position: "fixed", left: 0, top: 0, bottom: 0,
@@ -53,6 +53,13 @@ function SceneHelper({ children }: {
         searchParams.get("height") ?? defaultSceneSizeMetaData.height.default.toString());
 
     const isFullScreen = React.useContext(FullScreenContext);
+    const { isMenuOpen, setMenuOpen } = React.useContext(MenuContext);
+    React.useEffect(() => {
+        const lgWidth = getComputedStyle(document.body).getPropertyValue('--breakpoints-lg');
+        const isWideScreen = window.matchMedia(`(min-width: ${lgWidth})`);
+        if (!isMenuOpen && isWideScreen.matches) setMenuOpen(true);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <SVGContainerDiv className={isFullScreen ? "fullscreen" : undefined}>
