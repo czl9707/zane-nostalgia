@@ -5,8 +5,8 @@ import { SceneModule } from "../../../scene-components/utils/types";
 
 import { NextRequest } from "next/server";
 
-export async function GET(request: NextRequest, context: { params: { scene: string } }) {
-    const sceneModule: SceneModule = await fetchScene(context.params.scene);
+export async function GET(request: NextRequest, { params }: { params: Promise<{ scene: string }> }) {
+    const sceneModule: SceneModule = await fetchScene((await params).scene);
     const renderToString = (await import('react-dom/server')).renderToString;
 
     const searchParams = Object.fromEntries(new URL(request.url).searchParams);

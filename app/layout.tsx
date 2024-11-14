@@ -1,5 +1,5 @@
 import '@pigment-css/react/styles.css';
-import { Lato, Delius } from 'next/font/google';
+import { Space_Grotesk, Delius } from 'next/font/google';
 import { globalCss } from '@pigment-css/react';
 import React from 'react';
 
@@ -9,9 +9,9 @@ import LayoutOtherThanScene from './components/layout/layout-other-than-scene';
 import HeaderBarWithContextProvider from './components/layout/header-bar-with-context-provider';
 
 
-const lato = Lato({
-  weight: ['300', '400', '700', '900'],
-  style: ['italic', 'normal'],
+const lato = Space_Grotesk({
+  weight: ['300', '400', '500', '600', '700'],
+  style: ['normal'],
   subsets: ['latin-ext']
 });
 
