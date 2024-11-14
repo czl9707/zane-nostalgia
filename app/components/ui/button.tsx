@@ -36,10 +36,10 @@ const ButtonContainer = styled("div")<ButtonProps>(({ theme }) => ({
     paddingLeft: "1rem", paddingRight: "1rem",
     paddingTop: ".5rem", paddingBottom: ".5rem",
     boxSizing: "border-box",
-    fontFamily: ({ fontVariant = 'button' }) => theme.typographies[fontVariant].fontFamily,
-    // lineHeight: ({ fontVariant = 'button' }) => theme.typographies[fontVariant].lineHeight,
-    // fontSize: ({ fontVariant = 'button' }) => theme.typographies[fontVariant].fontSize,
-    // fontWeight: ({ fontVariant = 'button' }) => theme.typographies[fontVariant].fontWeight,
+    fontFamily: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontFamily,
+    lineHeight: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].lineHeight,
+    fontSize: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontSize,
+    fontWeight: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontWeight,
     overflow: "hidden",
     backgroundColor: ({ color = "transparent" }) => {
         if (color === "transparent") return "transparent";

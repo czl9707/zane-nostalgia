@@ -9,12 +9,14 @@ import LayoutOtherThanScene from './components/layout/layout-other-than-scene';
 import HeaderBarWithContextProvider from './components/layout/header-bar-with-context-provider';
 
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const lato = Space_Grotesk({
   weight: ['300', '400', '500', '600', '700'],
   style: ['normal'],
   subsets: ['latin-ext']
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const delius = Delius({
   weight: ["400",],
   style: ['normal'],
@@ -22,8 +24,8 @@ const delius = Delius({
 });
 
 const globalVars = {
-  "--serious-font-family": lato.style.fontFamily,
-  "--playful-font-family": delius.style.fontFamily,
+  // "--serious-font-family": lato.style.fontFamily,
+  // "--playful-font-family": delius.style.fontFamily,
   "--header-height": "4rem",
 } as React.CSSProperties;
 
