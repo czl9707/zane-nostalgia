@@ -33,11 +33,13 @@ export default function BulletPanel() {
             },
             display: "grid",
             alignItems: "stretch", justifyContent: "space-between",
-            gap: theme.padding.panel
+            gap: theme.padding.panel,
+            padding: "0 0 12rem 0"
         }))}>
             {
                 bullets.map(({ title, content, Icon }) => {
                     return (
+
                         <Panel style={{ flex: "1 1" }} key={title}>
                             <div style={{ display: "inline-flex", alignItems: "center", marginBottom: ".3rem", gap: "1rem" }}>
                                 <Icon />

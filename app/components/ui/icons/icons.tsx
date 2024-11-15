@@ -1,3 +1,4 @@
+import { css } from '@pigment-css/react';
 import * as React from 'react';
 
 
@@ -11,8 +12,9 @@ export const SvgIcon = React.forwardRef<SVGSVGElement, IconProps>(
     function SvgIcon({ size = 1, viewBoxSize = "0 -960 960 960", ...other }, ref) {
         return (
             <svg xmlns="http://www.w3.org/2000/svg"
+                className={css(({ theme }) => ({ fill: theme.vars.colors.primary.contrastText }))}
                 height={`${size * 2}rem`} width={`${size * 2}rem`}
-                viewBox={viewBoxSize} fill="#e8eaed"
+                viewBox={viewBoxSize}
                 {...other} ref={ref} />
         );
     }
@@ -156,6 +158,16 @@ export const Tune = React.forwardRef<SVGSVGElement, IconProps>(
         return (
             <SvgIcon {...props} ref={ref}>
                 <path d="M450-130v-220h60v80h320v60H510v80h-60Zm-320-80v-60h220v60H130Zm160-160v-80H130v-60h160v-80h60v220h-60Zm160-80v-60h380v60H450Zm160-160v-220h60v80h160v60H670v80h-60Zm-480-80v-60h380v60H130Z" />
+            </SvgIcon>
+        );
+    }
+)
+
+export const Download = React.forwardRef<SVGSVGElement, IconProps>(
+    function Download(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M480-328.46 309.23-499.23l42.16-43.38L450-444v-336h60v336l98.61-98.61 42.16 43.38L480-328.46ZM252.31-180Q222-180 201-201q-21-21-21-51.31v-108.46h60v108.46q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85h455.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46v-108.46h60v108.46Q780-222 759-201q-21 21-51.31 21H252.31Z" />
             </SvgIcon>
         );
     }

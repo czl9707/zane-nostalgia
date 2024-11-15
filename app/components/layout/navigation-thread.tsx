@@ -8,32 +8,29 @@ import { usePathname } from 'next/navigation';
 
 
 const NavigationThreadContainer = styled("div")(({ theme }) => ({
-    height: "100%",
+    position: "fixed", top: 0,
+    height: "100%", boxSizing: "border-box", overflowY: "scroll",
     padding: `var(--header-height) ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
-    boxSizing: "border-box", overflowY: "scroll", flexShrink: "0",
 
     display: "flex", flexDirection: "column", flexWrap: "nowrap",
     transition: `all ${theme.transition.short} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
         width: theme.breakpoints.sm,
-        marginLeft: `-${theme.breakpoints.sm}`,
-        marginRight: `calc(100% - ${theme.breakpoints.md})`,
+        left: `-${theme.breakpoints.sm}`,
+        // marginRight: `calc(100% - ${theme.breakpoints.md})`,
         "&.menu-open": {
-            marginLeft: 0,
-            marginRight: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), 0px)`,
-        },
-        "&.is-home": {
-            marginRight: 0,
+            left: 0,
+            // marginRight: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), 0px)`,
         },
     },
 
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
-        marginLeft: `max(-100%, -${theme.breakpoints.sm})`,
+        left: `max(-100%, -${theme.breakpoints.sm})`,
         width: `min(100%, ${theme.breakpoints.sm})`,
         "&.menu-open": {
-            marginRight: `max(0px, calc(100% - ${theme.breakpoints.sm}))`,
-            marginLeft: 0,
+            // marginRight: `max(0px, calc(100% - ${theme.breakpoints.sm}))`,
+            left: 0,
         }
     },
 }));

@@ -7,85 +7,109 @@ import Link from "next/link";
 
 const Spacer = () => <div style={{ height: "3rem" }} />;
 
-const ShowCaseViewBox = styled('div')(({ theme }) => ({
-    transition: `all ${theme.transition.long} linear`,
-    position: "relative",
+const ShowcaseContainer = styled('div')(({ theme }) => ({
+    width: "100%", height: "25vw", alignItems: "stretch",
+    display: "flex", flexDirection: "row", gap: ".5rem",
+}))
 
+const ShowCaseViewBox = styled('div')(({ theme }) => ({
+    transition: `flex ${theme.transition.long} ease-out`,
+    position: "relative",
+    flex: "1 1",
     [`${ShowCaseMask}`]: {
         opacity: 0,
+        transition: `opacity ${theme.transition.short} ease-out`,
     },
     "&:hover": {
-        boxShadow: `0 0 5px color-mix(in srgb, ${theme.vars.colors.secondary.contrastText} 30%, transparent)`,
         [`${ShowCaseMask}`]: {
             opacity: .8,
+            transition: `opacity ${theme.transition.long} ease-out ${theme.transition.short}`,
         },
+        flex: "5 5",
     }
 }))
 
 const ShowCaseMask = styled('div')(({ theme }) => ({
     position: "absolute", inset: 0,
-    backgroundImage: `linear-gradient(0deg, ${theme.vars.colors.secondary.contrastText} -200%, transparent 50%)`,
-    transition: `all ${theme.transition.long} linear`,
+    backgroundImage: `linear-gradient(0deg, grey -200%, transparent 50%)`,
     display: "flex", gap: "1rem",
     justifyContent: "center", alignItems: "flex-end",
-    paddingBottom: "1rem"
+    paddingBottom: "1rem",
 }))
 
 
-async function ShowCaseBox({ size, scene }: {
-    size: "sm" | "lg",
+async function ShowCase({ scene, ...other }: {
     scene: string,
+    [key: string]: string
 }) {
     const sceneModule: SceneModule = await import(`../scene-components/${scene}`);
-    const sceneParams = defaultParameterResolver({}, sceneModule.meta);
+    const sceneParams = defaultParameterResolver(other, sceneModule.meta);
 
     return (
-        <Link href={`/scenes/${scene}`}>
-            <ShowCaseViewBox>
-                <svg viewBox={`0 0 800 ${size === "sm" ? 600 : 1000}`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-                    <sceneModule.SceneComponent width={800} height={size === "sm" ? 600 : 1000} {...sceneParams} />
-                </svg>
+        <ShowCaseViewBox>
+            <svg viewBox={`0 0 600 1200`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+                <sceneModule.SceneComponent width={600} height={1200} {...sceneParams} />
+            </svg>
+            <Link href={`/scenes/${scene}`}>
                 <ShowCaseMask>
                     <sceneModule.SceneIcon />
                     <H5Typography color="primary">{sceneModule.name}</H5Typography>
                 </ShowCaseMask>
-            </ShowCaseViewBox >
-        </Link>
+            </Link>
+        </ShowCaseViewBox >
     )
 }
 
-const ShowcaseContainer = styled('div')(({ theme }) => ({
-    width: "100%", display: "flex", flexDirection: "column", gap: theme.padding.panel
-}))
 
 export default function ShowCasePanel() {
     return (
-        <div>
-            <Spacer />
-            <Spacer />
-            <H3Typography style={{ textWrap: "balance" }} color="primary">
-                Growing Number of SVG Generators
-                <br /><br />
-            </H3Typography>
-            <div className={css(({ theme }) => ({
-                gridTemplateColumns: `repeat(3, 1fr)`,
-                display: "grid", width: "100%",
-                alignItems: "stretch", justifyContent: "space-between",
-                gap: theme.padding.panel
-            }))}>
+        <>
+            <div style={{
+                position: "relative", padding: "0 0 12rem 0"
+            }}>
+                <div className={css(({ theme }) => ({
+                    position: "absolute", left: "-100vw", right: `calc(-1 * ${theme.padding.thread})`,
+                    top: 0, bottom: 0, zIndex: "-1",
+                    backgroundImage: `linear-gradient(0deg,
+                        transparent 0%, 
+                        ${theme.vars.colors.primary.background} 15%,
+                        ${theme.vars.colors.primary.background} 85%,
+                        transparent 100%
+                    )`,
+                }))} />
+                <Spacer />
+                <Spacer />
+                <H3Typography style={{ textWrap: "balance" }} color="primary">
+                    Increasing Number of SVG Generators
+                    <br /><br />
+                </H3Typography>
                 <ShowcaseContainer>
-                    <ShowCaseBox size="lg" scene="meteors" />
-                    <ShowCaseBox size="sm" scene="rainy" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
+                    <ShowCase scene="rainy" backgroundColor="#080808" />
+                    <ShowCase scene="waves" backgroundColor="#080808" />
+                    <ShowCase scene="404" backgroundColor="#080808" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
+                    <ShowCase scene="rainy" backgroundColor="#080808" />
+                    <ShowCase scene="waves" backgroundColor="#080808" />
                 </ShowcaseContainer>
+                <Spacer />
+                <Spacer />
+                <H3Typography style={{ textWrap: "balance" }} color="primary">
+                    Its All About Customization
+                    <br /><br />
+                </H3Typography>
                 <ShowcaseContainer>
-                    <ShowCaseBox size="sm" scene="rainy" />
-                    <ShowCaseBox size="lg" scene="meteors" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
+                    <ShowCase scene="meteors" backgroundColor="#080808" />
                 </ShowcaseContainer>
-                <ShowcaseContainer>
-                    <ShowCaseBox size="lg" scene="meteors" />
-                    <ShowCaseBox size="sm" scene="rainy" />
-                </ShowcaseContainer>
-            </div>
-        </div>
+                <Spacer />
+                <Spacer />
+            </div >
+        </>
     )
 }

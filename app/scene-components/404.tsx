@@ -91,7 +91,7 @@ function FourOFour({
                     fill: ${color};
                     stroke-width: 1px;
                     font: bold 1em;
-                    font-family: var(--serious-font-family), Arial;
+                    font-family: 'Space Grotesk', Arial;
                     animation-name: blink;
                     animation-direction: alternate;
                     animation-iteration-count: infinite;

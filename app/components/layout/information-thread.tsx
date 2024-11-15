@@ -8,34 +8,36 @@ import { MenuContext } from './header-bar-with-context-provider';
 
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
-    height: "100%",
+    boxSizing: "content-box", height: "100%",
     padding: `var(--header-height) ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
-    boxSizing: "border-box", flexShrink: "0",
     gap: theme.padding.thread,
 
-    display: "flex", flexDirection: "column",
-    flexWrap: "nowrap", overflowY: "scroll",
+    display: "inline-flex", flexDirection: "column",
+    flexWrap: "nowrap", overflowY: "visible", overflowX: "visible",
     transition: `all ${theme.transition.short} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        paddingLeft: 0,
-        width: `min(${theme.breakpoints.md}, calc(100% - ${theme.breakpoints.sm}))`,
+        paddingLeft: `calc(100% - ${theme.breakpoints.md} + ${theme.padding.thread})`,
+        width: `calc(${theme.breakpoints.md} - 2 * ${theme.padding.thread})`,
         "&.is-home": {
-            width: "100%",
+            width: `calc(100% - 2 * ${theme.padding.thread})`,
             paddingLeft: theme.padding.thread,
             "&.menu-open": {
-                width: `calc(100% - ${theme.breakpoints.sm})`,
-                paddingLeft: 0,
+                width: `calc(100% - ${theme.padding.thread} - ${theme.breakpoints.sm})`,
+                paddingLeft: theme.breakpoints.sm,
             }
         },
     },
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
-        width: `100%`,
+        width: `calc(100% - 2 * ${theme.padding.thread})`,
+        "&.menu-open": {
+            paddingLeft: `100%`,
+        },
     },
 }));
 
 
-function InformationThread({ children }: { children: React.ReactNode }) {
+export default function InformationThread({ children }: { children: React.ReactNode }) {
     const currentPath = usePathname();
     const { isMenuOpen } = React.useContext(MenuContext);
 
@@ -50,4 +52,3 @@ function InformationThread({ children }: { children: React.ReactNode }) {
 }
 
 
-export default InformationThread;

@@ -33,10 +33,10 @@ const globalVars = {
 globalCss(({ theme }) => ({
   // scroll bar
   "&::-webkit-scrollbar": {
-    width: "6px", padding: "0 3px",
+    width: "6px",
   },
   "&::-webkit-scrollbar-track": {
-    backgroundColor: "transparent",
+    backgroundColor: theme.vars.colors.primary.background,
   },
   "&::-webkit-scrollbar-thumb": {
     backgroundColor: `color-mix(in srgb, ${theme.vars.colors.secondary.background}, transparent)`,
