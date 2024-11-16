@@ -24,8 +24,6 @@ const delius = Delius({
 });
 
 const globalVars = {
-  // "--serious-font-family": lato.style.fontFamily,
-  // "--playful-font-family": delius.style.fontFamily,
   "--header-height": "4rem",
 } as React.CSSProperties;
 

@@ -10,7 +10,7 @@ import { usePathname } from 'next/navigation';
 const NavigationThreadContainer = styled("div")(({ theme }) => ({
     position: "fixed", top: 0,
     height: "100%", boxSizing: "border-box", overflowY: "scroll",
-    padding: `var(--header-height) ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
+    padding: `${theme.size.header.height} 0 ${theme.padding.thread} ${theme.padding.thread}`,
 
     display: "flex", flexDirection: "column", flexWrap: "nowrap",
     transition: `all ${theme.transition.short} linear`,
@@ -18,10 +18,8 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
         width: theme.breakpoints.sm,
         left: `-${theme.breakpoints.sm}`,
-        // marginRight: `calc(100% - ${theme.breakpoints.md})`,
         "&.menu-open": {
             left: 0,
-            // marginRight: `max(calc(100% - ${theme.breakpoints.sm} - ${theme.breakpoints.md}), 0px)`,
         },
     },
 
@@ -29,10 +27,11 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
         left: `max(-100%, -${theme.breakpoints.sm})`,
         width: `min(100%, ${theme.breakpoints.sm})`,
         "&.menu-open": {
-            // marginRight: `max(0px, calc(100% - ${theme.breakpoints.sm}))`,
             left: 0,
         }
     },
+
+    "&::-webkit-scrollbar": { display: "none" },
 }));
 
 

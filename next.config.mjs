@@ -41,9 +41,9 @@ export default withPigment(
                 }
             },
             breakpoints: {
-                sm: "450px", // width of navigation thread
-                md: "600px", // width of information thread
-                lg: "1050px",
+                sm: "400px", // width of navigation thread
+                md: "700px", // width of information thread
+                lg: "1100px",
             },
             typographies: {
                 body: { fontFamily: "'Space Grotesk', 'Space Grotesk Fallback'", fontWeight: 300, fontSize: "1rem", lineHeight: 1.4, },
@@ -63,6 +63,11 @@ export default withPigment(
             padding: {
                 thread: "min(4rem, 8%)",
                 panel: "1.5rem",
+            },
+            size: {
+                header: {
+                    height: "4rem",
+                },
             }
         })
     }

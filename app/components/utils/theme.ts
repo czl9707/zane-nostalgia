@@ -41,6 +41,11 @@ declare module '@pigment-css/react/theme' {
             thread: string,
             panel: string,
         },
+        size: {
+            header: {
+                height: string,
+            }
+        }
     }
 
     type ColorVariation = keyof ThemeToken["colors"];

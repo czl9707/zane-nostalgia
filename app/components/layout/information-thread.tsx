@@ -8,8 +8,8 @@ import { MenuContext } from './header-bar-with-context-provider';
 
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
-    boxSizing: "content-box", height: "100%",
-    padding: `var(--header-height) ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
+    boxSizing: "border-box", height: "100%",
+    padding: `${theme.size.header.height} ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
     gap: theme.padding.thread,
 
     display: "inline-flex", flexDirection: "column",
@@ -17,20 +17,21 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
     transition: `all ${theme.transition.short} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        paddingLeft: `calc(100% - ${theme.breakpoints.md} + ${theme.padding.thread})`,
-        width: `calc(${theme.breakpoints.md} - 2 * ${theme.padding.thread})`,
+        width: `100%`,
+        paddingLeft: `calc(100% - ${theme.breakpoints.md})`,
         "&.is-home": {
-            width: `calc(100% - 2 * ${theme.padding.thread})`,
+            width: `100%`,
             paddingLeft: theme.padding.thread,
             "&.menu-open": {
-                width: `calc(100% - ${theme.padding.thread} - ${theme.breakpoints.sm})`,
-                paddingLeft: theme.breakpoints.sm,
+                width: `100%`,
+                paddingLeft: `calc(${theme.padding.thread} + ${theme.breakpoints.sm})`,
             }
         },
     },
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
-        width: `calc(100% - 2 * ${theme.padding.thread})`,
+        width: `100%`,
         "&.menu-open": {
+            width: `200%`,
             paddingLeft: `100%`,
         },
     },
