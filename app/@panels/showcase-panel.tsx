@@ -5,12 +5,10 @@ import { H3Typography, H5Typography } from "../components/ui/typography";
 import Link from "next/link";
 
 
-const Spacer = () => <div style={{ height: "3rem" }} />;
-
-const ShowcaseContainer = styled('div')(({ theme }) => ({
+const ShowcaseContainer = styled('div')({
     width: "100%", height: "25vw", alignItems: "stretch",
     display: "flex", flexDirection: "row", gap: ".5rem",
-}))
+});
 
 const ShowCaseViewBox = styled('div')(({ theme }) => ({
     transition: `flex ${theme.transition.long} ease-out`,
@@ -29,13 +27,13 @@ const ShowCaseViewBox = styled('div')(({ theme }) => ({
     }
 }))
 
-const ShowCaseMask = styled('div')(({ theme }) => ({
+const ShowCaseMask = styled('div')({
     position: "absolute", inset: 0,
     backgroundImage: `linear-gradient(0deg, grey -200%, transparent 50%)`,
     display: "flex", gap: "1rem",
     justifyContent: "center", alignItems: "flex-end",
     paddingBottom: "1rem",
-}))
+});
 
 
 async function ShowCase({ scene, ...other }: {
@@ -63,53 +61,49 @@ async function ShowCase({ scene, ...other }: {
 
 export default function ShowCasePanel() {
     return (
-        <>
-            <div style={{
-                position: "relative", padding: "0 0 12rem 0"
-            }}>
-                <div className={css(({ theme }) => ({
-                    position: "absolute", left: "-100vw", right: `calc(-1 * ${theme.padding.thread})`,
-                    top: 0, bottom: 0, zIndex: "-1",
-                    backgroundImage: `linear-gradient(0deg,
+        <div style={{
+            position: "relative", padding: "12rem 0"
+        }}>
+            <div className={css(({ theme }) => ({
+                position: "absolute", left: "-100vw", right: `calc(-1 * ${theme.padding.thread})`,
+                top: "-12rem", bottom: "-12rem", zIndex: "-1",
+                backgroundImage: `linear-gradient(0deg,
                         transparent 0%, 
                         ${theme.vars.colors.primary.background} 15%,
                         ${theme.vars.colors.primary.background} 85%,
                         transparent 100%
                     )`,
-                }))} />
-                <Spacer />
-                <Spacer />
-                <H3Typography style={{ textWrap: "balance" }} color="primary">
-                    Increasing Number of SVG Generators
-                    <br /><br />
-                </H3Typography>
-                <ShowcaseContainer>
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                    <ShowCase scene="rainy" backgroundColor="#080808" />
-                    <ShowCase scene="waves" backgroundColor="#080808" />
-                    <ShowCase scene="404" backgroundColor="#080808" />
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                    <ShowCase scene="rainy" backgroundColor="#080808" />
-                    <ShowCase scene="waves" backgroundColor="#080808" />
-                </ShowcaseContainer>
-                <Spacer />
-                <Spacer />
-                <H3Typography style={{ textWrap: "balance" }} color="primary">
-                    Its All About Customization
-                    <br /><br />
-                </H3Typography>
-                <ShowcaseContainer>
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                    <ShowCase scene="meteors" backgroundColor="#080808" />
-                </ShowcaseContainer>
-                <Spacer />
-                <Spacer />
-            </div >
-        </>
+            }))} />
+
+            <H3Typography style={{ textWrap: "balance" }} color="primary">
+                Increasing Number of SVG Generators
+                <br /><br />
+            </H3Typography>
+            <ShowcaseContainer>
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="rainy" backgroundColor="#080808" />
+                <ShowCase scene="waves" backgroundColor="#080808" />
+                <ShowCase scene="404" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="rainy" backgroundColor="#080808" />
+                <ShowCase scene="waves" backgroundColor="#080808" />
+            </ShowcaseContainer>
+
+            <div style={{ height: "6rem" }} />
+
+            <H3Typography style={{ textWrap: "balance" }} color="primary">
+                Its All About Customization
+                <br /><br />
+            </H3Typography>
+            <ShowcaseContainer>
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#080808" />
+            </ShowcaseContainer>
+        </div >
     )
 }

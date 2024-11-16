@@ -7,11 +7,7 @@ export default function FooterPanel() {
             style={{
                 display: "flex", flexDirection: "column", alignItems: "center"
             }}>
-            <div style={{ height: "12rem" }} />
-
             <StartCustomizingButton href={"/scenes/rainy"} content={"Let's Start Customizing"} />
-
-            <div style={{ height: "12rem" }} />
         </Panel>
     )
 }

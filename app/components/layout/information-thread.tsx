@@ -8,9 +8,9 @@ import { MenuContext } from './header-bar-with-context-provider';
 
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
-    boxSizing: "border-box", height: "100%",
+    boxSizing: "border-box",
     padding: `${theme.size.header.height} ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
-    gap: theme.padding.thread,
+    gap: theme.size.header.height,
 
     display: "inline-flex", flexDirection: "column",
     flexWrap: "nowrap", overflowY: "visible", overflowX: "visible",

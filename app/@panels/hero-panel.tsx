@@ -18,8 +18,6 @@ export default function HeroPanel() {
     return (
         <Panel color="transparent">
             <CenteredSpacedDiv>
-                <div style={{ height: "6rem" }} />
-
                 <H2Typography style={{
                     textAlign: "center", textWrap: "balance"
                 }}>
@@ -37,8 +35,6 @@ export default function HeroPanel() {
                 <div style={{ height: "6rem" }} />
 
                 <StartCustomizingButton href={"/scenes/rainy"} content={"Start Customizing"} />
-
-                <div style={{ height: "12rem" }} />
             </CenteredSpacedDiv>
         </Panel>
     )

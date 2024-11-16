@@ -32,6 +32,10 @@ declare module '@pigment-css/react/theme' {
             button: TypographyToken,
             body: TypographyToken,
             quote: TypographyToken,
+        },
+        fonts: {
+            serious: string,
+            playful: string,
         }
         transition: {
             short: string,

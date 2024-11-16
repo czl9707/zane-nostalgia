@@ -1,3 +1,7 @@
-export default function ScenePanels() {
-    return null;
+"use client"
+
+import * as React from 'react'
+
+export default function GalaxyPanels() {
+    return <div />;
 }

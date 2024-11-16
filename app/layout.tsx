@@ -1,6 +1,6 @@
 import '@pigment-css/react/styles.css';
 import { Space_Grotesk, Delius } from 'next/font/google';
-import { globalCss } from '@pigment-css/react';
+import { CSSObjectNoCallback, globalCss } from '@pigment-css/react';
 import React from 'react';
 
 import ThemeCorrector from "./components/utils/theme-corrector";
@@ -10,23 +10,18 @@ import HeaderBarWithContextProvider from './components/layout/header-bar-with-co
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const lato = Space_Grotesk({
+const space_grotesk = Space_Grotesk({
   weight: ['300', '400', '500', '600', '700'],
   style: ['normal'],
-  subsets: ['latin-ext']
+  subsets: ['latin-ext'],
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const delius = Delius({
   weight: ["400",],
   style: ['normal'],
-  subsets: ['latin']
+  subsets: ['latin'],
 });
-
-const globalVars = {
-  "--header-height": "4rem",
-} as React.CSSProperties;
-
 
 globalCss(({ theme }) => ({
   // scroll bar
@@ -47,8 +42,11 @@ globalCss(({ theme }) => ({
   "body": {
     margin: 0, padding: 0, width: "100vw", height: "100vh", overflow: "hidden",
     backgroundColor: theme.vars.colors.primary.background,
-  }
-}));
+  },
+} as CSSObjectNoCallback));
+
+
+
 
 export default function RootLayout({
   children, panels
@@ -65,7 +63,19 @@ export default function RootLayout({
         <meta property="og:title" content="Zane's Nostalgia" />
         <meta property="og:description" content="Nostalgia, a curated collection of SVG patterns and backgrounds accessible via HTTP endpoints. Easily embed aesthetic visuals into GitHub READMEs, websites, and other projects. Perfect for developers looking to add unique, nostalgic effects with seamless integration." />
       </head>
-      <body style={globalVars}>
+      <body>
+        <style>
+          {/* a very nasty workaround here, single quote cannot hydrate successfully.
+             Have to remove from fontFamily to get this working */}
+          {
+            `
+            :root {
+                --fonts-serious:${space_grotesk.style.fontFamily.split("'").join("")};
+                --fonts-playful:${delius.style.fontFamily.split("'").join("")};
+            }
+            `
+          }
+        </style>
         <ThemeCorrector />
         <HeaderBarWithContextProvider>
           {children}
