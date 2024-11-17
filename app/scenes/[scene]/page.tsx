@@ -10,8 +10,8 @@ export async function generateStaticParams(): Promise<{ scene: string }[]> {
 }
 
 
-export default async function Page({ params, searchParams }: { params: { scene: string }, searchParams: { [key: string]: string } }) {
-    const sceneModule: SceneModule = await fetchScene(params.scene);
+export default async function Page({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: { [key: string]: string } }) {
+    const sceneModule: SceneModule = await fetchScene((await params).scene);
     const SceneComponent = sceneModule.SceneComponent;
 
     const resolvedParam = defaultParameterResolver(searchParams, sceneModule.meta);

@@ -32,7 +32,7 @@ declare module '@pigment-css/react/theme' {
             button: TypographyToken,
             body: TypographyToken,
             quote: TypographyToken,
-        }
+        },
         transition: {
             short: string,
             long: string,
@@ -41,6 +41,11 @@ declare module '@pigment-css/react/theme' {
             thread: string,
             panel: string,
         },
+        size: {
+            header: {
+                height: string,
+            }
+        }
     }
 
     type ColorVariation = keyof ThemeToken["colors"];

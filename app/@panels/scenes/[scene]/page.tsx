@@ -26,10 +26,10 @@ const PanelWrapper = styled(Panel)(({ theme }) => ({
     gap: `${theme.padding.panel}`,
 }));
 
-export default async function Panels({ params, searchParams }: { params: { scene: string }, searchParams: { [key: string]: string } }) {
+export default async function Panels({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: { [key: string]: string } }) {
     const renderToString = (await import('react-dom/server')).renderToString;
 
-    const sceneModule: SceneModule = await fetchScene(params.scene);
+    const sceneModule: SceneModule = await fetchScene((await params).scene);
     const meta: SceneMetaData = sceneModule.meta;
 
     let resolvedSize = defaultSizeParameterResolver(searchParams);
@@ -80,7 +80,7 @@ export default async function Panels({ params, searchParams }: { params: { scene
                 <Divider />
 
                 <CopyPanel label={"To use in Markdown:"}>
-                    {`<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/${params.scene}/api?${new URLSearchParams({ ...resolvedSize, ...resolved } as Record<string, string>).toString()}" />`}
+                    {`<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/${(await params).scene}/api?${new URLSearchParams({ ...resolvedSize, ...resolved } as Record<string, string>).toString()}" />`}
                 </CopyPanel>
 
                 <Divider />

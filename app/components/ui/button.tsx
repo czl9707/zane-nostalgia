@@ -1,11 +1,12 @@
 import { keyframes, styled } from "@pigment-css/react";
-import { ColorVariation } from "@pigment-css/react/theme";
+import { ColorVariation, TypographyVairation } from "@pigment-css/react/theme";
 import * as React from "react";
 
 interface ButtonProps {
-    variant: "outline" | "filled"
-    color?: ColorVariation | 'transparent'
-}
+    variant: "outline" | "filled",
+    color?: ColorVariation | 'transparent',
+    fontVariant?: TypographyVairation,
+};
 
 const ripple = keyframes({
     "from": {
@@ -35,9 +36,10 @@ const ButtonContainer = styled("div")<ButtonProps>(({ theme }) => ({
     paddingLeft: "1rem", paddingRight: "1rem",
     paddingTop: ".5rem", paddingBottom: ".5rem",
     boxSizing: "border-box",
-    fontFamily: theme.typographies.button.fontFamily,
-    lineHeight: theme.typographies.button.lineHeight,
-    fontSize: theme.typographies.button.fontSize,
+    fontFamily: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontFamily,
+    lineHeight: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].lineHeight,
+    fontSize: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontSize,
+    fontWeight: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontWeight,
     overflow: "hidden",
     backgroundColor: ({ color = "transparent" }) => {
         if (color === "transparent") return "transparent";

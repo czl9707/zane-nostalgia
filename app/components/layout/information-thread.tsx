@@ -8,34 +8,37 @@ import { MenuContext } from './header-bar-with-context-provider';
 
 
 const InformationThreadContainer = styled("div")(({ theme }) => ({
-    height: "100%",
-    padding: `var(--header-height) ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
-    boxSizing: "border-box", flexShrink: "0",
-    gap: theme.padding.thread,
+    boxSizing: "border-box",
+    padding: `${theme.size.header.height} ${theme.padding.thread} ${theme.padding.thread} ${theme.padding.thread}`,
+    gap: theme.size.header.height,
 
-    display: "flex", flexDirection: "column",
-    flexWrap: "nowrap", overflowY: "scroll",
+    display: "inline-flex", flexDirection: "column",
+    flexWrap: "nowrap", overflowY: "visible", overflowX: "visible",
     transition: `all ${theme.transition.short} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        paddingLeft: 0,
-        width: `min(${theme.breakpoints.md}, calc(100% - ${theme.breakpoints.sm}))`,
+        width: `100%`,
+        paddingLeft: `calc(100% - ${theme.breakpoints.md})`,
         "&.is-home": {
-            width: "100%",
+            width: `100%`,
             paddingLeft: theme.padding.thread,
             "&.menu-open": {
-                width: `calc(100% - ${theme.breakpoints.sm})`,
-                paddingLeft: 0,
+                width: `100%`,
+                paddingLeft: `calc(${theme.padding.thread} + ${theme.breakpoints.sm})`,
             }
         },
     },
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
         width: `100%`,
+        "&.menu-open": {
+            width: `200%`,
+            paddingLeft: `100%`,
+        },
     },
 }));
 
 
-function InformationThread({ children }: { children: React.ReactNode }) {
+export default function InformationThread({ children }: { children: React.ReactNode }) {
     const currentPath = usePathname();
     const { isMenuOpen } = React.useContext(MenuContext);
 
@@ -50,4 +53,3 @@ function InformationThread({ children }: { children: React.ReactNode }) {
 }
 
 
-export default InformationThread;

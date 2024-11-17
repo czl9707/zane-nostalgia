@@ -1,5 +1,6 @@
 import { Error as ErrorIcon } from "../components/ui/icons/icons";
-import { randomFitToInt } from "./utils/math-utils";
+import { space_grotesk } from "../layout";
+import { randomFitToInt, simpleHash } from "./utils/utils";
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneModule, SceneSizeMetaData } from "./utils/types";
 import seedrandom from 'seedrandom';
 
@@ -54,9 +55,11 @@ function FourOFour({
     density,
     height,
     width,
+    content = "404",
 }: SceneComponentProps<FourOFourMeta & SceneSizeMetaData>) {
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom("FourOFour");
+    const contentHash = simpleHash(content as string);
 
     const visitedDurClass = new Set();
     const visitedSizeClass = new Set();
@@ -71,14 +74,15 @@ function FourOFour({
         visitedInitClass.add(BLINK_INIT_CLASS(init));
 
         return (
-            <text key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
-                className={[`blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")}>
-                404
-            </text>
+            <use href={`#content-${contentHash}`} key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
+                className={["blink", `blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")}>
+                {content}
+            </use >
         )
     });
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
         <style>
             {
                 `
@@ -87,16 +91,11 @@ function FourOFour({
                     30% {opacity:0;}
                     100% {opacity:1;}
                 }
-                text {
-                    fill: ${color};
-                    stroke-width: 1px;
-                    font: bold 1em;
-                    font-family: var(--serious-font-family), Arial;
+                .blink {
                     animation-name: blink;
                     animation-direction: alternate;
                     animation-iteration-count: infinite;
-                }
-                `
+                }`
                 +
                 BLINK_DUR_VARIANTS
                     .filter((_, i) => visitedDurClass.has(BLINK_DUR_CLASS(i)))
@@ -118,6 +117,14 @@ function FourOFour({
             }
         </style>
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
+        <defs>
+            <text id={`content-${contentHash}`} style={{
+                fill: color,
+                fontFamily: `${space_grotesk.style.fontFamily},'Space Grotesk'`,
+            }}>
+                {content}
+            </text>
+        </defs>
         {textEls}
     </svg>)
 }

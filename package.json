@@ -4,28 +4,28 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "@pigment-css/react": "^0.0.24",
+    "@pigment-css/react": "^0.0.27",
     "@radix-ui/react-accordion": "^1.2.1",
     "@radix-ui/react-slider": "^1.2.1",
     "@radix-ui/react-switch": "^1.1.1",
     "@radix-ui/react-toggle-group": "^1.1.0",
-    "@react-three/drei": "^9.111.5",
-    "@react-three/fiber": "^8.17.6",
-    "@react-three/postprocessing": "^2.16.2",
+    "@react-three/drei": "^9.116.0",
+    "@react-three/fiber": "^8.17.10",
+    "@react-three/postprocessing": "^2.16.3",
     "next": "^14",
     "react": "^18",
     "react-dom": "^18",
     "seedrandom": "^3.0.5",
-    "three": "^0.168.0"
+    "three": "^0.170.0"
   },
   "devDependencies": {
-    "@pigment-css/nextjs-plugin": "^0.0.24",
-    "@types/node": "^20",
+    "@pigment-css/nextjs-plugin": "^0.0.27",
+    "@types/node": "^22",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/seedrandom": "^3.0.8",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.11",
+    "eslint": "^9",
+    "eslint-config-next": "15.0.3",
     "typescript": "^5"
   },
   "scripts": {

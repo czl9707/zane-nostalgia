@@ -8,7 +8,7 @@ import NavigationThreadContent from "./navigation-thread-content";
 
 const Container = styled("div")({
     position: "fixed", inset: 0, lineHeight: 0,
-    display: "inline-flex", overflowX: 'hidden', flexWrap: "nowrap"
+    overflowX: 'hidden', overflowY: "scroll",
 })
 
 export default function LayoutOtherThanScene({ children }: { children: React.ReactNode }) {

@@ -63,7 +63,7 @@ const AccordionButton = React.forwardRef<HTMLDivElement, Omit<AccordionButtonPro
         const currentHierachy = React.useContext(AccordionHierachyContext);
 
         return (
-            <Button variant='filled' color="transparent" {...other} ref={ref}
+            <Button variant='filled' color="transparent" fontVariant='body' {...other} ref={ref}
                 style={{ paddingLeft: `${currentHierachy * 2 + 1}rem`, width: "100%" }}>
                 {children}
             </Button>
@@ -90,7 +90,7 @@ function Accordion({ children, name }: AccordionProps) {
         <AccordionHierachyContext.Provider value={currentHierachy + 1}>
             <AccordionPrimitive.Item value={name}>
                 <AccordionTrigger asChild>
-                    <Button variant='filled' color="transparent"
+                    <Button variant='filled' color="transparent" fontVariant='body'
                         style={{ paddingLeft: `${currentHierachy * 2 + 1}rem`, width: "100%" }}>
                         {name}
                         <KeyboardArrowDown style={{ flex: "none" }} />

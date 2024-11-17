@@ -41,20 +41,20 @@ export default withPigment(
                 }
             },
             breakpoints: {
-                sm: "450px", // width of navigation thread
-                md: "600px", // width of information thread
-                lg: "1050px",
+                sm: "400px", // width of navigation thread
+                md: "700px", // width of information thread
+                lg: "1100px",
             },
             typographies: {
-                body: { fontFamily: "var(--serious-font-family)", fontWeight: 300, fontSize: "1.125rem", lineHeight: 1.4, },
-                quote: { fontFamily: "var(--playful-font-family)", fontWeight: 300, fontSize: "0.875rem", lineHeight: 1.4, },
-                button: { fontFamily: "var(--serious-font-family)", fontWeight: 700, fontSize: "1rem", lineHeight: 1.4, },
-                h1: { fontFamily: "var(--serious-font-family)", fontWeight: 700, fontSize: '4rem', lineHeight: 1.2, },
-                h2: { fontFamily: "var(--serious-font-family)", fontWeight: 400, fontSize: '3.75rem', lineHeight: 1.2, },
-                h3: { fontFamily: "var(--serious-font-family)", fontWeight: 400, fontSize: '2.25rem', lineHeight: 1.4, },
-                h4: { fontFamily: "var(--serious-font-family)", fontWeight: 400, fontSize: '1.5rem', lineHeight: 1.4, },
-                h5: { fontFamily: "var(--serious-font-family)", fontWeight: 300, fontSize: '1.25rem', lineHeight: 1.4, },
-                h6: { fontFamily: "var(--serious-font-family)", fontWeight: 300, fontSize: '1.25rem', lineHeight: 1.25, },
+                body: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: "1rem", lineHeight: 1.4, },
+                button: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: "1rem", lineHeight: 1.4, },
+                quote: { fontFamily: "var(--fonts-playful)", fontWeight: 300, fontSize: "0.875rem", lineHeight: 1.4, },
+                h1: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: '4rem', lineHeight: 1.2, },
+                h2: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '3.75rem', lineHeight: 1.2, },
+                h3: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: '2.25rem', lineHeight: 1.4, },
+                h4: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '1.5rem', lineHeight: 1.4, },
+                h5: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: '1.25rem', lineHeight: 1.4, },
+                h6: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '1.25rem', lineHeight: 1.25, },
             },
             transition: {
                 short: ".3s",
@@ -63,6 +63,11 @@ export default withPigment(
             padding: {
                 thread: "min(4rem, 8%)",
                 panel: "1.5rem",
+            },
+            size: {
+                header: {
+                    height: "4rem",
+                },
             }
         })
     }
