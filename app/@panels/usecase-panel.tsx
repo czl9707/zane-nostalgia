@@ -58,7 +58,7 @@ export default function UseCasePanel() {
                         <H4Typography>Copy for Maximum Customization</H4Typography>
                     </div>
                     <BodyTypography color="secondary" >
-                        Looking to tweak the pattern to perfection? Copy the raw SVG code and customize every detail to match your vision. Modify colors, adjust shapes, or add animations to make it uniquely yours
+                        Looking to tweak the pattern to perfection? Copy the raw SVG code and customize every detail to match your vision. Modify colors, adjust shapes, or add animations to make it uniquely yours.
                     </BodyTypography>
                 </Panel>
                 <CopyIllustration />
@@ -73,9 +73,7 @@ export default function UseCasePanel() {
                         Need visually stunning backgrounds or patterns to your GitHub README, documentation, or live projects? And wanna avoid huge chunk of svg text checked in? Take the HTTP endpoint and embed to integrate dynamic visuals without managing files.
                     </BodyTypography>
                 </Panel>
-                <Panel >
-                    2133
-                </Panel>
+                <EmbedIllustration />
             </UseCaseContainer>
         </>
     )
@@ -87,9 +85,9 @@ const MockContainer = styled("div")(({ theme }) => ({
     [`@media(max-width: ${theme.breakpoints.lg})`]: { height: "45vw", },
     width: "60%", background: "#333333", overflow: "hidden", position: "relative",
 }));
-const LinePlaceHolder = styled("div")({
+const LinePlaceHolder = styled("span")({
     backgroundColor: "#202020", height: "1.4rem", maxWidth: "100%", boxSizing: "border-box",
-    margin: ".3rem 1rem",
+    margin: ".3rem 1rem", display: "block"
 })
 const ScenePlaceHolder = styled("div")({
     backgroundColor: "#202020", height: "60%", width: "100%", overflow: "hidden", position: "relative",
@@ -188,8 +186,6 @@ const CodingPad = styled("div")(({ theme }) => ({
     padding: "1rem", boxSizing: "border-box", overflow: "hidden",
     borderRadius: ".5rem", border: `1px solid ${theme.vars.colors.secondary.contrastText}`,
     background: `color-mix(in srgb, ${theme.vars.colors.primary.background}, transparent)`,
-    whiteSpace: "normal",
-    overflowWrap: "break-word", wordBreak: "break-all",
 }));
 
 function CopyIllustration() {
@@ -199,39 +195,45 @@ function CopyIllustration() {
         <Panel className={css(({ theme }) => ({ display: "flex", alignItems: "stretch", gap: theme.padding.panel }))}>
             <div style={{ width: "40%", position: "relative", display: "flex", alignItems: "center" }}>
                 <CodingPad>
-                    <LinePlaceHolder />
-                    <LinePlaceHolder />
-                    <div style={{ display: "flex", alignItems: "center", margin: "-.3rem 0" }}>
+                    <BodyTypography color="secondary" style={{ opacity: "0.5", margin: ".3rem 1rem" }}>
+                        // FancyText.svg
+                    </BodyTypography>
+                    <LinePlaceHolder style={{ marginRight: "20%" }} />
+                    <LinePlaceHolder style={{ marginLeft: "10%", marginRight: "20%" }} />
+                    <div style={{ display: "flex", alignItems: "center", margin: "-.3rem 0", marginLeft: "15%" }}>
                         <LinePlaceHolder style={{ width: "10%" }} />
                         <BodyTypography color="secondary" >
                             <TypingTypography contents={["Zane", "Kiyo"]} />
                         </BodyTypography>
                         <LinePlaceHolder style={{ flex: "1 1" }} />
                     </div>
-                    <LinePlaceHolder />
+                    <LinePlaceHolder style={{ marginLeft: "10%", marginRight: "30%" }} />
+                    <LinePlaceHolder style={{ marginLeft: "10%", marginRight: "20%" }} />
+
+                    <LinePlaceHolder style={{ marginRight: "20%" }} />
                 </CodingPad>
             </div>
             <MockContainer>
                 <ScenePlaceHolder >
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                         style={{ animation: `${originalScene} ${animateDetail}`, position: "absolute", inset: "0 0 auto 0" }}>
-                        <FourOFour {...defaultParameterResolver({ color: "blue" }, fourOfourMeta)} width={1200} height={600} content="Zane" />
+                        <FourOFour {...defaultParameterResolver({ color: "#080877" }, fourOfourMeta)} width={1200} height={600} content="Zane" />
                     </svg>
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                         style={{ animation: `${updatedScene} ${animateDetail}`, position: "absolute", inset: "0 0 auto 0" }}>
-                        <FourOFour {...defaultParameterResolver({ color: "blue" }, fourOfourMeta)} width={1200} height={600} content="Kiyo" />
+                        <FourOFour {...defaultParameterResolver({ color: "#080877" }, fourOfourMeta)} width={1200} height={600} content="Kiyo" />
                     </svg>
                 </ScenePlaceHolder>
                 <LinePlaceHolder style={{ width: 0 }} />
 
                 <LinePlaceHolder />
-                <LinePlaceHolder style={{ width: "65%", }} />
+                <LinePlaceHolder />
+                <LinePlaceHolder style={{ width: "25%", }} />
 
                 <LinePlaceHolder style={{ width: 0 }} />
 
                 <LinePlaceHolder />
-                <LinePlaceHolder />
-                <LinePlaceHolder style={{ width: "40%", }} />
+                <LinePlaceHolder style={{ width: "50%", }} />
 
                 <LinePlaceHolder style={{ width: 0 }} />
 
@@ -248,3 +250,43 @@ function CopyIllustration() {
 
 
 // Embed Intro illustration
+
+function EmbedIllustration() {
+    const animateDetail = '8.7s linear infinite forwards';
+
+    return (
+        <Panel className={css(({ theme }) => ({ display: "flex", alignItems: "stretch", gap: theme.padding.panel }))}>
+            <div style={{ width: "40%", position: "relative", display: "flex", alignItems: "center" }}>
+                <BodyTypography color="secondary" >
+                    Under Construction
+                </BodyTypography>
+            </div>
+            <MockContainer>
+                <ScenePlaceHolder >
+                    <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+                        <MeteorsScene {...defaultParameterResolver({}, meteorsMeta)} width={1200} height={600} />
+                    </svg>
+                </ScenePlaceHolder>
+                <LinePlaceHolder style={{ width: 0 }} />
+
+                <LinePlaceHolder />
+                <LinePlaceHolder />
+                <LinePlaceHolder style={{ width: "25%", }} />
+
+                <LinePlaceHolder style={{ width: 0 }} />
+
+                <LinePlaceHolder />
+                <LinePlaceHolder style={{ width: "50%", }} />
+
+                <LinePlaceHolder style={{ width: 0 }} />
+
+                <LinePlaceHolder />
+                <LinePlaceHolder />
+                <LinePlaceHolder />
+                <LinePlaceHolder />
+                <LinePlaceHolder />
+                <LinePlaceHolder />
+            </MockContainer>
+        </Panel>
+    )
+}

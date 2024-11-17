@@ -1,6 +1,6 @@
 import { Error as ErrorIcon } from "../components/ui/icons/icons";
 import { space_grotesk } from "../layout";
-import { randomFitToInt } from "./utils/math-utils";
+import { randomFitToInt, simpleHash } from "./utils/utils";
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneModule, SceneSizeMetaData } from "./utils/types";
 import seedrandom from 'seedrandom';
 
@@ -59,6 +59,7 @@ function FourOFour({
 }: SceneComponentProps<FourOFourMeta & SceneSizeMetaData>) {
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom("FourOFour");
+    const contentHash = simpleHash(content as string);
 
     const visitedDurClass = new Set();
     const visitedSizeClass = new Set();
@@ -73,10 +74,10 @@ function FourOFour({
         visitedInitClass.add(BLINK_INIT_CLASS(init));
 
         return (
-            <text key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
+            <use href={`#content-${contentHash}`} key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
                 className={["blink", `blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")}>
                 {content}
-            </text>
+            </use >
         )
     });
 
@@ -90,15 +91,11 @@ function FourOFour({
                     30% {opacity:0;}
                     100% {opacity:1;}
                 }
-                text.blink {
-                    fill: ${color};
-                    stroke-width: 1px;
-                    font-family: ${space_grotesk.style.fontFamily},'Space Grotesk';
+                .blink {
                     animation-name: blink;
                     animation-direction: alternate;
                     animation-iteration-count: infinite;
-                }
-                `
+                }`
                 +
                 BLINK_DUR_VARIANTS
                     .filter((_, i) => visitedDurClass.has(BLINK_DUR_CLASS(i)))
@@ -120,6 +117,14 @@ function FourOFour({
             }
         </style>
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
+        <defs>
+            <text id={`content-${contentHash}`} style={{
+                fill: color,
+                fontFamily: `${space_grotesk.style.fontFamily},'Space Grotesk'`,
+            }}>
+                {content}
+            </text>
+        </defs>
         {textEls}
     </svg>)
 }

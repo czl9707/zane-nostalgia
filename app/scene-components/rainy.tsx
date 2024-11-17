@@ -2,7 +2,7 @@ import * as React from "react";
 
 import { IconProps, SvgIcon } from "../components/ui/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
-import { randomFitToInt } from "./utils/math-utils";
+import { randomFitToInt } from "./utils/utils";
 import seedrandom from "seedrandom";
 
 
