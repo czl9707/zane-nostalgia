@@ -1,4 +1,5 @@
 import { Error as ErrorIcon } from "../components/ui/icons/icons";
+import { space_grotesk } from "../layout";
 import { randomFitToInt } from "./utils/math-utils";
 import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneModule, SceneSizeMetaData } from "./utils/types";
 import seedrandom from 'seedrandom';
@@ -54,6 +55,7 @@ function FourOFour({
     density,
     height,
     width,
+    content = "404",
 }: SceneComponentProps<FourOFourMeta & SceneSizeMetaData>) {
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom("FourOFour");
@@ -72,13 +74,14 @@ function FourOFour({
 
         return (
             <text key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
-                className={[`blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")}>
-                404
+                className={["blink", `blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")}>
+                {content}
             </text>
         )
     });
 
     return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+        <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
         <style>
             {
                 `
@@ -87,11 +90,10 @@ function FourOFour({
                     30% {opacity:0;}
                     100% {opacity:1;}
                 }
-                text {
+                text.blink {
                     fill: ${color};
                     stroke-width: 1px;
-                    font: bold 1em;
-                    font-family: 'Space Grotesk', Arial;
+                    font-family: ${space_grotesk.style.fontFamily},'Space Grotesk';
                     animation-name: blink;
                     animation-direction: alternate;
                     animation-iteration-count: infinite;

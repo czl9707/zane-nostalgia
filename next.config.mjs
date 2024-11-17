@@ -56,10 +56,6 @@ export default withPigment(
                 h5: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: '1.25rem', lineHeight: 1.4, },
                 h6: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '1.25rem', lineHeight: 1.25, },
             },
-            fonts: {
-                serious: "placeholder", // need an entry here, to have --fonts--... variable consumerable by upper typography tokens.
-                playful: "placeholder",
-            },
             transition: {
                 short: ".3s",
                 long: ".6s",

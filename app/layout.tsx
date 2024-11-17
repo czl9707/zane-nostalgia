@@ -10,14 +10,14 @@ import HeaderBarWithContextProvider from './components/layout/header-bar-with-co
 
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const space_grotesk = Space_Grotesk({
+export const space_grotesk = Space_Grotesk({
   weight: ['300', '400', '500', '600', '700'],
   style: ['normal'],
   subsets: ['latin-ext'],
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const delius = Delius({
+export const delius = Delius({
   weight: ["400",],
   style: ['normal'],
   subsets: ['latin'],
