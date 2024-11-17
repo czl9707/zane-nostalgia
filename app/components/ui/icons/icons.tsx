@@ -1,19 +1,18 @@
-import { css } from '@pigment-css/react';
 import * as React from 'react';
 
 
 interface IconOwnProps {
-    size?: number
-    viewBoxSize?: string
+    size?: string
+    viewBoxSize?: string,
 }
 export type IconProps = IconOwnProps & React.HTMLAttributes<SVGSVGElement>;
 
 export const SvgIcon = React.forwardRef<SVGSVGElement, IconProps>(
-    function SvgIcon({ size = 1, viewBoxSize = "0 -960 960 960", ...other }, ref) {
+    function SvgIcon({ size = "2rem", viewBoxSize = "0 -960 960 960", ...other }, ref) {
         return (
             <svg xmlns="http://www.w3.org/2000/svg"
-                className={css(({ theme }) => ({ fill: theme.vars.colors.primary.contrastText }))}
-                height={`${size * 2}rem`} width={`${size * 2}rem`}
+                fill="currentColor"
+                height={size} width={size}
                 viewBox={viewBoxSize}
                 {...other} ref={ref} />
         );
@@ -172,3 +171,26 @@ export const Download = React.forwardRef<SVGSVGElement, IconProps>(
         );
     }
 )
+
+
+export const File = React.forwardRef<SVGSVGElement, IconProps>(
+    function File(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M252.31-100Q222-100 201-121q-21-21-21-51.31v-615.38Q180-818 201-839q21-21 51.31-21H570l210 210v477.69Q780-142 759-121q-21 21-51.31 21H252.31ZM540-620v-180H252.31q-4.62 0-8.46 3.85-3.85 3.84-3.85 8.46v615.38q0 4.62 3.85 8.46 3.84 3.85 8.46 3.85h455.38q4.62 0 8.46-3.85 3.85-3.84 3.85-8.46V-620H540ZM240-800v180-180V-160v-640Z" />
+            </SvgIcon>
+        );
+    }
+)
+
+export const BackHand = React.forwardRef<SVGSVGElement, IconProps>(
+    function BackHand(props, ref) {
+        return (
+            <SvgIcon {...props} ref={ref}>
+                <path d="M507.38-60Q427.69-60 358-97.31T244.62-201.23l-172-263.15 15.54-15.54q15.38-16 37.57-18.23 22.19-2.23 40.42 10.54L300-397.38V-780q0-12.38 8.63-21.19Q317.25-810 330-810q12.39 0 21.19 8.81Q360-792.38 360-780v497.77L189.69-398.31l105.39 162.62q35 54.46 91.32 85.07Q442.72-120 507.38-120q104.92 0 178.77-73.46Q760-266.92 760-372.23V-750q0-12.38 8.62-21.19Q777.25-780 790-780q12.38 0 21.19 8.81T820-750v377.77q0 130.41-91.02 221.32T507.38-60Zm-53.92-430v-370q0-12.38 8.63-21.19t21.39-8.81q12.75 0 21.37 8.81 8.61 8.81 8.61 21.19v370h-60Zm153.46 0v-330q0-12.38 8.63-21.19t21.39-8.81q12.75 0 21.37 8.81 8.61 8.81 8.61 21.19v330h-60ZM474.85-305Z" />
+            </SvgIcon>
+        );
+    }
+)
+
+

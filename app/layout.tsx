@@ -38,7 +38,7 @@ globalCss(({ theme }) => ({
   "&::-webkit-scrollbar-button": {
     backgroundColor: "transparent", height: "5px",
   },
-
+  "a": { color: "inherit" },
   "body": {
     margin: 0, padding: 0, width: "100vw", height: "100vh", overflow: "hidden",
     backgroundColor: theme.vars.colors.primary.background,

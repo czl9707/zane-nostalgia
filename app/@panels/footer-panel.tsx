@@ -1,5 +1,5 @@
 import Panel from "../components/ui/panel";
-import StartCustomizingButton from "./start-customizing-button";
+import StartCustomizingButton from "./extending-button";
 
 export default function FooterPanel() {
     return (

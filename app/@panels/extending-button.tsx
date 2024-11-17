@@ -2,7 +2,7 @@ import { styled } from "@pigment-css/react";
 import Button from "../components/ui/button";
 import Link from "next/link";
 
-const ExtendingLinkButton = styled(Button)(({ theme }) => ({
+const ExtendingButtonContainer = styled(Button)(({ theme }) => ({
     ".former": {
         transition: `width ${theme.transition.short} ease-out`,
         width: ".5rem"
@@ -17,16 +17,16 @@ const ExtendingLinkButton = styled(Button)(({ theme }) => ({
     }
 }));
 
-export default function StartCustomizingButton({ href, content }: { href: string, content: string }) {
+export default function ExtendingButton({ href, content }: { href: string, content: string }) {
     return (
         <Link href={href}>
-            <ExtendingLinkButton variant="filled" color="primary" >
+            <ExtendingButtonContainer variant="filled" color="primary" >
                 <div style={{ width: "1.5rem" }} />
                 {content}
                 <div className="former" />
                 {">"}
                 <div className="latter" />
-            </ExtendingLinkButton>
+            </ExtendingButtonContainer>
         </Link>
     )
 }

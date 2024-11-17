@@ -22,6 +22,7 @@ const HeaderBarDiv = styled("div")(({ theme }) => ({
     position: "fixed", backgroundColor: "transparent",
     display: "flex", flexDirection: "row", alignItems: "center",
     gap: "1rem",
+    color: theme.vars.colors.primary.contrastText,
 }));
 
 

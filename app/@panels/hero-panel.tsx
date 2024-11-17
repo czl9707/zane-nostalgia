@@ -2,7 +2,7 @@ import { styled } from "@pigment-css/react";
 import { H2Typography, H5Typography } from "../components/ui/typography";
 import Panel from "../components/ui/panel";
 import TypingTypography from "../components/ui/typing-typography";
-import StartCustomizingButton from "./start-customizing-button";
+import StartCustomizingButton from "./extending-button";
 
 const CenteredSpacedDiv = styled("div")(({ theme }) => ({
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
