@@ -18,32 +18,38 @@ interface NumberParamMetaToken extends BaseParamMetaToken {
     step: number,
 }
 
+interface StringParamMetaToken extends BaseParamMetaToken {
+    type: "string",
+    default: string,
+}
 
-type ParamMetaToken = ColorParamMetaToken | NumberParamMetaToken
-type SceneMetaData = { [key: string]: ParamMetaToken }
+type ParamMetaToken =
+    ColorParamMetaToken |
+    NumberParamMetaToken |
+    StringParamMetaToken;
 
-interface SceneSizeMetaData extends SceneMetaData {
-    width: NumberParamMetaToken,
-    height: NumberParamMetaToken,
+namespace Scene {
+    export type MetaData = { [key: string]: ParamMetaToken }
+    export interface CommonMetaData extends MetaData {
+        width: NumberParamMetaToken,
+        height: NumberParamMetaToken,
+    }
+    export type ComponentProps<M extends MetaData> = {
+        [key in keyof (M)]: M[key]["default"]
+    }
+    export type Module<M extends MetaData = MetaData> = {
+        Component: React.FC<ComponentProps<M & CommonMetaData>>,
+        Icon: React.ElementType,
+        name: string,
+        meta: M
+    }
 }
 
 
-type SceneComponentProps<M extends SceneMetaData> = {
-    [key in keyof (M)]: M[key]["default"]
-}
-
-interface SceneModule {
-    SceneComponent: React.ElementType,
-    SceneIcon: React.ElementType,
-    name: string,
-    meta: SceneMetaData
-}
 
 export type {
     ColorParamMetaToken,
     NumberParamMetaToken,
-    SceneMetaData,
-    SceneSizeMetaData,
-    SceneComponentProps,
-    SceneModule,
+    StringParamMetaToken,
+    Scene,
 }

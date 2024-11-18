@@ -1,12 +1,12 @@
 import * as React from "react";
 
 import { IconProps, SvgIcon } from "../components/ui/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
+import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
 import { randomFitToInt } from "./utils/utils";
 import seedrandom from 'seedrandom';
 
 
-interface MeteroShowerMeta extends SceneMetaData {
+interface MeteroShowerMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     rotation: NumberParamMetaToken,
@@ -69,7 +69,7 @@ function MeteorShower({
     density,
     height,
     width,
-}: SceneComponentProps<MeteroShowerMeta & SceneSizeMetaData>) {
+}: Scene.ComponentProps<MeteroShowerMeta & Scene.CommonMetaData>) {
     const meteorCountY = rotation === 90 ? 0 :
         Math.abs(Math.floor(
             height * density * DENSITY_FACTOR * Math.cos(rotation * Math.PI / 180)
@@ -165,7 +165,7 @@ const MeteorShowerIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-export const SceneComponent: SceneModule["SceneComponent"] = MeteorShower;
-export const SceneIcon: SceneModule["SceneIcon"] = MeteorShowerIcon;
-export const name: SceneModule["name"] = "Meteor Shower";
-export const meta: SceneModule["meta"] = meteorMeta;
+export const Component: Scene.Module<MeteroShowerMeta>["Component"] = MeteorShower;
+export const Icon: Scene.Module<MeteroShowerMeta>["Icon"] = MeteorShowerIcon;
+export const name: Scene.Module<MeteroShowerMeta>["name"] = "Meteor Shower";
+export const meta: Scene.Module<MeteroShowerMeta>["meta"] = meteorMeta;

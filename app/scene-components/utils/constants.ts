@@ -1,6 +1,6 @@
-import { SceneSizeMetaData } from "./types";
+import { Scene } from "./types";
 
-export const defaultSceneSizeMetaData: SceneSizeMetaData = {
+export const defaultSceneCommonMetaData: Scene.CommonMetaData = {
     height: {
         name: "Height",
         type: "number",
@@ -23,5 +23,3 @@ export const defaultSceneSizeMetaData: SceneSizeMetaData = {
     },
 }
 
-
-export const ALL_SCENES = ["meteor"] as const;

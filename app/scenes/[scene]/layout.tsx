@@ -5,7 +5,7 @@ import { styled } from '@pigment-css/react';
 import { useSearchParams } from 'next/navigation';
 
 import Panel from '../../components/ui/panel';
-import { defaultSceneSizeMetaData } from '../../scene-components/utils/constants';
+import { defaultSceneCommonMetaData } from '../../scene-components/utils/constants';
 import { FullScreenContext, MenuContext } from '../../components/layout/header-bar-with-context-provider';
 
 const SVGContainerDiv = styled('div')(({ theme }) => ({
@@ -48,9 +48,9 @@ function SceneHelper({ children }: {
 }) {
     const searchParams = useSearchParams();
     const width = parseInt(
-        searchParams.get("width") ?? defaultSceneSizeMetaData.width.default.toString());
+        searchParams.get("width") ?? defaultSceneCommonMetaData.width.default.toString());
     const height = parseInt(
-        searchParams.get("height") ?? defaultSceneSizeMetaData.height.default.toString());
+        searchParams.get("height") ?? defaultSceneCommonMetaData.height.default.toString());
 
     const isFullScreen = React.useContext(FullScreenContext);
     const { isMenuOpen, setMenuOpen } = React.useContext(MenuContext);

@@ -6,7 +6,6 @@ import { styled } from "@pigment-css/react";
 import FlippingIcon from '../ui/icons/flipping-icon';
 import { Copy, Check } from '../ui/icons/icons';
 import { ButtonTypography, QuoteTypography } from '../ui/typography';
-import InputInfo from './input-info';
 
 interface CopyPanelProps {
     children?: string,
@@ -38,6 +37,10 @@ const CopyPanelContainer = styled("div")(({ theme }) => ({
             boxShadow: `0 0 4px ${theme.vars.colors.primary.contrastText}`,
         }
     },
+
+    "::-webkit-scrollbar-track": {
+        backgroundColor: "transparent",
+    },
 }));
 
 
@@ -56,9 +59,7 @@ const CopyPanel = React.forwardRef<HTMLDivElement, CopyPanelProps & Omit<React.H
 
         return (
             <div>
-                <InputInfo>
-                    <ButtonTypography>{label}</ButtonTypography>
-                </InputInfo>
+                <ButtonTypography style={{ marginBottom: ".7rem" }}>{label}</ButtonTypography>
                 <CopyPanelContainer {...other} ref={ref} onClick={handleCopy}>
                     <IconContainer >
                         <FlippingIcon before={<Copy />} after={<Check />} isFlipped={!!copied} />

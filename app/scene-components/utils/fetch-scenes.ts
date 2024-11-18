@@ -1,10 +1,10 @@
 import path from "path";
 import { promises as fs } from "fs";
 
-import { SceneModule } from "./types";
+import { Scene } from "./types";
 
 async function fetchScene(scene: string) {
-    return (await import(`../${scene}`)) as SceneModule;
+    return (await import(`../${scene}`)) as Scene.Module;
 }
 
 async function fetchSceneMetas() {
@@ -15,9 +15,9 @@ async function fetchSceneMetas() {
         .filter(f => f.endsWith(".tsx"))
         .map(f => f.split(".")[0])
         .map(async s => {
-            const sceneModule: SceneModule = await import(`../${s}`);
+            const sceneModule: Scene.Module = await import(`../${s}`);
             return {
-                Icon: sceneModule.SceneIcon,
+                Icon: sceneModule.Icon,
                 name: sceneModule.name,
                 route: s,
             }

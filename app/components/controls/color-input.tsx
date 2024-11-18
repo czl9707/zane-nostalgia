@@ -2,9 +2,7 @@
 
 import * as React from 'react';
 import { styled } from "@pigment-css/react";
-
-import { H6Typography } from '../ui/typography';
-import InputInfo from './input-info';
+import ControlStructure from './control-structure';
 
 const ColorInputEL = styled("input")({
     "&[type=\"color\" i]": {
@@ -24,8 +22,7 @@ const ColorInputEL = styled("input")({
 });
 
 const ColorInputContainer = styled("div")(({ theme }) => ({
-    width: "100%", height: "1.7rem", userSelect: "none",
-    padding: 2,
+    height: "1.5rem", userSelect: "none", padding: 2, boxSizing: "border-box",
     boxShadow: `0 0 1.5px ${theme.vars.colors.secondary.contrastText}`,
     transition: `box-shadow ${theme.transition.short} linear`,
     "&:hover": {
@@ -45,19 +42,16 @@ const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps & Omit<Rea
         const [color, setColor] = React.useState<string>(defaultColor);
 
         return (
-            <div>
-                <InputInfo>
-                    <H6Typography>{label}</H6Typography>
-                    <H6Typography>{color}</H6Typography>
-                </InputInfo>
+            <ControlStructure label={label}>
                 <ColorInputContainer>
-                    <ColorInputEL type="color" value={color} name={label} {...other} ref={ref}
+                    <ColorInputEL type="color" value={color} name={label} {...other}
+                        aria-label={label} ref={ref}
                         onChange={(e) => {
                             setColor(e.target.value);
                             if (onChange) onChange(e.target.value);
                         }} />
                 </ColorInputContainer>
-            </div>
+            </ControlStructure>
         )
     }
 )

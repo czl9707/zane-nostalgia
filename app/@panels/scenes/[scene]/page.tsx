@@ -1,19 +1,19 @@
 import * as React from 'react';
 
 // dont know why only relative works ......
-
-import { SceneMetaData, SceneModule } from '../../../scene-components/utils/types';
-import { defaultSceneSizeMetaData } from '../../../scene-components/utils/constants';
-import { defaultParameterResolver, defaultSizeParameterResolver, resolveParameterConstraints } from '../../../scene-components/utils/resolver';
+import { defaultSceneCommonMetaData } from '../../../scene-components/utils/constants';
+import { defaultParameterResolver, defaultCommonParameterResolver, resolveParameterConstraints } from '../../../scene-components/utils/resolver';
 import { fetchScene, fetchSceneMetas } from '../../../scene-components/utils/fetch-scenes';
+import { Scene } from '../../../scene-components/utils/types';
 
 import Panel from '../../../components/ui/panel';
 import Divider from '../../../components/ui/divider';
-import { QuoteTypography } from '../../../components/ui/typography';
 import CopyPanel from '../../../components/controls/copy-panel';
 
-import { ColorInputRouterUpdater, SliderRouterUpdater } from './controls-router-updator';
+import ControlRouterUpdator from './controls-router-updator';
 import { styled } from '@pigment-css/react';
+import ColorInput from '@/app/components/controls/color-input';
+import Slider from '@/app/components/controls/slider';
 
 
 export async function generateStaticParams(): Promise<{ scene: string }[]> {
@@ -29,11 +29,11 @@ const PanelWrapper = styled(Panel)(({ theme }) => ({
 export default async function Panels({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: { [key: string]: string } }) {
     const renderToString = (await import('react-dom/server')).renderToString;
 
-    const sceneModule: SceneModule = await fetchScene((await params).scene);
-    const meta: SceneMetaData = sceneModule.meta;
+    const sceneModule: Scene.Module = await fetchScene((await params).scene);
+    const meta: Scene.MetaData = sceneModule.meta;
 
-    let resolvedSize = defaultSizeParameterResolver(searchParams);
-    resolvedSize = resolveParameterConstraints(resolvedSize, defaultSceneSizeMetaData);
+    let resolvedSize = defaultCommonParameterResolver(searchParams);
+    resolvedSize = resolveParameterConstraints(resolvedSize, defaultSceneCommonMetaData);
     let resolved = defaultParameterResolver(searchParams, meta);
     resolved = resolveParameterConstraints(resolved, meta);
 
@@ -45,38 +45,53 @@ export default async function Panels({ params, searchParams }: { params: Promise
             <PanelWrapper>
                 {
                     metaEntries.map(([paramName, metaEntry], i) => {
+                        let control = null;
                         if (metaEntry.type === "color")
-                            return (
-                                <React.Fragment key={paramName}>
-                                    {i > 0 && <Divider />}
-                                    <ColorInputRouterUpdater paramName={paramName}
-                                        label={metaEntry.name} defaultColor={resolved[paramName] as string} />
-                                </React.Fragment>
-                            )
+                            control = (
+                                <ControlRouterUpdator paramName={paramName}>
+                                    <ColorInput label={metaEntry.name}
+                                        defaultColor={resolved[paramName] as string} />
+                                </ControlRouterUpdator>
+                            );
                         else if (metaEntry.type === "number")
-                            return (
-                                <React.Fragment key={paramName}>
-                                    {i > 0 && <Divider />}
-                                    <SliderRouterUpdater paramName={paramName}
+                            control = (
+                                <ControlRouterUpdator paramName={paramName}>
+                                    <Slider
                                         min={metaEntry.min} max={metaEntry.max} step={metaEntry.step}
                                         label={metaEntry.name} defaultValue={resolved[paramName] as number} />
-                                </React.Fragment>
-                            )
+                                </ControlRouterUpdator>
+
+                            );
+                        // else if (metaEntry.type === "string")
+                        //     control = (
+                        //         <ControlRouterUpdator paramName={paramName}>
+                        //             <StringInputRouterUpdater
+                        //                 min={metaEntry.min} max={metaEntry.max} step={metaEntry.step}
+                        //                 label={metaEntry.name} defaultValue={resolved[paramName] as number} />
+                        //         </ControlRouterUpdator>
+                        //     );
+
+                        return (
+                            <React.Fragment key={paramName}>
+                                {i > 0 && <Divider />}
+                                {control}
+                            </React.Fragment>
+                        )
                     })
                 }
             </PanelWrapper>
             <PanelWrapper>
-                <QuoteTypography color="secondary" style={{ marginBottom: ".7rem" }}>
-                    * Window size Parameters won&apos;t applies to preview.
-                </QuoteTypography>
-
-                <SliderRouterUpdater paramName={"height"}
-                    min={defaultSceneSizeMetaData.height.min} max={defaultSceneSizeMetaData.height.max} step={defaultSceneSizeMetaData.height.step}
-                    label={defaultSceneSizeMetaData.height.name} defaultValue={resolvedSize["height"]} />
+                <ControlRouterUpdator paramName={"height"}>
+                    <Slider showValue
+                        min={defaultSceneCommonMetaData.height.min} max={defaultSceneCommonMetaData.height.max} step={defaultSceneCommonMetaData.height.step}
+                        label={defaultSceneCommonMetaData.height.name} defaultValue={resolvedSize["height"]} />
+                </ControlRouterUpdator>
                 <Divider />
-                <SliderRouterUpdater paramName={"width"}
-                    min={defaultSceneSizeMetaData.width.min} max={defaultSceneSizeMetaData.width.max} step={defaultSceneSizeMetaData.width.step}
-                    label={defaultSceneSizeMetaData.width.name} defaultValue={resolvedSize["width"]} />
+                <ControlRouterUpdator paramName={"width"}>
+                    <Slider showValue
+                        min={defaultSceneCommonMetaData.width.min} max={defaultSceneCommonMetaData.width.max} step={defaultSceneCommonMetaData.width.step}
+                        label={defaultSceneCommonMetaData.width.name} defaultValue={resolvedSize["width"]} />
+                </ControlRouterUpdator>
                 <Divider />
 
                 <CopyPanel label={"To use in Markdown:"}>
@@ -85,7 +100,7 @@ export default async function Panels({ params, searchParams }: { params: Promise
 
                 <Divider />
                 <CopyPanel label={"Raw SVG:"}>
-                    {renderToString(<sceneModule.SceneComponent {...resolvedSize} {...resolved} />)}
+                    {renderToString(<sceneModule.Component {...resolvedSize} {...resolved} />)}
                 </CopyPanel>
             </PanelWrapper>
         </>

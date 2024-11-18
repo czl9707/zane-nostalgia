@@ -1,12 +1,12 @@
 import * as React from "react";
 
 import { IconProps, SvgIcon } from "../components/ui/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
+import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
 import { randomFitToInt } from "./utils/utils";
 import seedrandom from "seedrandom";
 
 
-interface RainyMeta extends SceneMetaData {
+interface RainyMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
@@ -53,7 +53,7 @@ function Rainy({
     density,
     height,
     width,
-}: SceneComponentProps<RainyMeta & SceneSizeMetaData>) {
+}: Scene.ComponentProps<RainyMeta & Scene.CommonMetaData>) {
     const TIME_INVARIANT_NUM = Math.floor((CYCLE_DURATION + DROP_TIME) / 0.1)
     const DROP_COUNT = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom("Rainy");
@@ -129,7 +129,7 @@ const LightRainyIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-export const SceneComponent: SceneModule["SceneComponent"] = Rainy;
-export const SceneIcon: SceneModule["SceneIcon"] = LightRainyIcon;
-export const name: SceneModule["name"] = "Rainy";
-export const meta: SceneModule["meta"] = rainyMeta;
+export const Component: Scene.Module<RainyMeta>["Component"] = Rainy;
+export const Icon: Scene.Module<RainyMeta>["Icon"] = LightRainyIcon;
+export const name: Scene.Module<RainyMeta>["name"] = "Rainy";
+export const meta: Scene.Module<RainyMeta>["meta"] = rainyMeta;
