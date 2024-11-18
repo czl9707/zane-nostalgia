@@ -29,14 +29,14 @@ globalCss(({ theme }) => ({
     width: "6px",
   },
   "&::-webkit-scrollbar-track": {
-    backgroundColor: theme.vars.colors.primary.background,
+    backgroundColor: "transparent",
   },
   "&::-webkit-scrollbar-thumb": {
     backgroundColor: `color-mix(in srgb, ${theme.vars.colors.secondary.background}, transparent)`,
     borderRadius: "5px",
   },
   "&::-webkit-scrollbar-button": {
-    backgroundColor: "transparent", height: "5px",
+    backgroundColor: "transparent", height: "0",
   },
   "a": { color: "inherit" },
   "body": {

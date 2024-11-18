@@ -31,7 +31,9 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
         }
     },
 
-    "::-webkit-scrollbar": { display: "none" },
+    "::-webkit-scrollbar-track": {
+        backgroundColor: "transparent",
+    },
 }));
 
 
