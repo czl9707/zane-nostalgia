@@ -46,8 +46,6 @@ globalCss(({ theme }) => ({
 } as CSSObjectNoCallback));
 
 
-
-
 export default function RootLayout({
   children, panels
 }: {

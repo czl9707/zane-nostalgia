@@ -14,6 +14,7 @@ import ControlRouterUpdator from './controls-router-updator';
 import { styled } from '@pigment-css/react';
 import ColorInput from '@/app/components/controls/color-input';
 import Slider from '@/app/components/controls/slider';
+import StringInput from '@/app/components/controls/string-input';
 
 
 export async function generateStaticParams(): Promise<{ scene: string }[]> {
@@ -62,14 +63,13 @@ export default async function Panels({ params, searchParams }: { params: Promise
                                 </ControlRouterUpdator>
 
                             );
-                        // else if (metaEntry.type === "string")
-                        //     control = (
-                        //         <ControlRouterUpdator paramName={paramName}>
-                        //             <StringInputRouterUpdater
-                        //                 min={metaEntry.min} max={metaEntry.max} step={metaEntry.step}
-                        //                 label={metaEntry.name} defaultValue={resolved[paramName] as number} />
-                        //         </ControlRouterUpdator>
-                        //     );
+                        else if (metaEntry.type === "string")
+                            control = (
+                                <ControlRouterUpdator paramName={paramName}>
+                                    <StringInput
+                                        label={metaEntry.name} defaultValue={resolved[paramName] as string} />
+                                </ControlRouterUpdator>
+                            );
 
                         return (
                             <React.Fragment key={paramName}>

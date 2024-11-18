@@ -1,7 +1,7 @@
 import { Error as ErrorIcon } from "../components/ui/icons/icons";
 import { space_grotesk } from "../layout";
 import { randomFitToInt, simpleHash } from "./utils/utils";
-import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
+import { ColorParamMetaToken, NumberParamMetaToken, Scene, StringParamMetaToken } from "./utils/types";
 import seedrandom from 'seedrandom';
 
 
@@ -9,6 +9,7 @@ interface FourOFourMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
+    textContent: StringParamMetaToken,
 }
 
 
@@ -37,6 +38,13 @@ export const fourOFourMeta: FourOFourMeta = {
 
         controlOrder: 2,
     },
+    textContent: {
+        name: "Content",
+        type: "string",
+        default: "404",
+
+        controlOrder: 3,
+    }
 };
 
 const DENSITY_FACTOR = 0.0007;
@@ -55,11 +63,11 @@ function FourOFour({
     density,
     height,
     width,
-    content = "404",
+    textContent = "404",
 }: Scene.ComponentProps<FourOFourMeta & Scene.CommonMetaData>) {
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom("FourOFour");
-    const contentHash = simpleHash(content as string);
+    const contentHash = simpleHash(textContent as string);
 
     const visitedDurClass = new Set();
     const visitedSizeClass = new Set();
@@ -75,9 +83,7 @@ function FourOFour({
 
         return (
             <use href={`#content-${contentHash}`} key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
-                className={["blink", `blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")}>
-                {content}
-            </use >
+                className={["blink", `blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")} />
         )
     });
 
@@ -122,7 +128,7 @@ function FourOFour({
                 fill: color,
                 fontFamily: `${space_grotesk.style.fontFamily},'Space Grotesk'`,
             }}>
-                {content}
+                {textContent}
             </text>
         </defs>
         {textEls}

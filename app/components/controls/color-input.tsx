@@ -22,7 +22,7 @@ const ColorInputEL = styled("input")({
 });
 
 const ColorInputContainer = styled("div")(({ theme }) => ({
-    height: "1.5rem", userSelect: "none", padding: 2, boxSizing: "border-box",
+    height: "1.7rem", userSelect: "none", padding: 2, boxSizing: "border-box",
     boxShadow: `0 0 1.5px ${theme.vars.colors.secondary.contrastText}`,
     transition: `box-shadow ${theme.transition.short} linear`,
     "&:hover": {
