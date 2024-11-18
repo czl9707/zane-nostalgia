@@ -33,6 +33,7 @@ namespace Scene {
     export interface CommonMetaData extends MetaData {
         width: NumberParamMetaToken,
         height: NumberParamMetaToken,
+        banner: StringParamMetaToken,
     }
     export type ComponentProps<M extends MetaData> = {
         [key in keyof (M)]: M[key]["default"]

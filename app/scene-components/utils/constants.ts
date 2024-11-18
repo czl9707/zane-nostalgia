@@ -21,5 +21,13 @@ export const defaultSceneCommonMetaData: Scene.CommonMetaData = {
 
         controlOrder: 999,
     },
+
+    banner: {
+        name: "Banner",
+        type: "string",
+        default: "",
+
+        controlOrder: 997,
+    },
 }
 

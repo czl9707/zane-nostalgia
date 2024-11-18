@@ -87,7 +87,7 @@ function FourOFour({
         )
     });
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+    return (<>
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
         <style>
             {
@@ -132,7 +132,7 @@ function FourOFour({
             </text>
         </defs>
         {textEls}
-    </svg>)
+    </>)
 }
 
 

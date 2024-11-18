@@ -81,7 +81,7 @@ function Rainy({
         )
     });
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+    return (<>
         <defs>
             <ellipse id="ripple-geo-1" cx="0" cy="0" rx="100" ry="40" fill="none" stroke={color} strokeWidth={1} strokeDasharray="50 20 10 20 100 20" />
             <ellipse id="ripple-geo-2" cx="0" cy="0" rx="100" ry="40" fill="none" stroke={color} strokeWidth={1} strokeDasharray="120 20 10 20 40 20" />
@@ -115,7 +115,7 @@ function Rainy({
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         {dropInstances}
-    </svg>)
+    </>)
 }
 
 

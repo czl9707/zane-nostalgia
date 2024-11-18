@@ -111,7 +111,7 @@ function MeteorShower({
     ]
 
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+    return (<>
         <defs>
             <linearGradient id="tailGradient" gradientTransform={`rotate(0)`}>
                 <stop offset="0%" stopColor={color} />
@@ -151,7 +151,7 @@ function MeteorShower({
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         {meteorInstances}
-    </svg>)
+    </>)
 }
 
 

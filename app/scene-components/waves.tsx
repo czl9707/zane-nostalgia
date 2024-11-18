@@ -76,7 +76,7 @@ function Waves({
     const randomGenerator = seedrandom("Waves");
     const WAVE_VERTICAL_DELTA = Math.floor(width / (waveComplexity + 1) / 6);
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+    return (<>
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         <linearGradient id="waveGradient"
             gradientUnits="userSpaceOnUse"
@@ -111,7 +111,7 @@ function Waves({
             )
         }
 
-    </svg>)
+    </>)
 }
 
 // nodeNum is the number of nodes excluding two ends

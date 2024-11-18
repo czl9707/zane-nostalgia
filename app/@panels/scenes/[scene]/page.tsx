@@ -33,8 +33,8 @@ export default async function Panels({ params, searchParams }: { params: Promise
     const sceneModule: Scene.Module = await fetchScene((await params).scene);
     const meta: Scene.MetaData = sceneModule.meta;
 
-    let resolvedSize = defaultCommonParameterResolver(searchParams);
-    resolvedSize = resolveParameterConstraints(resolvedSize, defaultSceneCommonMetaData);
+    let resolvedCommon = defaultCommonParameterResolver(searchParams);
+    resolvedCommon = resolveParameterConstraints(resolvedCommon, defaultSceneCommonMetaData);
     let resolved = defaultParameterResolver(searchParams, meta);
     resolved = resolveParameterConstraints(resolved, meta);
 
@@ -81,26 +81,31 @@ export default async function Panels({ params, searchParams }: { params: Promise
                 }
             </PanelWrapper>
             <PanelWrapper>
+                <ControlRouterUpdator paramName={"banner"}>
+                    <StringInput
+                        label={defaultSceneCommonMetaData.banner.name} defaultValue={resolvedCommon["banner"]} />
+                </ControlRouterUpdator>
+                <Divider />
                 <ControlRouterUpdator paramName={"height"}>
                     <Slider showValue
                         min={defaultSceneCommonMetaData.height.min} max={defaultSceneCommonMetaData.height.max} step={defaultSceneCommonMetaData.height.step}
-                        label={defaultSceneCommonMetaData.height.name} defaultValue={resolvedSize["height"]} />
+                        label={defaultSceneCommonMetaData.height.name} defaultValue={resolvedCommon["height"]} />
                 </ControlRouterUpdator>
                 <Divider />
                 <ControlRouterUpdator paramName={"width"}>
                     <Slider showValue
                         min={defaultSceneCommonMetaData.width.min} max={defaultSceneCommonMetaData.width.max} step={defaultSceneCommonMetaData.width.step}
-                        label={defaultSceneCommonMetaData.width.name} defaultValue={resolvedSize["width"]} />
+                        label={defaultSceneCommonMetaData.width.name} defaultValue={resolvedCommon["width"]} />
                 </ControlRouterUpdator>
                 <Divider />
 
                 <CopyPanel label={"To use in Markdown:"}>
-                    {`<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/${(await params).scene}/api?${new URLSearchParams({ ...resolvedSize, ...resolved } as Record<string, string>).toString()}" />`}
+                    {`<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/${(await params).scene}/api?${new URLSearchParams({ ...resolvedCommon, ...resolved } as Record<string, string>).toString()}" />`}
                 </CopyPanel>
 
                 <Divider />
                 <CopyPanel label={"Raw SVG:"}>
-                    {renderToString(<sceneModule.Component {...resolvedSize} {...resolved} />)}
+                    {renderToString(<sceneModule.Component {...resolvedCommon} {...resolved} />)}
                 </CopyPanel>
             </PanelWrapper>
         </>
