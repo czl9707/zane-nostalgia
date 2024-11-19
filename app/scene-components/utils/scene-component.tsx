@@ -21,12 +21,12 @@ export default async function SceneComponent({ name, ...other }: SceneComponentP
             role="img" xmlns="http://www.w3.org/2000/svg"
         >
             <sceneModule.Component {...resolved} />
-            {resolved.banner &&
+            {resolved.bannerText &&
                 <text x="50%" y="50%"
-                    dominant-baseline="middle" text-anchor="middle"
-                    style={{ fill: "white", fontSize: "3rem" }}
+                    dominantBaseline="middle" textAnchor="middle"
+                    style={{ fill: resolved.bannerColor, fontSize: "4rem" }}
                 >
-                    {resolved.banner}
+                    {resolved.bannerText}
                 </text>
             }
         </svg>

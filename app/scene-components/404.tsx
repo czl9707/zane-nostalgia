@@ -18,15 +18,13 @@ export const fourOFourMeta: FourOFourMeta = {
         name: "Color",
         type: "color",
         default: "#220000",
-
-        controlOrder: 0,
+        group: "Color",
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
-
-        controlOrder: 1,
+        group: "Color",
     },
     density: {
         name: "Density",
@@ -35,15 +33,13 @@ export const fourOFourMeta: FourOFourMeta = {
         min: 2,
         max: 10,
         step: 1,
-
-        controlOrder: 2,
+        group: "Geometry",
     },
     textContent: {
         name: "Content",
         type: "string",
         default: "404",
-
-        controlOrder: 3,
+        group: "Geometry",
     }
 };
 

@@ -19,15 +19,13 @@ export const meteorMeta: MeteroShowerMeta = {
         name: "Color",
         type: "color",
         default: "#ffff00",
-
-        controlOrder: 0,
+        group: "Color",
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
-
-        controlOrder: 1,
+        group: "Color",
     },
     rotation: {
         name: "Rotation",
@@ -36,8 +34,7 @@ export const meteorMeta: MeteroShowerMeta = {
         min: 0,
         max: 180,
         step: 5,
-
-        controlOrder: 2,
+        group: "Geometry",
     },
     density: {
         name: "Density",
@@ -46,8 +43,7 @@ export const meteorMeta: MeteroShowerMeta = {
         min: 5,
         max: 20,
         step: 1,
-
-        controlOrder: 3,
+        group: "Geometry",
     },
 };
 

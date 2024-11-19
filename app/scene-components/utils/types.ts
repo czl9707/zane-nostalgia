@@ -2,7 +2,7 @@ interface BaseParamMetaToken {
     name: string,
     type: string,
     default: unknown,
-    controlOrder: number,
+    group: string,
 }
 
 interface ColorParamMetaToken extends BaseParamMetaToken {
@@ -33,7 +33,8 @@ namespace Scene {
     export interface CommonMetaData extends MetaData {
         width: NumberParamMetaToken,
         height: NumberParamMetaToken,
-        banner: StringParamMetaToken,
+        bannerText: StringParamMetaToken,
+        bannerColor: ColorParamMetaToken,
     }
     export type ComponentProps<M extends MetaData> = {
         [key in keyof (M)]: M[key]["default"]
@@ -49,6 +50,7 @@ namespace Scene {
 
 
 export type {
+    ParamMetaToken,
     ColorParamMetaToken,
     NumberParamMetaToken,
     StringParamMetaToken,

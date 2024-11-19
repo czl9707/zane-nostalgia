@@ -44,7 +44,7 @@ const StringInput = React.forwardRef<HTMLInputElement, StringInputProps & Omit<R
         return (
             <ControlStructure label={label}>
                 <StringInputEL type="text" value={value} name={label} {...other}
-                    aria-label={label} ref={ref}
+                    aria-label={label} ref={ref} placeholder="Your Text Here..."
                     onChange={(e) => {
                         setValue(e.target.value);
                         if (onChange) onChange(e.target.value);

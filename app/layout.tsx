@@ -52,6 +52,16 @@ export default function RootLayout({
   children: React.ReactNode,
   panels: React.ReactNode,
 }) {
+  const style = `
+  :root {
+      --fonts-serious:${space_grotesk.style.fontFamily};
+      --fonts-playful:${delius.style.fontFamily};
+  }
+  text {
+    font-family: ${space_grotesk.style.fontFamily}
+  }
+  `
+
   return (
     <html lang="en">
       <head>
@@ -62,18 +72,8 @@ export default function RootLayout({
         <meta property="og:description" content="Nostalgia, a curated collection of SVG patterns and backgrounds accessible via HTTP endpoints. Easily embed aesthetic visuals into GitHub READMEs, websites, and other projects. Perfect for developers looking to add unique, nostalgic effects with seamless integration." />
       </head>
       <body>
-        <style>
-          {/* a very nasty workaround here, single quote cannot hydrate successfully.
-             Have to remove from fontFamily to get this working */}
-          {
-            `
-            :root {
-                --fonts-serious:${space_grotesk.style.fontFamily.split("'").join("")};
-                --fonts-playful:${delius.style.fontFamily.split("'").join("")};
-            }
-            `
-          }
-        </style>
+        {/* to avoid escaping single quote :) */}
+        <style dangerouslySetInnerHTML={{ __html: style }} />
         <ThemeCorrector />
         <HeaderBarWithContextProvider>
           {children}

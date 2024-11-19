@@ -18,15 +18,13 @@ export const wavesMeta: WavesMeta = {
         name: "Color",
         type: "color",
         default: "#444444",
-
-        controlOrder: 0,
+        group: "Color",
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
-
-        controlOrder: 1,
+        group: "Color",
     },
     waveAmount: {
         name: "Waves Amount",
@@ -35,8 +33,7 @@ export const wavesMeta: WavesMeta = {
         min: 3,
         max: 10,
         step: 1,
-
-        controlOrder: 2,
+        group: "Geometry",
     },
     waveComplexity: {
         name: "Waves Complexity",
@@ -45,8 +42,7 @@ export const wavesMeta: WavesMeta = {
         min: 1,
         max: 8,
         step: 1,
-
-        controlOrder: 3,
+        group: "Geometry",
     },
     waveHeight: {
         name: "Waves Height",
@@ -55,9 +51,7 @@ export const wavesMeta: WavesMeta = {
         min: 30,
         max: 100,
         step: 5,
-
-        controlOrder: 4,
-
+        group: "Geometry",
     }
 };
 

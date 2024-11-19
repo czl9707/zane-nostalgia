@@ -8,8 +8,7 @@ export const defaultSceneCommonMetaData: Scene.CommonMetaData = {
         min: 200,
         max: 2400,
         step: 200,
-
-        controlOrder: 998,
+        group: "Screen Size",
     },
     width: {
         name: "Width",
@@ -18,16 +17,19 @@ export const defaultSceneCommonMetaData: Scene.CommonMetaData = {
         min: 400,
         max: 3600,
         step: 200,
-
-        controlOrder: 999,
+        group: "Screen Size",
     },
-
-    banner: {
-        name: "Banner",
+    bannerText: {
+        name: "Text",
         type: "string",
         default: "",
-
-        controlOrder: 997,
+        group: "Banner",
+    },
+    bannerColor: {
+        name: "Color",
+        type: "color",
+        default: "#FFFFFF",
+        group: "Banner",
     },
 }
 

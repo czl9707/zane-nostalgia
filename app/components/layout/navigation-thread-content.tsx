@@ -1,10 +1,12 @@
 import * as React from 'react';
+import Link from 'next/link';
 
 import { fetchSceneMetas } from '../../scene-components/utils/fetch-scenes';
-import { Accordion, AccordionLink, AccordionGroup } from "../ui/accordion";
+import { Accordion, AccordionGroup, AccordionItem } from "../ui/accordion";
 import { H4Typography } from "../ui/typography";
 import { DummyIcon, Orbit } from "../ui/icons/icons";
 import Divider from '../ui/divider';
+import Button from '../ui/button';
 
 const playgroundContents = [
     {
@@ -28,22 +30,27 @@ export default async function NavigationThreadContent() {
             </H4Typography>
             <Divider />
 
-            <AccordionLink href={"/"}>
-                Home
-                <DummyIcon />
-            </AccordionLink>
+            <Link href={"/"}>
+                <AccordionItem asChild>
+                    <Button variant='filled' color="transparent" fontVariant='body'>
+                        Home
+                        <DummyIcon />
+                    </Button>
+                </AccordionItem>
+            </Link>
             <Divider />
             <AccordionGroup type="multiple" defaultValue={["Scenes"]}>
                 <Accordion name={"Scenes"}>
                     {
                         sceneMetas.map(({ Icon, name, route }) => (
-                            <React.Fragment key={name}>
-                                <Divider />
-                                <AccordionLink href={`/scenes/${route}`}>
-                                    {name}
-                                    <Icon />
-                                </AccordionLink>
-                            </React.Fragment>
+                            <Link href={`/scenes/${route}`} key={name}>
+                                <AccordionItem asChild >
+                                    <Button variant='filled' color="transparent" fontVariant='body'>
+                                        {name}
+                                        <Icon />
+                                    </Button>
+                                </AccordionItem>
+                            </Link>
                         ))
                     }
                 </Accordion>
@@ -52,12 +59,13 @@ export default async function NavigationThreadContent() {
                 <Accordion name={"Playground"}>
                     {
                         playgroundContents.map(({ icon, name, route }) => (
-                            <React.Fragment key={name}>
-                                <Divider />
-                                <AccordionLink href={`/playground/${route}`}>
-                                    {name} {icon}
-                                </AccordionLink>
-                            </React.Fragment>
+                            <Link href={`/playground/${route}`} key={name}>
+                                <AccordionItem asChild >
+                                    <Button variant='filled' color="transparent" fontVariant='body'>
+                                        {name} {icon}
+                                    </Button>
+                                </AccordionItem>
+                            </Link>
                         ))
                     }
                 </Accordion>

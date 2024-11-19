@@ -18,15 +18,13 @@ export const rainyMeta: RainyMeta = {
         name: "Color",
         type: "color",
         default: "#888888",
-
-        controlOrder: 0,
+        group: "Color",
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
-
-        controlOrder: 1,
+        group: "Color",
     },
     density: {
         name: "Density",
@@ -35,8 +33,7 @@ export const rainyMeta: RainyMeta = {
         min: 5,
         max: 20,
         step: 1,
-
-        controlOrder: 2,
+        group: "Geometry",
     },
 };
 

@@ -19,6 +19,7 @@ export default function ControlRouterUpdator({ paramName, children }: { paramNam
     }
 
     return (
+        // work around the onChange type
         <Slot onChange={handleOnChange as unknown as React.FormEventHandler<HTMLElement>}>
             {children}
         </Slot>

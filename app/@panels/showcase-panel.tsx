@@ -46,7 +46,7 @@ async function ShowCase({ scene, ...other }: {
     return (
         <ShowCaseViewBox>
             <svg viewBox={`0 0 600 1200`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-                <sceneModule.Component width={600} height={1200} {...sceneParams} />
+                <sceneModule.Component width={600} height={1200} {...sceneParams} banner="" />
             </svg>
             <Link href={`/scenes/${scene}`}>
                 <ShowCaseMask>
