@@ -3,6 +3,7 @@ import { SvgIcon, IconProps } from "../components/ui/icons/icons";
 import { randomFitToInt } from "./utils/utils";
 import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
 import seedrandom from "seedrandom";
+import SceneComponent from "./utils/scene-component";
 
 interface WavesMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
@@ -147,7 +148,11 @@ const WaterIcon = React.forwardRef<SVGSVGElement, IconProps>(
 )
 
 
-export const Component: Scene.Module<WavesMeta>["Component"] = Waves;
 export const Icon: Scene.Module<WavesMeta>["Icon"] = WaterIcon;
 export const name: Scene.Module<WavesMeta>["name"] = "Waves";
 export const meta: Scene.Module<WavesMeta>["meta"] = wavesMeta;
+
+export const RawComponent: Scene.Module<WavesMeta>["RawComponent"] = Waves;
+export const Component: Scene.Module<WavesMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={Waves} meta={meta} {...props} />
+}

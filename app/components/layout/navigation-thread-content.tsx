@@ -31,12 +31,10 @@ export default async function NavigationThreadContent() {
             <Divider />
 
             <Link href={"/"}>
-                <AccordionItem asChild>
-                    <Button variant='filled' color="transparent" fontVariant='body'>
-                        Home
-                        <DummyIcon />
-                    </Button>
-                </AccordionItem>
+                <Button variant='filled' color="transparent" fontVariant='body' style={{ width: "100%" }}>
+                    Home
+                    <DummyIcon />
+                </Button>
             </Link>
             <Divider />
             <AccordionGroup type="multiple" defaultValue={["Scenes"]}>

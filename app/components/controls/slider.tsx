@@ -60,13 +60,14 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         showValue = false,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onChange = (_) => { },
+        ...other
     }, ref) {
         const [value, setValue] = React.useState<number>(defaultValue);
 
         return (
-            <ControlStructure label={label} value={showValue ? value : undefined}>
+            <ControlStructure label={label} value={showValue ? value : undefined} ref={ref} {...other}>
                 <SliderContainer value={[value]}
-                    min={min} max={max} step={step} ref={ref}
+                    min={min} max={max} step={step}
                     onValueChange={(vs) => {
                         setValue(vs[0]);
                         onChange(vs[0]);

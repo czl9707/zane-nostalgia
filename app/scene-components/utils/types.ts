@@ -1,3 +1,5 @@
+import React from "react";
+
 interface BaseParamMetaToken {
     name: string,
     type: string,
@@ -40,7 +42,8 @@ namespace Scene {
         [key in keyof (M)]: M[key]["default"]
     }
     export type Module<M extends MetaData = MetaData> = {
-        Component: React.FC<ComponentProps<M & CommonMetaData>>,
+        RawComponent: React.FC<ComponentProps<M & CommonMetaData>>,
+        Component: React.FC<Record<string, string>>,
         Icon: React.ElementType,
         name: string,
         meta: M

@@ -37,14 +37,14 @@ interface StringInputProps {
     defaultValue?: string,
 }
 
-const StringInput = React.forwardRef<HTMLInputElement, StringInputProps & Omit<React.HTMLAttributes<HTMLInputElement>, "onChange">>(
+const StringInput = React.forwardRef<HTMLDivElement, StringInputProps & Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">>(
     function StringInput({ defaultValue = "", label, onChange, ...other }, ref) {
         const [value, setValue] = React.useState<string>(defaultValue);
 
         return (
-            <ControlStructure label={label}>
-                <StringInputEL type="text" value={value} name={label} {...other}
-                    aria-label={label} ref={ref} placeholder="Your Text Here..."
+            <ControlStructure label={label} ref={ref} {...other}>
+                <StringInputEL type="text" value={value} name={label}
+                    aria-label={label} placeholder="Your Text Here..."
                     onChange={(e) => {
                         setValue(e.target.value);
                         if (onChange) onChange(e.target.value);

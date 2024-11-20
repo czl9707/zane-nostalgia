@@ -34,7 +34,6 @@ const slideUp = keyframes({
     "0%": { height: "var(--radix-accordion-content-height)", opacity: 1 },
 })
 const AccordionContent = styled(AccordionPrimitive.Content)(({ theme }) => ({
-    paddingLeft: "2rem",
     "&[data-state='open']": {
         animation: `${slideDown} ${theme.transition.long} linear`,
     },
@@ -60,7 +59,7 @@ const AccordionItem = React.forwardRef<HTMLDivElement, Omit<AccordionItemProps &
         const Com = asChild ? Slot : "div";
 
         return (
-            <Com {...other} ref={ref} style={{ width: "100%" }}>
+            <Com {...other} ref={ref} style={{ width: "100%", paddingLeft: "3rem" }}>
                 {children}
             </Com>
         )
@@ -80,7 +79,7 @@ function Accordion({ children = [], fontVariant = "body", name }: AccordionProps
             <AccordionContent>
                 {React.Children.toArray(children).map((child, i) => (
                     <React.Fragment key={i}>
-                        <Divider style={{ marginLeft: `-2rem` }} />
+                        <Divider />
                         {child}
                     </React.Fragment>
                 ))}

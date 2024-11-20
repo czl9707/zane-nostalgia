@@ -1,4 +1,4 @@
-import SceneComponent from "@/app/scene-components/utils/scene-component";
+import dynamic from "next/dynamic";
 import { fetchSceneMetas } from "../../scene-components/utils/fetch-scenes";
 
 export async function generateStaticParams(): Promise<{ scene: string }[]> {
@@ -6,9 +6,9 @@ export async function generateStaticParams(): Promise<{ scene: string }[]> {
     return scenes.map(s => ({ scene: s.route }));
 }
 
-export default async function Page({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: { [key: string]: string } }) {
+export default function Page({ params, searchParams }: { params: { scene: string }, searchParams: Record<string, string> }) {
+    const SComponent = dynamic(async () => import(`../../scene-components/${params.scene}`).then((mod) => mod.Component))
     return (
-        <SceneComponent name={(await params).scene} {...searchParams} />
+        <SComponent {...searchParams} />
     )
 }
-

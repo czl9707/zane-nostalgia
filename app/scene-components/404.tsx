@@ -3,6 +3,7 @@ import { space_grotesk } from "../layout";
 import { randomFitToInt, simpleHash } from "./utils/utils";
 import { ColorParamMetaToken, NumberParamMetaToken, Scene, StringParamMetaToken } from "./utils/types";
 import seedrandom from 'seedrandom';
+import SceneComponent from "./utils/scene-component";
 
 
 interface FourOFourMeta extends Scene.MetaData {
@@ -132,7 +133,11 @@ function FourOFour({
 }
 
 
-export const Component: Scene.Module<FourOFourMeta>["Component"] = FourOFour;
 export const Icon: Scene.Module<FourOFourMeta>["Icon"] = ErrorIcon;
 export const name: Scene.Module<FourOFourMeta>["name"] = "404";
 export const meta: Scene.Module<FourOFourMeta>["meta"] = fourOFourMeta;
+
+export const RawComponent: Scene.Module<FourOFourMeta>["RawComponent"] = FourOFour;
+export const Component: Scene.Module<FourOFourMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={FourOFour} meta={meta} {...props} />
+}

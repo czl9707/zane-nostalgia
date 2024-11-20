@@ -28,7 +28,7 @@ const PanelWrapper = styled(Panel)(({ theme }) => ({
     gap: `${theme.padding.panel}`,
 }));
 
-export default async function Panels({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: { [key: string]: string } }) {
+export default async function Panels({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: Record<string, string> }) {
     const renderToString = (await import('react-dom/server')).renderToString;
 
     const sceneModule: Scene.Module = await fetchScene((await params).scene);
@@ -51,15 +51,17 @@ export default async function Panels({ params, searchParams }: { params: Promise
     return (
         <>
             <PanelWrapper>
-                {
-                    Object.entries(metaGroups).map(([groupName, controlGroup], i) => (
-                        <div>
-                            <GroupControl resolvedValue={{ ...resolved, ...resolvedCommon }} groupName={groupName}
-                                controlGroup={controlGroup} key={i} />
-                            <Divider />
-                        </div>
-                    ))
-                }
+                <AccordionGroup type="multiple">
+                    {
+                        Object.entries(metaGroups).map(([groupName, controlGroup]) => (
+                            <React.Fragment key={groupName}>
+                                <GroupControl resolvedValue={{ ...resolved, ...resolvedCommon }} groupName={groupName}
+                                    controlGroup={controlGroup} />
+                                <Divider />
+                            </React.Fragment>
+                        ))
+                    }
+                </AccordionGroup>
             </PanelWrapper>
             <PanelWrapper>
                 <CopyPanel label={"To use in Markdown:"}>
@@ -68,7 +70,7 @@ export default async function Panels({ params, searchParams }: { params: Promise
 
                 <Divider />
                 <CopyPanel label={"Raw SVG:"}>
-                    {renderToString(<sceneModule.Component {...resolvedCommon} {...resolved} />)}
+                    {renderToString(<sceneModule.Component {...searchParams} />)}
                 </CopyPanel>
             </PanelWrapper>
         </>
@@ -80,10 +82,10 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
     groupName: string,
     resolvedValue: Scene.ComponentProps<Scene.MetaData>
 }) {
-    return <AccordionGroup type="single" collapsible>
+    return (
         <Accordion name={groupName} fontVariant='h5'>
             {
-                Object.entries(controlGroup).map(([paramName, metaEntry], i) => {
+                Object.entries(controlGroup).map(([paramName, metaEntry]) => {
                     let control = undefined;
                     if (metaEntry.type === "color")
                         control = (
@@ -103,7 +105,7 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
                         );
 
                     return (
-                        <AccordionItem key={paramName}>
+                        <AccordionItem key={paramName} asChild>
                             <ControlRouterUpdator paramName={paramName} >
                                 {control}
                             </ControlRouterUpdator>
@@ -112,5 +114,5 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
                 })
             }
         </Accordion>
-    </AccordionGroup >
+    )
 }

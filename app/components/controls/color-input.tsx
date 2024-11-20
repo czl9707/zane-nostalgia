@@ -37,15 +37,15 @@ interface ColorInputProps {
     defaultColor?: string,
 }
 
-const ColorInput = React.forwardRef<HTMLInputElement, ColorInputProps & Omit<React.HTMLAttributes<HTMLInputElement>, "onChange">>(
+const ColorInput = React.forwardRef<HTMLDivElement, ColorInputProps & Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">>(
     function ColorInput({ defaultColor = "#000000", label, onChange, ...other }, ref) {
         const [color, setColor] = React.useState<string>(defaultColor);
 
         return (
-            <ControlStructure label={label}>
+            <ControlStructure label={label} {...other} ref={ref}>
                 <ColorInputContainer>
-                    <ColorInputEL type="color" value={color} name={label} {...other}
-                        aria-label={label} ref={ref}
+                    <ColorInputEL type="color" value={color} name={label}
+                        aria-label={label}
                         onChange={(e) => {
                             setColor(e.target.value);
                             if (onChange) onChange(e.target.value);

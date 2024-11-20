@@ -2,7 +2,7 @@ import { defaultSceneCommonMetaData } from "./constants";
 import { NumberParamMetaToken, Scene, } from "./types";
 
 function defaultParameterResolver<M extends Scene.MetaData>(
-    props: { [key: string]: string },
+    props: Partial<Record<string, string>>,
     metaData: M
 ): Scene.ComponentProps<M> {
     const resolved: Partial<Scene.ComponentProps<M>> = {};
@@ -23,7 +23,7 @@ function defaultParameterResolver<M extends Scene.MetaData>(
 }
 
 function defaultCommonParameterResolver(
-    props: { [key: string]: string },
+    props: Partial<Record<string, string>>,
 ): Scene.ComponentProps<Scene.CommonMetaData> {
     return defaultParameterResolver<Scene.CommonMetaData>(props, defaultSceneCommonMetaData)
 }

@@ -4,6 +4,7 @@ import { IconProps, SvgIcon } from "../components/ui/icons/icons"
 import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
 import { randomFitToInt } from "./utils/utils";
 import seedrandom from 'seedrandom';
+import SceneComponent from "./utils/scene-component";
 
 
 interface MeteroShowerMeta extends Scene.MetaData {
@@ -161,7 +162,11 @@ const MeteorShowerIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-export const Component: Scene.Module<MeteroShowerMeta>["Component"] = MeteorShower;
 export const Icon: Scene.Module<MeteroShowerMeta>["Icon"] = MeteorShowerIcon;
 export const name: Scene.Module<MeteroShowerMeta>["name"] = "Meteor Shower";
 export const meta: Scene.Module<MeteroShowerMeta>["meta"] = meteorMeta;
+
+export const RawComponent: Scene.Module<MeteroShowerMeta>["RawComponent"] = MeteorShower;
+export const Component: Scene.Module<MeteroShowerMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={MeteorShower} meta={meta} {...props} />
+}

@@ -41,12 +41,11 @@ async function ShowCase({ scene, ...other }: {
     [key: string]: string
 }) {
     const sceneModule: Scene.Module = await import(`../scene-components/${scene}`);
-    const sceneParams = defaultParameterResolver(other, sceneModule.meta);
 
     return (
         <ShowCaseViewBox>
             <svg viewBox={`0 0 600 1200`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-                <sceneModule.Component width={600} height={1200} {...sceneParams} banner="" />
+                <sceneModule.Component width={"600"} height={"1200"} />
             </svg>
             <Link href={`/scenes/${scene}`}>
                 <ShowCaseMask>

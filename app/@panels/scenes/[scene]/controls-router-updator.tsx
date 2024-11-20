@@ -6,7 +6,7 @@ import { Slot } from '@radix-ui/react-slot';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-export default function ControlRouterUpdator({ paramName, children }: { paramName: string, children: React.ReactNode }) {
+export default function ControlRouterUpdator({ paramName, children, ...other }: { paramName: string, children: React.ReactNode }) {
     const router = useRouter();
     const path = usePathname();
     const searchParam = useSearchParams();
@@ -20,7 +20,7 @@ export default function ControlRouterUpdator({ paramName, children }: { paramNam
 
     return (
         // work around the onChange type
-        <Slot onChange={handleOnChange as unknown as React.FormEventHandler<HTMLElement>}>
+        <Slot onChange={handleOnChange as unknown as React.FormEventHandler<HTMLElement>} {...other}>
             {children}
         </Slot>
     )
