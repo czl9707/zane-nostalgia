@@ -5,27 +5,23 @@ import * as React from 'react';
 import Button from "./button"
 import { keyframes, styled } from '@pigment-css/react';
 import * as AccordionPrimitive from '@radix-ui/react-accordion'
+import { Slot } from '@radix-ui/react-slot'
 
 import { KeyboardArrowDown } from './icons/icons';
-import { useRouter } from 'next/navigation';
+import Divider from './divider';
+import { TypographyVairation } from '@pigment-css/react/theme';
 
-
-const AccordionHierachyContext = React.createContext<number>(0);
 
 interface AccordionProps {
-    children?: React.ReactNode,
+    children?: Iterable<React.ReactNode>,
     name: string,
+    fontVariant?: TypographyVairation,
 }
 
-interface AccordionButtonProps {
-    children: React.ReactNode,
+interface AccordionItemProps {
+    chilren?: React.ReactNode,
+    asChild?: boolean,
 }
-
-interface AccordionLinkProps {
-    href: string,
-    children: React.ReactNode,
-}
-
 
 const slideDown = keyframes({
     "0%": { height: 0, opacity: 0 },
@@ -58,52 +54,40 @@ const AccordionTrigger = styled(AccordionPrimitive.Trigger)(({ theme }) => ({
     },
 }));
 
-const AccordionButton = React.forwardRef<HTMLDivElement, Omit<AccordionButtonProps & React.HTMLAttributes<HTMLDivElement>, "color">>(
-    function AccordionButton({ children, ...other }, ref) {
-        const currentHierachy = React.useContext(AccordionHierachyContext);
+const AccordionItem = React.forwardRef<HTMLDivElement, Omit<AccordionItemProps & React.HTMLAttributes<HTMLDivElement>, "color">>(
+    function AccordionItem({ children, asChild = false, ...other }, ref) {
+        const Com = asChild ? Slot : "div";
 
         return (
-            <Button variant='filled' color="transparent" fontVariant='body' {...other} ref={ref}
-                style={{ paddingLeft: `${currentHierachy * 2 + 1}rem`, width: "100%" }}>
+            <Com {...other} ref={ref} style={{ width: "100%", paddingLeft: "3rem" }}>
                 {children}
-            </Button>
+            </Com>
         )
     }
 )
 
-const AccordionLink = React.forwardRef<HTMLDivElement, Omit<AccordionLinkProps & React.HTMLAttributes<HTMLDivElement>, "color">>(
-    function AccordionLink({ children, href, ...other }, ref) {
-        const router = useRouter();
-
-        return (
-            <AccordionButton ref={ref} {...other} onClick={() => router.push(href)}>
-                {children}
-            </AccordionButton>
-        )
-    }
-)
-
-function Accordion({ children, name }: AccordionProps) {
-    const currentHierachy = React.useContext(AccordionHierachyContext);
-
+function Accordion({ children = [], fontVariant = "body", name }: AccordionProps) {
     return (
-        <AccordionHierachyContext.Provider value={currentHierachy + 1}>
-            <AccordionPrimitive.Item value={name}>
-                <AccordionTrigger asChild>
-                    <Button variant='filled' color="transparent" fontVariant='body'
-                        style={{ paddingLeft: `${currentHierachy * 2 + 1}rem`, width: "100%" }}>
-                        {name}
-                        <KeyboardArrowDown style={{ flex: "none" }} />
-                    </Button>
-                </AccordionTrigger>
-                <AccordionContent>
-                    {children}
-                </AccordionContent>
-            </AccordionPrimitive.Item>
-        </AccordionHierachyContext.Provider>
+        <AccordionPrimitive.Item value={name}>
+            <AccordionTrigger asChild>
+                <Button variant='filled' color="transparent" fontVariant={fontVariant}
+                    style={{ width: "100%" }}>
+                    {name}
+                    <KeyboardArrowDown style={{ flex: "none" }} />
+                </Button>
+            </AccordionTrigger>
+            <AccordionContent>
+                {React.Children.toArray(children).map((child, i) => (
+                    <React.Fragment key={i}>
+                        <Divider />
+                        {child}
+                    </React.Fragment>
+                ))}
+            </AccordionContent>
+        </AccordionPrimitive.Item>
     )
 }
 
 const AccordionGroup = AccordionPrimitive.Root;
 
-export { AccordionLink, AccordionButton, Accordion, AccordionGroup }
+export { Accordion, AccordionGroup, AccordionItem }

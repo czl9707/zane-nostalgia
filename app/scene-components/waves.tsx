@@ -1,10 +1,11 @@
 import * as React from "react";
 import { SvgIcon, IconProps } from "../components/ui/icons/icons";
 import { randomFitToInt } from "./utils/utils";
-import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneModule, SceneSizeMetaData } from "./utils/types";
+import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
 import seedrandom from "seedrandom";
+import SceneComponent from "./utils/scene-component";
 
-interface WavesMeta extends SceneMetaData {
+interface WavesMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     waveAmount: NumberParamMetaToken,
@@ -18,15 +19,13 @@ export const wavesMeta: WavesMeta = {
         name: "Color",
         type: "color",
         default: "#444444",
-
-        controlOrder: 0,
+        group: "Color",
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
-
-        controlOrder: 1,
+        group: "Color",
     },
     waveAmount: {
         name: "Waves Amount",
@@ -35,8 +34,7 @@ export const wavesMeta: WavesMeta = {
         min: 3,
         max: 10,
         step: 1,
-
-        controlOrder: 2,
+        group: "Geometry",
     },
     waveComplexity: {
         name: "Waves Complexity",
@@ -45,8 +43,7 @@ export const wavesMeta: WavesMeta = {
         min: 1,
         max: 8,
         step: 1,
-
-        controlOrder: 3,
+        group: "Geometry",
     },
     waveHeight: {
         name: "Waves Height",
@@ -55,9 +52,7 @@ export const wavesMeta: WavesMeta = {
         min: 30,
         max: 100,
         step: 5,
-
-        controlOrder: 4,
-
+        group: "Geometry",
     }
 };
 
@@ -72,11 +67,11 @@ function Waves({
     waveHeight,
     height,
     width,
-}: SceneComponentProps<WavesMeta & SceneSizeMetaData>) {
+}: Scene.ComponentProps<WavesMeta & Scene.CommonMetaData>) {
     const randomGenerator = seedrandom("Waves");
     const WAVE_VERTICAL_DELTA = Math.floor(width / (waveComplexity + 1) / 6);
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+    return (<>
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         <linearGradient id="waveGradient"
             gradientUnits="userSpaceOnUse"
@@ -111,7 +106,7 @@ function Waves({
             )
         }
 
-    </svg>)
+    </>)
 }
 
 // nodeNum is the number of nodes excluding two ends
@@ -153,7 +148,11 @@ const WaterIcon = React.forwardRef<SVGSVGElement, IconProps>(
 )
 
 
-export const SceneComponent: SceneModule["SceneComponent"] = Waves;
-export const SceneIcon: SceneModule["SceneIcon"] = WaterIcon;
-export const name: SceneModule["name"] = "Waves";
-export const meta: SceneModule["meta"] = wavesMeta;
+export const Icon: Scene.Module<WavesMeta>["Icon"] = WaterIcon;
+export const name: Scene.Module<WavesMeta>["name"] = "Waves";
+export const meta: Scene.Module<WavesMeta>["meta"] = wavesMeta;
+
+export const RawComponent: Scene.Module<WavesMeta>["RawComponent"] = Waves;
+export const Component: Scene.Module<WavesMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={Waves} meta={meta} {...props} />
+}

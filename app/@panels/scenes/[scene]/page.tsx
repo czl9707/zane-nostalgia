@@ -1,19 +1,21 @@
 import * as React from 'react';
 
 // dont know why only relative works ......
-
-import { SceneMetaData, SceneModule } from '../../../scene-components/utils/types';
-import { defaultSceneSizeMetaData } from '../../../scene-components/utils/constants';
-import { defaultParameterResolver, defaultSizeParameterResolver, resolveParameterConstraints } from '../../../scene-components/utils/resolver';
+import { defaultSceneCommonMetaData } from '../../../scene-components/utils/constants';
+import { defaultParameterResolver, defaultCommonParameterResolver, resolveParameterConstraints } from '../../../scene-components/utils/resolver';
 import { fetchScene, fetchSceneMetas } from '../../../scene-components/utils/fetch-scenes';
+import { ParamMetaToken, Scene } from '../../../scene-components/utils/types';
 
 import Panel from '../../../components/ui/panel';
 import Divider from '../../../components/ui/divider';
-import { QuoteTypography } from '../../../components/ui/typography';
 import CopyPanel from '../../../components/controls/copy-panel';
 
-import { ColorInputRouterUpdater, SliderRouterUpdater } from './controls-router-updator';
+import ControlRouterUpdator from './controls-router-updator';
 import { styled } from '@pigment-css/react';
+import ColorInput from '@/app/components/controls/color-input';
+import Slider from '@/app/components/controls/slider';
+import StringInput from '@/app/components/controls/string-input';
+import { Accordion, AccordionGroup, AccordionItem } from '@/app/components/ui/accordion';
 
 
 export async function generateStaticParams(): Promise<{ scene: string }[]> {
@@ -26,68 +28,91 @@ const PanelWrapper = styled(Panel)(({ theme }) => ({
     gap: `${theme.padding.panel}`,
 }));
 
-export default async function Panels({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: { [key: string]: string } }) {
+export default async function Panels({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: Record<string, string> }) {
     const renderToString = (await import('react-dom/server')).renderToString;
 
-    const sceneModule: SceneModule = await fetchScene((await params).scene);
-    const meta: SceneMetaData = sceneModule.meta;
+    const sceneModule: Scene.Module = await fetchScene((await params).scene);
+    const meta: Scene.MetaData = sceneModule.meta;
 
-    let resolvedSize = defaultSizeParameterResolver(searchParams);
-    resolvedSize = resolveParameterConstraints(resolvedSize, defaultSceneSizeMetaData);
+    let resolvedCommon = defaultCommonParameterResolver(searchParams);
+    resolvedCommon = resolveParameterConstraints(resolvedCommon, defaultSceneCommonMetaData);
     let resolved = defaultParameterResolver(searchParams, meta);
     resolved = resolveParameterConstraints(resolved, meta);
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const metaEntries = Object.entries(meta).sort(([pn, metaEntry]) => metaEntry.controlOrder)
+    const metaGroups: { [key: string]: { [key: string]: ParamMetaToken } } = {};
+
+    for (const [paramName, token] of Object.entries({ ...meta, ...defaultSceneCommonMetaData })) {
+        if (!metaGroups.hasOwnProperty(token.group)) {
+            metaGroups[token.group] = {};
+        }
+        metaGroups[token.group][paramName] = token;
+    }
 
     return (
         <>
             <PanelWrapper>
-                {
-                    metaEntries.map(([paramName, metaEntry], i) => {
-                        if (metaEntry.type === "color")
-                            return (
-                                <React.Fragment key={paramName}>
-                                    {i > 0 && <Divider />}
-                                    <ColorInputRouterUpdater paramName={paramName}
-                                        label={metaEntry.name} defaultColor={resolved[paramName] as string} />
-                                </React.Fragment>
-                            )
-                        else if (metaEntry.type === "number")
-                            return (
-                                <React.Fragment key={paramName}>
-                                    {i > 0 && <Divider />}
-                                    <SliderRouterUpdater paramName={paramName}
-                                        min={metaEntry.min} max={metaEntry.max} step={metaEntry.step}
-                                        label={metaEntry.name} defaultValue={resolved[paramName] as number} />
-                                </React.Fragment>
-                            )
-                    })
-                }
+                <AccordionGroup type="multiple">
+                    {
+                        Object.entries(metaGroups).map(([groupName, controlGroup]) => (
+                            <React.Fragment key={groupName}>
+                                <GroupControl resolvedValue={{ ...resolved, ...resolvedCommon }} groupName={groupName}
+                                    controlGroup={controlGroup} />
+                                <Divider />
+                            </React.Fragment>
+                        ))
+                    }
+                </AccordionGroup>
             </PanelWrapper>
             <PanelWrapper>
-                <QuoteTypography color="secondary" style={{ marginBottom: ".7rem" }}>
-                    * Window size Parameters won&apos;t applies to preview.
-                </QuoteTypography>
-
-                <SliderRouterUpdater paramName={"height"}
-                    min={defaultSceneSizeMetaData.height.min} max={defaultSceneSizeMetaData.height.max} step={defaultSceneSizeMetaData.height.step}
-                    label={defaultSceneSizeMetaData.height.name} defaultValue={resolvedSize["height"]} />
-                <Divider />
-                <SliderRouterUpdater paramName={"width"}
-                    min={defaultSceneSizeMetaData.width.min} max={defaultSceneSizeMetaData.width.max} step={defaultSceneSizeMetaData.width.step}
-                    label={defaultSceneSizeMetaData.width.name} defaultValue={resolvedSize["width"]} />
-                <Divider />
-
                 <CopyPanel label={"To use in Markdown:"}>
-                    {`<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/${(await params).scene}/api?${new URLSearchParams({ ...resolvedSize, ...resolved } as Record<string, string>).toString()}" />`}
+                    {`<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/${(await params).scene}/api?${new URLSearchParams({ ...resolvedCommon, ...resolved } as Record<string, string>).toString()}" />`}
                 </CopyPanel>
 
                 <Divider />
                 <CopyPanel label={"Raw SVG:"}>
-                    {renderToString(<sceneModule.SceneComponent {...resolvedSize} {...resolved} />)}
+                    {renderToString(<sceneModule.Component {...searchParams} />)}
                 </CopyPanel>
             </PanelWrapper>
         </>
     );
+}
+
+function GroupControl({ controlGroup, groupName, resolvedValue }: {
+    controlGroup: { [key in keyof Scene.MetaData]: ParamMetaToken },
+    groupName: string,
+    resolvedValue: Scene.ComponentProps<Scene.MetaData>
+}) {
+    return (
+        <Accordion name={groupName} fontVariant='h5'>
+            {
+                Object.entries(controlGroup).map(([paramName, metaEntry]) => {
+                    let control = undefined;
+                    if (metaEntry.type === "color")
+                        control = (
+                            <ColorInput label={metaEntry.name}
+                                defaultColor={resolvedValue[paramName] as string} />
+                        );
+                    else if (metaEntry.type === "number")
+                        control = (
+                            <Slider showValue={groupName === "Screen Size"}
+                                min={metaEntry.min} max={metaEntry.max} step={metaEntry.step}
+                                label={metaEntry.name} defaultValue={resolvedValue[paramName] as number} />
+                        );
+                    else if (metaEntry.type === "string")
+                        control = (
+                            <StringInput
+                                label={metaEntry.name} defaultValue={resolvedValue[paramName] as string} />
+                        );
+
+                    return (
+                        <AccordionItem key={paramName} asChild>
+                            <ControlRouterUpdator paramName={paramName} >
+                                {control}
+                            </ControlRouterUpdator>
+                        </AccordionItem>
+                    )
+                })
+            }
+        </Accordion>
+    )
 }

@@ -29,14 +29,14 @@ globalCss(({ theme }) => ({
     width: "6px",
   },
   "&::-webkit-scrollbar-track": {
-    backgroundColor: theme.vars.colors.primary.background,
+    backgroundColor: "transparent",
   },
   "&::-webkit-scrollbar-thumb": {
     backgroundColor: `color-mix(in srgb, ${theme.vars.colors.secondary.background}, transparent)`,
     borderRadius: "5px",
   },
   "&::-webkit-scrollbar-button": {
-    backgroundColor: "transparent", height: "5px",
+    backgroundColor: "transparent", height: "0",
   },
   "a": { color: "inherit" },
   "body": {
@@ -46,14 +46,22 @@ globalCss(({ theme }) => ({
 } as CSSObjectNoCallback));
 
 
-
-
 export default function RootLayout({
   children, panels
 }: {
   children: React.ReactNode,
   panels: React.ReactNode,
 }) {
+  const style = `
+  :root {
+      --fonts-serious:${space_grotesk.style.fontFamily};
+      --fonts-playful:${delius.style.fontFamily};
+  }
+  text {
+    font-family: ${space_grotesk.style.fontFamily}
+  }
+  `
+
   return (
     <html lang="en">
       <head>
@@ -64,18 +72,8 @@ export default function RootLayout({
         <meta property="og:description" content="Nostalgia, a curated collection of SVG patterns and backgrounds accessible via HTTP endpoints. Easily embed aesthetic visuals into GitHub READMEs, websites, and other projects. Perfect for developers looking to add unique, nostalgic effects with seamless integration." />
       </head>
       <body>
-        <style>
-          {/* a very nasty workaround here, single quote cannot hydrate successfully.
-             Have to remove from fontFamily to get this working */}
-          {
-            `
-            :root {
-                --fonts-serious:${space_grotesk.style.fontFamily.split("'").join("")};
-                --fonts-playful:${delius.style.fontFamily.split("'").join("")};
-            }
-            `
-          }
-        </style>
+        {/* to avoid escaping single quote :) */}
+        <style dangerouslySetInnerHTML={{ __html: style }} />
         <ThemeCorrector />
         <HeaderBarWithContextProvider>
           {children}

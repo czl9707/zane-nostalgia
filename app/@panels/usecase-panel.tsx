@@ -3,9 +3,8 @@ import Panel from "../components/ui/panel"
 import { BodyTypography, H3Typography, H4Typography } from "../components/ui/typography"
 import { Download, Copy, Code, File, BackHand } from "../components/ui/icons/icons";
 
-import { SceneComponent as MeteorsScene, meta as meteorsMeta } from "../scene-components/meteors";
-import { SceneComponent as FourOFour, meta as fourOfourMeta } from "../scene-components/404";
-import { defaultParameterResolver } from "../scene-components/utils/resolver";
+import { Component as MeteorsScene } from "../scene-components/meteors";
+import { Component as FourOFour } from "../scene-components/404";
 import TypingTypography from "../components/ui/typing-typography";
 
 interface UseCaseContainer {
@@ -144,7 +143,7 @@ function DownloadIllustration() {
                 <ScenePlaceHolder >
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                         style={{ animation: `${sceneDropped} ${animateDetail}` }}>
-                        <MeteorsScene {...defaultParameterResolver({}, meteorsMeta)} width={1200} height={600} />
+                        <MeteorsScene width="1200" height="600" />
                     </svg>
                 </ScenePlaceHolder>
                 <LinePlaceHolder style={{ width: 0 }} />
@@ -217,11 +216,11 @@ function CopyIllustration() {
                 <ScenePlaceHolder >
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                         style={{ animation: `${originalScene} ${animateDetail}`, position: "absolute", inset: "0 0 auto 0" }}>
-                        <FourOFour {...defaultParameterResolver({ color: "#080877" }, fourOfourMeta)} width={1200} height={600} content="Zane" />
+                        <FourOFour color="#080877" width="1200" height="600" content="Zane" />
                     </svg>
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                         style={{ animation: `${updatedScene} ${animateDetail}`, position: "absolute", inset: "0 0 auto 0" }}>
-                        <FourOFour {...defaultParameterResolver({ color: "#080877" }, fourOfourMeta)} width={1200} height={600} content="Kiyo" />
+                        <FourOFour color="#080877" width="1200" height="600" content="Kiyo" />
                     </svg>
                 </ScenePlaceHolder>
                 <LinePlaceHolder style={{ width: 0 }} />
@@ -264,7 +263,7 @@ function EmbedIllustration() {
             <MockContainer>
                 <ScenePlaceHolder >
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-                        <MeteorsScene {...defaultParameterResolver({}, meteorsMeta)} width={1200} height={600} />
+                        <MeteorsScene width="1200" height="600" />
                     </svg>
                 </ScenePlaceHolder>
                 <LinePlaceHolder style={{ width: 0 }} />

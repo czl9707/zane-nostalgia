@@ -1,14 +1,16 @@
 import { Error as ErrorIcon } from "../components/ui/icons/icons";
 import { space_grotesk } from "../layout";
 import { randomFitToInt, simpleHash } from "./utils/utils";
-import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneModule, SceneSizeMetaData } from "./utils/types";
+import { ColorParamMetaToken, NumberParamMetaToken, Scene, StringParamMetaToken } from "./utils/types";
 import seedrandom from 'seedrandom';
+import SceneComponent from "./utils/scene-component";
 
 
-interface FourOFourMeta extends SceneMetaData {
+interface FourOFourMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
+    textContent: StringParamMetaToken,
 }
 
 
@@ -17,15 +19,13 @@ export const fourOFourMeta: FourOFourMeta = {
         name: "Color",
         type: "color",
         default: "#220000",
-
-        controlOrder: 0,
+        group: "Color",
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
-
-        controlOrder: 1,
+        group: "Color",
     },
     density: {
         name: "Density",
@@ -34,9 +34,14 @@ export const fourOFourMeta: FourOFourMeta = {
         min: 2,
         max: 10,
         step: 1,
-
-        controlOrder: 2,
+        group: "Geometry",
     },
+    textContent: {
+        name: "Content",
+        type: "string",
+        default: "404",
+        group: "Geometry",
+    }
 };
 
 const DENSITY_FACTOR = 0.0007;
@@ -55,11 +60,11 @@ function FourOFour({
     density,
     height,
     width,
-    content = "404",
-}: SceneComponentProps<FourOFourMeta & SceneSizeMetaData>) {
+    textContent = "404",
+}: Scene.ComponentProps<FourOFourMeta & Scene.CommonMetaData>) {
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom("FourOFour");
-    const contentHash = simpleHash(content as string);
+    const contentHash = simpleHash(textContent as string);
 
     const visitedDurClass = new Set();
     const visitedSizeClass = new Set();
@@ -75,13 +80,11 @@ function FourOFour({
 
         return (
             <use href={`#content-${contentHash}`} key={i} x={randomFitToInt(randomGenerator(), 0, width)} y={randomFitToInt(randomGenerator(), 0, height)}
-                className={["blink", `blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")}>
-                {content}
-            </use >
+                className={["blink", `blink-dur-${dur}`, `blink-size-${size}`, `blink-init-${init}`,].join(" ")} />
         )
     });
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+    return (<>
         <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
         <style>
             {
@@ -122,15 +125,19 @@ function FourOFour({
                 fill: color,
                 fontFamily: `${space_grotesk.style.fontFamily},'Space Grotesk'`,
             }}>
-                {content}
+                {textContent}
             </text>
         </defs>
         {textEls}
-    </svg>)
+    </>)
 }
 
 
-export const SceneComponent: SceneModule["SceneComponent"] = FourOFour;
-export const SceneIcon: SceneModule["SceneIcon"] = ErrorIcon;
-export const name: SceneModule["name"] = "404";
-export const meta: SceneModule["meta"] = fourOFourMeta;
+export const Icon: Scene.Module<FourOFourMeta>["Icon"] = ErrorIcon;
+export const name: Scene.Module<FourOFourMeta>["name"] = "404";
+export const meta: Scene.Module<FourOFourMeta>["meta"] = fourOFourMeta;
+
+export const RawComponent: Scene.Module<FourOFourMeta>["RawComponent"] = FourOFour;
+export const Component: Scene.Module<FourOFourMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={FourOFour} meta={meta} {...props} />
+}

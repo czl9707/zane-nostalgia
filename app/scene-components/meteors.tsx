@@ -1,12 +1,13 @@
 import * as React from "react";
 
 import { IconProps, SvgIcon } from "../components/ui/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
+import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
 import { randomFitToInt } from "./utils/utils";
 import seedrandom from 'seedrandom';
+import SceneComponent from "./utils/scene-component";
 
 
-interface MeteroShowerMeta extends SceneMetaData {
+interface MeteroShowerMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     rotation: NumberParamMetaToken,
@@ -19,15 +20,13 @@ export const meteorMeta: MeteroShowerMeta = {
         name: "Color",
         type: "color",
         default: "#ffff00",
-
-        controlOrder: 0,
+        group: "Color",
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
-
-        controlOrder: 1,
+        group: "Color",
     },
     rotation: {
         name: "Rotation",
@@ -36,8 +35,7 @@ export const meteorMeta: MeteroShowerMeta = {
         min: 0,
         max: 180,
         step: 5,
-
-        controlOrder: 2,
+        group: "Geometry",
     },
     density: {
         name: "Density",
@@ -46,8 +44,7 @@ export const meteorMeta: MeteroShowerMeta = {
         min: 5,
         max: 20,
         step: 1,
-
-        controlOrder: 3,
+        group: "Geometry",
     },
 };
 
@@ -69,7 +66,7 @@ function MeteorShower({
     density,
     height,
     width,
-}: SceneComponentProps<MeteroShowerMeta & SceneSizeMetaData>) {
+}: Scene.ComponentProps<MeteroShowerMeta & Scene.CommonMetaData>) {
     const meteorCountY = rotation === 90 ? 0 :
         Math.abs(Math.floor(
             height * density * DENSITY_FACTOR * Math.cos(rotation * Math.PI / 180)
@@ -111,7 +108,7 @@ function MeteorShower({
     ]
 
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+    return (<>
         <defs>
             <linearGradient id="tailGradient" gradientTransform={`rotate(0)`}>
                 <stop offset="0%" stopColor={color} />
@@ -151,7 +148,7 @@ function MeteorShower({
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         {meteorInstances}
-    </svg>)
+    </>)
 }
 
 
@@ -165,7 +162,11 @@ const MeteorShowerIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-export const SceneComponent: SceneModule["SceneComponent"] = MeteorShower;
-export const SceneIcon: SceneModule["SceneIcon"] = MeteorShowerIcon;
-export const name: SceneModule["name"] = "Meteor Shower";
-export const meta: SceneModule["meta"] = meteorMeta;
+export const Icon: Scene.Module<MeteroShowerMeta>["Icon"] = MeteorShowerIcon;
+export const name: Scene.Module<MeteroShowerMeta>["name"] = "Meteor Shower";
+export const meta: Scene.Module<MeteroShowerMeta>["meta"] = meteorMeta;
+
+export const RawComponent: Scene.Module<MeteroShowerMeta>["RawComponent"] = MeteorShower;
+export const Component: Scene.Module<MeteroShowerMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={MeteorShower} meta={meta} {...props} />
+}

@@ -1,8 +1,10 @@
+import React from "react";
+
 interface BaseParamMetaToken {
     name: string,
     type: string,
     default: unknown,
-    controlOrder: number,
+    group: string,
 }
 
 interface ColorParamMetaToken extends BaseParamMetaToken {
@@ -18,32 +20,42 @@ interface NumberParamMetaToken extends BaseParamMetaToken {
     step: number,
 }
 
+interface StringParamMetaToken extends BaseParamMetaToken {
+    type: "string",
+    default: string,
+}
 
-type ParamMetaToken = ColorParamMetaToken | NumberParamMetaToken
-type SceneMetaData = { [key: string]: ParamMetaToken }
+type ParamMetaToken =
+    ColorParamMetaToken |
+    NumberParamMetaToken |
+    StringParamMetaToken;
 
-interface SceneSizeMetaData extends SceneMetaData {
-    width: NumberParamMetaToken,
-    height: NumberParamMetaToken,
+namespace Scene {
+    export type MetaData = { [key: string]: ParamMetaToken }
+    export interface CommonMetaData extends MetaData {
+        width: NumberParamMetaToken,
+        height: NumberParamMetaToken,
+        bannerText: StringParamMetaToken,
+        bannerColor: ColorParamMetaToken,
+    }
+    export type ComponentProps<M extends MetaData> = {
+        [key in keyof (M)]: M[key]["default"]
+    }
+    export type Module<M extends MetaData = MetaData> = {
+        RawComponent: React.FC<ComponentProps<M & CommonMetaData>>,
+        Component: React.FC<Record<string, string>>,
+        Icon: React.ElementType,
+        name: string,
+        meta: M
+    }
 }
 
 
-type SceneComponentProps<M extends SceneMetaData> = {
-    [key in keyof (M)]: M[key]["default"]
-}
-
-interface SceneModule {
-    SceneComponent: React.ElementType,
-    SceneIcon: React.ElementType,
-    name: string,
-    meta: SceneMetaData
-}
 
 export type {
+    ParamMetaToken,
     ColorParamMetaToken,
     NumberParamMetaToken,
-    SceneMetaData,
-    SceneSizeMetaData,
-    SceneComponentProps,
-    SceneModule,
+    StringParamMetaToken,
+    Scene,
 }

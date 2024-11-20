@@ -1,6 +1,6 @@
-import { SceneSizeMetaData } from "./types";
+import { Scene } from "./types";
 
-export const defaultSceneSizeMetaData: SceneSizeMetaData = {
+export const defaultSceneCommonMetaData: Scene.CommonMetaData = {
     height: {
         name: "Height",
         type: "number",
@@ -8,8 +8,7 @@ export const defaultSceneSizeMetaData: SceneSizeMetaData = {
         min: 200,
         max: 2400,
         step: 200,
-
-        controlOrder: 998,
+        group: "Screen Size",
     },
     width: {
         name: "Width",
@@ -18,10 +17,19 @@ export const defaultSceneSizeMetaData: SceneSizeMetaData = {
         min: 400,
         max: 3600,
         step: 200,
-
-        controlOrder: 999,
+        group: "Screen Size",
+    },
+    bannerText: {
+        name: "Text",
+        type: "string",
+        default: "",
+        group: "Banner",
+    },
+    bannerColor: {
+        name: "Color",
+        type: "color",
+        default: "#FFFFFF",
+        group: "Banner",
     },
 }
 
-
-export const ALL_SCENES = ["meteor"] as const;

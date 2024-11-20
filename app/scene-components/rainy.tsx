@@ -1,12 +1,13 @@
 import * as React from "react";
 
 import { IconProps, SvgIcon } from "../components/ui/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, SceneComponentProps, SceneMetaData, SceneSizeMetaData, SceneModule } from "./utils/types";
+import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
 import { randomFitToInt } from "./utils/utils";
 import seedrandom from "seedrandom";
+import SceneComponent from "./utils/scene-component";
 
 
-interface RainyMeta extends SceneMetaData {
+interface RainyMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
@@ -18,15 +19,13 @@ export const rainyMeta: RainyMeta = {
         name: "Color",
         type: "color",
         default: "#888888",
-
-        controlOrder: 0,
+        group: "Color",
     },
     backgroundColor: {
         name: "Background Color",
         type: "color",
         default: "#000000",
-
-        controlOrder: 1,
+        group: "Color",
     },
     density: {
         name: "Density",
@@ -35,8 +34,7 @@ export const rainyMeta: RainyMeta = {
         min: 5,
         max: 20,
         step: 1,
-
-        controlOrder: 2,
+        group: "Geometry",
     },
 };
 
@@ -53,7 +51,7 @@ function Rainy({
     density,
     height,
     width,
-}: SceneComponentProps<RainyMeta & SceneSizeMetaData>) {
+}: Scene.ComponentProps<RainyMeta & Scene.CommonMetaData>) {
     const TIME_INVARIANT_NUM = Math.floor((CYCLE_DURATION + DROP_TIME) / 0.1)
     const DROP_COUNT = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom("Rainy");
@@ -81,7 +79,7 @@ function Rainy({
         )
     });
 
-    return (<svg viewBox={`0 0 ${width} ${height}`} height={`${height}px`} width={`${width}px`} role="img" xmlns="http://www.w3.org/2000/svg">
+    return (<>
         <defs>
             <ellipse id="ripple-geo-1" cx="0" cy="0" rx="100" ry="40" fill="none" stroke={color} strokeWidth={1} strokeDasharray="50 20 10 20 100 20" />
             <ellipse id="ripple-geo-2" cx="0" cy="0" rx="100" ry="40" fill="none" stroke={color} strokeWidth={1} strokeDasharray="120 20 10 20 40 20" />
@@ -115,7 +113,7 @@ function Rainy({
 
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         {dropInstances}
-    </svg>)
+    </>)
 }
 
 
@@ -129,7 +127,11 @@ const LightRainyIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-export const SceneComponent: SceneModule["SceneComponent"] = Rainy;
-export const SceneIcon: SceneModule["SceneIcon"] = LightRainyIcon;
-export const name: SceneModule["name"] = "Rainy";
-export const meta: SceneModule["meta"] = rainyMeta;
+export const Icon: Scene.Module<RainyMeta>["Icon"] = LightRainyIcon;
+export const name: Scene.Module<RainyMeta>["name"] = "Rainy";
+export const meta: Scene.Module<RainyMeta>["meta"] = rainyMeta;
+
+export const RawComponent: Scene.Module<RainyMeta>["RawComponent"] = Rainy;
+export const Component: Scene.Module<RainyMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={Rainy} meta={meta} {...props} />
+}
