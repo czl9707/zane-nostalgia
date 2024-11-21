@@ -9,7 +9,7 @@ const StringInputEL = styled("input")(({ theme }) => ({
     "&[type=\"text\" i]": {
         border: "none", outline: "none", borderRadius: 0, boxSizing: "border-box",
         padding: "0 .5rem", margin: 0,
-        display: "inline-flex", alignItems: "center",
+        display: "inline-block", alignItems: "center",
         paddingBlock: 0, paddingInline: '.5rem',
         width: undefined, height: "1.7rem", // same as color
         backgroundColor: "transparent",

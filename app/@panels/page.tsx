@@ -18,7 +18,6 @@ export default function HomePanels() {
             <UseCasePanel />
             <Spacer />
             <ShowCasePanel />
-            <Spacer />
             <FooterPanel />
             <Spacer />
         </>

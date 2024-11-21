@@ -216,11 +216,11 @@ function CopyIllustration() {
                 <ScenePlaceHolder >
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                         style={{ animation: `${originalScene} ${animateDetail}`, position: "absolute", inset: "0 0 auto 0" }}>
-                        <FourOFour color="#080877" width="1200" height="600" content="Zane" />
+                        <FourOFour color="#080877" width="1200" height="600" textContent="Zane" />
                     </svg>
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                         style={{ animation: `${updatedScene} ${animateDetail}`, position: "absolute", inset: "0 0 auto 0" }}>
-                        <FourOFour color="#080877" width="1200" height="600" content="Kiyo" />
+                        <FourOFour color="#080877" width="1200" height="600" textContent="Kiyo" />
                     </svg>
                 </ScenePlaceHolder>
                 <LinePlaceHolder style={{ width: 0 }} />

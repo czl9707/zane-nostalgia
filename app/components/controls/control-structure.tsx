@@ -10,7 +10,7 @@ const ControlStructureContainer = styled("div")({
         flex: "1 1",
     },
     "&>:nth-child(2)": {
-        flex: "2 2",
+        width: "60%",
     },
 })
 
