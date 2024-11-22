@@ -15,7 +15,7 @@ export default function SceneComponent<M extends Scene.MetaData>({ Component, me
     const resolvedSizeParam = defaultCommonParameterResolver(props);
     const resolved = resolveParameterConstraints({ ...resolvedParam, ...resolvedSizeParam }, { ...meta, ...defaultSceneCommonMetaData });
 
-    const styleText = `text {font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";}`;
+    const styleText = `text {font-family: 'Space Grotesk',-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";}`;
 
     return (
         <svg viewBox={`0 0 ${resolved.width} ${resolved.height}`}
