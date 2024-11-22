@@ -17,7 +17,7 @@ export default function SceneComponent<M extends Scene.MetaData>({ Component, me
 
     const styleText = `
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
-    text {font-family: 'Space Grotesk'}
+    text {font-family: 'Space Grotesk';}
     `;
 
     return (
