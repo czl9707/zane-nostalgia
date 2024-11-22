@@ -16,15 +16,17 @@ export default function SceneComponent<M extends Scene.MetaData>({ Component, me
     const resolved = resolveParameterConstraints({ ...resolvedParam, ...resolvedSizeParam }, { ...meta, ...defaultSceneCommonMetaData });
 
     const styleText = `
-text {font-family: 'Space Grotesk';}
-`;
+    @font-face{
+        font-family: 'Space Grotesk';
+        src: url(https://fonts.gstatic.com/s/spacegrotesk/v16/V8mDoQDjQSkFtoMM3T6r8E7mPbF4Cw.woff2) format("woff2");
+    }
+    text {font-family: 'Space Grotesk';}`;
 
     return (
         <svg viewBox={`0 0 ${resolved.width} ${resolved.height}`}
             height={`${resolved.height}px`} width={`${resolved.width}px`}
             role="img" xmlns="http://www.w3.org/2000/svg"
         >
-            <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet" />
             <style dangerouslySetInnerHTML={{ __html: styleText }} />
             <Component {...resolved} />
             {resolved.bannerText &&
