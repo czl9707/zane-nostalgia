@@ -13,7 +13,7 @@ interface SliderProps {
     max: number,
     step?: number,
     onChange?: (v: number) => void,
-    defaultValue: number,
+    value: number,
     showValue?: boolean,
 }
 
@@ -56,20 +56,20 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         min,
         max,
         step = 1,
-        defaultValue,
+        value,
         showValue = false,
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         onChange = (_) => { },
         ...other
     }, ref) {
-        const [value, setValue] = React.useState<number>(defaultValue);
+        // const [value, setValue] = React.useState<number>(value);
 
         return (
             <ControlStructure label={label} value={showValue ? value : undefined} ref={ref} {...other}>
                 <SliderContainer value={[value]}
                     min={min} max={max} step={step}
                     onValueChange={(vs) => {
-                        setValue(vs[0]);
+                        // setValue(vs[0]);
                         onChange(vs[0]);
                     }} >
                     <SliderTrack />

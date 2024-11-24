@@ -14,5 +14,16 @@ function simpleHash(s: string): string {
     return hash.toString();
 }
 
+const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
 
-export { randomFitToInt, simpleHash };
+function randomString(length: number): string {
+    const chars: string[] = [];
+    for (let i = 0; i < length; i++) {
+        chars.push(
+            characters.charAt(Math.floor(Math.random() * characters.length))
+        );
+    }
+    return chars.join("");
+}
+
+export { randomFitToInt, simpleHash, randomString };

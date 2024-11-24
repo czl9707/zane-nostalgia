@@ -41,7 +41,7 @@ const ShowCaseViewBox = styled('div')(({ theme }) => ({
 }))
 
 const ShowCaseMask = styled('div')(({ theme }) => ({
-    position: "absolute", inset: 0,
+    position: "absolute", inset: 0, boxSizing: "border-box",
     backgroundImage: `linear-gradient(0deg, grey -200%, transparent 50%)`,
     display: "flex", gap: "1rem",
     justifyContent: "center", alignItems: "flex-end",

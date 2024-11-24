@@ -7,8 +7,6 @@ import { defaultParameterResolver, defaultCommonParameterResolver, resolveParame
 import { fetchScene, fetchSceneMetas } from '../../../scene-components/utils/fetch-scenes';
 import { ParamMetaToken, Scene } from '../../../scene-components/utils/types';
 
-
-import ControlRouterUpdator from '@/app/@panels/scenes/[scene]/local-components/controls-router-updator';
 import Panel from '@/app/components/ui/panel';
 import Divider from '@/app/components/ui/divider';
 import { Accordion, AccordionGroup, AccordionItem } from '@/app/components/ui/accordion';
@@ -16,7 +14,9 @@ import CopyPanel from '@/app/components/controls/copy-panel';
 import ColorInput from '@/app/components/controls/color-input';
 import Slider from '@/app/components/controls/slider';
 import StringInput from '@/app/components/controls/string-input';
-import DownloadButton from './local-components/download-button';
+import DownloadButton from '@/app/@panels/scenes/[scene]/local-components/download-button';
+import RandomSeedButton from '@/app/@panels/scenes/[scene]/local-components/random-seed-button';
+import ControlRouterUpdator from '@/app/@panels/scenes/[scene]/local-components/controls-router-updator';
 
 
 export async function generateStaticParams(): Promise<{ scene: string }[]> {
@@ -93,22 +93,24 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
             {
                 Object.entries(controlGroup).map(([paramName, metaEntry]) => {
                     let control = undefined;
-                    if (metaEntry.type === "color")
-                        control = (
-                            <ColorInput label={metaEntry.name}
-                                defaultColor={resolvedValue[paramName] as string} />
-                        );
-                    else if (metaEntry.type === "number")
-                        control = (
-                            <Slider showValue={groupName === "Screen Size"}
+                    switch (metaEntry.type) {
+                        case "color":
+                            control = <ColorInput label={metaEntry.name} color={resolvedValue[paramName] as string} />;
+                            break;
+                        case "number":
+                            control = <Slider showValue={groupName === "Screen Size"}
                                 min={metaEntry.min} max={metaEntry.max} step={metaEntry.step}
-                                label={metaEntry.name} defaultValue={resolvedValue[paramName] as number} />
-                        );
-                    else if (metaEntry.type === "string")
-                        control = (
-                            <StringInput
-                                label={metaEntry.name} defaultValue={resolvedValue[paramName] as string} />
-                        );
+                                label={metaEntry.name} value={resolvedValue[paramName] as number} />;
+                            break;
+                        case "string":
+                            control = <StringInput label={metaEntry.name} value={resolvedValue[paramName] as string} />;
+                            break;
+                        case "randomSeed":
+                            control = <RandomSeedButton label={metaEntry.name} value={resolvedValue[paramName] as string} />;
+                            break;
+                        default:
+                            throw new Error("Unknown control type");
+                    }
 
                     return (
                         <AccordionItem key={paramName} asChild>

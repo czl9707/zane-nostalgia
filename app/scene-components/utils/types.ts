@@ -20,6 +20,11 @@ interface NumberParamMetaToken extends BaseParamMetaToken {
     step: number,
 }
 
+interface RandomSeedParamMetaToken extends BaseParamMetaToken {
+    type: 'randomSeed',
+    default: string,
+}
+
 interface StringParamMetaToken extends BaseParamMetaToken {
     type: "string",
     default: string,
@@ -28,7 +33,8 @@ interface StringParamMetaToken extends BaseParamMetaToken {
 type ParamMetaToken =
     ColorParamMetaToken |
     NumberParamMetaToken |
-    StringParamMetaToken;
+    StringParamMetaToken |
+    RandomSeedParamMetaToken;
 
 namespace Scene {
     export type MetaData = { [key: string]: ParamMetaToken }
@@ -57,5 +63,6 @@ export type {
     ColorParamMetaToken,
     NumberParamMetaToken,
     StringParamMetaToken,
+    RandomSeedParamMetaToken,
     Scene,
 }

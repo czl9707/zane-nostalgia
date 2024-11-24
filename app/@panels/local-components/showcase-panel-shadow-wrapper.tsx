@@ -17,6 +17,8 @@ export default function ShowcasePanelShadowWrapper({ scene, ...other }: { scene:
     const SceneComponent: React.ComponentType<Record<string, string>> = SceneComponents[scene];
     const [shadowRoot, setShadowRoot] = React.useState<ShadowRoot | undefined>();
     const setShadowCallback = React.useCallback<(el: HTMLDivElement) => void>((el) => {
+        if (!el) return;
+
         const sr = el.attachShadow({ mode: "open" });
         setShadowRoot(sr);
     }, [])

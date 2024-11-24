@@ -41,15 +41,24 @@ const ButtonContainer = styled("div")<ButtonProps>(({ theme }) => ({
     fontSize: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontSize,
     fontWeight: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontWeight,
     overflow: "hidden",
-    backgroundColor: ({ color = "transparent" }) => {
+    backgroundColor: ({ color = "transparent", variant }) => {
+        if (variant === "outline") return "transparent";
         if (color === "transparent") return "transparent";
         else return theme.vars.colors[color].contrastText;
     },
-    color: ({ color = "transparent" }) => {
+    color: ({ color = "transparent", variant }) => {
+        if (variant === "outline") {
+            color = color === "transparent" ? "primary" : color;
+            return theme.vars.colors[color].contrastText;
+        }
         if (color === "transparent") return theme.vars.colors.primary.contrastText;
         return theme.vars.colors[color].background;
     },
-    border: ({ variant }) => variant === "outline" ? ".5px solid grey" : undefined,
+    border: ({ variant, color = "transparent" }) => {
+        if (variant === "filled") return undefined;
+        color = color === "transparent" ? "primary" : color;
+        return `.5px solid ${theme.vars.colors[color].contrastText}`
+    },
 
     "&:hover": {
         [`${OnHoverMask}`]: {

@@ -27,7 +27,6 @@ const ControlStructure = React.forwardRef<HTMLDivElement, ControlStructureProps 
                 <BodyTypography style={{ display: "flex" }}>
                     {
                         !value && <span >{label}</span>
-
                     }
                     {value &&
                         <>

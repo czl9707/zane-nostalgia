@@ -1,10 +1,10 @@
 import * as React from "react";
-
-import { IconProps, SvgIcon } from "../components/ui/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
-import { randomFitToInt } from "./utils/utils";
 import seedrandom from 'seedrandom';
+
+import { randomFitToInt } from "@/app/components/utils/math-utils";
+import { IconProps, SvgIcon } from "@/app/components/ui/icons/icons"
 import SceneComponent from "./utils/scene-component";
+import { ColorParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
 
 
 interface MeteroShowerMeta extends Scene.MetaData {
@@ -12,6 +12,7 @@ interface MeteroShowerMeta extends Scene.MetaData {
     backgroundColor: ColorParamMetaToken,
     rotation: NumberParamMetaToken,
     density: NumberParamMetaToken,
+    geoSeed: RandomSeedParamMetaToken,
 }
 
 
@@ -46,6 +47,12 @@ export const meteorMeta: MeteroShowerMeta = {
         step: 1,
         group: "Geometry",
     },
+    geoSeed: {
+        name: "Random Seed",
+        type: "randomSeed",
+        default: "MeteorShower",
+        group: "Geometry",
+    }
 };
 
 const DENSITY_FACTOR = 0.005;
@@ -66,6 +73,7 @@ function MeteorShower({
     density,
     height,
     width,
+    geoSeed,
 }: Scene.ComponentProps<MeteroShowerMeta & Scene.CommonMetaData>) {
     const meteorCountY = rotation === 90 ? 0 :
         Math.abs(Math.floor(
@@ -75,8 +83,8 @@ function MeteorShower({
         Math.abs(Math.floor(
             width * density * DENSITY_FACTOR * Math.sin(rotation * Math.PI / 180)
         ));
-    const randomGeneratorX = seedrandom("MeteorShower");
-    const randomGeneratorY = seedrandom("MeteorShower");
+    const randomGeneratorX = seedrandom(geoSeed);
+    const randomGeneratorY = seedrandom(geoSeed);
 
     // Ideally should be a tuple, but hashset and array not works good.
     const visitedClass = new Set<string>();
