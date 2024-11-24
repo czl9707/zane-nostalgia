@@ -3,7 +3,7 @@ import * as React from 'react';
 import { styled, css, keyframes } from "@pigment-css/react";
 
 import Panel from "../../components/ui/panel";
-import { BodyTypography, H3Typography, H4Typography, H5Typography, H6Typography } from "../../components/ui/typography"
+import { BodyTypography, H3Typography, H4Typography, H5Typography, } from "../../components/ui/typography"
 import { Download, Copy, Code, File, BackHand } from "../../components/ui/icons/icons";
 
 import { Component as MeteorsScene } from "../../scene-components/meteors";
@@ -22,10 +22,10 @@ const UseCaseContainer = styled("div")<UseCaseContainer>(({ theme }) => ({
         flexDirection: "column", alignItems: "stretch",
     },
     "&>div:nth-child(1)": {
-        flex: "1 1"
+        flex: "1 1",
     },
     "&>div:nth-child(2)": {
-        flex: "2 2"
+        flex: "2 2",
     },
     display: "flex",
     gap: theme.padding.panel, padding: "0 0 3rem 0"
@@ -86,6 +86,12 @@ export default function UseCasePanel() {
 }
 
 // Embed Intro illustration
+const CodingPad = styled("div")(({ theme }) => ({
+    position: "relative", width: "100%", lineBreak: "anywhere", maxHeight: "15rem",
+    padding: "1rem", boxSizing: "border-box", overflowY: "scroll",
+    borderRadius: ".5rem", border: `1px solid ${theme.vars.colors.secondary.contrastText}`,
+    background: `color-mix(in srgb, ${theme.vars.colors.primary.background}, transparent)`,
+}));
 
 function EmbedIllustration() {
     return (
@@ -101,7 +107,7 @@ function EmbedIllustration() {
                     <BodyTypography color="secondary" style={{ opacity: .7 }}><i>// my_blog.html</i></BodyTypography>
                     <BodyTypography color="secondary">
                         <br />
-                        {`<img src="https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?width=2400&height=400&bannerText=Hello%2C+I+am+Zane%21" alt="Hello, I am Zane!"/>`}
+                        {`<img src="https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?width=2000&height=400&bannerText=Hello%2C+I+am+Zane%21" alt="Hello, I am Zane!"/>`}
                     </BodyTypography>
                 </CodingPad>
                 <div style={{ display: "flex", alignItems: "center" }}>
@@ -111,15 +117,15 @@ function EmbedIllustration() {
                     <BodyTypography color="secondary" style={{ opacity: .7 }}><i>// README.md</i></BodyTypography>
                     <BodyTypography color="secondary">
                         <br />
-                        {`![Hello, I am Zane!](https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?width=2400&height=400&bannerText=Hello%2C+I+am+Zane%21)`}
+                        {`![Hello, I am Zane!](https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?width=2000&height=400&bannerText=Hello%2C+I+am+Zane%21)`}
                     </BodyTypography>
                 </CodingPad>
             </div>
             <H5Typography style={{ textAlign: 'center' }}>
                 The stunning header svg image you get:
             </H5Typography>
-            <svg viewBox={`0 0 2400 400`} width="100%" preserveAspectRatio="xMidYMid slice">
-                <RainyScene width="2400" height="400" bannerText="Hello, I am Zane!" />
+            <svg viewBox={`0 0 2000 400`} width="100%" preserveAspectRatio="xMidYMid slice">
+                <RainyScene width="2000" height="400" bannerText="Hello, I am Zane!" />
             </svg>
         </Panel>
     )
@@ -219,22 +225,19 @@ function DownloadIllustration() {
 }
 
 // Copy Intro illustration
-const CodingPad = styled("div")(({ theme }) => ({
-    position: "relative", width: "100%", lineBreak: "anywhere",
-    padding: "1rem", boxSizing: "border-box", overflow: "hidden",
-    borderRadius: ".5rem", border: `1px solid ${theme.vars.colors.secondary.contrastText}`,
-    background: `color-mix(in srgb, ${theme.vars.colors.primary.background}, transparent)`,
-}));
 
 function CopyIllustration() {
     return (
         <Panel className={css(({ theme }) => ({
             display: "flex", alignItems: "stretch", gap: theme.padding.panel,
-            "&>div": { display: "flex", flexDirection: "column", flex: "1 1", gap: theme.padding.panel },
+            "&>div": {
+                display: "flex", flexDirection: "column", gap: theme.padding.panel,
+                width: `calc((100% - ${theme.padding.panel}) / 2)`, flex: "1 0",
+            },
             "&>div>div:nth-child(1)": {
-                flex: "1 1",
+                height: "30%", overflow: "visible",
                 display: "flex", alignItems: "center", justifyContent: "center",
-                padding: "1rem", boxSizing: "border-box",
+                padding: "1rem", boxSizing: "border-box", zIndex: 1,
             },
             "&>div>:nth-child(2)": {
                 flex: "3 3"

@@ -27,7 +27,7 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
         left: `max(-100%, -${theme.breakpoints.sm})`,
         width: `min(100%, ${theme.breakpoints.sm})`,
         "&.menu-open": {
-            left: 0,
+            left: 0, paddingRight: theme.padding.thread,
         }
     },
 
