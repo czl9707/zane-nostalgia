@@ -1,4 +1,4 @@
-import Panel from "../components/ui/panel";
+import Panel from "../../components/ui/panel";
 import StartCustomizingButton from "./extending-button";
 
 export default function FooterPanel() {

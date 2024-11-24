@@ -121,10 +121,7 @@ function FourOFour({
         </style>
         <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
         <defs>
-            <text id={`content-${contentHash}`} style={{
-                fill: color,
-                fontFamily: `${space_grotesk.style.fontFamily},'Space Grotesk'`,
-            }}>
+            <text id={`content-${contentHash}`} style={{ fill: color }}>
                 {textContent}
             </text>
         </defs>
