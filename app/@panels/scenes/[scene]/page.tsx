@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { styled } from '@pigment-css/react';
 
 // dont know why only relative works ......
 import { defaultSceneCommonMetaData } from '../../../scene-components/utils/constants';
@@ -6,16 +7,16 @@ import { defaultParameterResolver, defaultCommonParameterResolver, resolveParame
 import { fetchScene, fetchSceneMetas } from '../../../scene-components/utils/fetch-scenes';
 import { ParamMetaToken, Scene } from '../../../scene-components/utils/types';
 
-import Panel from '../../../components/ui/panel';
-import Divider from '../../../components/ui/divider';
-import CopyPanel from '../../../components/controls/copy-panel';
 
-import ControlRouterUpdator from './controls-router-updator';
-import { styled } from '@pigment-css/react';
+import ControlRouterUpdator from '@/app/@panels/scenes/[scene]/local-components/controls-router-updator';
+import Panel from '@/app/components/ui/panel';
+import Divider from '@/app/components/ui/divider';
+import { Accordion, AccordionGroup, AccordionItem } from '@/app/components/ui/accordion';
+import CopyPanel from '@/app/components/controls/copy-panel';
 import ColorInput from '@/app/components/controls/color-input';
 import Slider from '@/app/components/controls/slider';
 import StringInput from '@/app/components/controls/string-input';
-import { Accordion, AccordionGroup, AccordionItem } from '@/app/components/ui/accordion';
+import DownloadButton from './local-components/download-button';
 
 
 export async function generateStaticParams(): Promise<{ scene: string }[]> {
@@ -38,6 +39,8 @@ export default async function Panels({ params, searchParams }: { params: Promise
     resolvedCommon = resolveParameterConstraints(resolvedCommon, defaultSceneCommonMetaData);
     let resolved = defaultParameterResolver(searchParams, meta);
     resolved = resolveParameterConstraints(resolved, meta);
+
+    const svgContent = renderToString(<sceneModule.Component {...searchParams} />);
 
     const metaGroups: { [key: string]: { [key: string]: ParamMetaToken } } = {};
 
@@ -64,14 +67,17 @@ export default async function Panels({ params, searchParams }: { params: Promise
                 </AccordionGroup>
             </PanelWrapper>
             <PanelWrapper>
-                <CopyPanel label={"To use in Markdown:"}>
-                    {`<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/${(await params).scene}/api?${new URLSearchParams({ ...resolvedCommon, ...resolved } as Record<string, string>).toString()}" />`}
+                <CopyPanel label={"HTTP Endpoint:"}>
+                    {`https://zane-nostalgia.kiyo-n-zane.com/scenes/${(await params).scene}/api?${new URLSearchParams({ ...resolvedCommon, ...resolved } as Record<string, string>).toString()}`}
                 </CopyPanel>
 
                 <Divider />
                 <CopyPanel label={"Raw SVG:"}>
-                    {renderToString(<sceneModule.Component {...searchParams} />)}
+                    {svgContent}
                 </CopyPanel>
+
+                <Divider />
+                <DownloadButton content={svgContent} fileName={`${(await params).scene}.svg`} />
             </PanelWrapper>
         </>
     );

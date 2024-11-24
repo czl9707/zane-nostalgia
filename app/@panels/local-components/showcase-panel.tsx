@@ -2,7 +2,7 @@ import { css, styled } from "@pigment-css/react";
 import { Scene } from "../../scene-components/utils/types";
 import { H3Typography, H5Typography } from "../../components/ui/typography";
 import Link from "next/link";
-import ShowcaseShadowWrapper, { ShowCaseSceneTypes } from "./showcase-shadow-wrapper";
+import ShowcasePanelShadowWrapper, { ShowCaseSceneTypes } from "./showcase-panel-shadow-wrapper";
 
 
 const ShowcaseContainer = styled('div')(({ theme }) => ({
@@ -57,7 +57,7 @@ async function ShowCase({ scene, ...other }: {
 
     return (
         <ShowCaseViewBox>
-            <ShowcaseShadowWrapper scene={scene} {...other} />
+            <ShowcasePanelShadowWrapper scene={scene} {...other} />
             <Link href={`/scenes/${scene}`}>
                 <ShowCaseMask>
                     <sceneModule.Icon />

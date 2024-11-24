@@ -13,7 +13,7 @@ const SceneComponents = {
 
 type ShowCaseSceneTypes = keyof typeof SceneComponents;
 
-export default function ShowcaseShadowWrapper({ scene, ...other }: { scene: ShowCaseSceneTypes }) {
+export default function ShowcasePanelShadowWrapper({ scene, ...other }: { scene: ShowCaseSceneTypes }) {
     const SceneComponent: React.ComponentType<Record<string, string>> = SceneComponents[scene];
     const [shadowRoot, setShadowRoot] = React.useState<ShadowRoot | undefined>();
     const setShadowCallback = React.useCallback<(el: HTMLDivElement) => void>((el) => {

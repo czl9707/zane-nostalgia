@@ -1,10 +1,10 @@
 "use server"
 
-import HeroPanel from "./home-panel-components/hero-panel";
-import BulletPanel from "./home-panel-components/bullets-panel";
-import ShowCasePanel from "./home-panel-components/showcase-panel";
-import UseCasePanel from "./home-panel-components/usecase-panel";
-import FooterPanel from "./home-panel-components/footer-panel";
+import HeroPanel from "@/app/@panels/local-components/hero-panel";
+import BulletPanel from "@/app/@panels/local-components/bullets-panel";
+import ShowCasePanel from "@/app/@panels/local-components/showcase-panel";
+import UseCasePanel from "@/app/@panels/local-components/usecase-panel";
+import FooterPanel from "@/app/@panels/local-components/footer-panel";
 
 const Spacer = () => <div style={{ height: "6rem" }} />;
 
