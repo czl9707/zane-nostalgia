@@ -1,5 +1,3 @@
-"use server"
-
 import HeroPanel from "@/app/@panels/local-components/hero-panel";
 import BulletPanel from "@/app/@panels/local-components/bullets-panel";
 import ShowCasePanel from "@/app/@panels/local-components/showcase-panel";
