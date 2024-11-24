@@ -13,7 +13,7 @@ const SceneComponents = {
 
 type ShowCaseSceneTypes = keyof typeof SceneComponents;
 
-export default function ShowcaseShadowWrapper({ scene, ...other }: { scene: ShowCaseSceneTypes }) {
+export default function ShowcasePanelShadowWrapper({ scene, ...other }: { scene: ShowCaseSceneTypes }) {
     const SceneComponent: React.ComponentType<Record<string, string>> = SceneComponents[scene];
     const [shadowRoot, setShadowRoot] = React.useState<ShadowRoot | undefined>();
     const setShadowCallback = React.useCallback<(el: HTMLDivElement) => void>((el) => {
@@ -26,8 +26,8 @@ export default function ShowcaseShadowWrapper({ scene, ...other }: { scene: Show
             {
                 shadowRoot && ReactDOM.createPortal(
                     (
-                        <svg viewBox={`0 0 600 1200`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-                            <SceneComponent width={"600"} height={"1200"} {...other} />
+                        <svg viewBox={`0 0 1000 1000`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+                            <SceneComponent width={"1000"} height={"1000"} {...other} />
                         </svg>
                     ),
                     shadowRoot
