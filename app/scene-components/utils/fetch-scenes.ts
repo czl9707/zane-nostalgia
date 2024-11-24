@@ -10,7 +10,6 @@ async function fetchScene(scene: string) {
 async function fetchSceneMetas() {
     const sceneDir = path.join(process.cwd(), "app/scene-components");
     const scenes = await fs.readdir(sceneDir);
-
     const sceneContents = scenes
         .filter(f => f.endsWith(".tsx"))
         .map(f => f.split(".")[0])

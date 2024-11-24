@@ -1,13 +1,15 @@
-import HeroPanel from "./hero-panel";
-import BulletPanel from "./bullets-panel";
-import ShowCasePanel from "./showcase-panel";
-import UseCasePanel from "./usecase-panel";
-import FooterPanel from "./footer-panel";
+"use server"
+
+import HeroPanel from "./home-panel-components/hero-panel";
+import BulletPanel from "./home-panel-components/bullets-panel";
+import ShowCasePanel from "./home-panel-components/showcase-panel";
+import UseCasePanel from "./home-panel-components/usecase-panel";
+import FooterPanel from "./home-panel-components/footer-panel";
 
 const Spacer = () => <div style={{ height: "6rem" }} />;
 
 
-export default function HomePanels() {
+export default async function HomePanels() {
     return (
         <>
             <Spacer />

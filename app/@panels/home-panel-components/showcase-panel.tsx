@@ -1,8 +1,8 @@
 import { css, styled } from "@pigment-css/react";
-import { defaultParameterResolver } from "../scene-components/utils/resolver";
-import { Scene } from "../scene-components/utils/types";
-import { H3Typography, H5Typography } from "../components/ui/typography";
+import { Scene } from "../../scene-components/utils/types";
+import { H3Typography, H5Typography } from "../../components/ui/typography";
 import Link from "next/link";
+import ShowcaseShadowWrapper, { ShowCaseSceneTypes } from "./showcase-shadow-wrapper";
 
 
 const ShowcaseContainer = styled('div')({
@@ -12,8 +12,9 @@ const ShowcaseContainer = styled('div')({
 
 const ShowCaseViewBox = styled('div')(({ theme }) => ({
     transition: `flex ${theme.transition.long} ease-out`,
-    position: "relative",
+    position: "relative", overflow: "hidden",
     flex: "1 1",
+    "& div": { height: "100%" },
     [`${ShowCaseMask}`]: {
         opacity: 0,
         transition: `opacity ${theme.transition.short} ease-out`,
@@ -37,16 +38,14 @@ const ShowCaseMask = styled('div')(({ theme }) => ({
 
 
 async function ShowCase({ scene, ...other }: {
-    scene: string,
+    scene: ShowCaseSceneTypes,
     [key: string]: string
 }) {
-    const sceneModule: Scene.Module = await import(`../scene-components/${scene}`);
+    const sceneModule: Scene.Module = await import(`../../scene-components/${scene}`);
 
     return (
         <ShowCaseViewBox>
-            <svg viewBox={`0 0 600 1200`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
-                <sceneModule.Component width={"600"} height={"1200"} />
-            </svg>
+            <ShowcaseShadowWrapper scene={scene} {...other} />
             <Link href={`/scenes/${scene}`}>
                 <ShowCaseMask>
                     <sceneModule.Icon />
@@ -79,13 +78,13 @@ export default function ShowCasePanel() {
                 <br /><br />
             </H3Typography>
             <ShowcaseContainer>
-                <ShowCase scene="meteors" backgroundColor="#080808" />
-                <ShowCase scene="rainy" backgroundColor="#080808" />
-                <ShowCase scene="waves" backgroundColor="#080808" />
-                <ShowCase scene="404" backgroundColor="#080808" />
-                <ShowCase scene="meteors" backgroundColor="#080808" />
-                <ShowCase scene="rainy" backgroundColor="#080808" />
-                <ShowCase scene="waves" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#040404" color="#AAAAAA" />
+                <ShowCase scene="rainy" backgroundColor="#040404" color="#AAAAAA" />
+                <ShowCase scene="waves" backgroundColor="#040404" color="#AAAAAA" />
+                <ShowCase scene="404" backgroundColor="#040404" color="#AAAAAA" />
+                <ShowCase scene="meteors" backgroundColor="#040404" color="#AAAAAA" />
+                <ShowCase scene="rainy" backgroundColor="#040404" color="#AAAAAA" />
+                <ShowCase scene="waves" backgroundColor="#040404" color="#AAAAAA" />
             </ShowcaseContainer>
 
             <div style={{ height: "6rem" }} />
@@ -95,13 +94,13 @@ export default function ShowCasePanel() {
                 <br /><br />
             </H3Typography>
             <ShowcaseContainer>
-                <ShowCase scene="meteors" backgroundColor="#080808" />
-                <ShowCase scene="meteors" backgroundColor="#080808" />
-                <ShowCase scene="meteors" backgroundColor="#080808" />
-                <ShowCase scene="meteors" backgroundColor="#080808" />
-                <ShowCase scene="meteors" backgroundColor="#080808" />
-                <ShowCase scene="meteors" backgroundColor="#080808" />
-                <ShowCase scene="meteors" backgroundColor="#080808" />
+                <ShowCase scene="meteors" backgroundColor="#7a0606" color="#000000" rotation="90" density="20" />
+                <ShowCase scene="meteors" backgroundColor="#290505" color="#ff0000" rotation="150" density="20" />
+                <ShowCase scene="meteors" backgroundColor="#051829" color="#8c8c8c" rotation="60" density="20" />
+                <ShowCase scene="meteors" backgroundColor="#a975a2" color="#ffffff" rotation="70" density="20" />
+                <ShowCase scene="meteors" backgroundColor="#040404" color="#FFFFFF" rotation="0" density="20" />
+                <ShowCase scene="meteors" backgroundColor="#b8eaff" color="#c5baba" rotation="120" density="20" />
+                <ShowCase scene="meteors" backgroundColor="#050525" color="#FFFF00" rotation="60" density="15" />
             </ShowcaseContainer>
         </div >
     )

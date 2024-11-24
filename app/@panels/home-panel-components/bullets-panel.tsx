@@ -1,7 +1,7 @@
 import { css } from "@pigment-css/react";
-import { Tune, Animation, Code } from "../components/ui/icons/icons";
-import Panel from "../components/ui/panel";
-import { BodyTypography, H4Typography } from "../components/ui/typography";
+import { Tune, Animation, Code } from "../../components/ui/icons/icons";
+import Panel from "../../components/ui/panel";
+import { BodyTypography, H4Typography } from "../../components/ui/typography";
 
 
 const bullets = [

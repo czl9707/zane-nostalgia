@@ -9,9 +9,6 @@ const nextConfig = {};
 export default withPigment(
     nextConfig,
     {
-        css: {
-            defaultDirection: 'ltr',
-        },
         theme: extendTheme({
             getSelector: (colorScheme) => colorScheme ? `.theme-${colorScheme}` : ':root',
             colorSchemes: {

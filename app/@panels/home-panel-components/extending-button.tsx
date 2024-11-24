@@ -1,5 +1,5 @@
 import { styled } from "@pigment-css/react";
-import Button from "../components/ui/button";
+import Button from "../../components/ui/button";
 import Link from "next/link";
 
 const ExtendingButtonContainer = styled(Button)(({ theme }) => ({
