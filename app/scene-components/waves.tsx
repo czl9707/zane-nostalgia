@@ -1,8 +1,9 @@
 import * as React from "react";
-import { SvgIcon, IconProps } from "../components/ui/icons/icons";
-import { randomFitToInt } from "./utils/utils";
-import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
 import seedrandom from "seedrandom";
+
+import { SvgIcon, IconProps } from "@/app/components/ui/icons/icons";
+import { randomFitToInt } from "@/app/components/utils/math-utils";
+import { ColorParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
 import SceneComponent from "./utils/scene-component";
 
 interface WavesMeta extends Scene.MetaData {
@@ -11,6 +12,7 @@ interface WavesMeta extends Scene.MetaData {
     waveAmount: NumberParamMetaToken,
     waveComplexity: NumberParamMetaToken,
     waveHeight: NumberParamMetaToken,
+    geoSeed: RandomSeedParamMetaToken,
 }
 
 
@@ -53,6 +55,12 @@ export const wavesMeta: WavesMeta = {
         max: 100,
         step: 5,
         group: "Geometry",
+    },
+    geoSeed: {
+        name: "Random Seed",
+        type: "randomSeed",
+        default: "MeteorShower",
+        group: "Waves",
     }
 };
 
@@ -67,8 +75,9 @@ function Waves({
     waveHeight,
     height,
     width,
+    geoSeed,
 }: Scene.ComponentProps<WavesMeta & Scene.CommonMetaData>) {
-    const randomGenerator = seedrandom("Waves");
+    const randomGenerator = seedrandom(geoSeed);
     const WAVE_VERTICAL_DELTA = Math.floor(width / (waveComplexity + 1) / 6);
 
     return (<>

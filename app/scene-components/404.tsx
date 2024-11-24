@@ -1,8 +1,7 @@
-import { Error as ErrorIcon } from "../components/ui/icons/icons";
-import { space_grotesk } from "../layout";
-import { randomFitToInt, simpleHash } from "./utils/utils";
-import { ColorParamMetaToken, NumberParamMetaToken, Scene, StringParamMetaToken } from "./utils/types";
 import seedrandom from 'seedrandom';
+import { Error as ErrorIcon } from "@/app/components/ui/icons/icons";
+import { randomFitToInt, simpleHash } from "@/app/components/utils/math-utils";
+import { ColorParamMetaToken, NumberParamMetaToken, StringParamMetaToken, RandomSeedParamMetaToken, Scene, } from "./utils/types";
 import SceneComponent from "./utils/scene-component";
 
 
@@ -11,6 +10,7 @@ interface FourOFourMeta extends Scene.MetaData {
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
     textContent: StringParamMetaToken,
+    geoSeed: RandomSeedParamMetaToken,
 }
 
 
@@ -41,6 +41,12 @@ export const fourOFourMeta: FourOFourMeta = {
         type: "string",
         default: "404",
         group: "Geometry",
+    },
+    geoSeed: {
+        name: "Random Seed",
+        type: "randomSeed",
+        default: "FourOFour",
+        group: "Geometry",
     }
 };
 
@@ -60,10 +66,11 @@ function FourOFour({
     density,
     height,
     width,
-    textContent = "404",
+    geoSeed,
+    textContent,
 }: Scene.ComponentProps<FourOFourMeta & Scene.CommonMetaData>) {
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
-    const randomGenerator = seedrandom("FourOFour");
+    const randomGenerator = seedrandom(geoSeed);
     const contentHash = simpleHash(textContent as string);
 
     const visitedDurClass = new Set();

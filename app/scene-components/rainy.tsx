@@ -1,9 +1,9 @@
 import * as React from "react";
-
-import { IconProps, SvgIcon } from "../components/ui/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
-import { randomFitToInt } from "./utils/utils";
 import seedrandom from "seedrandom";
+
+import { IconProps, SvgIcon } from "@/app/components/ui/icons/icons"
+import { randomFitToInt } from "@/app/components/utils/math-utils";
+import { ColorParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
 import SceneComponent from "./utils/scene-component";
 
 
@@ -11,6 +11,7 @@ interface RainyMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
+    geoSeed: RandomSeedParamMetaToken,
 }
 
 
@@ -36,6 +37,12 @@ export const rainyMeta: RainyMeta = {
         step: 1,
         group: "Geometry",
     },
+    geoSeed: {
+        name: "Random Seed",
+        type: "randomSeed",
+        default: "Rainy",
+        group: "Geometry",
+    }
 };
 
 const DROP_TIME = 0.4;
@@ -51,10 +58,11 @@ function Rainy({
     density,
     height,
     width,
+    geoSeed,
 }: Scene.ComponentProps<RainyMeta & Scene.CommonMetaData>) {
     const TIME_INVARIANT_NUM = Math.floor((CYCLE_DURATION + DROP_TIME) / 0.1)
     const DROP_COUNT = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
-    const randomGenerator = seedrandom("Rainy");
+    const randomGenerator = seedrandom(geoSeed);
 
     const visitedRippleClasses = new Set();
     const visitedDropClasses = new Set();

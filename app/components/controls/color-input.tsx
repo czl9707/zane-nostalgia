@@ -34,12 +34,12 @@ const ColorInputContainer = styled("div")(({ theme }) => ({
 interface ColorInputProps {
     label: string,
     onChange?: (v: string) => void,
-    defaultColor?: string,
+    color: string,
 }
 
 const ColorInput = React.forwardRef<HTMLDivElement, ColorInputProps & Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">>(
-    function ColorInput({ defaultColor = "#000000", label, onChange, ...other }, ref) {
-        const [color, setColor] = React.useState<string>(defaultColor);
+    function ColorInput({ color = "#000000", label, onChange, ...other }, ref) {
+        // const [color, setColor] = React.useState<string>(defaultColor);
 
         return (
             <ControlStructure label={label} {...other} ref={ref}>
@@ -47,7 +47,7 @@ const ColorInput = React.forwardRef<HTMLDivElement, ColorInputProps & Omit<React
                     <ColorInputEL type="color" value={color} name={label}
                         aria-label={label}
                         onChange={(e) => {
-                            setColor(e.target.value);
+                            // setColor(e.target.value);
                             if (onChange) onChange(e.target.value);
                         }} />
                 </ColorInputContainer>
