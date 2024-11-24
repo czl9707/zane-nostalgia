@@ -6,7 +6,6 @@ import ControlStructure from "@/app/components/controls/control-structure"
 import Button from "@/app/components/ui/button"
 import { Casino } from "@/app/components/ui/icons/icons"
 import { randomString } from "@/app/components/utils/math-utils";
-import { BodyTypography } from "@/app/components/ui/typography";
 
 interface RandomSeedButtonProps {
     label: string,
@@ -18,7 +17,7 @@ const RandomSeedButton = React.forwardRef<HTMLDivElement, RandomSeedButtonProps 
     function RandomSeedButton({ value, label, onChange, ...other }, ref) {
         return (
             <ControlStructure label={label} {...other} ref={ref}>
-                <Button variant='filled' color="primary"
+                <Button variant='outline' color="secondary"
                     style={{ gap: "1rem", paddingTop: ".1rem", paddingBottom: ".1rem", justifyContent: "flex-start" }}
                     onClick={() => {
                         if (onChange !== undefined)
