@@ -8,7 +8,7 @@ import { Download, Copy, Code, File, BackHand } from "../../components/ui/icons/
 
 import { Component as MeteorsScene } from "../../scene-components/meteors";
 import { Component as FourOFourScene } from "../../scene-components/404";
-import { Component as RainyScene } from "../../scene-components/rainy";
+import { Component as NoiseScene } from "../../scene-components/noise";
 
 interface UseCaseContainer {
     reverse?: boolean
@@ -125,7 +125,7 @@ function EmbedIllustration() {
                 The stunning header svg image you get:
             </H5Typography>
             <svg viewBox={`0 0 2000 400`} width="100%" preserveAspectRatio="xMidYMid slice">
-                <RainyScene width="2000" height="400" bannerText="Hello, I am Zane!" />
+                <NoiseScene width="2000" height="400" bannerText="Hello, I am Zane!" />
             </svg>
         </Panel>
     )

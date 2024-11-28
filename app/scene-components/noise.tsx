@@ -5,14 +5,15 @@ import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types"
 import SceneComponent from "./utils/scene-component";
 
 
-interface ThumpMeta extends Scene.MetaData {
+interface NoiseMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
-    frequency: NumberParamMetaToken,
+    xOffset: NumberParamMetaToken,
+    yOffset: NumberParamMetaToken,
 }
 
-export const thumpMeta: ThumpMeta = {
+export const NoiseMeta: NoiseMeta = {
     color: {
         name: "Color",
         type: "color",
@@ -34,12 +35,21 @@ export const thumpMeta: ThumpMeta = {
         step: 1,
         group: "Geometry",
     },
-    frequency: {
-        name: "Frequency",
+    xOffset: {
+        name: "Horizontal Offset",
         type: "number",
-        default: 5,
-        min: 1,
-        max: 20,
+        default: 0,
+        min: -10,
+        max: 10,
+        step: 1,
+        group: "Geometry",
+    },
+    yOffset: {
+        name: "Vertical Offset",
+        type: "number",
+        default: 0,
+        min: -10,
+        max: 10,
         step: 1,
         group: "Geometry",
     }
@@ -47,17 +57,23 @@ export const thumpMeta: ThumpMeta = {
 
 const MIN_RADIUS = 100;
 
-function Thump({
+function Noise({
     color,
     backgroundColor,
     density,
-    frequency,
+    xOffset,
+    yOffset,
     height,
     width,
-}: Scene.ComponentProps<ThumpMeta & Scene.CommonMetaData>) {
-    const MAX_RADIUS = Math.floor(Math.sqrt(height * height / 4 + width * width / 4));
+}: Scene.ComponentProps<NoiseMeta & Scene.CommonMetaData>) {
+    const CENTER_X = width / 2 + Math.floor(width / 2 / 10 * xOffset);
+    const CENTER_Y = height / 2 + Math.floor(height / 2 / 10 * yOffset);
+
+    const MAX_RADIUS = Math.floor(Math.sqrt(
+        Math.pow(Math.max(CENTER_X, width - CENTER_X), 2) + Math.pow(Math.max(CENTER_Y, width - CENTER_Y), 2)
+    ));
     const AMOUNT = Math.ceil((MAX_RADIUS - MIN_RADIUS) / 600) * density;
-    const RADIUSES = [...Array(AMOUNT)].map((_, i) => MIN_RADIUS + (MAX_RADIUS - MIN_RADIUS) / (AMOUNT - 1) * i);
+    const RADIUSES = [...Array(AMOUNT)].map((_, i) => MIN_RADIUS + Math.floor((MAX_RADIUS - MIN_RADIUS) / (AMOUNT - 1) * i));
 
     return (
         <>
@@ -78,7 +94,7 @@ function Thump({
                             <circle r={radius} fill="white" />
                         </mask>
                         <circle r={radius} fill="transparent" strokeWidth={50} stroke={color} filter="url(#noise-filter)"
-                            transform={`translate(${width / 2}, ${height / 2})`} mask={`url(#circle-mask${i})`} />
+                            transform={`translate(${CENTER_X}, ${CENTER_Y})`} mask={`url(#circle-mask${i})`} />
                     </React.Fragment>
                 ))
             }
@@ -97,11 +113,11 @@ const HeadphoneIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-export const Icon: Scene.Module<ThumpMeta>["Icon"] = HeadphoneIcon;
-export const name: Scene.Module<ThumpMeta>["name"] = "Thump";
-export const meta: Scene.Module<ThumpMeta>["meta"] = thumpMeta;
+export const Icon: Scene.Module<NoiseMeta>["Icon"] = HeadphoneIcon;
+export const name: Scene.Module<NoiseMeta>["name"] = "Noise";
+export const meta: Scene.Module<NoiseMeta>["meta"] = NoiseMeta;
 
-export const RawComponent: Scene.Module<ThumpMeta>["RawComponent"] = Thump;
-export const Component: Scene.Module<ThumpMeta>["Component"] = (props: Record<string, string>) => {
-    return <SceneComponent Component={Thump} meta={meta} {...props} />
+export const RawComponent: Scene.Module<NoiseMeta>["RawComponent"] = Noise;
+export const Component: Scene.Module<NoiseMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={Noise} meta={meta} {...props} />
 }

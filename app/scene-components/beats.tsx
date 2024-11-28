@@ -11,6 +11,8 @@ interface BeatsMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
+    strength: NumberParamMetaToken,
+    frequency: NumberParamMetaToken,
     geoSeed: RandomSeedParamMetaToken,
 }
 
@@ -36,6 +38,24 @@ export const beatsMeta: BeatsMeta = {
         step: 1,
         group: "Geometry",
     },
+    strength: {
+        name: "Strength",
+        type: "number",
+        default: 10,
+        min: 5,
+        max: 20,
+        step: 1,
+        group: "Geometry",
+    },
+    frequency: {
+        name: "Frequency",
+        type: "number",
+        default: 10,
+        min: 5,
+        max: 20,
+        step: 1,
+        group: "Geometry",
+    },
     geoSeed: {
         name: "Random Seed",
         type: "randomSeed",
@@ -48,10 +68,13 @@ function Beats({
     color,
     backgroundColor,
     density,
+    geoSeed,
     height,
     width,
-    geoSeed,
 }: Scene.ComponentProps<BeatsMeta & Scene.CommonMetaData>) {
+    const shapeGenerator = seedrandom(geoSeed);
+    const animationGenerator = seedrandom(geoSeed);
+
     return (
         <>
             <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
