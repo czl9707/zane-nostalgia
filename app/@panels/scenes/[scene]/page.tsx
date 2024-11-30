@@ -16,6 +16,7 @@ import Slider from '@/app/components/controls/slider';
 import StringInput from '@/app/components/controls/string-input';
 import DownloadButton from '@/app/@panels/scenes/[scene]/local-components/download-button';
 import RandomSeedButton from '@/app/@panels/scenes/[scene]/local-components/random-seed-button';
+import ToggleGroup, { ToggleGroupItem } from '@/app/components/controls/toggle-group';
 import ControlRouterUpdator from '@/app/@panels/scenes/[scene]/local-components/controls-router-updator';
 
 
@@ -107,6 +108,19 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
                             break;
                         case "randomSeed":
                             control = <RandomSeedButton label={metaEntry.name} value={resolvedValue[paramName] as string} />;
+                            break;
+                        case "enum":
+                            control = <ToggleGroup label={metaEntry.name} value={resolvedValue[paramName] as string}>
+                                <>
+                                    {
+                                        Object.entries(metaEntry.options).map(([value, Icon]) => (
+                                            <ToggleGroupItem value={value} key={value}>
+                                                <Icon />
+                                            </ToggleGroupItem>
+                                        ))
+                                    }
+                                </>
+                            </ToggleGroup>;
                             break;
                         default:
                             throw new Error("Unknown control type");

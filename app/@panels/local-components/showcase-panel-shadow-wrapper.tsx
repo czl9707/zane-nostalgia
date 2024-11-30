@@ -10,7 +10,7 @@ const SceneComponents = {
     "waves": dynamic(async () => import(`../../scene-components/waves`).then(m => m.Component)),
     "rainy": dynamic(async () => import(`../../scene-components/rainy`).then(m => m.Component)),
     "noise": dynamic(async () => import(`../../scene-components/noise`).then(m => m.Component)),
-    "sounds": dynamic(async () => import(`../../scene-components/sounds`).then(m => m.Component)),
+    "beats": dynamic(async () => import(`../../scene-components/beats`).then(m => m.Component)),
 } as const;
 
 type ShowCaseSceneTypes = keyof typeof SceneComponents;

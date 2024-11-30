@@ -15,7 +15,7 @@ interface RainyMeta extends Scene.MetaData {
 }
 
 
-export const rainyMeta: RainyMeta = {
+const rainyMeta: RainyMeta = {
     color: {
         name: "Color",
         type: "color",

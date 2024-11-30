@@ -15,8 +15,7 @@ interface WavesMeta extends Scene.MetaData {
     geoSeed: RandomSeedParamMetaToken,
 }
 
-
-export const wavesMeta: WavesMeta = {
+const wavesMeta: WavesMeta = {
     color: {
         name: "Color",
         type: "color",

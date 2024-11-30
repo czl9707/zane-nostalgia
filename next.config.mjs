@@ -65,6 +65,12 @@ export default withPigment(
                 header: {
                     height: "4rem",
                 },
+            },
+            boxShadow: {
+                thickness: {
+                    normal: 1.5,
+                    focus: 8
+                }
             }
         })
     }

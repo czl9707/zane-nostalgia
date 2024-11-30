@@ -14,7 +14,7 @@ interface FourOFourMeta extends Scene.MetaData {
 }
 
 
-export const fourOFourMeta: FourOFourMeta = {
+const fourOFourMeta: FourOFourMeta = {
     color: {
         name: "Color",
         type: "color",
