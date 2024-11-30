@@ -60,7 +60,7 @@ export const wavesMeta: WavesMeta = {
         name: "Random Seed",
         type: "randomSeed",
         default: "MeteorShower",
-        group: "Waves",
+        group: "Geometry",
     }
 };
 
