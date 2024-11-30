@@ -2,12 +2,11 @@ import * as React from "react";
 import seedrandom from "seedrandom";
 
 import { IconProps, SvgIcon } from "@/app/components/ui/icons/icons"
-import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { ColorParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
 import SceneComponent from "./utils/scene-component";
 
 
-interface BeatsMeta extends Scene.MetaData {
+interface SoundsMeta extends Scene.MetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,  // graphic unit per 200px
@@ -16,7 +15,7 @@ interface BeatsMeta extends Scene.MetaData {
     geoSeed: RandomSeedParamMetaToken,
 }
 
-export const beatsMeta: BeatsMeta = {
+export const soundsMeta: SoundsMeta = {
     color: {
         name: "Color",
         type: "color",
@@ -59,7 +58,7 @@ export const beatsMeta: BeatsMeta = {
     geoSeed: {
         name: "Random Seed",
         type: "randomSeed",
-        default: "Beats",
+        default: "Sounds",
         group: "Geometry",
     }
 };
@@ -68,7 +67,7 @@ export const beatsMeta: BeatsMeta = {
 const BEAT_ANIMATE_STEP = 0.02;
 const BEAT_NO_SCALE = 0.0001;
 
-function Beats({
+function Sounds({
     color,
     backgroundColor,
     density,
@@ -77,7 +76,7 @@ function Beats({
     frequency,
     height,
     width,
-}: Scene.ComponentProps<BeatsMeta & Scene.CommonMetaData>) {
+}: Scene.ComponentProps<SoundsMeta & Scene.CommonMetaData>) {
     const geoGenerator = seedrandom(geoSeed);
     const animationGenerator = seedrandom(geoSeed);
     const geoCount = Math.floor(width * 0.8 / (200 / density));
@@ -142,11 +141,11 @@ const PlannerReviewIcon = React.forwardRef<SVGSVGElement, IconProps>(
     }
 )
 
-export const Icon: Scene.Module<BeatsMeta>["Icon"] = PlannerReviewIcon;
-export const name: Scene.Module<BeatsMeta>["name"] = "Beats";
-export const meta: Scene.Module<BeatsMeta>["meta"] = beatsMeta;
+export const Icon: Scene.Module<SoundsMeta>["Icon"] = PlannerReviewIcon;
+export const name: Scene.Module<SoundsMeta>["name"] = "Sounds";
+export const meta: Scene.Module<SoundsMeta>["meta"] = soundsMeta;
 
-export const RawComponent: Scene.Module<BeatsMeta>["RawComponent"] = Beats;
-export const Component: Scene.Module<BeatsMeta>["Component"] = (props: Record<string, string>) => {
-    return <SceneComponent Component={Beats} meta={meta} {...props} />
+export const RawComponent: Scene.Module<SoundsMeta>["RawComponent"] = Sounds;
+export const Component: Scene.Module<SoundsMeta>["Component"] = (props: Record<string, string>) => {
+    return <SceneComponent Component={Sounds} meta={meta} {...props} />
 }
