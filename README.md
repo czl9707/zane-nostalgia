@@ -14,3 +14,8 @@ Hosted at https://zane-nostalgia.kiyo-n-zane.com/
 <img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/404/api?height=200&width=2000&color=%23940000&backgroundColor=%23000000&density=6&bannerText=404" />
 
 <img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/waves/api?height=200&width=2000&color=%23444444&backgroundColor=%23000000&waveAmount=5&waveComplexity=3&waveHeight=80&bannerText=Waves" />
+
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/beats/api?height=200&width=2000&bannerText=Beats&bannerColor=%23FFFFFF&color=%23444444&backgroundColor=%23000000&density=5&strength=150&frequency=3" />
+
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/noise/api?height=200&width=2000&bannerText=Noise&bannerColor=%23FFFFFF&color=%231F1F1F&backgroundColor=%23000000&density=5" />
+
