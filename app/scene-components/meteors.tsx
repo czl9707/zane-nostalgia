@@ -16,7 +16,7 @@ interface MeteroShowerMeta extends Scene.MetaData {
 }
 
 
-export const meteorMeta: MeteroShowerMeta = {
+const meteorMeta: MeteroShowerMeta = {
     color: {
         name: "Color",
         type: "color",

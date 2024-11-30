@@ -45,6 +45,12 @@ declare module '@pigment-css/react/theme' {
             header: {
                 height: string,
             }
+        },
+        boxShadow: {
+            thickness: {
+                normal: number,
+                focus: number,
+            }
         }
     }
 

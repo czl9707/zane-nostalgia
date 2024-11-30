@@ -13,7 +13,7 @@ interface NoiseMeta extends Scene.MetaData {
     yOffset: NumberParamMetaToken,
 }
 
-export const NoiseMeta: NoiseMeta = {
+const NoiseMeta: NoiseMeta = {
     color: {
         name: "Color",
         type: "color",

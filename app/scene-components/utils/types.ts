@@ -30,11 +30,18 @@ interface StringParamMetaToken extends BaseParamMetaToken {
     default: string,
 }
 
+interface EnumParamMetaToken<ENUM extends string> extends BaseParamMetaToken {
+    type: "enum",
+    default: ENUM,
+    options: Record<ENUM, React.FC>
+}
+
 type ParamMetaToken =
     ColorParamMetaToken |
     NumberParamMetaToken |
     StringParamMetaToken |
-    RandomSeedParamMetaToken;
+    RandomSeedParamMetaToken |
+    EnumParamMetaToken<string>;
 
 namespace Scene {
     export type MetaData = { [key: string]: ParamMetaToken }
@@ -64,5 +71,6 @@ export type {
     NumberParamMetaToken,
     StringParamMetaToken,
     RandomSeedParamMetaToken,
+    EnumParamMetaToken,
     Scene,
 }

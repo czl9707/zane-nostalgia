@@ -95,7 +95,7 @@ export default function ShowCasePanel() {
                 <ShowCase scene="waves" backgroundColor="#040404" color="#AAAAAA" />
                 <ShowCase scene="404" backgroundColor="#040404" color="#AAAAAA" />
                 <ShowCase scene="noise" backgroundColor="#040404" color="#1F1F1F" />
-                <ShowCase scene="sounds" backgroundColor="#040404" color="#333333" />
+                <ShowCase scene="beats" backgroundColor="#040404" color="#333333" />
                 <ShowCase scene="meteors" backgroundColor="#040404" color="#AAAAAA" />
             </ShowcaseContainer>
 

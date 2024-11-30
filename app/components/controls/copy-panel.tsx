@@ -34,7 +34,7 @@ const CopyPanelContainer = styled("div")(({ theme }) => ({
     "&:hover": {
         [`${IconContainer}`]: {
             opacity: 1,
-            boxShadow: `0 0 4px ${theme.vars.colors.primary.contrastText}`,
+            boxShadow: `0 0 ${theme.boxShadow.thickness.normal}px ${theme.vars.colors.primary.contrastText}`,
         }
     },
 
