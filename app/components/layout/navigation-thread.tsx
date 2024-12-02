@@ -12,7 +12,7 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
     height: "100%", boxSizing: "border-box", overflowY: "scroll",
     padding: `${theme.size.header.height} 0 ${theme.padding.thread} ${theme.padding.thread}`,
 
-    display: "flex", flexDirection: "column", flexWrap: "nowrap",
+    display: "inline-flex", flexDirection: "column", flexWrap: "nowrap",
     transition: `all ${theme.transition.short} linear`,
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
@@ -31,8 +31,8 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
         }
     },
 
-    "::-webkit-scrollbar-track": {
-        backgroundColor: "transparent",
+    "&::-webkit-scrollbar": {
+        display: "none",
     },
 }));
 

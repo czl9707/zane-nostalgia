@@ -18,12 +18,14 @@ const ShowcaseContainer = styled('div')(({ theme }) => ({
 const ShowCaseViewBox = styled('div')(({ theme }) => ({
     transition: `flex ${theme.transition.long} ease-out`,
     position: "relative", overflow: "hidden",
-    flex: "1 1",
+    flex: "1 1", display: "flex",
 
     [`@media(min-width: ${theme.breakpoints.lg})`]: {
+        flexDirection: "column",
         "& div": { height: "100%" },
     },
     [`@media(max-width: ${theme.breakpoints.lg})`]: {
+        flexDirection: "row",
         "& div": { width: "100%" },
     },
 
@@ -96,7 +98,7 @@ export default function ShowCasePanel() {
                 <ShowCase scene="404" backgroundColor="#040404" color="#AAAAAA" />
                 <ShowCase scene="noise" backgroundColor="#040404" color="#1F1F1F" />
                 <ShowCase scene="beats" backgroundColor="#040404" color="#333333" />
-                <ShowCase scene="meteors" backgroundColor="#040404" color="#AAAAAA" />
+                <ShowCase scene="cubes" backgroundColor="#040404" color="#333333" />
             </ShowcaseContainer>
 
             <div style={{ height: "6rem" }} />

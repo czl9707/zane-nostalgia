@@ -5,7 +5,7 @@ interface DividerProps {
 }
 
 const Divider = styled("div")<DividerProps>(({ theme }) => ({
-    padding: 0, height: .1, userSelect: "none",
+    padding: 0, height: .1, minHeight: .1, userSelect: "none",
 
     boxShadow: ({ direction = "horizontal" }) =>
         direction === "horizontal" ?
