@@ -51,7 +51,7 @@ const meteorMeta: CubesMeta = {
         name: "Rotation",
         type: "number",
         default: 0,
-        min: -45,
+        min: -40,
         max: 45,
         step: 5,
         group: "Geometry",
@@ -59,7 +59,7 @@ const meteorMeta: CubesMeta = {
     animateVariant: {
         name: "Animation Variant",
         type: "enum",
-        default: "random",
+        default: "sequential",
         options: {
             "random": RandomIcon,
             "sequential": SequentialIcon,
@@ -88,6 +88,8 @@ function Cubes({
     width,
     geoSeed,
 }: Scene.ComponentProps<CubesMeta & Scene.CommonMetaData>) {
+    const randomGenerator = seedrandom(geoSeed);
+
     const cornerX = 150 * Math.sin(rotation * Math.PI / 180);
     const cornerY = 150 * Math.cos(rotation * Math.PI / 180);
     const rectCorners = [
@@ -107,8 +109,8 @@ function Cubes({
             <style>{`
                 @keyframes lifting {
                     0% {transform:translateY(0);}
-                    20% {transform:translateY(-10%);}
-                    40% {transform:translateY(-10%);}
+                    20% {transform:translateY(-7%);}
+                    40% {transform:translateY(-7%);}
                     80% {transform:translateY(0);}
                     100% {transform:translateY(0);}
                 }
@@ -134,8 +136,15 @@ function Cubes({
             <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
             <g id="cubes">
                 {
-                    validBaseList(width, height, vectorRightDown, vecotrLeftDown).map(({ x, y }, i) => (
-                        <use href={`#cube-base`} key={i} x={x} y={y} className={LIFTING_INIT_CLASS(i % LIFTING_DURATION)} />
+                    validBaseList(width, height, vectorRightDown, vecotrLeftDown).map(({ x, y, row, cell }, i) => (
+                        <use href={`#cube-base`} key={i} x={x} y={y}
+                            className={LIFTING_INIT_CLASS(
+                                (
+                                    animateVariant === "random" ?
+                                        randomFitToInt(randomGenerator(), 0, LIFTING_DURATION) :
+                                        (row + cell * 2)
+                                ) % LIFTING_DURATION
+                            )} />
                     ))
                 }
             </g>
@@ -145,24 +154,30 @@ function Cubes({
 
 function validBaseList(width: number, height: number, vecotrRD: { x: number, y: number }, vecotrLD: { x: number, y: number }) {
     const isValid = ({ x, y }: { x: number, y: number }) => -300 <= x && x <= 300 + width && -300 <= y && y <= height + 300;
-    const move = (p: { x: number, y: number }, vector: { x: number, y: number }, reverse: boolean = false) =>
-        ({ x: p.x + (reverse ? -1 : 1) * vector.x, y: p.y + (reverse ? -1 : 1) * vector.y });
-    const result = []
+    const nextRow = (p: { x: number, y: number, row: number, cell: number }) =>
+        ({ x: p.x + vecotrRD.x, y: p.y + vecotrRD.y, row: p.row + 1, cell: p.cell });
+    const nextCell = (p: { x: number, y: number, row: number, cell: number }) =>
+        ({ x: p.x + vecotrLD.x, y: p.y + vecotrLD.y, row: p.row, cell: p.cell + 1 });
+    const prevCell = (p: { x: number, y: number, row: number, cell: number }) =>
+        ({ x: p.x - vecotrLD.x, y: p.y - vecotrLD.y, row: p.row, cell: p.cell - 1 });
+    const result = [];
 
     let rowHaveValid = true;
-    let currentBase = { x: -300, y: -300 };
+    let currentBase = { x: -300, y: -300, row: 0, cell: 0 };
     while (rowHaveValid) {
         rowHaveValid = false;
-        while (isValid(currentBase)) currentBase = move(currentBase, vecotrLD, true);
-        currentBase = move(currentBase, vecotrLD);
+        while (currentBase.y >= -300) currentBase = prevCell(currentBase);
+        currentBase = nextCell(currentBase);
 
         let currentP = currentBase;
-        while (isValid(currentP)) {
-            rowHaveValid = true;
-            result.push(currentP)
-            currentP = move(currentP, vecotrLD);
+        while (currentP.y <= height + 300) {
+            if (isValid(currentP)) {
+                rowHaveValid = true;
+                result.push(currentP)
+            }
+            currentP = nextCell(currentP);
         }
-        currentBase = move(currentBase, vecotrRD);
+        currentBase = nextRow(currentBase);
     }
 
     return result;

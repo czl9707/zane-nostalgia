@@ -1,5 +1,5 @@
 import { defaultSceneCommonMetaData } from "./constants";
-import { NumberParamMetaToken, Scene, } from "./types";
+import { EnumParamMetaToken, NumberParamMetaToken, Scene, } from "./types";
 
 function defaultParameterResolver<M extends Scene.MetaData>(
     props: Partial<Record<string, string>>,
@@ -42,6 +42,12 @@ function resolveParameterConstraints<M extends Scene.MetaData>(
                 meta.max,
                 meta.step
             );
+        }
+        else if (metaData[param].type == "enum") {
+            const meta = metaData[param] as EnumParamMetaToken<string>;
+            if (!meta.options[props[param] as string]) {
+                props[param] = meta.default;
+            }
         }
     }
 

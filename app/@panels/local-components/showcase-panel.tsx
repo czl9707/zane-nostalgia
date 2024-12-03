@@ -98,7 +98,7 @@ export default function ShowCasePanel() {
                 <ShowCase scene="404" backgroundColor="#040404" color="#AAAAAA" />
                 <ShowCase scene="noise" backgroundColor="#040404" color="#1F1F1F" />
                 <ShowCase scene="beats" backgroundColor="#040404" color="#333333" />
-                <ShowCase scene="cubes" backgroundColor="#040404" color="#333333" />
+                <ShowCase scene="cubes" backgroundColor="#040404" color="#222222" />
             </ShowcaseContainer>
 
             <div style={{ height: "6rem" }} />
