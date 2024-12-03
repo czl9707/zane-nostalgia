@@ -19,7 +19,7 @@ async function fetchSceneMetas() {
                 Icon: sceneModule.Icon,
                 name: sceneModule.name,
                 route: s,
-            }
+            };
         });
 
     return Promise.all(sceneContents);
