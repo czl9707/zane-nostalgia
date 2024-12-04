@@ -2,58 +2,12 @@ import * as React from "react";
 import seedrandom from 'seedrandom';
 
 import { randomFitToInt } from "@/app/components/utils/math-utils";
-import { IconProps, SvgIcon } from "@/app/components/ui/icons/icons"
+import { Scene } from "./utils/types";
+import { meta, MeteroShowerMeta } from "./meteors.meta";
 import SceneComponent from "./utils/scene-component";
-import { ColorParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import SearchParamProvider from "./utils/search-param-provider";
 
 
-interface MeteroShowerMeta extends Scene.MetaData {
-    color: ColorParamMetaToken,
-    backgroundColor: ColorParamMetaToken,
-    rotation: NumberParamMetaToken,
-    density: NumberParamMetaToken,
-    geoSeed: RandomSeedParamMetaToken,
-}
-
-
-const meteorMeta: MeteroShowerMeta = {
-    color: {
-        name: "Color",
-        type: "color",
-        default: "#ffff00",
-        group: "Color",
-    },
-    backgroundColor: {
-        name: "Background Color",
-        type: "color",
-        default: "#000000",
-        group: "Color",
-    },
-    rotation: {
-        name: "Rotation",
-        type: "number",
-        default: 45,
-        min: 0,
-        max: 180,
-        step: 5,
-        group: "Geometry",
-    },
-    density: {
-        name: "Density",
-        type: "number",
-        default: 10,
-        min: 5,
-        max: 20,
-        step: 1,
-        group: "Geometry",
-    },
-    geoSeed: {
-        name: "Random Seed",
-        type: "randomSeed",
-        default: "MeteorShower",
-        group: "Geometry",
-    }
-};
 
 const DENSITY_FACTOR = 0.005;
 const METEOR_ANIMATION_TIME_RANGE = 60;
@@ -160,21 +114,15 @@ function MeteorShower({
 }
 
 
-const MeteorShowerIcon = React.forwardRef<SVGSVGElement, IconProps>(
-    function MeteorShower(props, ref) {
-        return (
-            <SvgIcon {...props} viewBoxSize='0 0 256 256' style={{ transform: "scale(0.75)" }} ref={ref} >
-                <path d="M96 124a36 36 0 1 0 36 36a36 36 0 0 0-36-36m0 48a12 12 0 1 1 12-12a12 12 0 0 1-12 12m128.49-52.49a12 12 0 0 1 0 17l-48 48a12 12 0 0 1-17-17l48-48a12 12 0 0 1 17 0m-36-20a12 12 0 0 1 0 17l-20 20a12 12 0 0 1-17-17l20-20a12 12 0 0 1 17 0m44-27l-16 16a12 12 0 0 1-17-17l16-16a12 12 0 0 1 17 17m-113 15l72-72a12 12 0 0 1 17 17l-72 72a12 12 0 1 1-17-17m30.23 109.26a12 12 0 0 1 0 17A76 76 0 1 1 42.26 106.26L125 23.51a12 12 0 1 1 17 17l-82.77 82.72a52 52 0 0 0 73.54 73.54a12 12 0 0 1 16.97 0Z" />
-            </SvgIcon>
-        );
-    }
-)
-
-export const Icon: Scene.Module<MeteroShowerMeta>["Icon"] = MeteorShowerIcon;
-export const name: Scene.Module<MeteroShowerMeta>["name"] = "Meteor Shower";
-export const meta: Scene.Module<MeteroShowerMeta>["meta"] = meteorMeta;
-
-export const RawComponent: Scene.Module<MeteroShowerMeta>["RawComponent"] = MeteorShower;
-export const Component: Scene.Module<MeteroShowerMeta>["Component"] = (props: Record<string, string>) => {
-    return <SceneComponent Component={MeteorShower} meta={meta} {...props} />
+export default function MeteorShowerWrapper(props: Record<string, string>) {
+    return (
+        <SceneComponent meta={meta} Component={MeteorShower} {...props} />
+    )
 }
+
+export const RawComponent = MeteorShower;
+export const SearchParamConsumerComponent = () => (
+    <SearchParamProvider>
+        <MeteorShowerWrapper />
+    </SearchParamProvider>
+)

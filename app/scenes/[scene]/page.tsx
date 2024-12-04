@@ -6,9 +6,8 @@ export async function generateStaticParams(): Promise<{ scene: string }[]> {
     return scenes.map(s => ({ scene: s.route }));
 }
 
-export default function Page({ params, searchParams }: { params: { scene: string }, searchParams: Record<string, string> }) {
-    const SComponent = dynamic(async () => import(`../../scene-components/${params.scene}`).then((mod) => mod.Component))
-    return (
-        <SComponent {...searchParams} />
-    )
+export default function Page({ params }: { params: { scene: string } }) {
+    const SComponent = dynamic(async () => import(`../../scene-components/${params.scene}`)
+        .then(m => m.SearchParamConsumerComponent))
+    return <SComponent />;
 }

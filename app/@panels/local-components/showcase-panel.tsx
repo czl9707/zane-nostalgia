@@ -55,7 +55,7 @@ async function ShowCase({ scene, ...other }: {
     scene: ShowCaseSceneTypes,
     [key: string]: string
 }) {
-    const sceneModule: Scene.Module = await import(`../../scene-components/${scene}`);
+    const sceneModule: Scene.ComponentMetaModule = await import(`../../scene-components/${scene}.meta`);
 
     return (
         <ShowCaseViewBox>

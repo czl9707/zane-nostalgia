@@ -4,7 +4,7 @@ import { styled } from '@pigment-css/react';
 // dont know why only relative works ......
 import { defaultSceneCommonMetaData } from '../../../scene-components/utils/constants';
 import { defaultParameterResolver, defaultCommonParameterResolver, resolveParameterConstraints } from '../../../scene-components/utils/resolver';
-import { fetchScene, fetchSceneMetas } from '../../../scene-components/utils/fetch-scenes';
+import { fetchSceneMetas } from '../../../scene-components/utils/fetch-scenes';
 import { ParamMetaToken, Scene } from '../../../scene-components/utils/types';
 
 import Panel from '@/app/components/ui/panel';
@@ -18,6 +18,7 @@ import DownloadButton from '@/app/@panels/scenes/[scene]/local-components/downlo
 import RandomSeedButton from '@/app/@panels/scenes/[scene]/local-components/random-seed-button';
 import ToggleGroup, { ToggleGroupItem } from '@/app/components/controls/toggle-group';
 import ControlRouterUpdator from '@/app/@panels/scenes/[scene]/local-components/controls-router-updator';
+import SearchParamProvider from '@/app/scene-components/utils/search-param-provider';
 
 
 export async function generateStaticParams(): Promise<{ scene: string }[]> {
@@ -33,15 +34,19 @@ const PanelWrapper = styled(Panel)(({ theme }) => ({
 export default async function Panels({ params, searchParams }: { params: Promise<{ scene: string }>, searchParams: Record<string, string> }) {
     const renderToString = (await import('react-dom/server')).renderToString;
 
-    const sceneModule: Scene.Module = await fetchScene((await params).scene);
-    const meta: Scene.MetaData = sceneModule.meta;
+    const SceneComponent: Scene.ComponentModule = await import(`../../../scene-components/${(await params).scene}`);
+    const sceneMetaModule: Scene.ComponentMetaModule = await import(`../../../scene-components/${(await params).scene}.meta`);
+    const meta = sceneMetaModule.meta;
 
     let resolvedCommon = defaultCommonParameterResolver(searchParams);
     resolvedCommon = resolveParameterConstraints(resolvedCommon, defaultSceneCommonMetaData);
     let resolved = defaultParameterResolver(searchParams, meta);
     resolved = resolveParameterConstraints(resolved, meta);
 
-    const svgContent = renderToString(<sceneModule.Component {...searchParams} />);
+    const svgContent = ""
+    // renderToString(
+    //     <SceneComponent.default {...searchParams} />
+    // );
 
     const metaGroups: { [key: string]: { [key: string]: ParamMetaToken } } = {};
 

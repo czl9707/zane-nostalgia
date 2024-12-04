@@ -54,12 +54,17 @@ namespace Scene {
     export type ComponentProps<M extends MetaData> = {
         [key in keyof (M)]: M[key]["default"]
     }
-    export type Module<M extends MetaData = MetaData> = {
-        RawComponent: React.FC<ComponentProps<M & CommonMetaData>>,
-        Component: React.FC<Record<string, string>>,
+    export type ComponentMetaModule<M extends MetaData = MetaData> = {
         Icon: React.ElementType,
         name: string,
         meta: M
+    }
+    export type RawComponentType<M extends MetaData = MetaData> = React.FC<ComponentProps<M & CommonMetaData>>;
+    export type ComponentType = React.FC<Record<string, string>>;
+    export type ComponentModule<M extends MetaData = MetaData> = {
+        RawComponent: RawComponentType<M>,
+        default: ComponentType,
+        SearchParamConsumerComponent: React.FC
     }
 }
 
