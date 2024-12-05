@@ -7,8 +7,6 @@ import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { Scene } from "./utils/types";
 import { meta, MeteroShowerMeta } from "./meteors.meta";
 import SceneComponent from "./utils/scene-component";
-import SearchParamProvider from "./utils/search-param-provider";
-
 
 
 const DENSITY_FACTOR = 0.005;
@@ -124,6 +122,3 @@ function MeteorShowerWrapper(props: Record<string, string>) {
 
 export const Component: Scene.ComponentModule<MeteroShowerMeta>["Component"] = MeteorShowerWrapper;
 export const RawComponent: Scene.ComponentModule<MeteroShowerMeta>["RawComponent"] = MeteorShower;
-export const SearchParamConsumerComponent: Scene.ComponentModule<MeteroShowerMeta>["SearchParamConsumerComponent"] = () => (
-    <SearchParamProvider Component={MeteorShowerWrapper} />
-)

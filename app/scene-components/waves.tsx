@@ -7,8 +7,6 @@ import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { Scene } from "./utils/types";
 import { meta, WavesMeta } from "./waves.meta";
 import SceneComponent from "./utils/scene-component";
-import SearchParamProvider from "./utils/search-param-provider";
-
 
 const WAVE_ANIMATION_STEP = 4;
 const WAVE_ANIMATION_CYCLE = 6;
@@ -99,6 +97,3 @@ export default function WavesWrapper(props: Record<string, string>) {
 
 export const Component: Scene.ComponentModule<WavesMeta>["Component"] = WavesWrapper;
 export const RawComponent: Scene.ComponentModule<WavesMeta>["RawComponent"] = Waves;
-export const SearchParamConsumerComponent: Scene.ComponentModule<WavesMeta>["SearchParamConsumerComponent"] = () => (
-    <SearchParamProvider Component={WavesWrapper} />
-)

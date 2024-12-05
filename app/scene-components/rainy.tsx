@@ -7,8 +7,6 @@ import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { Scene } from "./utils/types";
 import { meta, RainyMeta } from "./rainy.meta";
 import SceneComponent from "./utils/scene-component";
-import SearchParamProvider from "./utils/search-param-provider";
-
 
 const DROP_TIME = 0.4;
 const CYCLE_DURATION = 1.5;
@@ -98,6 +96,3 @@ function RainyWrapper(props: Record<string, string>) {
 
 export const Component: Scene.ComponentModule<RainyMeta>["Component"] = RainyWrapper;
 export const RawComponent: Scene.ComponentModule<RainyMeta>["RawComponent"] = Rainy;
-export const SearchParamConsumerComponent: Scene.ComponentModule<RainyMeta>["SearchParamConsumerComponent"] = () => (
-    <SearchParamProvider Component={RainyWrapper} />
-)

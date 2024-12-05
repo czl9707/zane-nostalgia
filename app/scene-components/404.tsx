@@ -102,6 +102,3 @@ function FourOFourWrapper(props: Record<string, string>) {
 
 export const Component: Scene.ComponentModule<FourOFourMeta>["Component"] = FourOFourWrapper;
 export const RawComponent: Scene.ComponentModule<FourOFourMeta>["RawComponent"] = FourOFour;
-export const SearchParamConsumerComponent: Scene.ComponentModule<FourOFourMeta>["SearchParamConsumerComponent"] = () => (
-    <SearchParamProvider Component={FourOFourWrapper} />
-)

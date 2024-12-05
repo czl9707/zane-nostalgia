@@ -7,7 +7,6 @@ import { Scene } from "./utils/types";
 import { BeatsMeta, meta } from "./beats.meta";
 import { randomFitToInt } from "../components/utils/math-utils";
 import SceneComponent from "./utils/scene-component";
-import SearchParamProvider from "./utils/search-param-provider";
 
 const BEAT_CYCLE_SEC = 5; // sec
 const BEAT_STEP = 10; // px
@@ -173,6 +172,3 @@ function BeatsWrapper(props: Record<string, string>) {
 
 export const Component: Scene.ComponentModule<BeatsMeta>["Component"] = BeatsWrapper;
 export const RawComponent: Scene.ComponentModule<BeatsMeta>["RawComponent"] = Beats;
-export const SearchParamConsumerComponent: Scene.ComponentModule<BeatsMeta>["SearchParamConsumerComponent"] = () => (
-    <SearchParamProvider Component={BeatsWrapper} />
-)

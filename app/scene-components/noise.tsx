@@ -5,8 +5,6 @@ import * as React from "react";
 import { meta, NoiseMeta } from "./noise.meta";
 import { Scene } from "./utils/types";
 import SceneComponent from "./utils/scene-component";
-import SearchParamProvider from "./utils/search-param-provider";
-
 
 const MIN_RADIUS = 100;
 
@@ -64,6 +62,3 @@ function NoiseWrapper(props: Record<string, string>) {
 
 export const Component: Scene.ComponentModule<NoiseMeta>["Component"] = NoiseWrapper;
 export const RawComponent: Scene.ComponentModule<NoiseMeta>["RawComponent"] = Noise;
-export const SearchParamConsumerComponent: Scene.ComponentModule<NoiseMeta>["SearchParamConsumerComponent"] = () => (
-    <SearchParamProvider Component={NoiseWrapper} />
-)

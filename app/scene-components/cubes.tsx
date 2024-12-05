@@ -7,7 +7,6 @@ import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { Scene } from "./utils/types";
 import { CubesMeta, meta } from "./cubes.meta";
 import SceneComponent from "./utils/scene-component";
-import SearchParamProvider from "./utils/search-param-provider";
 
 const LIFTING_DURATION = 10;
 const LIFTING_INIT_VARIANTS = [...Array(LIFTING_DURATION)].map((_, i) => i);
@@ -44,8 +43,8 @@ function Cubes({
             <style>{`
                 @keyframes lifting {
                     0% {transform:translateY(0);}
-                    20% {transform:translateY(-7%);}
-                    40% {transform:translateY(-7%);}
+                    20% {transform:translateY(-80px);}
+                    40% {transform:translateY(-80px);}
                     80% {transform:translateY(0);}
                     100% {transform:translateY(0);}
                 }
@@ -71,16 +70,16 @@ function Cubes({
             <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
             <g id="cubes">
                 {
-                    validBaseList(width, height, vectorRightDown, vecotrLeftDown).map(({ x, y, row, cell }, i) => (
-                        <use href={`#cube-base`} key={i} x={x} y={y}
-                            className={LIFTING_INIT_CLASS(
-                                (
+                    validBaseList(width, height, vectorRightDown, vecotrLeftDown).map(({ x, y, row, cell }, i) => {
+                        return (
+                            <use href={`#cube-base`} key={i} x={x} y={y}
+                                className={LIFTING_INIT_CLASS(
                                     animateVariant === "random" ?
                                         randomFitToInt(randomGenerator(), 0, LIFTING_DURATION) :
-                                        (row + cell * 2)
-                                ) % LIFTING_DURATION
-                            )} />
-                    ))
+                                        ((row + cell * 2) % LIFTING_DURATION + LIFTING_DURATION) % LIFTING_DURATION
+                                )} />
+                        )
+                    })
                 }
             </g>
         </>
@@ -102,7 +101,6 @@ function validBaseList(width: number, height: number, vecotrRD: { x: number, y: 
     while (rowHaveValid) {
         rowHaveValid = false;
         while (currentBase.y >= -300) currentBase = prevCell(currentBase);
-        currentBase = nextCell(currentBase);
 
         let currentP = currentBase;
         while (currentP.y <= height + 300) {
@@ -127,6 +125,3 @@ function CubesWrapper(props: Record<string, string>) {
 
 export const Component: Scene.ComponentModule<CubesMeta>["Component"] = CubesWrapper;
 export const RawComponent: Scene.ComponentModule<CubesMeta>["RawComponent"] = Cubes;
-export const SearchParamConsumerComponent: Scene.ComponentModule<CubesMeta>["SearchParamConsumerComponent"] = () => (
-    <SearchParamProvider Component={CubesWrapper} />
-)
