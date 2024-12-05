@@ -6,7 +6,12 @@ export async function GET(request: NextRequest, { params }: { params: { scene: s
     const renderToString = (await import('react-dom/server')).renderToString;
     const searchParams = Object.fromEntries(new URL(request.url).searchParams);
 
-    const SceneComponentModule: Scene.ComponentModule = await import(`../../../scene-components/${params.scene}`);
+    let SceneComponentModule: Scene.ComponentModule;
+    try {
+        SceneComponentModule = await import(`../../../scene-components/${params.scene}`);
+    } catch {
+        return new Response(undefined, { status: 404 });
+    }
 
     const result = renderToString(<SceneComponentModule.Component {...searchParams} />,);
     const response = new Response(result, {
@@ -16,4 +21,5 @@ export async function GET(request: NextRequest, { params }: { params: { scene: s
         },
     });
     return response;
+
 }

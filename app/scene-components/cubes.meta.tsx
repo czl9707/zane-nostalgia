@@ -58,8 +58,8 @@ const meteorMeta: CubesMeta = {
         type: "enum",
         default: "sequential",
         options: {
-            "random": RandomIcon,
-            "sequential": SequentialIcon,
+            "random": <RandomIcon />,
+            "sequential": <SequentialIcon />,
         },
         group: "Geometry",
     },

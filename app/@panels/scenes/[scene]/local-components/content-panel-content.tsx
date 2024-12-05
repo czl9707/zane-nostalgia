@@ -14,17 +14,19 @@ export default function ContentPanelContent({ scene, Component }: { scene: strin
     const [svgContent, setSVGContent] = React.useState<string>("");
     const searchParams = useSearchParams();
 
-    new Promise((resolve) => setTimeout(resolve, 0)).then(() => {
-        if (typeof document === "undefined") return;
+    React.useEffect(() => {
+        new Promise((resolve) => setTimeout(resolve, 0)).then(() => {
+            if (typeof document === "undefined") return;
 
-        const container = document?.createElement('div');
-        const root = Client.createRoot(container);
-        ReactDOM.flushSync(() => {
-            root.render(<Component {...Object.fromEntries(searchParams.entries())} />);
-        });
-        setSVGContent(container.innerHTML);
-        root.unmount();
-    })
+            const container = document?.createElement('div');
+            const root = Client.createRoot(container);
+            ReactDOM.flushSync(() => {
+                root.render(<Component {...Object.fromEntries(searchParams.entries())} />);
+            });
+            setSVGContent(container.innerHTML);
+            root.unmount();
+        })
+    }, [searchParams])
 
     return <>
         <CopyPanel label={"HTTP Endpoint:"}>

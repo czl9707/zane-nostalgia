@@ -77,9 +77,9 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
                             control = <ToggleGroup label={metaEntry.name} value={resolvedValue[paramName] as string}>
                                 <>
                                     {
-                                        Object.entries(metaEntry.options).map(([value, Icon]) => (
+                                        Object.entries(metaEntry.options).map(([value, icon]) => (
                                             <ToggleGroupItem value={value} key={value}>
-                                                <Icon />
+                                                {icon}
                                             </ToggleGroupItem>
                                         ))
                                     }

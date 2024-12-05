@@ -107,8 +107,8 @@ const beatsMeta: BeatsMeta = {
         type: "enum",
         default: "bar",
         options: {
-            "line": PlannerReviewIcon,
-            "bar": BarChartIcon,
+            "line": <PlannerReviewIcon />,
+            "bar": <BarChartIcon />,
         },
         group: "Geometry",
     },
@@ -117,9 +117,9 @@ const beatsMeta: BeatsMeta = {
         type: "enum",
         default: "middle",
         options: {
-            "top": AlignStartIcon,
-            "middle": AlignCenterIcon,
-            "bottom": AlignEndIcon,
+            "top": <AlignStartIcon />,
+            "middle": <AlignCenterIcon />,
+            "bottom": <AlignEndIcon />,
         },
         group: "Geometry",
     },

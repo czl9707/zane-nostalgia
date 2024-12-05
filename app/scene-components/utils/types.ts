@@ -33,7 +33,7 @@ interface StringParamMetaToken extends BaseParamMetaToken {
 interface EnumParamMetaToken<ENUM extends string> extends BaseParamMetaToken {
     type: "enum",
     default: ENUM,
-    options: Record<ENUM, React.FC>
+    options: Record<ENUM, React.ReactElement>
 }
 
 type ParamMetaToken =
@@ -64,7 +64,6 @@ namespace Scene {
     export type ComponentModule<M extends MetaData = MetaData> = {
         RawComponent: RawComponentType<M>,
         Component: ComponentType,
-        SearchParamConsumerComponent: React.FC
     }
 }
 
