@@ -38,3 +38,4 @@ export default function SceneComponent<M extends Scene.MetaData>({ Component, me
         </svg>
     )
 }
+

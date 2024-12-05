@@ -1,54 +1,12 @@
+"use client"
+
 import seedrandom from 'seedrandom';
-import { Error as ErrorIcon } from "@/app/components/ui/icons/icons";
 import { randomFitToInt, simpleHash } from "@/app/components/utils/math-utils";
-import { ColorParamMetaToken, NumberParamMetaToken, StringParamMetaToken, RandomSeedParamMetaToken, Scene, } from "./utils/types";
-import SceneComponent from "./utils/scene-component";
 
-
-interface FourOFourMeta extends Scene.MetaData {
-    color: ColorParamMetaToken,
-    backgroundColor: ColorParamMetaToken,
-    density: NumberParamMetaToken,
-    textContent: StringParamMetaToken,
-    geoSeed: RandomSeedParamMetaToken,
-}
-
-
-const fourOFourMeta: FourOFourMeta = {
-    color: {
-        name: "Color",
-        type: "color",
-        default: "#220000",
-        group: "Color",
-    },
-    backgroundColor: {
-        name: "Background Color",
-        type: "color",
-        default: "#000000",
-        group: "Color",
-    },
-    density: {
-        name: "Density",
-        type: "number",
-        default: 6,
-        min: 2,
-        max: 10,
-        step: 1,
-        group: "Geometry",
-    },
-    textContent: {
-        name: "Content",
-        type: "string",
-        default: "404",
-        group: "Geometry",
-    },
-    geoSeed: {
-        name: "Random Seed",
-        type: "randomSeed",
-        default: "FourOFour",
-        group: "Geometry",
-    }
-};
+import { FourOFourMeta, meta } from './404.meta'
+import { Scene } from './utils/types';
+import SceneComponent from './utils/scene-component';
+import SearchParamProvider from './utils/search-param-provider';
 
 const DENSITY_FACTOR = 0.0007;
 
@@ -136,12 +94,11 @@ function FourOFour({
     </>)
 }
 
-
-export const Icon: Scene.Module<FourOFourMeta>["Icon"] = ErrorIcon;
-export const name: Scene.Module<FourOFourMeta>["name"] = "404";
-export const meta: Scene.Module<FourOFourMeta>["meta"] = fourOFourMeta;
-
-export const RawComponent: Scene.Module<FourOFourMeta>["RawComponent"] = FourOFour;
-export const Component: Scene.Module<FourOFourMeta>["Component"] = (props: Record<string, string>) => {
-    return <SceneComponent Component={FourOFour} meta={meta} {...props} />
+function FourOFourWrapper(props: Record<string, string>) {
+    return (
+        <SceneComponent meta={meta} Component={FourOFour} {...props} />
+    )
 }
+
+export const Component: Scene.ComponentModule<FourOFourMeta>["Component"] = FourOFourWrapper;
+export const RawComponent: Scene.ComponentModule<FourOFourMeta>["RawComponent"] = FourOFour;

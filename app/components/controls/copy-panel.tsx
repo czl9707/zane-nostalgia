@@ -27,7 +27,7 @@ const CopyPanelContainer = styled("div")(({ theme }) => ({
     borderRadius: ".5rem", border: `1px solid ${theme.vars.colors.secondary.contrastText}`,
     background: `color-mix(in srgb, ${theme.vars.colors.primary.background}, transparent)`,
     "p": {
-        width: "100%", maxHeight: "5rem",
+        width: "100%", maxHeight: "5rem", minHeight: "2rem",
         whiteSpace: "normal", overflowY: "scroll",
         overflowWrap: "break-word", wordBreak: "break-all",
     },
