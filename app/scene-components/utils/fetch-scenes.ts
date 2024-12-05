@@ -10,7 +10,7 @@ async function fetchSceneMetas() {
         .filter(f => f.endsWith("meta.tsx"))
         .map(f => f.split(".")[0])
         .map(async s => {
-            const sceneModule: Scene.CommonMetaData = await import(`../${s}.meta`);
+            const sceneModule: Scene.ComponentMetaModule = await import(`../${s}.meta`);
             return {
                 Icon: sceneModule.Icon,
                 name: sceneModule.name,

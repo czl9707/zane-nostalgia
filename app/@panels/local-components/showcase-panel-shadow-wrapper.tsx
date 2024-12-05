@@ -5,13 +5,13 @@ import * as ReactDOM from 'react-dom'
 import * as React from 'react'
 
 const SceneComponents = {
-    "404": dynamic(async () => import(`../../scene-components/404`)),
-    "meteors": dynamic(async () => import(`../../scene-components/meteors`)),
-    "waves": dynamic(async () => import(`../../scene-components/waves`)),
-    "rainy": dynamic(async () => import(`../../scene-components/rainy`)),
-    "noise": dynamic(async () => import(`../../scene-components/noise`)),
-    "beats": dynamic(async () => import(`../../scene-components/beats`)),
-    "cubes": dynamic(async () => import(`../../scene-components/cubes`)),
+    "404": dynamic(async () => import(`../../scene-components/404`).then(m => m.Component), { ssr: false }),
+    "meteors": dynamic(async () => import(`../../scene-components/meteors`).then(m => m.Component), { ssr: false }),
+    "waves": dynamic(async () => import(`../../scene-components/waves`).then(m => m.Component), { ssr: false }),
+    "rainy": dynamic(async () => import(`../../scene-components/rainy`).then(m => m.Component), { ssr: false }),
+    "noise": dynamic(async () => import(`../../scene-components/noise`).then(m => m.Component), { ssr: false }),
+    "beats": dynamic(async () => import(`../../scene-components/beats`).then(m => m.Component), { ssr: false }),
+    "cubes": dynamic(async () => import(`../../scene-components/cubes`).then(m => m.Component), { ssr: false }),
 } as const;
 
 type ShowCaseSceneTypes = keyof typeof SceneComponents;

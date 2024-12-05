@@ -94,15 +94,14 @@ function FourOFour({
     </>)
 }
 
-export default function FourOFourWrapper(props: Record<string, string>) {
+function FourOFourWrapper(props: Record<string, string>) {
     return (
         <SceneComponent meta={meta} Component={FourOFour} {...props} />
     )
 }
 
-export const RawComponent = FourOFour;
-export const SearchParamConsumerComponent = () => (
-    <SearchParamProvider>
-        <FourOFourWrapper />
-    </SearchParamProvider>
+export const Component: Scene.ComponentModule<FourOFourMeta>["Component"] = FourOFourWrapper;
+export const RawComponent: Scene.ComponentModule<FourOFourMeta>["RawComponent"] = FourOFour;
+export const SearchParamConsumerComponent: Scene.ComponentModule<FourOFourMeta>["SearchParamConsumerComponent"] = () => (
+    <SearchParamProvider Component={FourOFourWrapper} />
 )

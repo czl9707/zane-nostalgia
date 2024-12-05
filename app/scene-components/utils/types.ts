@@ -63,7 +63,7 @@ namespace Scene {
     export type ComponentType = React.FC<Record<string, string>>;
     export type ComponentModule<M extends MetaData = MetaData> = {
         RawComponent: RawComponentType<M>,
-        default: ComponentType,
+        Component: ComponentType,
         SearchParamConsumerComponent: React.FC
     }
 }

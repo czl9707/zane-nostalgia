@@ -3,7 +3,8 @@
 import * as React from 'react';
 import { useSearchParams } from "next/navigation";
 
-export default function SearchParamProvider({ children }: { children: React.ReactElement }) {
+export default function SearchParamProvider({ Component }: { Component: React.FC<Record<string, string>> }) {
     const searchParams = useSearchParams();
-    return React.cloneElement(children, Object.fromEntries(searchParams.entries()));
+
+    return <Component {...Object.fromEntries(searchParams.entries())} />
 }

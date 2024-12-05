@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import seedrandom from "seedrandom";
 
@@ -89,14 +91,14 @@ function generateCommonPath(nodes: { x: number, y: number }[]): string {
     return `0 ${nodes[0].y}` + segments.join(" ");
 }
 
-export const RawComponent = Waves;
 export default function WavesWrapper(props: Record<string, string>) {
     return (
         <SceneComponent meta={meta} Component={Waves} {...props} />
     )
 }
-export const SearchParamConsumerComponent = () => (
-    <SearchParamProvider>
-        <WavesWrapper />
-    </SearchParamProvider>
+
+export const Component: Scene.ComponentModule<WavesMeta>["Component"] = WavesWrapper;
+export const RawComponent: Scene.ComponentModule<WavesMeta>["RawComponent"] = Waves;
+export const SearchParamConsumerComponent: Scene.ComponentModule<WavesMeta>["SearchParamConsumerComponent"] = () => (
+    <SearchParamProvider Component={WavesWrapper} />
 )

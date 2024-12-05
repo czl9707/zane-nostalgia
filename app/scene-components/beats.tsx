@@ -165,14 +165,14 @@ function normalDistribution(x: number) {
 }
 
 
-export default function BeatsWrapper(props: Record<string, string>) {
+function BeatsWrapper(props: Record<string, string>) {
     return (
         <SceneComponent meta={meta} Component={Beats} {...props} />
     )
 }
-export const RawComponent = Beats;
-export const SearchParamConsumerComponent = () => (
-    <SearchParamProvider>
-        <BeatsWrapper />
-    </SearchParamProvider>
+
+export const Component: Scene.ComponentModule<BeatsMeta>["Component"] = BeatsWrapper;
+export const RawComponent: Scene.ComponentModule<BeatsMeta>["RawComponent"] = Beats;
+export const SearchParamConsumerComponent: Scene.ComponentModule<BeatsMeta>["SearchParamConsumerComponent"] = () => (
+    <SearchParamProvider Component={BeatsWrapper} />
 )

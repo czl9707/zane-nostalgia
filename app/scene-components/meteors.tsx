@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import seedrandom from 'seedrandom';
 
@@ -114,15 +116,14 @@ function MeteorShower({
 }
 
 
-export default function MeteorShowerWrapper(props: Record<string, string>) {
+function MeteorShowerWrapper(props: Record<string, string>) {
     return (
         <SceneComponent meta={meta} Component={MeteorShower} {...props} />
     )
 }
 
-export const RawComponent = MeteorShower;
-export const SearchParamConsumerComponent = () => (
-    <SearchParamProvider>
-        <MeteorShowerWrapper />
-    </SearchParamProvider>
+export const Component: Scene.ComponentModule<MeteroShowerMeta>["Component"] = MeteorShowerWrapper;
+export const RawComponent: Scene.ComponentModule<MeteroShowerMeta>["RawComponent"] = MeteorShower;
+export const SearchParamConsumerComponent: Scene.ComponentModule<MeteroShowerMeta>["SearchParamConsumerComponent"] = () => (
+    <SearchParamProvider Component={MeteorShowerWrapper} />
 )

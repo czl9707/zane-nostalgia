@@ -4,18 +4,17 @@ import * as React from 'react'
 
 import { Slot } from '@radix-ui/react-slot';
 
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 
 export default function ControlRouterUpdator({ paramName, children, ...other }: { paramName: string, children: React.ReactNode }) {
-    const router = useRouter();
-    const path = usePathname();
-    const searchParam = useSearchParams();
+    const searchParams = useSearchParams();
 
     const handleOnChange = (value: string) => {
-        const updatedSP = new URLSearchParams(searchParam.toString());
+        const updatedSP = new URLSearchParams(searchParams.toString());
         updatedSP.set(paramName, value);
 
-        router.replace(path + '?' + updatedSP.toString(), { scroll: false })
+        // no router update here.
+        window.history.pushState(null, '', `?${updatedSP.toString()}`);
     }
 
     return (

@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 
 import { meta, NoiseMeta } from "./noise.meta";
@@ -54,15 +56,14 @@ function Noise({
 }
 
 
-export default function NoiseWrapper(props: Record<string, string>) {
+function NoiseWrapper(props: Record<string, string>) {
     return (
         <SceneComponent meta={meta} Component={Noise} {...props} />
     )
 }
 
-export const RawComponent = Noise;
-export const SearchParamConsumerComponent = () => (
-    <SearchParamProvider>
-        <NoiseWrapper />
-    </SearchParamProvider>
+export const Component: Scene.ComponentModule<NoiseMeta>["Component"] = NoiseWrapper;
+export const RawComponent: Scene.ComponentModule<NoiseMeta>["RawComponent"] = Noise;
+export const SearchParamConsumerComponent: Scene.ComponentModule<NoiseMeta>["SearchParamConsumerComponent"] = () => (
+    <SearchParamProvider Component={NoiseWrapper} />
 )

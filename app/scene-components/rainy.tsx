@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import seedrandom from "seedrandom";
 
@@ -88,15 +90,14 @@ function Rainy({
 }
 
 
-export default function RainyWrapper(props: Record<string, string>) {
+function RainyWrapper(props: Record<string, string>) {
     return (
         <SceneComponent meta={meta} Component={Rainy} {...props} />
     )
 }
 
-export const RawComponent = Rainy;
-export const SearchParamConsumerComponent = () => (
-    <SearchParamProvider>
-        <RainyWrapper />
-    </SearchParamProvider>
+export const Component: Scene.ComponentModule<RainyMeta>["Component"] = RainyWrapper;
+export const RawComponent: Scene.ComponentModule<RainyMeta>["RawComponent"] = Rainy;
+export const SearchParamConsumerComponent: Scene.ComponentModule<RainyMeta>["SearchParamConsumerComponent"] = () => (
+    <SearchParamProvider Component={RainyWrapper} />
 )

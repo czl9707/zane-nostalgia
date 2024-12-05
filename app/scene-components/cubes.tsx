@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react";
 import seedrandom from 'seedrandom';
 
@@ -117,15 +119,14 @@ function validBaseList(width: number, height: number, vecotrRD: { x: number, y: 
 }
 
 
-export default function CubesWrapper(props: Record<string, string>) {
+function CubesWrapper(props: Record<string, string>) {
     return (
         <SceneComponent meta={meta} Component={Cubes} {...props} />
     )
 }
 
-export const RawComponent = Cubes;
-export const SearchParamConsumerComponent = () => (
-    <SearchParamProvider>
-        <CubesWrapper />
-    </SearchParamProvider>
+export const Component: Scene.ComponentModule<CubesMeta>["Component"] = CubesWrapper;
+export const RawComponent: Scene.ComponentModule<CubesMeta>["RawComponent"] = Cubes;
+export const SearchParamConsumerComponent: Scene.ComponentModule<CubesMeta>["SearchParamConsumerComponent"] = () => (
+    <SearchParamProvider Component={CubesWrapper} />
 )

@@ -8,6 +8,6 @@ export async function generateStaticParams(): Promise<{ scene: string }[]> {
 
 export default function Page({ params }: { params: { scene: string } }) {
     const SComponent = dynamic(async () => import(`../../scene-components/${params.scene}`)
-        .then(m => m.SearchParamConsumerComponent))
+        .then(m => m.SearchParamConsumerComponent), { ssr: false })
     return <SComponent />;
 }
