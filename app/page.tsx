@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Rainy from "./scene-components/rainy";
+import Rainy from "./scene-components/rainy.server";
 import { defaultSceneCommonMetaData } from "./scene-components/utils/constants";
 
 const DEFAULT_SVG_HEIGHT = defaultSceneCommonMetaData.height.default;

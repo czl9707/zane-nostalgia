@@ -8,7 +8,7 @@ export async function GET(request: NextRequest, { params }: { params: { scene: s
 
     let SceneComponent: Scene.ComponentType;
     try {
-        SceneComponent = (await import(`../../../scene-components/${params.scene}`)).default;
+        SceneComponent = (await import(`../../../scene-components/${params.scene}.server`)).default;
     } catch {
         return new Response(undefined, { status: 404 });
     }

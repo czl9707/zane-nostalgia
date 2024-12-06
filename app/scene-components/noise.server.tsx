@@ -29,12 +29,11 @@ function Noise({
             <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
             <defs>
                 <filter id="noise-filter">
-                    <feTurbulence type="fractalNoise" baseFrequency="1" numOctaves="3" result="turbulence">
+                    <feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="1" result="turbulence">
                         <animate attributeName="seed" values={`1;10`} dur={`1s`} repeatCount="indefinite" />
                     </feTurbulence>
                     <feDisplacementMap in="SourceGraphic" in2="turbulence" xChannelSelector="R" yChannelSelector="G" scale={300} />
                 </filter>
-
             </defs>
             {
                 RADIUSES.map((radius, i) => (
