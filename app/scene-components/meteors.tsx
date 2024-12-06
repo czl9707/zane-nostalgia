@@ -1,12 +1,10 @@
-"use client"
-
 import * as React from "react";
 import seedrandom from 'seedrandom';
 
 import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { Scene } from "./utils/types";
 import { meta, MeteroShowerMeta } from "./meteors.meta";
-import SceneComponent from "./utils/scene-component";
+import { paramsResolvingWrapper } from "./utils/paramsResolvingWrapper";
 
 
 const DENSITY_FACTOR = 0.005;
@@ -113,12 +111,5 @@ function MeteorShower({
     </>)
 }
 
-
-function MeteorShowerWrapper(props: Record<string, string>) {
-    return (
-        <SceneComponent meta={meta} Component={MeteorShower} {...props} />
-    )
-}
-
-export const Component: Scene.ComponentModule<MeteroShowerMeta>["Component"] = MeteorShowerWrapper;
-export const RawComponent: Scene.ComponentModule<MeteroShowerMeta>["RawComponent"] = MeteorShower;
+const MeteorShowerWrapper = paramsResolvingWrapper(MeteorShower, meta);
+export default MeteorShowerWrapper;

@@ -16,11 +16,11 @@ const PanelWrapper = styled(Panel)(({ theme }) => ({
 
 export default async function Panels({ params }: { params: Promise<{ scene: string }> }) {
     const scene = (await params).scene;
-    let SceneComponentModule: Scene.ComponentModule;
+    let SceneComponent: Scene.ComponentType;
     let sceneMetaModule: Scene.ComponentMetaModule;
 
     try {
-        SceneComponentModule = await import(`../../../scene-components/${scene}`);
+        SceneComponent = (await import(`../../../scene-components/${scene}.client`)).default;
         sceneMetaModule = await import(`../../../scene-components/${scene}.meta`);
     }
     catch {
@@ -33,7 +33,7 @@ export default async function Panels({ params }: { params: Promise<{ scene: stri
                 <ControlPanelContent meta={sceneMetaModule.meta} />
             </PanelWrapper>
             <PanelWrapper>
-                <ContentPanelContent scene={scene} Component={SceneComponentModule.Component} />
+                <ContentPanelContent scene={scene} contentElement={<SceneComponent />} />
             </PanelWrapper>
         </>
     );

@@ -1,10 +1,8 @@
-"use client"
-
 import * as React from "react";
 
 import { meta, NoiseMeta } from "./noise.meta";
 import { Scene } from "./utils/types";
-import SceneComponent from "./utils/scene-component";
+import { paramsResolvingWrapper } from "./utils/paramsResolvingWrapper";
 
 const MIN_RADIUS = 100;
 
@@ -53,12 +51,5 @@ function Noise({
     );
 }
 
-
-function NoiseWrapper(props: Record<string, string>) {
-    return (
-        <SceneComponent meta={meta} Component={Noise} {...props} />
-    )
-}
-
-export const Component: Scene.ComponentModule<NoiseMeta>["Component"] = NoiseWrapper;
-export const RawComponent: Scene.ComponentModule<NoiseMeta>["RawComponent"] = Noise;
+const NoiseWrapper = paramsResolvingWrapper(Noise, meta);
+export default NoiseWrapper;

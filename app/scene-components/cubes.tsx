@@ -1,12 +1,10 @@
-"use client"
-
 import * as React from "react";
 import seedrandom from 'seedrandom';
 
 import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { Scene } from "./utils/types";
 import { CubesMeta, meta } from "./cubes.meta";
-import SceneComponent from "./utils/scene-component";
+import { paramsResolvingWrapper } from "./utils/paramsResolvingWrapper";
 
 const LIFTING_DURATION = 10;
 const LIFTING_INIT_VARIANTS = [...Array(LIFTING_DURATION)].map((_, i) => i);
@@ -117,11 +115,5 @@ function validBaseList(width: number, height: number, vecotrRD: { x: number, y: 
 }
 
 
-function CubesWrapper(props: Record<string, string>) {
-    return (
-        <SceneComponent meta={meta} Component={Cubes} {...props} />
-    )
-}
-
-export const Component: Scene.ComponentModule<CubesMeta>["Component"] = CubesWrapper;
-export const RawComponent: Scene.ComponentModule<CubesMeta>["RawComponent"] = Cubes;
+const CubesWrapper = paramsResolvingWrapper(Cubes, meta);
+export default CubesWrapper;

@@ -1,12 +1,10 @@
-"use client"
-
 import * as React from "react";
 import seedrandom from "seedrandom";
 
 import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { Scene } from "./utils/types";
 import { meta, WavesMeta } from "./waves.meta";
-import SceneComponent from "./utils/scene-component";
+import { paramsResolvingWrapper } from "./utils/paramsResolvingWrapper";
 
 const WAVE_ANIMATION_STEP = 4;
 const WAVE_ANIMATION_CYCLE = 6;
@@ -89,11 +87,6 @@ function generateCommonPath(nodes: { x: number, y: number }[]): string {
     return `0 ${nodes[0].y}` + segments.join(" ");
 }
 
-export default function WavesWrapper(props: Record<string, string>) {
-    return (
-        <SceneComponent meta={meta} Component={Waves} {...props} />
-    )
-}
 
-export const Component: Scene.ComponentModule<WavesMeta>["Component"] = WavesWrapper;
-export const RawComponent: Scene.ComponentModule<WavesMeta>["RawComponent"] = Waves;
+const WavesWrapper = paramsResolvingWrapper(Waves, meta);
+export default WavesWrapper;

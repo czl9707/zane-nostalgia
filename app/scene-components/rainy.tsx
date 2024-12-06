@@ -1,12 +1,10 @@
-"use client"
-
 import * as React from "react";
 import seedrandom from "seedrandom";
 
 import { randomFitToInt } from "@/app/components/utils/math-utils";
 import { Scene } from "./utils/types";
 import { meta, RainyMeta } from "./rainy.meta";
-import SceneComponent from "./utils/scene-component";
+import { paramsResolvingWrapper } from "./utils/paramsResolvingWrapper";
 
 const DROP_TIME = 0.4;
 const CYCLE_DURATION = 1.5;
@@ -88,11 +86,5 @@ function Rainy({
 }
 
 
-function RainyWrapper(props: Record<string, string>) {
-    return (
-        <SceneComponent meta={meta} Component={Rainy} {...props} />
-    )
-}
-
-export const Component: Scene.ComponentModule<RainyMeta>["Component"] = RainyWrapper;
-export const RawComponent: Scene.ComponentModule<RainyMeta>["RawComponent"] = Rainy;
+const RainyWrapper = paramsResolvingWrapper(Rainy, meta);
+export default RainyWrapper;
