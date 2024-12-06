@@ -6,9 +6,9 @@ import Panel from "../../components/ui/panel";
 import { BodyTypography, H3Typography, H4Typography, H5Typography, } from "../../components/ui/typography"
 import { Download, Copy, Code, File, BackHand } from "../../components/ui/icons/icons";
 
-import MeteorsScene from "../../scene-components/meteors";
-import FourOFourScene from "../../scene-components/404";
-import NoiseScene from "../../scene-components/noise";
+import MeteorsScene from "../../scene-components/meteors.server";
+import FourOFourScene from "../../scene-components/404.server";
+import NoiseScene from "../../scene-components/noise.server";
 
 interface UseCaseContainer {
     reverse?: boolean

@@ -10,7 +10,6 @@ export interface FourOFourMeta extends Scene.MetaData {
     geoSeed: RandomSeedParamMetaToken,
 }
 
-
 const fourOFourMeta: FourOFourMeta = {
     color: {
         name: "Color",

@@ -18,7 +18,7 @@ async function fetchSceneMetas() {
             };
         });
 
-    return Promise.all(sceneContents);
+    return await Promise.all(sceneContents);
 }
 
 export { fetchSceneMetas }
