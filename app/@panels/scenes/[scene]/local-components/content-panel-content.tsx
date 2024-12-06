@@ -10,7 +10,7 @@ import Divider from '@/app/components/ui/divider';
 import DownloadButton from './download-button';
 
 
-export default function ContentPanelContent({ scene, Component }: { scene: string, Component: React.FC<Record<string, string>> }) {
+export default function ContentPanelContent({ scene, contentElement }: { scene: string, contentElement: React.ReactElement }) {
     const [svgContent, setSVGContent] = React.useState<string>("");
     const searchParams = useSearchParams();
 
@@ -21,7 +21,7 @@ export default function ContentPanelContent({ scene, Component }: { scene: strin
             const container = document?.createElement('div');
             const root = Client.createRoot(container);
             ReactDOM.flushSync(() => {
-                root.render(<Component {...Object.fromEntries(searchParams.entries())} />);
+                root.render(React.cloneElement(contentElement, Object.fromEntries(searchParams.entries())));
             });
             setSVGContent(container.innerHTML);
             root.unmount();

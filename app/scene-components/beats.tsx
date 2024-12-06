@@ -1,12 +1,10 @@
-"use client"
-
 import * as React from "react";
 import seedrandom from "seedrandom";
 
 import { Scene } from "./utils/types";
 import { BeatsMeta, meta } from "./beats.meta";
 import { randomFitToInt } from "../components/utils/math-utils";
-import SceneComponent from "./utils/scene-component";
+import { paramsResolvingWrapper } from "./utils/paramsResolvingWrapper";
 
 const BEAT_CYCLE_SEC = 5; // sec
 const BEAT_STEP = 10; // px
@@ -163,12 +161,5 @@ function normalDistribution(x: number) {
     return PRE * Math.pow(Math.E, - x * x / 2 / SIGMA)
 }
 
-
-function BeatsWrapper(props: Record<string, string>) {
-    return (
-        <SceneComponent meta={meta} Component={Beats} {...props} />
-    )
-}
-
-export const Component: Scene.ComponentModule<BeatsMeta>["Component"] = BeatsWrapper;
-export const RawComponent: Scene.ComponentModule<BeatsMeta>["RawComponent"] = Beats;
+const BeatsWrapper = paramsResolvingWrapper(Beats, meta);
+export default BeatsWrapper;

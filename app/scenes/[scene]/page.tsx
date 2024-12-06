@@ -2,13 +2,14 @@ import SearchParamProvider from "@/app/scene-components/utils/search-param-provi
 import { Scene } from "@/app/scene-components/utils/types";
 import { redirect } from "next/navigation";
 
+
 export default async function Page({ params }: { params: { scene: string } }) {
-    let SceneComponentModule: Scene.ComponentModule;
+    let SceneComponent: Scene.ComponentType;
     try {
-        SceneComponentModule = await import(`../../scene-components/${params.scene}`);
+        SceneComponent = (await import(`../../scene-components/${params.scene}.client`)).default;
     }
     catch {
         redirect("/not-found")
     }
-    return <SearchParamProvider Component={SceneComponentModule.Component} />;
+    return <SearchParamProvider contentElement={<SceneComponent />} />;
 }

@@ -6,14 +6,14 @@ export async function GET(request: NextRequest, { params }: { params: { scene: s
     const renderToString = (await import('react-dom/server')).renderToString;
     const searchParams = Object.fromEntries(new URL(request.url).searchParams);
 
-    let SceneComponentModule: Scene.ComponentModule;
+    let SceneComponent: Scene.ComponentType;
     try {
-        SceneComponentModule = await import(`../../../scene-components/${params.scene}`);
+        SceneComponent = (await import(`../../../scene-components/${params.scene}`)).default;
     } catch {
         return new Response(undefined, { status: 404 });
     }
 
-    const result = renderToString(<SceneComponentModule.Component {...searchParams} />,);
+    const result = renderToString(<SceneComponent {...searchParams} />,);
     const response = new Response(result, {
         headers: {
             "Content-type": "image/svg+xml; charset=utf-8",
@@ -21,5 +21,4 @@ export async function GET(request: NextRequest, { params }: { params: { scene: s
         },
     });
     return response;
-
 }

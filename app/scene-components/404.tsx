@@ -1,12 +1,9 @@
-"use client"
-
 import seedrandom from 'seedrandom';
 import { randomFitToInt, simpleHash } from "@/app/components/utils/math-utils";
 
 import { FourOFourMeta, meta } from './404.meta'
 import { Scene } from './utils/types';
-import SceneComponent from './utils/scene-component';
-import SearchParamProvider from './utils/search-param-provider';
+import { paramsResolvingWrapper } from './utils/paramsResolvingWrapper';
 
 const DENSITY_FACTOR = 0.0007;
 
@@ -94,11 +91,6 @@ function FourOFour({
     </>)
 }
 
-function FourOFourWrapper(props: Record<string, string>) {
-    return (
-        <SceneComponent meta={meta} Component={FourOFour} {...props} />
-    )
-}
 
-export const Component: Scene.ComponentModule<FourOFourMeta>["Component"] = FourOFourWrapper;
-export const RawComponent: Scene.ComponentModule<FourOFourMeta>["RawComponent"] = FourOFour;
+const FourOFourWrapper = paramsResolvingWrapper(FourOFour, meta);
+export default FourOFourWrapper;
