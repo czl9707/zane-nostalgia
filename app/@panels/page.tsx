@@ -16,8 +16,8 @@ export default async function HomePanels() {
             <BulletPanel />
             <Spacer />
             <UseCasePanel />
-            <Spacer />
-            <ShowCasePanel />
+            {/* <Spacer />
+            <ShowCasePanel /> */}
             <FooterPanel />
             <Spacer />
         </>
