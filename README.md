@@ -1,6 +1,6 @@
-# Zane's Nostalgia Moment
+# Z.Nostalgia
 
-Nostalgia is a collection of SVG patterns and backgrounds, available via HTTP endpoints, designed for easy integration into projects. Use them to add unique visuals to GitHub READMEs, websites, and more by simply embedding the provided URLs.
+Nostalgia.Z is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.
 
 Hosted at https://zane-nostalgia.kiyo-n-zane.com/
 
@@ -19,3 +19,4 @@ Hosted at https://zane-nostalgia.kiyo-n-zane.com/
 
 <img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/noise/api?height=200&width=2000&bannerText=Noise&bannerColor=%23FFFFFF&color=%231F1F1F&backgroundColor=%23000000&density=5" />
 
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/cubes/api??height=200&width=2000&bannerText=Cubes&bannerColor=%23FFFFFF" />

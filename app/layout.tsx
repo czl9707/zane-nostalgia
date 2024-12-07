@@ -65,8 +65,8 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta property="og:site_name" content="zane-nostalgia.kiyo-n-zane.com" />
-        <meta property="og:title" content="Zane's Nostalgia" />
-        <meta property="og:description" content="Nostalgia, a curated collection of SVG patterns and backgrounds accessible via HTTP endpoints. Easily embed aesthetic visuals into GitHub READMEs, websites, and other projects. Perfect for developers looking to add unique, nostalgic effects with seamless integration." />
+        <meta property="og:title" content="Z.Nostalgia" />
+        <meta property="og:description" content="Nostalgia.Z is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL." />
       </head>
       <body>
         {/* to avoid escaping single quote :) */}
@@ -85,9 +85,9 @@ export default function RootLayout({
 
 
 export const metadata: Metadata = {
-  title: "Zane's Nostalgia Moments",
-  description: "Nostalgia, a curated collection of SVG patterns and backgrounds accessible via HTTP endpoints. Easily embed aesthetic visuals into GitHub READMEs, websites, and other projects. Perfect for developers looking to add unique, nostalgic effects with seamless integration.",
-  applicationName: "Zane's Nostalgia",
+  title: "Z.Nostalgia",
+  description: "Nostalgia.Z is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.",
+  applicationName: "Z.Nostalgia",
   keywords: ["svg background", "markdown", "github readme"],
   icons: "/favicon.svg",
 }
