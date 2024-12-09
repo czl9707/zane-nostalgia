@@ -26,26 +26,42 @@ function Noise({
 
     return (
         <>
+            <style>
+                {
+                    `
+                    @keyframes flashing {
+                        from {transform: none;}
+                        to {transform: rotate(945deg);}
+                    }
+                    .noise-circle {
+                        fill: transparent;
+                        stroke-width: 50px;
+                        stroke: ${color};
+                        filter: url(#noise-filter);
+                        animation: flashing 1s steps(10, jump-both) infinite;
+                    }`
+                }
+            </style>
             <rect width={`${width}px`} height={`${height}px`} fill={backgroundColor} />
             <defs>
                 <filter id="noise-filter">
                     <feTurbulence type="fractalNoise" baseFrequency=".6" numOctaves="1" result="turbulence">
-                        <animate attributeName="seed" values={`1;10`} dur={`1s`} repeatCount="indefinite" />
                     </feTurbulence>
                     <feDisplacementMap in="SourceGraphic" in2="turbulence" xChannelSelector="R" yChannelSelector="G" scale={300} />
                 </filter>
             </defs>
-            {
-                RADIUSES.map((radius, i) => (
-                    <React.Fragment key={i}>
-                        <mask id={`circle-mask${i}`}>
-                            <circle r={radius} fill="white" />
-                        </mask>
-                        <circle r={radius} fill="transparent" strokeWidth={50} stroke={color} filter="url(#noise-filter)"
-                            transform={`translate(${CENTER_X}, ${CENTER_Y})`} mask={`url(#circle-mask${i})`} />
-                    </React.Fragment>
-                ))
-            }
+            <g transform={`translate(${CENTER_X}, ${CENTER_Y})`}>
+                {
+                    RADIUSES.map((radius, i) => (
+                        <React.Fragment key={i}>
+                            <mask id={`circle-mask${i}`}>
+                                <circle r={radius} fill="white" />
+                            </mask>
+                            <circle r={radius} className="noise-circle" mask={`url(#circle-mask${i})`} />
+                        </React.Fragment>
+                    ))
+                }
+            </g>
         </>
     );
 }
