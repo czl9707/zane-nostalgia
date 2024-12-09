@@ -30,15 +30,15 @@ function Noise({
                 {
                     `
                     @keyframes flashing {
-                        from {transform: none;}
-                        to {transform: rotate(945deg);}
+                        0% {transform: none;}
+                        100% {transform: rotate(900deg);}
                     }
                     .noise-circle {
                         fill: transparent;
                         stroke-width: 50px;
                         stroke: ${color};
                         filter: url(#noise-filter);
-                        animation: flashing 1s steps(10, jump-both) infinite;
+                        animation: flashing 1s steps(10, jump-end) infinite;
                     }`
                 }
             </style>
