@@ -16,17 +16,37 @@
 
 <h2 align="center">Working Samples</h2>
 
+``` html
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/rainy?height=200&width=2000&density=20&bannerText=Rainy" />
+```
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/rainy/api?height=200&width=2000&density=20&bannerText=Rainy" />
 
-<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/rainy/api?height=200&width=2000&color=%23888888&backgroundColor=%23000000&density=20&bannerText=Rainy" />
+``` html
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?height=200&width=2000&rotation=30&density=15&bannerText=Meteors+Shower" />
+```
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?height=200&width=2000&rotation=30&density=15&bannerText=Meteors+Shower" />
 
-<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?height=200&width=2000&color=%23ffff00&backgroundColor=%23000000&rotation=30&density=15&bannerText=Meteors+Shower" />
+``` html
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/404/api?height=200&width=2000&density=6&bannerText=404" />
+```
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/404/api?height=200&width=2000&density=6&bannerText=404" />
 
-<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/404/api?height=200&width=2000&color=%23940000&backgroundColor=%23000000&density=6&bannerText=404" />
+``` html
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/waves/api?height=200&width=2000&waveHeight=80&bannerText=Waves" />
+```
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/waves/api?height=200&width=2000&waveHeight=80&bannerText=Waves" />
 
-<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/waves/api?height=200&width=2000&color=%23444444&backgroundColor=%23000000&waveAmount=5&waveComplexity=3&waveHeight=80&bannerText=Waves" />
+``` html
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/beats/api?height=200&width=2000&bannerText=Beats" />
+```
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/beats/api?height=200&width=2000&bannerText=Beats" />
 
-<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/beats/api?height=200&width=2000&bannerText=Beats&bannerColor=%23FFFFFF&color=%23444444&backgroundColor=%23000000&density=5&strength=150&frequency=3" />
+``` html
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/noise/api?height=200&width=2000&bannerText=Noise" />
+```
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/noise/api?height=200&width=2000&bannerText=Noise" />
 
-<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/noise/api?height=200&width=2000&bannerText=Noise&bannerColor=%23FFFFFF&color=%231F1F1F&backgroundColor=%23000000&density=5" />
-
-<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/cubes/api??height=200&width=2000&bannerText=Cubes&bannerColor=%23FFFFFF" />
+``` html
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/cubes/api??height=200&width=2000&bannerText=Cubes" />
+```
+<img align="center" src="https://zane-nostalgia.kiyo-n-zane.com/scenes/cubes/api??height=200&width=2000&bannerText=Cubes" />
