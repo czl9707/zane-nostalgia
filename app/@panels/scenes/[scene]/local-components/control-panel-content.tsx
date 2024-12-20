@@ -33,7 +33,8 @@ export default function ControlPanelContent({ meta }: { meta: Scene.MetaData }) 
     }
 
     return (
-        <AccordionGroup type="multiple">
+        // Always have the first group open
+        <AccordionGroup type="multiple" defaultValue={[Object.entries(metaGroups)[0][0]]}>
             {
                 Object.entries(metaGroups).map(([groupName, controlGroup]) => (
                     <React.Fragment key={groupName}>

@@ -48,7 +48,7 @@ export default withPigment(
                 quote: { fontFamily: "var(--fonts-playful)", fontWeight: 300, fontSize: "0.875rem", lineHeight: 1.4, },
                 h1: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: '4rem', lineHeight: 1.2, },
                 h2: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '3.75rem', lineHeight: 1.2, },
-                h3: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: '2.25rem', lineHeight: 1.4, },
+                h3: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '2.25rem', lineHeight: 1.4, },
                 h4: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '1.5rem', lineHeight: 1.4, },
                 h5: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: '1.25rem', lineHeight: 1.4, },
                 h6: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '1.25rem', lineHeight: 1.25, },
