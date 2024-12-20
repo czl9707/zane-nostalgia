@@ -3,6 +3,7 @@ import Button from "../../components/ui/button";
 import Link from "next/link";
 
 const ExtendingButtonContainer = styled(Button)(({ theme }) => ({
+    paddingTop: "0.75rem", paddingBottom: "0.75rem",
     ".former": {
         transition: `width ${theme.transition.short} ease-out`,
         width: ".5rem"

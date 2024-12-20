@@ -39,9 +39,8 @@ export default function BulletPanel() {
             {
                 bullets.map(({ title, content, Icon }) => {
                     return (
-
                         <Panel style={{ flex: "1 1" }} key={title}>
-                            <div style={{ display: "inline-flex", alignItems: "center", marginBottom: ".5rem", gap: "1rem" }}>
+                            <div style={{ display: "inline-flex", alignItems: "center", marginBottom: "1.5rem", gap: "1rem" }}>
                                 <Icon />
                                 <H4Typography>{title}</H4Typography>
                             </div>
