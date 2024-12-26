@@ -9,7 +9,7 @@
   </a>
  </p>
  <p align="center">
- Nostalgia.Z is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.
+ Z.Nostalgia is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.
  </p>
 </p>
 
