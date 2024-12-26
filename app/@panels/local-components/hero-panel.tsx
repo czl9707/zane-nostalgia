@@ -28,7 +28,7 @@ export default function HeroPanel() {
                     textAlign: "center", textWrap: "balance"
                 }}>
                     <br />
-                    Nostalgia.Z is a web app for generating customizable, animated SVGs. <br />
+                    Z.Nostalgia is a web app for generating customizable, animated SVGs. <br />
                     <TypingTypography contents={["Embed", "Copy", "Download"]} /> for effortless use anywhere.
                 </H5Typography>
 
