@@ -5,7 +5,6 @@ import * as React from "react";
 interface ButtonProps {
     variant: "outline" | "filled",
     color?: ColorVariation | 'transparent',
-    fontVariant?: TypographyVairation,
 };
 
 const ripple = keyframes({
@@ -36,28 +35,28 @@ const ButtonContainer = styled("div")<ButtonProps>(({ theme }) => ({
     paddingLeft: "1rem", paddingRight: "1rem",
     paddingTop: ".5rem", paddingBottom: ".5rem",
     boxSizing: "border-box",
-    fontFamily: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontFamily,
-    lineHeight: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].lineHeight,
-    fontSize: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontSize,
-    fontWeight: ({ fontVariant = 'button' }) => theme.vars.typographies[fontVariant].fontWeight,
+    fontFamily: theme.vars.typographies.button.fontFamily,
+    lineHeight: theme.vars.typographies.button.lineHeight,
+    fontSize: theme.vars.typographies.button.fontSize,
+    fontWeight: theme.vars.typographies.button.fontWeight,
     overflow: "hidden",
     backgroundColor: ({ color = "transparent", variant }) => {
         if (variant === "outline") return "transparent";
         if (color === "transparent") return "transparent";
-        else return theme.vars.colors[color].contrastText;
+        else return `rgb(${theme.vars.colors[color].contrastText})`;
     },
     color: ({ color = "transparent", variant }) => {
         if (variant === "outline") {
             color = color === "transparent" ? "primary" : color;
-            return theme.vars.colors[color].contrastText;
+            return `rgb(${theme.vars.colors[color].contrastText})`;
         }
-        if (color === "transparent") return theme.vars.colors.primary.contrastText;
-        return theme.vars.colors[color].background;
+        if (color === "transparent") return `rgb(${theme.vars.colors.primary.contrastText})`;
+        return `rgb(${theme.vars.colors[color].background})`;
     },
     border: ({ variant, color = "transparent" }) => {
         if (variant === "filled") return undefined;
         color = color === "transparent" ? "primary" : color;
-        return `.5px solid ${theme.vars.colors[color].contrastText}`
+        return `.5px solid rgb(${theme.vars.colors[color].contrastText})`
     },
 
     "&:hover": {

@@ -1,7 +1,7 @@
 import { css } from "@pigment-css/react";
 import { Tune, Animation, Code } from "@/components/ui/icons/icons";
 import Panel from "@/components/ui/panel";
-import { BodyTypography, H4Typography } from "@/components/ui/typography";
+import * as T from "@/components/ui/typography";
 
 
 const bullets = [
@@ -42,11 +42,11 @@ export default function BulletPanel() {
                         <Panel style={{ flex: "1 1" }} key={title}>
                             <div style={{ display: "inline-flex", alignItems: "center", marginBottom: "1.5rem", gap: "1rem" }}>
                                 <Icon />
-                                <H4Typography>{title}</H4Typography>
+                                <T.H4>{title}</T.H4>
                             </div>
-                            <BodyTypography color="secondary" >
+                            <T.Body color="secondary" >
                                 {content}
-                            </BodyTypography>
+                            </T.Body>
                         </Panel>
                     )
                 })

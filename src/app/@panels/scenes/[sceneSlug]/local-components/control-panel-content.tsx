@@ -1,8 +1,8 @@
 "use client"
 
 import * as React from 'react';
+import { useSearchParams } from 'next/navigation';
 
-// dont know why only relative works ......
 import { defaultSceneCommonMetaData } from '@/scene-components/utils/constants';
 import { defaultParameterResolver, defaultCommonParameterResolver, resolveParameterConstraints } from '@/scene-components/utils/resolver';
 import { ParamMetaToken, Scene } from '@/scene-components/utils/types';
@@ -16,7 +16,8 @@ import ColorInput from '@/components/controls/color-input';
 import Slider from '@/components/controls/slider';
 import StringInput from '@/components/controls/string-input';
 import ToggleGroup, { ToggleGroupItem } from '@/components/controls/toggle-group';
-import { useSearchParams } from 'next/navigation';
+import * as T from '@/components/ui/typography';
+
 
 export default function ControlPanelContent({ meta }: { meta: Scene.MetaData }) {
     const searchParams = Object.fromEntries(useSearchParams().entries());
@@ -56,7 +57,7 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
     resolvedValue: Scene.ComponentProps<Scene.MetaData>
 }) {
     return (
-        <Accordion name={groupName} fontVariant='h5'>
+        <Accordion name={<T.H5>{groupName}</T.H5>}>
             {
                 Object.entries(controlGroup).map(([paramName, metaEntry]) => {
                     let control = undefined;

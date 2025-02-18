@@ -10,12 +10,12 @@ const PanelContainer = styled("div")<PanelProps>(({ theme }) => ({
     backgroundColor: ({ color = "primary" }) => {
         if (color === "transparent")
             return "transparent";
-        return `color-mix(in srgb, ${theme.vars.colors[color].contrastText} 6%, transparent)`;
+        return `rgb(${theme.vars.colors[color].contrastText} / 6%)`;
     },
     color: ({ color = "primary" }) => {
         if (color === "transparent")
             color = "primary";
-        return `${theme.vars.colors[color].contrastText}`;
+        return `rgb(${theme.vars.colors[color].contrastText})`;
     },
     boxSizing: "border-box", position: "relative",
     padding: theme.padding.panel,

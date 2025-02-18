@@ -23,13 +23,13 @@ const SliderContainer = styled(SliderPrimitive.Root)(({ theme }) => ({
     boxSizing: "border-box", cursor: "grab",
     "&:hover": {
         [`${SliderThumb}`]: {
-            boxShadow: `0 0 ${theme.boxShadow.thickness.focus / 2}px ${theme.vars.colors.primary.contrastText}`,
+            boxShadow: `0 0 calc(${theme.boxShadow.thickness.focus} / 2) rgb(${theme.vars.colors.primary.contrastText})`,
         }
     },
     "&:active": {
         [`${SliderThumb}`]: {
-            backgroundColor: theme.vars.colors.primary.background,
-            boxShadow: `0 0 ${theme.boxShadow.thickness.focus / 2}px ${theme.vars.colors.primary.contrastText}`,
+            backgroundColor: `rgb(${theme.vars.colors.primary.background})`,
+            boxShadow: `0 0 calc(${theme.boxShadow.thickness.focus} / 2) rgb(${theme.vars.colors.primary.contrastText})`,
         }
     },
 }));
@@ -39,14 +39,14 @@ const SliderThumb = styled(SliderPrimitive.Thumb)(({ theme }) => ({
     transform: "translateX(-50%) translateY(-50%)",
     transition: `background-color ${theme.transition.short} linear,
                 box-shadow ${theme.transition.short} linear`,
-    backgroundColor: theme.vars.colors.secondary.background,
-    boxShadow: `0 0 ${theme.boxShadow.thickness.normal}px ${theme.vars.colors.secondary.contrastText}`,
+    backgroundColor: `rgb(${theme.vars.colors.secondary.background})`,
+    boxShadow: `0 0 ${theme.boxShadow.thickness.normal} rgb(${theme.vars.colors.secondary.contrastText})`,
 }));
 
 const SliderTrack = styled(SliderPrimitive.Track)(({ theme }) => ({
     position: "relative", width: "100%", height: ".8rem",
-    backgroundColor: theme.vars.colors.primary.background,
-    boxShadow: `0 0 ${theme.boxShadow.thickness.normal}px ${theme.vars.colors.primary.contrastText}`,
+    backgroundColor: `rgb(${theme.vars.colors.primary.background})`,
+    boxShadow: `0 0 ${theme.boxShadow.thickness.normal} rgb(${theme.vars.colors.primary.contrastText})`,
 }));
 
 

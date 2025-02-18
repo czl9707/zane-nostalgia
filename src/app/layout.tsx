@@ -9,7 +9,6 @@ import LayoutOtherThanScene from '@/components/layout/layout-other-than-scene';
 import HeaderBarWithContextProvider from '@/components/layout/header-bar-with-context-provider';
 
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const space_grotesk = Space_Grotesk({
   weight: ['300', '400', '500', '600', '700'],
   style: ['normal'],
@@ -17,7 +16,6 @@ export const space_grotesk = Space_Grotesk({
   variable: "--fonts-serious",
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const delius = Delius({
   weight: ["400",],
   style: ['normal'],
@@ -34,7 +32,7 @@ globalCss(({ theme }) => ({
     backgroundColor: "transparent",
   },
   "&::-webkit-scrollbar-thumb": {
-    backgroundColor: `color-mix(in srgb, ${theme.vars.colors.secondary.background}, transparent)`,
+    backgroundColor: `rgb(${theme.vars.colors.secondary.background} / 50%)`,
     borderRadius: "5px",
   },
   "&::-webkit-scrollbar-button": {
@@ -43,7 +41,7 @@ globalCss(({ theme }) => ({
   "a": { color: "inherit" },
   "body": {
     margin: 0, padding: 0, width: "100vw", height: "100vh", overflow: "hidden",
-    backgroundColor: theme.vars.colors.primary.background,
+    backgroundColor: `rgb(${theme.vars.colors.primary.background})`,
   },
 } as CSSObjectNoCallback));
 

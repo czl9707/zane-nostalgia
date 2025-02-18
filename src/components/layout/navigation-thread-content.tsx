@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { fetchSceneMetas } from '@/scene-components/utils/fetch-scenes';
 
 import { Accordion, AccordionGroup, AccordionItem } from "@/components/ui/accordion";
-import { H4Typography } from "@/components/ui/typography";
+import * as T from "@/components/ui/typography";
 import { DummyIcon } from "@/components/ui/icons/icons";
 import Divider from '@/components/ui/divider';
 import Button from '@/components/ui/button';
@@ -17,15 +17,15 @@ export default async function NavigationThreadContent() {
         <>
             <Divider />
 
-            <H4Typography color="primary"
+            <T.H4 color="primary"
                 style={{ padding: '1rem', userSelect: "none", }}>
                 Z.Nostalgia
-            </H4Typography>
+            </T.H4>
             <Divider />
 
             <Link href={"/"}>
-                <Button variant='filled' color="transparent" fontVariant='body' style={{ width: "100%" }}>
-                    Home
+                <Button variant='filled' color="transparent" style={{ width: "100%" }}>
+                    <T.Body>Home</T.Body>
                     <DummyIcon />
                 </Button>
             </Link>
@@ -36,8 +36,8 @@ export default async function NavigationThreadContent() {
                         sceneMetas.map(({ Icon, name, route }) => (
                             <Link href={`/scenes/${route}`} key={name}>
                                 <AccordionItem asChild >
-                                    <Button variant='filled' color="transparent" fontVariant='body'>
-                                        {name}
+                                    <Button variant='filled' color="transparent">
+                                        <T.Body>{name}</T.Body>
                                         <Icon />
                                     </Button>
                                 </AccordionItem>

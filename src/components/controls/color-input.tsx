@@ -23,11 +23,11 @@ const ColorInputEL = styled("input")({
 
 const ColorInputContainer = styled("div")(({ theme }) => ({
     height: "1.7rem", userSelect: "none", padding: 2, boxSizing: "border-box",
-    boxShadow: `0 0 ${theme.boxShadow.thickness.normal}px ${theme.vars.colors.secondary.contrastText}`,
+    boxShadow: `0 0 ${theme.boxShadow.thickness.normal} rgb(${theme.vars.colors.secondary.contrastText})`,
     transition: `box-shadow ${theme.transition.short} linear`,
     "&:hover": {
-        boxShadow: `0 0 ${theme.boxShadow.thickness.focus / 2}px ${theme.vars.colors.primary.contrastText},
-                    inset 0 0 ${theme.boxShadow.thickness.focus / 2}px ${theme.vars.colors.primary.contrastText}`,
+        boxShadow: `0 0 calc(${theme.boxShadow.thickness.focus} / 2) rgb(${theme.vars.colors.primary.contrastText}),
+                    inset 0 0 calc(${theme.boxShadow.thickness.focus} / 2) rgb(${theme.vars.colors.primary.contrastText})`,
     }
 }));
 

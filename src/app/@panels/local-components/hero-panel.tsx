@@ -1,5 +1,5 @@
 import { styled } from "@pigment-css/react";
-import { H1Typography, H5Typography } from "@/components/ui/typography";
+import * as T from "@/components/ui/typography";
 import Panel from "@/components/ui/panel";
 import TypingTypography from "@/components/ui/typing-typography";
 import StartCustomizingButton from "./extending-button";
@@ -18,19 +18,19 @@ export default function HeroPanel() {
     return (
         <Panel color="transparent">
             <CenteredSpacedDiv>
-                <H1Typography style={{
+                <T.H1 style={{
                     textAlign: "center", textWrap: "balance", fontWeight: 500
                 }}>
                     Animated and Embedable SVGs at Fingertips
-                </H1Typography>
+                </T.H1>
 
-                <H5Typography color="secondary" style={{
+                <T.H5 color="secondary" style={{
                     textAlign: "center", textWrap: "balance"
                 }}>
                     <br />
                     Z.Nostalgia is a web app for generating customizable, animated SVGs. <br />
                     <TypingTypography contents={["Embed", "Copy", "Download"]} /> for effortless use anywhere.
-                </H5Typography>
+                </T.H5>
 
                 <div style={{ height: "6rem" }} />
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { styled } from "@pigment-css/react";
 
-import { BodyTypography } from '@/components/ui/typography';
+import * as T from '@/components/ui/typography';
 
 const ControlStructureContainer = styled("div")({
     width: "100%", height: "3rem", display: "flex", flexDirection: "row", alignItems: "center",
@@ -24,7 +24,7 @@ const ControlStructure = React.forwardRef<HTMLDivElement, ControlStructureProps 
     function ControlStructure({ label, value, children, ...other }, ref) {
         return (
             <ControlStructureContainer ref={ref} {...other}>
-                <BodyTypography style={{ display: "flex" }}>
+                <T.Body style={{ display: "flex" }}>
                     {
                         !value && <span >{label}</span>
                     }
@@ -36,7 +36,7 @@ const ControlStructure = React.forwardRef<HTMLDivElement, ControlStructureProps 
                             </span>
                         </>
                     }
-                </BodyTypography>
+                </T.Body>
                 {children}
             </ControlStructureContainer>
         )

@@ -8,23 +8,23 @@ import ControlStructure from './control-structure';
 
 const ToggleGroupRoot = styled(ToggleGroupPrimitive.Root)(({ theme }) => ({
     borderRadius: ".5rem", overflow: "hidden",
-    border: `1px solid color-mix(in srgb, ${theme.vars.colors.primary.contrastText} 20%, transparent)`,
+    border: `1px solid rgb(${theme.vars.colors.primary.contrastText} / 20%)`,
     padding: 0, margin: 0, display: "flex"
 }));
 
 const ToggleGroupItem = styled(ToggleGroupPrimitive.Item)(({ theme }) => ({
     borderTop: "none", borderBottom: "none", borderLeft: `none`,
-    borderRight: `1px solid color-mix(in srgb, ${theme.vars.colors.primary.contrastText} 20%, transparent)`,
+    borderRight: `1px solid rgb(${theme.vars.colors.primary.contrastText} / 20%)`,
     cursor: "pointer",
 
     flex: "1 1",
-    background: `color-mix(in srgb, ${theme.vars.colors.primary.contrastText} 6%, transparent)`,
+    background: `rgb(${theme.vars.colors.primary.contrastText} / 6%)`,
     transition: `box-shadow ${theme.transition.short} linear`,
     "&:hover": {
-        boxShadow: `inset 0 0 ${theme.boxShadow.thickness.focus / 2}px ${theme.vars.colors.primary.contrastText}`,
+        boxShadow: `inset 0 0 calc(${theme.boxShadow.thickness.focus} / 2) rgb(${theme.vars.colors.primary.contrastText})`,
     },
     "&[data-state='on']": {
-        background: `color-mix(in srgb, ${theme.vars.colors.primary.background}, transparent)`,
+        background: `rgb(${theme.vars.colors.primary.background} / 50%)`,
     },
     "&[data-state='off']": {
         background: `transparent`,

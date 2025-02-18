@@ -1,6 +1,6 @@
 import { css, styled } from "@pigment-css/react";
 import { Scene } from "@/scene-components/utils/types";
-import { H3Typography, H5Typography } from "@/components/ui/typography";
+import * as T from "@/components/uiT./";
 import Link from "next/link";
 import ShowcasePanelShadowWrapper, { ShowCaseSceneTypes } from "./showcase-panel-shadow-wrapper";
 
@@ -47,7 +47,7 @@ const ShowCaseMask = styled('div')(({ theme }) => ({
     backgroundImage: `linear-gradient(0deg, grey -200%, transparent 50%)`,
     display: "flex", gap: "1rem",
     justifyContent: "center", alignItems: "flex-end",
-    paddingBottom: "1rem", color: theme.vars.colors.primary.contrastText
+    paddingBottom: "1rem", color: `rgb(${theme.vars.colors.primary.contrastText})`
 }));
 
 
@@ -63,7 +63,7 @@ async function ShowCase({ scene, ...other }: {
             <Link href={`/scenes/${scene}`}>
                 <ShowCaseMask>
                     <sceneModule.Icon />
-                    <H5Typography>{sceneModule.name}</H5Typography>
+                    <T.H5>{sceneModule.name}</T.H5>
                 </ShowCaseMask>
             </Link>
         </ShowCaseViewBox >
@@ -81,16 +81,16 @@ export default function ShowCasePanel() {
                 top: "-12rem", bottom: "-12rem", zIndex: "-1",
                 backgroundImage: `linear-gradient(0deg,
                         transparent 0%, 
-                        ${theme.vars.colors.primary.background} 15%,
-                        ${theme.vars.colors.primary.background} 85%,
+                        rgb(${theme.vars.colors.primary.background}) 15%,
+                        rgb(${theme.vars.colors.primary.background}) 85%,
                         transparent 100%
                     )`,
             }))} />
 
-            <H3Typography style={{ textWrap: "balance" }} color="primary">
+            <T.H3 style={{ textWrap: "balance" }} color="primary">
                 Increasing Number of SVG Generators
                 <br /><br />
-            </H3Typography>
+            </T.H3>
             <ShowcaseContainer>
                 <ShowCase scene="meteors" backgroundColor="#040404" color="#AAAAAA" />
                 <ShowCase scene="rainy" backgroundColor="#040404" color="#AAAAAA" />
@@ -103,10 +103,10 @@ export default function ShowCasePanel() {
 
             <div style={{ height: "6rem" }} />
 
-            <H3Typography style={{ textWrap: "balance" }} color="primary">
+            <T.H3 style={{ textWrap: "balance" }} color="primary">
                 Its All About Customization
                 <br /><br />
-            </H3Typography>
+            </T.H3>
             <ShowcaseContainer>
                 <ShowCase scene="meteors" backgroundColor="#7a0606" color="#000000" rotation="90" density="20" />
                 <ShowCase scene="meteors" backgroundColor="#b8eaff" color="#c5baba" rotation="120" density="20" />

@@ -3,7 +3,7 @@ import * as React from 'react';
 import { styled, css, keyframes } from "@pigment-css/react";
 
 import Panel from "@/components/ui/panel";
-import { BodyTypography, H3Typography, H4Typography, H5Typography, } from "@/components/ui/typography"
+import * as T from "@/components/ui/typography"
 import { Download, Copy, Code, File, BackHand } from "@/components/ui/icons/icons";
 
 import MeteorsScene from "@/scene-components/meteors.server";
@@ -36,22 +36,22 @@ export default function UseCasePanel() {
     return (
         <>
             <div>
-                <H3Typography style={{ textWrap: "balance" }} color="primary">
+                <T.H3 style={{ textWrap: "balance" }} color="primary">
                     Multiple Integration Options
                     <br /><br />
-                </H3Typography>
+                </T.H3>
             </div>
             <UseCaseContainer>
                 <Panel color="transparent">
                     <div style={{ display: "inline-flex", alignItems: "center", marginBottom: ".3rem", gap: "1rem" }}>
                         <Code />
-                        <H4Typography>Embed for Effortless Integration</H4Typography>
+                        <T.H4>Embed for Effortless Integration</T.H4>
                     </div>
-                    <BodyTypography color="secondary" >
+                    <T.Body color="secondary" >
                         Need visually stunning backgrounds or patterns to your <b>GitHub README, documentation, or live projects</b>?
                         And wanna avoid huge chunk of svg text checked in? Take the <b>HTTP endpoint</b> and embed to integrate dynamic visuals without managing files.
                         We also provide an option to inclue a <b>banner</b>, perfect for headers or contextual visuals that stand out.
-                    </BodyTypography>
+                    </T.Body>
                 </Panel>
                 <EmbedIllustration />
             </UseCaseContainer>
@@ -59,12 +59,12 @@ export default function UseCasePanel() {
                 <Panel color="transparent">
                     <div style={{ display: "inline-flex", alignItems: "center", marginBottom: ".5rem", gap: "1rem" }}>
                         <Download />
-                        <H4Typography>Download for Quick Start</H4Typography>
+                        <T.H4>Download for Quick Start</T.H4>
                     </div>
-                    <BodyTypography color="secondary" >
+                    <T.Body color="secondary" >
                         Whether you&apos;re crafting sleek UI designs, building presentation decks, or creating engaging social media posts, downloading patterns as file,
                         keep it static in hand would be the most native way.
-                    </BodyTypography>
+                    </T.Body>
                 </Panel>
                 <DownloadIllustration />
             </UseCaseContainer>
@@ -72,12 +72,12 @@ export default function UseCasePanel() {
                 <Panel color="transparent">
                     <div style={{ display: "inline-flex", alignItems: "center", marginBottom: ".3rem", gap: "1rem" }}>
                         <Copy />
-                        <H4Typography>Copy for Maximum Customization</H4Typography>
+                        <T.H4>Copy for Maximum Customization</T.H4>
                     </div>
-                    <BodyTypography color="secondary" >
+                    <T.Body color="secondary" >
                         Developer looking to tweak the pattern to perfection? Copy the raw SVG code and customize every detail to match your vision.
                         Modify fonts, adjust shapes, or add animations to make it uniquely yours.
-                    </BodyTypography>
+                    </T.Body>
                 </Panel>
                 <CopyIllustration />
             </UseCaseContainer>
@@ -89,41 +89,41 @@ export default function UseCasePanel() {
 const CodingPad = styled("div")(({ theme }) => ({
     position: "relative", width: "100%", lineBreak: "anywhere", maxHeight: "15rem",
     padding: "1rem", boxSizing: "border-box", overflowY: "scroll",
-    borderRadius: ".5rem", border: `1px solid ${theme.vars.colors.secondary.contrastText}`,
-    background: `color-mix(in srgb, ${theme.vars.colors.primary.background}, transparent)`,
+    borderRadius: ".5rem", border: `1px solid rgb(${theme.vars.colors.secondary.contrastText})`,
+    background: `rgb(${theme.vars.colors.primary.background} / 50%)`,
 }));
 
 function EmbedIllustration() {
     return (
         <Panel className={css(({ theme }) => ({ display: "flex", flexDirection: "column", alignItems: "stretch", gap: theme.padding.panel }))}>
-            <H5Typography style={{ textAlign: 'center' }}>
+            <T.H5 style={{ textAlign: 'center' }}>
                 The only line of Code you need:
-            </H5Typography>
+            </T.H5>
             <div className={css(({ theme }) => ({
                 display: "flex", gap: theme.padding.panel,
                 alignItems: "stretch",
             }))}>
                 <CodingPad>
-                    <BodyTypography color="secondary" style={{ opacity: .7 }}><i>{"// my_blog.html"}</i></BodyTypography>
-                    <BodyTypography color="secondary">
+                    <T.Body color="secondary" style={{ opacity: .7 }}><i>{"// my_blog.html"}</i></T.Body>
+                    <T.Body color="secondary">
                         <br />
                         {`<img src="https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?width=2000&height=400&bannerText=Hello%2C+I+am+Zane%21" alt="Hello, I am Zane!"/>`}
-                    </BodyTypography>
+                    </T.Body>
                 </CodingPad>
                 <div style={{ display: "flex", alignItems: "center" }}>
-                    <BodyTypography>Or</BodyTypography>
+                    <T.Body>Or</T.Body>
                 </div>
                 <CodingPad>
-                    <BodyTypography color="secondary" style={{ opacity: .7 }}><i>{"// README.md"}</i></BodyTypography>
-                    <BodyTypography color="secondary">
+                    <T.Body color="secondary" style={{ opacity: .7 }}><i>{"// README.md"}</i></T.Body>
+                    <T.Body color="secondary">
                         <br />
                         {`![Hello, I am Zane!](https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?width=2000&height=400&bannerText=Hello%2C+I+am+Zane%21)`}
-                    </BodyTypography>
+                    </T.Body>
                 </CodingPad>
             </div>
-            <H5Typography style={{ textAlign: 'center' }}>
+            <T.H5 style={{ textAlign: 'center' }}>
                 The stunning header svg image you get:
-            </H5Typography>
+            </T.H5>
             <svg viewBox={`0 0 2000 400`} width="100%" preserveAspectRatio="xMidYMid slice">
                 <NoiseScene width="2000" height="400" bannerText="Hello, I am Zane!" />
             </svg>
@@ -177,7 +177,7 @@ function DownloadIllustration() {
             position: "absolute", inset: 0, zIndex: 1, animation: animation,
         }}>
             <File size="2.5rem" style={{ opacity: hasHand ? .6 : 1 }} />
-            <BodyTypography>Meteors.svg</BodyTypography>
+            <T.Body>Meteors.svg</T.Body>
             {
                 hasHand &&
                 <div style={{ height: 0, overflow: "visible", }}>
@@ -246,9 +246,9 @@ function CopyIllustration() {
             <style dangerouslySetInnerHTML={{ __html: `@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');` }} />
             <div>
                 <div>
-                    <H5Typography style={{ textAlign: 'center', }}>
+                    <T.H5 style={{ textAlign: 'center', }}>
                         Raw SVG string copied from Z.Nostalgia
-                    </H5Typography>
+                    </T.H5>
                 </div>
                 <svg viewBox={`0 0 1200 1200`} width="100%" preserveAspectRatio="xMidYMid slice">
                     <FourOFourScene width="1200" height="1200" />
@@ -256,11 +256,11 @@ function CopyIllustration() {
             </div>
             <div>
                 <div>
-                    <H5Typography style={{ textAlign: 'center' }}>
+                    <T.H5 style={{ textAlign: 'center' }}>
                         Adjust fonts, shapes and etc...
                         <br />
                         Customize everything and make it unique.
-                    </H5Typography>
+                    </T.H5>
                 </div>
                 <svg viewBox={`0 0 1200 1200`} width="100%" preserveAspectRatio="xMidYMid slice" id="customized-svg"
                     className={css({ "& text": { transform: "rotate(-30deg) scale(2,2)", fontFamily: "'Pacifico' !important" } })}>

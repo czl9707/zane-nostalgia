@@ -14,8 +14,7 @@ import { TypographyVairation } from '@pigment-css/react/theme';
 
 interface AccordionProps {
     children?: Iterable<React.ReactNode>,
-    name: string,
-    fontVariant?: TypographyVairation,
+    name: React.ReactNode,
 }
 
 interface AccordionItemProps {
@@ -66,11 +65,11 @@ const AccordionItem = React.forwardRef<HTMLDivElement, Omit<AccordionItemProps &
     }
 )
 
-function Accordion({ children = [], fontVariant = "body", name }: AccordionProps) {
+function Accordion({ children = [], name }: AccordionProps) {
     return (
         <AccordionPrimitive.Item value={name}>
             <AccordionTrigger asChild>
-                <Button variant='filled' color="transparent" fontVariant={fontVariant}
+                <Button variant='filled' color="transparent"
                     style={{ width: "100%" }}>
                     {name}
                     <KeyboardArrowDown style={{ flex: "none" }} />

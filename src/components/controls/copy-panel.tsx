@@ -5,7 +5,7 @@ import { styled } from "@pigment-css/react";
 
 import FlippingIcon from '@/components/ui/icons/flipping-icon';
 import { Copy, Check } from '@/components/ui/icons/icons';
-import { ButtonTypography, QuoteTypography } from '@/components/ui/typography';
+import * as T from '@/components/ui/typography';
 
 interface CopyPanelProps {
     children?: string,
@@ -14,8 +14,8 @@ interface CopyPanelProps {
 
 const IconContainer = styled("div")(({ theme }) => ({
     position: "absolute", right: '.8rem', top: '.8rem',
-    padding: ".1rem", borderRadius: ".2rem", border: `1px solid ${theme.vars.colors.secondary.contrastText}`,
-    background: `color-mix(in srgb, ${theme.vars.colors.secondary.background}, transparent)`,
+    padding: ".1rem", borderRadius: ".2rem", border: `1px solid rgb(${theme.vars.colors.secondary.contrastText})`,
+    background: `rgb(${theme.vars.colors.secondary.background} / 50%)`,
     opacity: .5,
 
     transition: `all ${theme.transition.short} ease-out`,
@@ -24,8 +24,8 @@ const IconContainer = styled("div")(({ theme }) => ({
 const CopyPanelContainer = styled("div")(({ theme }) => ({
     position: "relative", width: "100%", boxSizing: "border-box",
     padding: "1rem", paddingRight: "3.5rem",
-    borderRadius: ".5rem", border: `1px solid ${theme.vars.colors.secondary.contrastText}`,
-    background: `color-mix(in srgb, ${theme.vars.colors.primary.background}, transparent)`,
+    borderRadius: ".5rem", border: `1px solid rgb(${theme.vars.colors.secondary.contrastText})`,
+    background: `rgb(${theme.vars.colors.primary.background} / 50%)`,
     "p": {
         width: "100%", maxHeight: "5rem", minHeight: "2rem",
         whiteSpace: "normal", overflowY: "scroll",
@@ -34,7 +34,7 @@ const CopyPanelContainer = styled("div")(({ theme }) => ({
     "&:hover": {
         [`${IconContainer}`]: {
             opacity: 1,
-            boxShadow: `0 0 ${theme.boxShadow.thickness.normal}px ${theme.vars.colors.primary.contrastText}`,
+            boxShadow: `0 0 ${theme.boxShadow.thickness.normal} rgb(${theme.vars.colors.primary.contrastText})`,
         }
     },
 
@@ -59,14 +59,14 @@ const CopyPanel = React.forwardRef<HTMLDivElement, CopyPanelProps & Omit<React.H
 
         return (
             <div>
-                <ButtonTypography style={{ marginBottom: ".7rem" }}>{label}</ButtonTypography>
+                <T.Button style={{ marginBottom: ".7rem" }}>{label}</T.Button>
                 <CopyPanelContainer {...other} ref={ref} onClick={handleCopy}>
                     <IconContainer >
                         <FlippingIcon before={<Copy />} after={<Check />} isFlipped={!!copied} />
                     </IconContainer>
-                    <QuoteTypography color="secondary">
+                    <T.Quote color="secondary">
                         {children}
-                    </QuoteTypography>
+                    </T.Quote>
                 </CopyPanelContainer>
             </div>
         );

@@ -9,8 +9,8 @@ const Divider = styled("div")<DividerProps>(({ theme }) => ({
 
     boxShadow: ({ direction = "horizontal" }) =>
         direction === "horizontal" ?
-            `0 -0.2px 0 ${theme.vars.colors.primary.contrastText}` :
-            `-0.2px 0 0 ${theme.vars.colors.primary.contrastText}`,
+            `0 -0.2px 0 rgb(${theme.vars.colors.primary.contrastText})` :
+            `-0.2px 0 0 rgb(${theme.vars.colors.primary.contrastText})`,
 }));
 
 export default Divider;
