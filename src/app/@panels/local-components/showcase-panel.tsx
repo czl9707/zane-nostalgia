@@ -7,10 +7,10 @@ import ShowcasePanelShadowWrapper, { ShowCaseSceneTypes } from "./showcase-panel
 
 const ShowcaseContainer = styled('div')(({ theme }) => ({
     alignItems: "stretch", display: "flex", gap: ".5rem",
-    [`@media(min-width: ${theme.breakpoints.lg})`]: {
+    [`@media(min-width: ${theme.breakpoint.lg})`]: {
         width: "100%", height: "25vw", flexDirection: "row",
     },
-    [`@media(max-width: ${theme.breakpoints.lg})`]: {
+    [`@media(max-width: ${theme.breakpoint.lg})`]: {
         width: "100%", height: "100vw", flexDirection: "column",
     },
 }));
@@ -20,11 +20,11 @@ const ShowCaseViewBox = styled('div')(({ theme }) => ({
     position: "relative", overflow: "hidden",
     flex: "1 1", display: "flex",
 
-    [`@media(min-width: ${theme.breakpoints.lg})`]: {
+    [`@media(min-width: ${theme.breakpoint.lg})`]: {
         flexDirection: "column",
         "& div": { height: "100%" },
     },
-    [`@media(max-width: ${theme.breakpoints.lg})`]: {
+    [`@media(max-width: ${theme.breakpoint.lg})`]: {
         flexDirection: "row",
         "& div": { width: "100%" },
     },

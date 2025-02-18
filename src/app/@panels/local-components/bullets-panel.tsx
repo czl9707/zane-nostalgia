@@ -25,10 +25,10 @@ const bullets = [
 export default function BulletPanel() {
     return (
         <div className={css(({ theme }) => ({
-            [`@media(min-width: ${theme.breakpoints.lg})`]: {
+            [`@media(min-width: ${theme.breakpoint.lg})`]: {
                 gridTemplateColumns: `repeat(3, 1fr)`,
             },
-            [`@media(max-width: ${theme.breakpoints.lg})`]: {
+            [`@media(max-width: ${theme.breakpoint.lg})`]: {
                 gridTemplateColumns: `repeat(1, 1fr)`,
             },
             display: "grid",

@@ -37,7 +37,7 @@ export default withPigment(
                     }
                 }
             },
-            breakpoints: {
+            breakpoint: {
                 sm: "400px", // width of navigation thread
                 md: "700px", // width of information thread
                 lg: "1100px",

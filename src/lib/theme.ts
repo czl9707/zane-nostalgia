@@ -17,7 +17,7 @@ declare module '@pigment-css/react/theme' {
             primary: ColorToken,
             secondary: ColorToken,
         },
-        breakpoints: {
+        breakpoint: {
             sm: string,
             md: string,
             lg: string,

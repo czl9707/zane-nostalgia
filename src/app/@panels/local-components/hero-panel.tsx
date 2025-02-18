@@ -5,10 +5,10 @@ import TypingTypography from "@/components/ui/typing-typography";
 import StartCustomizingButton from "./extending-button";
 
 const CenteredSpacedDiv = styled("div")(({ theme }) => ({
-    [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        padding: `0 calc(50% - ${theme.breakpoints.lg} / 2)`
+    [`@media(min-width: ${theme.breakpoint.lg})`]: {
+        padding: `0 calc(50% - ${theme.breakpoint.lg} / 2)`
     },
-    [`@media(max-width: ${theme.breakpoints.lg})`]: {
+    [`@media(max-width: ${theme.breakpoint.lg})`]: {
         width: "100%",
     },
     display: "flex", flexDirection: "column", alignItems: "center"

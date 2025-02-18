@@ -15,18 +15,18 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
     display: "inline-flex", flexDirection: "column", flexWrap: "nowrap",
     transition: `all ${theme.transition.short} linear`,
 
-    [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        width: theme.breakpoints.sm,
-        left: `-${theme.breakpoints.sm}`,
-        "&.menu-open": {
+    [`@media(min-width: ${theme.breakpoint.lg})`]: {
+        width: theme.breakpoint.sm,
+        left: `-${theme.breakpoint.sm}`,
+        "&[data-menu-open=true]": {
             left: 0,
         },
     },
 
-    [`@media(max-width: ${theme.breakpoints.lg})`]: {
-        left: `max(-100%, -${theme.breakpoints.sm})`,
-        width: `min(100%, ${theme.breakpoints.sm})`,
-        "&.menu-open": {
+    [`@media(max-width: ${theme.breakpoint.lg})`]: {
+        left: `max(-100%, -${theme.breakpoint.sm})`,
+        width: `min(100%, ${theme.breakpoint.sm})`,
+        "&[data-menu-open=true]": {
             left: 0, paddingRight: theme.padding.thread,
         }
     },
@@ -41,12 +41,8 @@ export default function NavigationThread({ children }: { children: React.ReactNo
     const currentPath = usePathname();
     const { isMenuOpen } = React.useContext(MenuContext);
 
-    const classes = []
-    if (isMenuOpen) classes.push("menu-open");
-    if (currentPath == "/") classes.push("is-home");
-
     return (
-        <NavigationThreadContainer className={classes.join(" ")}>
+        <NavigationThreadContainer data-menu-open={isMenuOpen} data-is-home={currentPath == "/"}>
             {children}
         </NavigationThreadContainer>
     )

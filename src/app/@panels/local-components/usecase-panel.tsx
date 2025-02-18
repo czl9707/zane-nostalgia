@@ -14,11 +14,11 @@ interface UseCaseContainer {
     reverse?: boolean
 }
 const UseCaseContainer = styled("div")<UseCaseContainer>(({ theme }) => ({
-    [`@media(min-width: ${theme.breakpoints.lg})`]: {
+    [`@media(min-width: ${theme.breakpoint.lg})`]: {
         flexDirection: ({ reverse = false }) => reverse ? "row-reverse" : "row",
         alignItems: "center", justifyContent: "space-between",
     },
-    [`@media(max-width: ${theme.breakpoints.lg})`]: {
+    [`@media(max-width: ${theme.breakpoint.lg})`]: {
         flexDirection: "column", alignItems: "stretch",
     },
     "&>div:nth-child(1)": {
@@ -134,8 +134,8 @@ function EmbedIllustration() {
 
 // Mock Util
 const MockContainer = styled("div")(({ theme }) => ({
-    [`@media(min-width: ${theme.breakpoints.lg})`]: { height: "30vw", },
-    [`@media(max-width: ${theme.breakpoints.lg})`]: { height: "45vw", },
+    [`@media(min-width: ${theme.breakpoint.lg})`]: { height: "30vw", },
+    [`@media(max-width: ${theme.breakpoint.lg})`]: { height: "45vw", },
     width: "60%", background: "#333333", overflow: "hidden", position: "relative",
 }));
 const LinePlaceHolder = styled("span")({

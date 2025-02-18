@@ -16,21 +16,21 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
     flexWrap: "nowrap", overflowY: "visible", overflowX: "visible",
     transition: `all ${theme.transition.short} linear`,
 
-    [`@media(min-width: ${theme.breakpoints.lg})`]: {
+    [`@media(min-width: ${theme.breakpoint.lg})`]: {
         width: `100%`,
-        paddingLeft: `calc(100% - ${theme.breakpoints.md})`,
-        "&.is-home": {
+        paddingLeft: `calc(100% - ${theme.breakpoint.md})`,
+        "&[data-is-home=true]": {
             width: `100%`,
             paddingLeft: theme.padding.thread,
-            "&.menu-open": {
+            "&[data-menu-open=true]": {
                 width: `100%`,
-                paddingLeft: `calc(${theme.padding.thread} + ${theme.breakpoints.sm})`,
+                paddingLeft: `calc(${theme.padding.thread} + ${theme.breakpoint.sm})`,
             }
         },
     },
-    [`@media(max-width: ${theme.breakpoints.lg})`]: {
+    [`@media(max-width: ${theme.breakpoint.lg})`]: {
         width: `100%`,
-        "&.menu-open": {
+        "&[data-menu-open=true]": {
             width: `200%`,
             paddingLeft: `100%`,
         },
@@ -42,11 +42,8 @@ export default function InformationThread({ children }: { children: React.ReactN
     const currentPath = usePathname();
     const { isMenuOpen } = React.useContext(MenuContext);
 
-    const classes = []
-    if (isMenuOpen) classes.push("menu-open");
-    if (currentPath == "/") classes.push("is-home");
     return (
-        <InformationThreadContainer className={classes.join(" ")}>
+        <InformationThreadContainer data-menu-open={isMenuOpen} data-is-home={currentPath == "/"}>
             {children}
         </InformationThreadContainer >
     )

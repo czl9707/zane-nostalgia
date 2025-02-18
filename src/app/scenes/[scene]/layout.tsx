@@ -14,16 +14,16 @@ const SVGContainerDiv = styled('div')(({ theme }) => ({
     justifyContent: "center", alignItems: "center",
 
     padding: "2%",
-    "&.fullscreen": {
+    "&[data-fullscreen=true]": {
         padding: 0,
     },
 
-    [`@media(max-width: ${theme.breakpoints.lg})`]: {
+    [`@media(max-width: ${theme.breakpoint.lg})`]: {
         right: 0,
     },
-    [`@media(min-width: ${theme.breakpoints.lg})`]: {
-        right: theme.breakpoints.md,
-        "&.fullscreen": {
+    [`@media(min-width: ${theme.breakpoint.lg})`]: {
+        right: theme.breakpoint.md,
+        "&[data-fullscreen=true]": {
             right: 0,
         },
     },
@@ -35,7 +35,7 @@ const SVGWrapper = styled('svg')(({ theme }) => ({
     maxWidth: "100%", maxHeight: "100%",
     minWidth: 0, minHeight: 0,
 
-    "&.fullscreen": {
+    "&[data-fullscreen=true]": {
         maxWidth: "1000%", maxHeight: "1000%",
         minWidth: "100%", minHeight: "100%",
     },
@@ -55,14 +55,14 @@ function SceneHelper({ children }: {
     const isFullScreen = React.useContext(FullScreenContext);
     const { isMenuOpen, setMenuOpen } = React.useContext(MenuContext);
     React.useEffect(() => {
-        const lgWidth = getComputedStyle(document.body).getPropertyValue('--breakpoints-lg');
+        const lgWidth = getComputedStyle(document.body).getPropertyValue('--breakpoint-lg');
         const isWideScreen = window.matchMedia(`(min-width: ${lgWidth})`);
         if (!isMenuOpen && isWideScreen.matches) setMenuOpen(true);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
-        <SVGContainerDiv className={isFullScreen ? "fullscreen" : undefined}>
+        <SVGContainerDiv data-fullscreen={isFullScreen}>
             <SVGWrapper style={{
                 maxWidth: isFullScreen ? "300%" : "100%",
                 maxHeight: isFullScreen ? "300%" : "100%",
