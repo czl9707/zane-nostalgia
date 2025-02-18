@@ -43,6 +43,7 @@ type ParamMetaToken =
     RandomSeedParamMetaToken |
     EnumParamMetaToken<string>;
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 namespace Scene {
     export type MetaData = { [key: string]: ParamMetaToken }
     export interface CommonMetaData extends MetaData {
@@ -62,7 +63,6 @@ namespace Scene {
     export type RawComponentType<M extends MetaData = MetaData> = React.FC<ComponentProps<M & CommonMetaData>>;
     export type ComponentType = React.FC<Record<string, string>>;
 }
-
 
 
 export type {

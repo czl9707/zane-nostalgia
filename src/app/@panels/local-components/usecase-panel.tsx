@@ -104,7 +104,7 @@ function EmbedIllustration() {
                 alignItems: "stretch",
             }))}>
                 <CodingPad>
-                    <BodyTypography color="secondary" style={{ opacity: .7 }}><i>// my_blog.html</i></BodyTypography>
+                    <BodyTypography color="secondary" style={{ opacity: .7 }}><i>{"// my_blog.html"}</i></BodyTypography>
                     <BodyTypography color="secondary">
                         <br />
                         {`<img src="https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?width=2000&height=400&bannerText=Hello%2C+I+am+Zane%21" alt="Hello, I am Zane!"/>`}
@@ -114,7 +114,7 @@ function EmbedIllustration() {
                     <BodyTypography>Or</BodyTypography>
                 </div>
                 <CodingPad>
-                    <BodyTypography color="secondary" style={{ opacity: .7 }}><i>// README.md</i></BodyTypography>
+                    <BodyTypography color="secondary" style={{ opacity: .7 }}><i>{"// README.md"}</i></BodyTypography>
                     <BodyTypography color="secondary">
                         <br />
                         {`![Hello, I am Zane!](https://zane-nostalgia.kiyo-n-zane.com/scenes/meteors/api?width=2000&height=400&bannerText=Hello%2C+I+am+Zane%21)`}

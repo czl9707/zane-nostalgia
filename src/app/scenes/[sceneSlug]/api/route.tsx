@@ -2,13 +2,13 @@ import 'server-only'
 import { NextRequest } from "next/server";
 import { Scene } from '@/scene-components/utils/types';
 
-export async function GET(request: NextRequest, { params }: { params: { scene: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ sceneSlug: string }> }) {
     const renderToString = (await import('react-dom/server')).renderToString;
     const searchParams = Object.fromEntries(new URL(request.url).searchParams);
 
     let SceneComponent: Scene.ComponentType;
     try {
-        SceneComponent = (await import(`../../../../scene-components/${params.scene}.server`)).default;
+        SceneComponent = (await import(`../../../../scene-components/${(await params).sceneSlug}.server`)).default;
     } catch {
         return new Response(undefined, { status: 404 });
     }

@@ -5,15 +5,15 @@ import SearchParamProvider from "@/scene-components/utils/search-param-provider"
 import { Scene } from "@/scene-components/utils/types";
 import { Metadata, ResolvingMetadata } from "next";
 
-export async function generateStaticParams(): Promise<{ scene: string }[]> {
+export async function generateStaticParams(): Promise<{ sceneSlug: string }[]> {
     const scenes = await fetchSceneMetas();
-    return scenes.map(s => ({ scene: s.route }));
+    return scenes.map(s => ({ sceneSlug: s.route }));
 }
 
-export default async function Page({ params }: { params: { scene: string } }) {
+export default async function Page({ params }: { params: Promise<{ sceneSlug: string }> }) {
     let SceneComponent: Scene.ComponentType;
     try {
-        SceneComponent = (await import(`../../../scene-components/${params.scene}.client`)).default;
+        SceneComponent = (await import(`../../../scene-components/${(await params).sceneSlug}.client`)).default;
     }
     catch {
         redirect("/not-found")
@@ -22,10 +22,11 @@ export default async function Page({ params }: { params: { scene: string } }) {
 }
 
 export async function generateMetadata(
-    { params }: { params: { scene: string } },
+    { params }: { params: Promise<{ sceneSlug: string }> },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     parent: ResolvingMetadata
 ): Promise<Metadata> {
-    const scene = (await import(`../../../scene-components/${params.scene}.meta`)).name;
+    const scene = (await import(`../../../scene-components/${(await params).sceneSlug}.meta`)).name;
 
     return {
         title: `Z.Nostalgia - ${scene}`,

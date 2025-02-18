@@ -10,9 +10,9 @@ import Panel from '@/components/ui/panel';
 import ControlPanelContent from './local-components/control-panel-content';
 import ContentPanelContent from './local-components/content-panel-content';
 
-export async function generateStaticParams(): Promise<{ scene: string }[]> {
+export async function generateStaticParams(): Promise<{ sceneSlug: string }[]> {
     const scenes = await fetchSceneMetas();
-    return scenes.map(s => ({ scene: s.route }));
+    return scenes.map(s => ({ sceneSlug: s.route }));
 }
 
 
@@ -21,8 +21,8 @@ const PanelWrapper = styled(Panel)(({ theme }) => ({
     gap: `${theme.padding.panel}`,
 }));
 
-export default async function Panels({ params }: { params: Promise<{ scene: string }> }) {
-    const scene = (await params).scene;
+export default async function Panels({ params }: { params: Promise<{ sceneSlug: string }> }) {
+    const scene = (await params).sceneSlug;
     let SceneComponent: Scene.ComponentType;
     let sceneMetaModule: Scene.ComponentMetaModule;
 

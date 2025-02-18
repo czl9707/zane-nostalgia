@@ -5,15 +5,15 @@
   "type": "module",
   "dependencies": {
     "@pigment-css/react": "^0",
-    "@radix-ui/react-accordion": "^1.2.1",
-    "@radix-ui/react-slider": "^1.2.1",
-    "@radix-ui/react-slot": "^1.1.0",
-    "@radix-ui/react-switch": "^1.1.1",
-    "@radix-ui/react-toggle-group": "^1.1.0",
-    "next": "^14",
-    "react": "^18",
-    "react-dom": "^18",
-    "seedrandom": "^3.0.5"
+    "@radix-ui/react-accordion": "^1",
+    "@radix-ui/react-slider": "^1",
+    "@radix-ui/react-slot": "^1",
+    "@radix-ui/react-switch": "^1",
+    "@radix-ui/react-toggle-group": "^1",
+    "next": "^15",
+    "react": "^19",
+    "react-dom": "^19",
+    "seedrandom": "^3"
   },
   "devDependencies": {
     "@pigment-css/nextjs-plugin": "^0",

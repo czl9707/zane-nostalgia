@@ -1,6 +1,6 @@
 import HeroPanel from "./local-components/hero-panel";
 import BulletPanel from "./local-components/bullets-panel";
-import ShowCasePanel from "./local-components/showcase-panel";
+// import ShowCasePanel from "./local-components/showcase-panel";
 import UseCasePanel from "./local-components/usecase-panel";
 import FooterPanel from "./local-components/footer-panel";
 

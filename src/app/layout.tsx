@@ -53,7 +53,6 @@ export default function RootLayout({
   panels: React.ReactNode,
 }) {
   const style = `
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap');
   :root {
       --fonts-serious:${space_grotesk.style.fontFamily};
       --fonts-playful:${delius.style.fontFamily};

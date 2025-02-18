@@ -3,7 +3,7 @@ function randomFitToInt(num: number, start: number, range: number): number {
 }
 
 function simpleHash(s: string): string {
-    var hash = 0,
+    let hash = 0,
         i, chr;
     if (s.length === 0) return hash.toString();
     for (i = 0; i < s.length; i++) {

@@ -7,8 +7,8 @@ import { defaultSceneCommonMetaData } from '@/scene-components/utils/constants';
 import { defaultParameterResolver, defaultCommonParameterResolver, resolveParameterConstraints } from '@/scene-components/utils/resolver';
 import { ParamMetaToken, Scene } from '@/scene-components/utils/types';
 
-import RandomSeedButton from '../local-components/random-seed-button';
-import ControlRouterUpdator from '../local-components/controls-router-updator';
+import RandomSeedButton from './random-seed-button';
+import ControlRouterUpdator from './controls-router-updator';
 
 import Divider from '@/components/ui/divider';
 import { Accordion, AccordionGroup, AccordionItem } from '@/components/ui/accordion';

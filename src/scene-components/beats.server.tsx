@@ -1,3 +1,5 @@
+/* eslint @typescript-eslint/no-unused-vars: 0 */  // --> OFF
+
 import * as React from "react";
 import seedrandom from "seedrandom";
 
