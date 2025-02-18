@@ -14,6 +14,7 @@ export const space_grotesk = Space_Grotesk({
   weight: ['300', '400', '500', '600', '700'],
   style: ['normal'],
   subsets: ['latin-ext'],
+  variable: "--fonts-serious",
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -21,6 +22,7 @@ export const delius = Delius({
   weight: ["400",],
   style: ['normal'],
   subsets: ['latin'],
+  variable: "--fonts-playful",
 });
 
 globalCss(({ theme }) => ({
@@ -52,13 +54,6 @@ export default function RootLayout({
   children: React.ReactNode,
   panels: React.ReactNode,
 }) {
-  const style = `
-  :root {
-      --fonts-serious:${space_grotesk.style.fontFamily};
-      --fonts-playful:${delius.style.fontFamily};
-  }
-  `
-
   return (
     <html lang="en">
       <head>
@@ -67,9 +62,7 @@ export default function RootLayout({
         <meta property="og:title" content="Z.Nostalgia" />
         <meta property="og:description" content="Z.Nostalgia is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL." />
       </head>
-      <body>
-        {/* to avoid escaping single quote :) */}
-        <style dangerouslySetInnerHTML={{ __html: style }} />
+      <body className={[space_grotesk.variable, delius.variable].join(" ")}>
         <ThemeCorrector />
         <HeaderBarWithContextProvider>
           {children}
