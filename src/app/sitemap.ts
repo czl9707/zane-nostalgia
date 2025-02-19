@@ -14,7 +14,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         ...(scenes.map(({ route }) => ({
             url: `https://zane-nostalgia.kiyo-n-zane.com/scenes/${route}`,
             lastModified: new Date(),
-            changeFrequency: 'monthly',
+            changeFrequency: 'weekly',
         })) as MetadataRoute.Sitemap)
     ]
 }
