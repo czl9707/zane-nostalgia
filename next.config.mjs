@@ -10,34 +10,34 @@ export default withPigment(
     nextConfig,
     {
         theme: extendTheme({
-            getSelector: (colorScheme) => colorScheme ? `.theme-${colorScheme}` : ':root',
+            getSelector: (colorScheme) => colorScheme ? `.theme-${colorScheme}` : 'body',
             colorSchemes: {
                 light: {
                     colors: {
                         primary: {
-                            background: "#FFFFFF",
-                            contrastText: "#000000"
+                            background: "255 255 255",
+                            contrastText: "0 0 0"
                         },
                         secondary: {
-                            background: "#CCCCCC",
-                            contrastText: "#333333"
+                            background: "205 205 205",
+                            contrastText: "50 50 50"
                         },
                     }
                 },
                 dark: {
                     colors: {
                         primary: {
-                            background: "#000000",
-                            contrastText: "#FFFFFF"
+                            background: "0 0 0",
+                            contrastText: "255 255 255"
                         },
                         secondary: {
-                            background: "#333333",
-                            contrastText: "#CCCCCC"
+                            background: "50 50 50",
+                            contrastText: "205 205 205"
                         },
                     }
                 }
             },
-            breakpoints: {
+            breakpoint: {
                 sm: "400px", // width of navigation thread
                 md: "700px", // width of information thread
                 lg: "1100px",
@@ -68,8 +68,8 @@ export default withPigment(
             },
             boxShadow: {
                 thickness: {
-                    normal: 1.5,
-                    focus: 8
+                    normal: "1.5px",
+                    focus: "8px"
                 }
             }
         })
