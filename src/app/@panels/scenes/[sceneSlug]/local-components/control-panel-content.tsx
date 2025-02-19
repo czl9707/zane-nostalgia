@@ -57,7 +57,7 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
     resolvedValue: Scene.ComponentProps<Scene.MetaData>
 }) {
     return (
-        <Accordion name={<T.H5>{groupName}</T.H5>}>
+        <Accordion name={<T.H5>{groupName}</T.H5>} value={groupName}>
             {
                 Object.entries(controlGroup).map(([paramName, metaEntry]) => {
                     let control = undefined;

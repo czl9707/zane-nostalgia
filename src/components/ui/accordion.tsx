@@ -9,12 +9,12 @@ import { Slot } from '@radix-ui/react-slot'
 
 import { KeyboardArrowDown } from './icons/icons';
 import Divider from './divider';
-import { TypographyVairation } from '@pigment-css/react/theme';
 
 
 interface AccordionProps {
     children?: Iterable<React.ReactNode>,
     name: React.ReactNode,
+    value: string,
 }
 
 interface AccordionItemProps {
@@ -65,9 +65,9 @@ const AccordionItem = React.forwardRef<HTMLDivElement, Omit<AccordionItemProps &
     }
 )
 
-function Accordion({ children = [], name }: AccordionProps) {
+function Accordion({ children = [], name, value }: AccordionProps) {
     return (
-        <AccordionPrimitive.Item value={name}>
+        <AccordionPrimitive.Item value={value}>
             <AccordionTrigger asChild>
                 <Button variant='filled' color="transparent"
                     style={{ width: "100%" }}>

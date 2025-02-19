@@ -1,5 +1,5 @@
 import { keyframes, styled } from "@pigment-css/react";
-import { ColorVariation, TypographyVairation } from "@pigment-css/react/theme";
+import { ColorVariation } from "@pigment-css/react/theme";
 import * as React from "react";
 
 interface ButtonProps {

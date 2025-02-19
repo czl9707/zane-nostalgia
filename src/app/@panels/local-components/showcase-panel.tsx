@@ -1,6 +1,6 @@
 import { css, styled } from "@pigment-css/react";
 import { Scene } from "@/scene-components/utils/types";
-import * as T from "@/components/uiT./";
+import * as T from "@/components/ui/typography";
 import Link from "next/link";
 import ShowcasePanelShadowWrapper, { ShowCaseSceneTypes } from "./showcase-panel-shadow-wrapper";
 
