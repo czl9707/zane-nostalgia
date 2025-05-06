@@ -31,7 +31,7 @@ export default async function NavigationThreadContent() {
             </Link>
             <Divider />
             <AccordionGroup type="multiple" defaultValue={["Scenes"]}>
-                <Accordion name={"Scenes"} value={"Scenes"}>
+                <Accordion name={<T.Body>Scenes</T.Body>} value={"Scenes"}>
                     {
                         sceneMetas.map(({ Icon, name, route }) => (
                             <Link href={`/scenes/${route}`} key={name}>
