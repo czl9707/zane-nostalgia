@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@pigment-css/nextjs-plugin": "^0",
-    "@types/node": "^22",
+    "@types/node": "^24",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@types/seedrandom": "^3",
