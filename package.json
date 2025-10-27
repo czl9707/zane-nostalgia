@@ -22,7 +22,7 @@
     "@types/react-dom": "^18",
     "@types/seedrandom": "^3",
     "eslint": "^9",
-    "eslint-config-next": "^15",
+    "eslint-config-next": "^16",
     "typescript": "^5"
   },
   "scripts": {
