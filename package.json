@@ -10,7 +10,7 @@
     "@radix-ui/react-slot": "^1",
     "@radix-ui/react-switch": "^1",
     "@radix-ui/react-toggle-group": "^1",
-    "next": "^15",
+    "next": "^16",
     "react": "^19",
     "react-dom": "^19",
     "seedrandom": "^3"
