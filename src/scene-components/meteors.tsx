@@ -175,7 +175,7 @@ function MeteorShower({
 const meteorModule: Scene.ComponentModule<MeteroShowerMeta> = {
     Icon: MeteorShowerIcon,
     name: "Meteor Shower",
-    route: "meteor",
+    route: "meteors",
     meta: meteorMeta,
     Component: ParamsResolvingWrapper(MeteorShower, meteorMeta),
 }
