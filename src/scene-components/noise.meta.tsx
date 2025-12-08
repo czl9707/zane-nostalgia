@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { IconProps, SvgIcon } from "@/components/ui/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
+import { SvgIcon, type IconProps } from "@/components/ui/icons/icons";
+import type { ColorParamMetaToken, NumberParamMetaToken, Scene } from "./utils/types";
+import { defaultSceneCommonMetaData, type CommonMetaData } from "./utils/constants";
 
 
-export interface NoiseMeta extends Scene.MetaData {
+export interface NoiseMeta extends CommonMetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
@@ -13,6 +14,7 @@ export interface NoiseMeta extends Scene.MetaData {
 }
 
 const NoiseMeta: NoiseMeta = {
+    ...defaultSceneCommonMetaData,
     color: {
         name: "Color",
         type: "color",

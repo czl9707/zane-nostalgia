@@ -2,8 +2,8 @@ import * as React from "react";
 import seedrandom from "seedrandom";
 
 import { randomFitToInt } from "@/lib/math";
-import { Scene } from "./utils/types";
-import { meta, WavesMeta } from "./waves.meta";
+import type { Scene } from "./utils/types";
+import { meta, type WavesMeta } from "./waves.meta";
 import { paramsResolvingWrapper } from "./utils/paramsResolvingWrapper";
 
 const WAVE_ANIMATION_STEP = 4;
@@ -18,7 +18,7 @@ function Waves({
     height,
     width,
     geoSeed,
-}: Scene.ComponentProps<WavesMeta & Scene.CommonMetaData>) {
+}: Scene.ComponentProps<WavesMeta>) {
     const randomGenerator = seedrandom(geoSeed);
     const WAVE_VERTICAL_DELTA = Math.floor(width / (waveComplexity + 1) / 6);
 

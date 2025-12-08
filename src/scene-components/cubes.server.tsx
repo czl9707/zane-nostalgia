@@ -19,7 +19,7 @@ function Cubes({
     height,
     width,
     geoSeed,
-}: Scene.ComponentProps<CubesMeta & Scene.CommonMetaData>) {
+}: Scene.ComponentProps<CubesMeta>) {
     const randomGenerator = seedrandom(geoSeed);
 
     const cornerX = 150 * Math.sin(rotation * Math.PI / 180);

@@ -14,7 +14,7 @@ function Noise({
     yOffset,
     height,
     width,
-}: Scene.ComponentProps<NoiseMeta & Scene.CommonMetaData>) {
+}: Scene.ComponentProps<NoiseMeta>) {
     const CENTER_X = width / 2 + Math.floor(width / 2 / 10 * xOffset);
     const CENTER_Y = height / 2 + Math.floor(height / 2 / 10 * yOffset);
 

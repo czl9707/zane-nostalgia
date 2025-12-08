@@ -25,7 +25,7 @@ function Beats({
     frequency,
     height,
     width,
-}: Scene.ComponentProps<BeatsMeta & Scene.CommonMetaData>) {
+}: Scene.ComponentProps<BeatsMeta>) {
     const geoGenerator = seedrandom(geoSeed);
     const animationGenerator = seedrandom(geoSeed);
     const PathRenderer = pathVariant === "bar" ? BarPathRenderer : LinePathRenderer;

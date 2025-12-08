@@ -20,7 +20,7 @@ function Rainy({
     height,
     width,
     geoSeed,
-}: Scene.ComponentProps<RainyMeta & Scene.CommonMetaData>) {
+}: Scene.ComponentProps<RainyMeta>) {
     const TIME_INVARIANT_NUM = Math.floor((CYCLE_DURATION + DROP_TIME) / 0.1)
     const DROP_COUNT = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom(geoSeed);

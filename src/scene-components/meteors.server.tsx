@@ -26,7 +26,7 @@ function MeteorShower({
     height,
     width,
     geoSeed,
-}: Scene.ComponentProps<MeteroShowerMeta & Scene.CommonMetaData>) {
+}: Scene.ComponentProps<MeteroShowerMeta>) {
     const meteorCountY = rotation === 90 ? 0 :
         Math.abs(Math.floor(
             height * density * DENSITY_FACTOR * Math.cos(rotation * Math.PI / 180)

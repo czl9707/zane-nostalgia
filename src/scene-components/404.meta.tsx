@@ -1,8 +1,11 @@
 import { Error as ErrorIcon } from "@/components/ui/icons/icons";
-import { ColorParamMetaToken, NumberParamMetaToken, StringParamMetaToken, RandomSeedParamMetaToken, Scene, } from "./utils/types";
 
 
-export interface FourOFourMeta extends Scene.MetaData {
+import type { ColorParamMetaToken, StringParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import { defaultSceneCommonMetaData, type CommonMetaData } from "./utils/constants";
+
+
+export interface FourOFourMeta extends CommonMetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
@@ -11,6 +14,7 @@ export interface FourOFourMeta extends Scene.MetaData {
 }
 
 const fourOFourMeta: FourOFourMeta = {
+    ...defaultSceneCommonMetaData,
     color: {
         name: "Color",
         type: "color",

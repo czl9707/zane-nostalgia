@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import { IconProps, SvgIcon } from "@/components/ui/icons/icons"
-import { ColorParamMetaToken, EnumParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import { SvgIcon, type IconProps } from "@/components/ui/icons/icons";
+import type { ColorParamMetaToken, EnumParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import { defaultSceneCommonMetaData, type CommonMetaData } from "./utils/constants";
 
-
-export interface BeatsMeta extends Scene.MetaData {
+export interface BeatsMeta extends CommonMetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,  // graphic unit per 200px
@@ -63,6 +63,7 @@ const AlignCenterIcon = React.forwardRef<SVGSVGElement, IconProps>(
 
 
 const beatsMeta: BeatsMeta = {
+    ...defaultSceneCommonMetaData,
     color: {
         name: "Color",
         type: "color",

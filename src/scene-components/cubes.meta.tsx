@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { IconProps, SvgIcon } from "@/components/ui/icons/icons"
-import { ColorParamMetaToken, EnumParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import { SvgIcon, type IconProps } from "@/components/ui/icons/icons";
+import type { ColorParamMetaToken, EnumParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import { defaultSceneCommonMetaData, type CommonMetaData } from "./utils/constants";
 
 
-export interface CubesMeta extends Scene.MetaData {
+export interface CubesMeta extends CommonMetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     rotation: NumberParamMetaToken,
@@ -32,6 +33,7 @@ const SequentialIcon = React.forwardRef<SVGSVGElement, IconProps>(
 )
 
 const meteorMeta: CubesMeta = {
+    ...defaultSceneCommonMetaData,
     color: {
         name: "Color",
         type: "color",

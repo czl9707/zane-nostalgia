@@ -1,4 +1,3 @@
-import { defaultSceneCommonMetaData } from "./constants";
 import { EnumParamMetaToken, NumberParamMetaToken, Scene, } from "./types";
 
 function defaultParameterResolver<M extends Scene.MetaData>(
@@ -20,12 +19,6 @@ function defaultParameterResolver<M extends Scene.MetaData>(
     }
 
     return resolved as Scene.ComponentProps<M>;
-}
-
-function defaultCommonParameterResolver(
-    props: Partial<Record<string, string>>,
-): Scene.ComponentProps<Scene.CommonMetaData> {
-    return defaultParameterResolver<Scene.CommonMetaData>(props, defaultSceneCommonMetaData)
 }
 
 function resolveParameterConstraints<M extends Scene.MetaData>(
@@ -59,4 +52,4 @@ function fitInStep(v: number, min: number, max: number, step: number): number {
     return v - ((v - min) % step);
 }
 
-export { defaultParameterResolver, resolveParameterConstraints, defaultCommonParameterResolver }
+export { defaultParameterResolver, resolveParameterConstraints }

@@ -46,12 +46,6 @@ type ParamMetaToken =
 // eslint-disable-next-line @typescript-eslint/no-namespace
 namespace Scene {
     export type MetaData = { [key: string]: ParamMetaToken }
-    export interface CommonMetaData extends MetaData {
-        width: NumberParamMetaToken,
-        height: NumberParamMetaToken,
-        bannerText: StringParamMetaToken,
-        bannerColor: ColorParamMetaToken,
-    }
     export type ComponentProps<M extends MetaData> = {
         [key in keyof (M)]: M[key]["default"]
     }
@@ -60,7 +54,7 @@ namespace Scene {
         name: string,
         meta: M
     }
-    export type RawComponentType<M extends MetaData = MetaData> = React.FC<ComponentProps<M & CommonMetaData>>;
+    export type RawComponentType<M extends MetaData = MetaData> = React.FC<ComponentProps<M>>;
     export type ComponentType = React.FC<Record<string, string>>;
 }
 

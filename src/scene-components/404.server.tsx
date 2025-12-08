@@ -23,7 +23,7 @@ function FourOFour({
     width,
     geoSeed,
     textContent,
-}: Scene.ComponentProps<FourOFourMeta & Scene.CommonMetaData>) {
+}: Scene.ComponentProps<FourOFourMeta>) {
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom(geoSeed);
     const contentHash = simpleHash(textContent as string);

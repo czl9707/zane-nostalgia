@@ -1,10 +1,11 @@
 import * as React from "react";
 
-import { IconProps, SvgIcon } from "@/components/ui/icons/icons"
-import { ColorParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import { SvgIcon, type IconProps } from "@/components/ui/icons/icons";
+import type { ColorParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import { defaultSceneCommonMetaData, type CommonMetaData } from "./utils/constants";
 
 
-export interface RainyMeta extends Scene.MetaData {
+export interface RainyMeta extends CommonMetaData {
     color: ColorParamMetaToken,
     backgroundColor: ColorParamMetaToken,
     density: NumberParamMetaToken,
@@ -12,6 +13,7 @@ export interface RainyMeta extends Scene.MetaData {
 }
 
 const rainyMeta: RainyMeta = {
+    ...defaultSceneCommonMetaData,
     color: {
         name: "Color",
         type: "color",
