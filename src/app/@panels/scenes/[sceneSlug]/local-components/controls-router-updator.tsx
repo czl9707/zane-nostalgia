@@ -14,7 +14,7 @@ export default function ControlRouterUpdator({ paramName, children, ...other }: 
         updatedSP.set(paramName, value);
 
         // no router update here.
-        window.history.pushState(null, '', `?${updatedSP.toString()}`);
+        window.history.replaceState(null, '', `?${updatedSP.toString()}`);
     }
 
     return (
