@@ -58,6 +58,7 @@ export default function TypingTypography({ contents }: { contents: string[] }) {
             timeoutRef.current = true;
             updateState();
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
