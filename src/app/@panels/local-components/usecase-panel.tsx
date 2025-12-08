@@ -6,9 +6,9 @@ import Panel from "@/components/ui/panel";
 import * as T from "@/components/ui/typography"
 import { Download, Copy, Code, File, BackHand } from "@/components/ui/icons/icons";
 
-import MeteorsScene from "@/scene-components/meteors.server";
-import FourOFourScene from "@/scene-components/404.server";
-import NoiseScene from "@/scene-components/noise.server";
+import { meteorModule } from "@/scene-components/meteors";
+import { fourOFourModule } from "@/scene-components/404";
+import { noiseModule } from "@/scene-components/noise";
 
 interface UseCaseContainer {
     reverse?: boolean
@@ -125,7 +125,7 @@ function EmbedIllustration() {
                 The stunning header svg image you get:
             </T.H5>
             <svg viewBox={`0 0 2000 400`} width="100%" preserveAspectRatio="xMidYMid slice">
-                <NoiseScene width="2000" height="400" bannerText="Hello, I am Zane!" />
+                <noiseModule.Component width={2000} height={400} bannerText="Hello, I am Zane!" />
             </svg>
         </Panel>
     )
@@ -197,7 +197,7 @@ function DownloadIllustration() {
                 <ScenePlaceHolder >
                     <svg viewBox={`0 0 1200 600`} width="100%" height="100%" preserveAspectRatio="xMidYMid slice"
                         style={{ animation: `${sceneDropped} ${animateDetail}` }}>
-                        <MeteorsScene width="1200" height="600" />
+                        <meteorModule.Component width={1200} height={600} />
                     </svg>
                 </ScenePlaceHolder>
                 <LinePlaceHolder style={{ width: 0 }} />
@@ -251,7 +251,7 @@ function CopyIllustration() {
                     </T.H5>
                 </div>
                 <svg viewBox={`0 0 1200 1200`} width="100%" preserveAspectRatio="xMidYMid slice">
-                    <FourOFourScene width="1200" height="1200" />
+                    <fourOFourModule.Component width={1200} height={1200} />
                 </svg>
             </div>
             <div>
@@ -264,7 +264,7 @@ function CopyIllustration() {
                 </div>
                 <svg viewBox={`0 0 1200 1200`} width="100%" preserveAspectRatio="xMidYMid slice" id="customized-svg"
                     className={css({ "& text": { transform: "rotate(-30deg) scale(2,2)", fontFamily: "'Pacifico' !important" } })}>
-                    <FourOFourScene width="1200" height="1200" color="#ffff0088" textContent="Kiyo" />
+                    <fourOFourModule.Component width={1200} height={1200} color="#ffff0088" textContent="Kiyo" />
                 </svg>
             </div>
         </Panel>

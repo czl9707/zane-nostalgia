@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Link from 'next/link';
 
-import { fetchSceneMetas } from '@/scene-components/utils/fetch-scenes';
+import { sceneModules } from '@/scene-components';
 
 import { Accordion, AccordionGroup, AccordionItem } from "@/components/ui/accordion";
 import * as T from "@/components/ui/typography";
@@ -11,8 +11,6 @@ import Button from '@/components/ui/button';
 
 
 export default async function NavigationThreadContent() {
-    const sceneMetas = await fetchSceneMetas();
-
     return (
         <>
             <Divider />
@@ -33,7 +31,7 @@ export default async function NavigationThreadContent() {
             <AccordionGroup type="multiple" defaultValue={["Scenes"]}>
                 <Accordion name={"Scenes"} value={"Scenes"}>
                     {
-                        sceneMetas.map(({ Icon, name, route }) => (
+                        sceneModules.map(({ Icon, name, route }) => (
                             <Link href={`/scenes/${route}`} key={name}>
                                 <AccordionItem asChild >
                                     <Button variant='filled' color="transparent">

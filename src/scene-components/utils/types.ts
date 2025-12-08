@@ -46,16 +46,27 @@ type ParamMetaToken =
 // eslint-disable-next-line @typescript-eslint/no-namespace
 namespace Scene {
     export type MetaData = { [key: string]: ParamMetaToken }
-    export type ComponentProps<M extends MetaData> = {
+    export type RawComponentProps<M extends MetaData> = {
         [key in keyof (M)]: M[key]["default"]
     }
-    export type ComponentMetaModule<M extends MetaData = MetaData> = {
+    export type ComponentProps<M extends MetaData> = {
+        [key in keyof (M)]?: M[key]["default"]
+    }
+    export type ComponentModule<M extends MetaData> = {
         Icon: React.ElementType,
         name: string,
-        meta: M
+        route: string,
+        meta: M,
+        Component: React.FC<ComponentProps<M>>
     }
-    export type RawComponentType<M extends MetaData = MetaData> = React.FC<ComponentProps<M>>;
-    export type ComponentType = React.FC<Record<string, string>>;
+
+    export type AnyComponentModule = {
+        Icon: React.ElementType,
+        name: string,
+        route: string,
+        meta: MetaData,
+        Component: React.ElementType
+    }
 }
 
 

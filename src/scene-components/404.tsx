@@ -1,9 +1,56 @@
+import { Error as ErrorIcon } from "@/components/ui/icons/icons";
+import type { ColorParamMetaToken, StringParamMetaToken, NumberParamMetaToken, RandomSeedParamMetaToken, Scene } from "./utils/types";
+import { defaultSceneCommonMetaData, type CommonMetaData } from "./utils/constants";
 import seedrandom from 'seedrandom';
 import { randomFitToInt, simpleHash } from "@/lib/math";
+import React from "react";
+import { ParamsResolvingWrapper } from "./utils/ParamsResolvingWrapper";
 
-import { FourOFourMeta, meta } from './404.meta'
-import { Scene } from './utils/types';
-import { paramsResolvingWrapper } from './utils/paramsResolvingWrapper';
+interface FourOFourMeta extends CommonMetaData {
+    color: ColorParamMetaToken,
+    backgroundColor: ColorParamMetaToken,
+    density: NumberParamMetaToken,
+    textContent: StringParamMetaToken,
+    geoSeed: RandomSeedParamMetaToken,
+}
+
+const fourOFourMeta: FourOFourMeta = {
+    ...defaultSceneCommonMetaData,
+    color: {
+        name: "Color",
+        type: "color",
+        default: "#220000",
+        group: "Color",
+    },
+    backgroundColor: {
+        name: "Background Color",
+        type: "color",
+        default: "#000000",
+        group: "Color",
+    },
+    density: {
+        name: "Density",
+        type: "number",
+        default: 6,
+        min: 2,
+        max: 10,
+        step: 1,
+        group: "Geometry",
+    },
+    textContent: {
+        name: "Content",
+        type: "string",
+        default: "404",
+        group: "Geometry",
+    },
+    geoSeed: {
+        name: "Random Seed",
+        type: "randomSeed",
+        default: "FourOFour",
+        group: "Geometry",
+    }
+};
+
 
 const DENSITY_FACTOR = 0.0007;
 
@@ -23,7 +70,7 @@ function FourOFour({
     width,
     geoSeed,
     textContent,
-}: Scene.ComponentProps<FourOFourMeta>) {
+}: Scene.RawComponentProps<FourOFourMeta>) {
     const textCount = Math.floor(height * width * Math.pow(density * DENSITY_FACTOR, 2));
     const randomGenerator = seedrandom(geoSeed);
     const contentHash = simpleHash(textContent as string);
@@ -90,6 +137,14 @@ function FourOFour({
     </>)
 }
 
+const fourOFourModule: Scene.ComponentModule<FourOFourMeta> = {
+    Icon: ErrorIcon,
+    name: "404",
+    route: "404",
+    meta: fourOFourMeta,
+    Component: ParamsResolvingWrapper(FourOFour, fourOFourMeta),
+}
 
-const FourOFourWrapper = paramsResolvingWrapper(FourOFour, meta);
-export default FourOFourWrapper;
+export {
+    fourOFourModule
+};

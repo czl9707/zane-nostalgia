@@ -3,7 +3,7 @@ import { EnumParamMetaToken, NumberParamMetaToken, Scene, } from "./types";
 function defaultParameterResolver<M extends Scene.MetaData>(
     props: Partial<Record<string, string>>,
     metaData: M
-): Scene.ComponentProps<M> {
+): Scene.RawComponentProps<M> {
     const resolved: Partial<Scene.ComponentProps<M>> = {};
 
     for (const param in metaData) {
@@ -18,13 +18,13 @@ function defaultParameterResolver<M extends Scene.MetaData>(
             resolved[param] = props[param] as string;
     }
 
-    return resolved as Scene.ComponentProps<M>;
+    return resolved as Scene.RawComponentProps<M>;
 }
 
 function resolveParameterConstraints<M extends Scene.MetaData>(
     props: Scene.ComponentProps<M>,
     metaData: M
-): Scene.ComponentProps<M> {
+): Scene.RawComponentProps<M> {
     for (const param in metaData) {
         if (metaData[param].type == "number") {
             const meta = metaData[param] as NumberParamMetaToken;
@@ -44,7 +44,7 @@ function resolveParameterConstraints<M extends Scene.MetaData>(
         }
     }
 
-    return props;
+    return props as Scene.RawComponentProps<M>;
 }
 
 function fitInStep(v: number, min: number, max: number, step: number): number {

@@ -4,13 +4,13 @@ import { Scene } from './types';
 import { defaultParameterResolver, resolveParameterConstraints } from './resolver';
 
 
-export function paramsResolvingWrapper<M extends Scene.MetaData>(
-    Component: React.FC<Scene.ComponentProps<M>>,
+export function ParamsResolvingWrapper<M extends Scene.MetaData>(
+    Component: React.FC<Scene.RawComponentProps<M>>,
     meta: M,
 ) {
-    return React.forwardRef<SVGSVGElement, Record<string, string>>(
+    return React.forwardRef<SVGSVGElement, Scene.ComponentProps<M>>(
         function WrappedComponent(props, ref) {
-            const resolvedParam = defaultParameterResolver(props, meta);
+            const resolvedParam = defaultParameterResolver(props as Partial<Record<string, string>>, meta);
             const resolved = resolveParameterConstraints({ ...resolvedParam }, { ...meta });
 
             const styleText = `text {

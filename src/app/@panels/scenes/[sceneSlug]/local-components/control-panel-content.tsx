@@ -51,7 +51,7 @@ export default function ControlPanelContent({ meta }: { meta: Scene.MetaData }) 
 function GroupControl({ controlGroup, groupName, resolvedValue }: {
     controlGroup: { [key in keyof Scene.MetaData]: ParamMetaToken },
     groupName: string,
-    resolvedValue: Scene.ComponentProps<Scene.MetaData>
+    resolvedValue: Scene.RawComponentProps<Scene.MetaData>
 }) {
     return (
         <Accordion name={<T.H5>{groupName}</T.H5>} value={groupName}>
