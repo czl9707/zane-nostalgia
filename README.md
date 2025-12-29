@@ -3,9 +3,8 @@
  <img width="100px" src="./public/favicon.svg" align="center" alt="Nostalgia Github Readme" />
  <h1 align="center">Nostalgia Github Readme</h1>
  <p align="center">
-  Hosted at 
   <a href="https://zane-nostalgia.kiyo-n-zane.com">
-    zane-nostalgia.kiyo-n-zane.com
+    Start Customizing Here
   </a>
  </p>
  <p align="center">

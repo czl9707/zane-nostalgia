@@ -19,9 +19,9 @@ interface HeaderBarProps {
 const HeaderBarDiv = styled("div")(({ theme }) => ({
     padding: `0 ${theme.padding.thread}`, zIndex: 1000,
     height: theme.size.header.height, top: "0", left: 0, right: 0,
-    position: "fixed", backgroundColor: "transparent",
+    position: "fixed", backgroundImage: `linear-gradient(to bottom, rgb(${theme.vars.colors.primary.background}) 15%, transparent 100%)`,
     display: "flex", flexDirection: "row", alignItems: "center",
-    gap: "1rem",
+    gap: "1rem", boxSizing: "border-box",
     color: `rgb(${theme.vars.colors.primary.contrastText})`,
 }));
 

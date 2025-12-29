@@ -10,7 +10,7 @@ import Divider from '@/components/ui/divider';
 import Button from '@/components/ui/button';
 
 
-export default async function NavigationThreadContent() {
+export default function NavigationThreadContent() {
     return (
         <>
             <Divider />
