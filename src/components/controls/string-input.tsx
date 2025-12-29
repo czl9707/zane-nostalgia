@@ -19,7 +19,7 @@ const StringInputEL = styled("input")(({ theme }) => ({
         lineHeight: theme.typographies.body.lineHeight,
     },
     boxShadow: `0 0 ${theme.boxShadow.thickness.normal} rgb(${theme.vars.colors.secondary.contrastText})`,
-    transition: `box-shadow ${theme.transition.short} linear`,
+    transition: `box-shadow ${theme.transition.short} ease-in`,
     "&:hover": {
         boxShadow: `0 0 calc(${theme.boxShadow.thickness.focus} / 2) rgb(${theme.vars.colors.primary.contrastText}),
                     inset 0 0 calc(${theme.boxShadow.thickness.focus} / 2) rgb(${theme.vars.colors.primary.contrastText})`,

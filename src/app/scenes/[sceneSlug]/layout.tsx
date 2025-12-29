@@ -22,13 +22,13 @@ const SVGContainerDiv = styled('div')(({ theme }) => ({
         right: 0,
     },
     [`@media(min-width: ${theme.breakpoint.lg})`]: {
-        right: theme.breakpoint.md,
+        right: `calc(${theme.breakpoint.md} + ${theme.padding.thread} )`,
         "&[data-fullscreen=true]": {
             right: 0,
         },
     },
 
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.short} ease-in`,
 }))
 
 const SVGWrapper = styled('svg')(({ theme }) => ({
@@ -39,7 +39,7 @@ const SVGWrapper = styled('svg')(({ theme }) => ({
         maxWidth: "1000%", maxHeight: "1000%",
         minWidth: "100%", minHeight: "100%",
     },
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.short} ease-in`,
 }))
 
 // wrapped in Suspense
@@ -52,7 +52,7 @@ function SceneHelper({ children }: {
     const height = parseInt(
         searchParams.get("height") ?? defaultSceneCommonMetaData.height.default.toString());
 
-    const isFullScreen = React.useContext(FullScreenContext);
+    const { isFullScreen } = React.useContext(FullScreenContext);
     const { isMenuOpen, setMenuOpen } = React.useContext(MenuContext);
     React.useEffect(() => {
         const lgWidth = getComputedStyle(document.body).getPropertyValue('--breakpoint-lg');

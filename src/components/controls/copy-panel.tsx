@@ -54,7 +54,7 @@ const CopyPanel = React.forwardRef<HTMLDivElement, CopyPanelProps & Omit<React.H
             clearTimeout(copied);
             setCopied(setTimeout(() => {
                 setCopied(undefined);
-            }, 5000));
+            }, 2500));
         }
 
         return (

@@ -4,31 +4,26 @@ import { styled } from "@pigment-css/react";
 import Link from 'next/link';
 import * as React from 'react';
 
-import { DoubleArrow, FitScreen, FloatLandscape2, Github } from '@/components/ui/icons/icons';
+import { DoubleArrow, Github } from '@/components/ui/icons/icons';
 import FlippingIcon from "@/components/ui/icons/flipping-icon";
-import { usePathname } from "next/navigation";
 
 
 interface HeaderBarProps {
     toggleMenu: () => void,
     isMenuOpen: boolean,
-    toggleFullScreen: () => void,
-    isFullScreen: boolean,
 }
 
 const HeaderBarDiv = styled("div")(({ theme }) => ({
     padding: `0 ${theme.padding.thread}`, zIndex: 1000,
     height: theme.size.header.height, top: "0", left: 0, right: 0,
-    position: "fixed", backgroundColor: "transparent",
+    position: "fixed", backgroundImage: `linear-gradient(to bottom, rgb(${theme.vars.colors.primary.background}) 15%, transparent 100%)`,
     display: "flex", flexDirection: "row", alignItems: "center",
-    gap: "1rem",
+    gap: "1rem", boxSizing: "border-box",
     color: `rgb(${theme.vars.colors.primary.contrastText})`,
 }));
 
 
-function HeaderBar({ toggleMenu, isMenuOpen, toggleFullScreen, isFullScreen }: HeaderBarProps) {
-    const currentPath = usePathname();
-
+function HeaderBar({ toggleMenu, isMenuOpen }: HeaderBarProps) {
     return (
         <HeaderBarDiv>
             <FlippingIcon direction="horizontal"
@@ -37,13 +32,6 @@ function HeaderBar({ toggleMenu, isMenuOpen, toggleFullScreen, isFullScreen }: H
                 before={<DoubleArrow />}
             />
             <div style={{ flex: "1 1" }} />
-            <FlippingIcon direction="horizontal"
-                style={{ display: currentPath.startsWith("/scenes/") ? undefined : "none" }}
-                onClick={toggleFullScreen}
-                isFlipped={!isFullScreen}
-                before={<FloatLandscape2 />}
-                after={<FitScreen />}
-            />
             <Link href={"https://github.com/czl9707/zane-nostalgia"} target="_blank" rel="noopener noreferrer">
                 <Github />
             </Link>

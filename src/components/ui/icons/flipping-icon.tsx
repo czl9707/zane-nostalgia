@@ -1,6 +1,6 @@
 import { styled } from "@pigment-css/react";
 import React from "react";
-
+import clsx from "clsx";
 
 
 const FlippingIconContainer = styled("div")<{ direction?: 'vertical' | 'horizontal' }>(({ theme }) => ({
@@ -23,7 +23,7 @@ interface FlippingIconProps {
 const FlippingIcon = React.forwardRef<HTMLDivElement, FlippingIconProps & React.HTMLAttributes<HTMLDivElement>>(
     function FlippingIcon({ before, after, isFlipped, direction, className, ...other }, ref) {
         return (
-            <FlippingIconContainer direction={direction} className={className + (isFlipped ? " flipped" : "")}
+            <FlippingIconContainer direction={direction} className={clsx(className, isFlipped ? " flipped" : undefined)}
                 ref={ref} {...other} >
                 {
                     isFlipped && after ? after : before

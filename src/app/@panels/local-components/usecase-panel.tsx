@@ -247,7 +247,7 @@ function CopyIllustration() {
             <div>
                 <div>
                     <T.H5 style={{ textAlign: 'center', }}>
-                        Raw SVG string copied from Z.Nostalgia
+                        Raw SVG string copied from Web App
                     </T.H5>
                 </div>
                 <svg viewBox={`0 0 1200 1200`} width="100%" preserveAspectRatio="xMidYMid slice">

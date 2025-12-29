@@ -10,14 +10,14 @@ import Divider from '@/components/ui/divider';
 import Button from '@/components/ui/button';
 
 
-export default async function NavigationThreadContent() {
+export default function NavigationThreadContent() {
     return (
         <>
             <Divider />
 
             <T.H4 color="primary"
                 style={{ padding: '1rem', userSelect: "none", }}>
-                Z.Nostalgia
+                Nostalgia
             </T.H4>
             <Divider />
 

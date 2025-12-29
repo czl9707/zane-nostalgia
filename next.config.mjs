@@ -40,7 +40,7 @@ export default withPigment(
             breakpoint: {
                 sm: "400px", // width of navigation thread
                 md: "700px", // width of information thread
-                lg: "1100px",
+                lg: "1100px", // sum of both threads' widths
             },
             typographies: {
                 body: { fontFamily: "var(--fonts-serious)", fontWeight: 300, fontSize: "1rem", lineHeight: 1.4, },
@@ -54,11 +54,11 @@ export default withPigment(
                 h6: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '1.25rem', lineHeight: 1.25, },
             },
             transition: {
-                short: ".3s",
-                long: ".6s",
+                short: ".2s",
+                long: ".4s",
             },
             padding: {
-                thread: "min(4rem, 8%)",
+                thread: "3rem",
                 panel: "1.5rem",
             },
             size: {
