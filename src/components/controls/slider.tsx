@@ -62,16 +62,18 @@ const Slider = React.forwardRef<HTMLDivElement, SliderProps>(
         onChange = (_) => { },
         ...other
     }, ref) {
-        // const [value, setValue] = React.useState<number>(value);
+        const [sliderValue, setsliderValue] = React.useState<number>(value);
 
         return (
-            <ControlStructure label={label} value={showValue ? value : undefined} ref={ref} {...other}>
-                <SliderContainer value={[value]}
+            <ControlStructure label={label} value={showValue ? sliderValue : undefined} ref={ref} {...other}>
+                <SliderContainer value={[sliderValue]}
                     min={min} max={max} step={step}
-                    onValueChange={(vs) => {
-                        // setValue(vs[0]);
+                    onValueCommit={(vs) => {
                         onChange(vs[0]);
-                    }} >
+                    }} 
+                    onValueChange={(vs) => {
+                        setsliderValue(vs[0]);
+                    }}>
                     <SliderTrack />
                     <SliderThumb aria-label={label} />
                 </SliderContainer>
