@@ -70,7 +70,8 @@ export default function LayoutOtherThanScene({ children }: { children: React.Rea
             <ThreadSplitter/>
             <InformationThreadContainer>
                 {children}
-                <span style={{minHeight:"1"}}/>
+                <span style={{minHeight:"1px"}}/> 
+                {/* Trick for scrolling behavior */}
             </InformationThreadContainer>
         </Container>
     )

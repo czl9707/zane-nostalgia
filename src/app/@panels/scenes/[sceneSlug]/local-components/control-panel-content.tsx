@@ -6,7 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import { defaultParameterResolver, resolveParameterConstraints } from '@/scene-components/utils/resolver';
 import { ParamMetaToken, Scene } from '@/scene-components/utils/types';
 
-import RandomSeedButton from './random-seed-button';
+import { RandomSeedButton, TogglePreviewButton } from './buttons';
 import ControlRouterUpdator from './controls-router-updator';
 
 import Divider from '@/components/ui/divider';
@@ -55,6 +55,12 @@ function GroupControl({ controlGroup, groupName, resolvedValue }: {
 }) {
     return (
         <Accordion name={<T.H5>{groupName}</T.H5>} value={groupName}>
+            {
+                groupName === "Screen Size" &&
+                <AccordionItem>
+                    <TogglePreviewButton />
+                </AccordionItem>
+            }
             {
                 Object.entries(controlGroup).map(([paramName, metaEntry]) => {
                     let control = undefined;

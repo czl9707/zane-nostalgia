@@ -4,16 +4,13 @@ import { styled } from "@pigment-css/react";
 import Link from 'next/link';
 import * as React from 'react';
 
-import { DoubleArrow, FitScreen, FloatLandscape2, Github } from '@/components/ui/icons/icons';
+import { DoubleArrow, Github } from '@/components/ui/icons/icons';
 import FlippingIcon from "@/components/ui/icons/flipping-icon";
-import { usePathname } from "next/navigation";
 
 
 interface HeaderBarProps {
     toggleMenu: () => void,
     isMenuOpen: boolean,
-    toggleFullScreen: () => void,
-    isFullScreen: boolean,
 }
 
 const HeaderBarDiv = styled("div")(({ theme }) => ({
@@ -26,9 +23,7 @@ const HeaderBarDiv = styled("div")(({ theme }) => ({
 }));
 
 
-function HeaderBar({ toggleMenu, isMenuOpen, toggleFullScreen, isFullScreen }: HeaderBarProps) {
-    const currentPath = usePathname();
-
+function HeaderBar({ toggleMenu, isMenuOpen }: HeaderBarProps) {
     return (
         <HeaderBarDiv>
             <FlippingIcon direction="horizontal"
@@ -37,13 +32,6 @@ function HeaderBar({ toggleMenu, isMenuOpen, toggleFullScreen, isFullScreen }: H
                 before={<DoubleArrow />}
             />
             <div style={{ flex: "1 1" }} />
-            <FlippingIcon direction="horizontal"
-                style={{ display: currentPath.startsWith("/scenes/") ? undefined : "none" }}
-                onClick={toggleFullScreen}
-                isFlipped={!isFullScreen}
-                before={<FloatLandscape2 />}
-                after={<FitScreen />}
-            />
             <Link href={"https://github.com/czl9707/zane-nostalgia"} target="_blank" rel="noopener noreferrer">
                 <Github />
             </Link>

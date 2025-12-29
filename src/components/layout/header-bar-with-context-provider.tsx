@@ -9,7 +9,9 @@ import { usePathname } from 'next/navigation';
 const MenuContext = React.createContext<{ isMenuOpen: boolean, setMenuOpen: (isMenuOpen: boolean) => void }>(
     { isMenuOpen: false, setMenuOpen: () => { } }
 );
-const FullScreenContext = React.createContext<boolean>(true);
+const FullScreenContext = React.createContext<{ isFullScreen: boolean, setFullScreen: (isFullScreen: boolean) => void }>(
+    { isFullScreen: false, setFullScreen: () => { } }
+);
 
 export default function HeaderBarWithContextProvider({ children }: { children: React.ReactNode }) {
     const [isMenuOpen, setMenuOpen] = React.useState<boolean>(false);
@@ -23,10 +25,9 @@ export default function HeaderBarWithContextProvider({ children }: { children: R
     }, [currentPath]);
 
     return (
-        <FullScreenContext.Provider value={isFullScreen}>
+        <FullScreenContext.Provider value={{isFullScreen, setFullScreen}}>
             <MenuContext.Provider value={{ isMenuOpen, setMenuOpen }}>
-                <HeaderBar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}
-                    isFullScreen={isFullScreen} toggleFullScreen={toggleFullScreen} />
+                <HeaderBar isMenuOpen={isMenuOpen} toggleMenu={toggleMenu}/>
                 {children}
             </MenuContext.Provider>
         </FullScreenContext.Provider>
