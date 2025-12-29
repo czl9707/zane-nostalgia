@@ -1,14 +1,14 @@
 
 <p align="center">
- <img width="100px" src="./public/favicon.svg" align="center" alt="Nostalgia Github Readme" />
- <h1 align="center">Nostalgia Github Readme</h1>
+ <img width="100px" src="./public/favicon.svg" align="center" alt="Nostalgia Github Banner" />
+ <h1 align="center">Nostalgia Github Banner</h1>
  <p align="center">
   <a href="https://zane-nostalgia.kiyo-n-zane.com">
     Start Customizing Here
   </a>
  </p>
  <p align="center">
- Nostalgia Github Readme is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.
+ Nostalgia Github Banner is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.
  </p>
 
  <h3 align="center">More Patterns?</h3>
