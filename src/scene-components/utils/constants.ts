@@ -1,6 +1,13 @@
-import { Scene } from "./types";
+import { ColorParamMetaToken, NumberParamMetaToken, Scene, StringParamMetaToken } from "./types";
 
-export const defaultSceneCommonMetaData: Scene.CommonMetaData = {
+export interface CommonMetaData extends Scene.MetaData {
+    width: NumberParamMetaToken,
+    height: NumberParamMetaToken,
+    bannerText: StringParamMetaToken,
+    bannerColor: ColorParamMetaToken,
+}
+
+export const defaultSceneCommonMetaData: CommonMetaData = {
     height: {
         name: "Height",
         type: "number",

@@ -16,7 +16,7 @@ interface RandomSeedButtonProps {
 const RandomSeedButton = React.forwardRef<HTMLDivElement, RandomSeedButtonProps & Omit<React.HTMLAttributes<HTMLDivElement>, "onChange">>(
     function RandomSeedButton({ label, onChange, ...other }, ref) {
         return (
-            <ControlStructure label={label} {...other} ref={ref}>
+            <ControlStructure label={label} {...other} value={undefined} ref={ref}>
                 <Button variant='outline' color="secondary"
                     style={{ gap: "1rem", paddingTop: ".1rem", paddingBottom: ".1rem", justifyContent: "flex-start" }}
                     onClick={() => {

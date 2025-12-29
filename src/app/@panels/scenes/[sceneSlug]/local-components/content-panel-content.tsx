@@ -26,6 +26,7 @@ export default function ContentPanelContent({ scene, contentElement }: { scene: 
             setSVGContent(container.innerHTML);
             root.unmount();
         })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchParams])
 
     return <>

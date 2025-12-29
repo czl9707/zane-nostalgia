@@ -3,8 +3,7 @@
 import * as React from 'react';
 import { useSearchParams } from 'next/navigation';
 
-import { defaultSceneCommonMetaData } from '@/scene-components/utils/constants';
-import { defaultParameterResolver, defaultCommonParameterResolver, resolveParameterConstraints } from '@/scene-components/utils/resolver';
+import { defaultParameterResolver, resolveParameterConstraints } from '@/scene-components/utils/resolver';
 import { ParamMetaToken, Scene } from '@/scene-components/utils/types';
 
 import RandomSeedButton from './random-seed-button';
@@ -21,13 +20,11 @@ import * as T from '@/components/ui/typography';
 
 export default function ControlPanelContent({ meta }: { meta: Scene.MetaData }) {
     const searchParams = Object.fromEntries(useSearchParams().entries());
-    let resolvedCommon = defaultCommonParameterResolver(searchParams);
-    resolvedCommon = resolveParameterConstraints(resolvedCommon, defaultSceneCommonMetaData);
     let resolved = defaultParameterResolver(searchParams, meta);
     resolved = resolveParameterConstraints(resolved, meta);
 
     const metaGroups: { [key: string]: { [key: string]: ParamMetaToken } } = {};
-    for (const [paramName, token] of Object.entries({ ...meta, ...defaultSceneCommonMetaData })) {
+    for (const [paramName, token] of Object.entries({ ...meta })) {
         if (!metaGroups.hasOwnProperty(token.group)) {
             metaGroups[token.group] = {};
         }
@@ -40,7 +37,7 @@ export default function ControlPanelContent({ meta }: { meta: Scene.MetaData }) 
             {
                 Object.entries(metaGroups).map(([groupName, controlGroup]) => (
                     <React.Fragment key={groupName}>
-                        <GroupControl resolvedValue={{ ...resolved, ...resolvedCommon }} groupName={groupName}
+                        <GroupControl resolvedValue={{ ...resolved }} groupName={groupName}
                             controlGroup={controlGroup} />
                         <Divider />
                     </React.Fragment>
@@ -54,7 +51,7 @@ export default function ControlPanelContent({ meta }: { meta: Scene.MetaData }) 
 function GroupControl({ controlGroup, groupName, resolvedValue }: {
     controlGroup: { [key in keyof Scene.MetaData]: ParamMetaToken },
     groupName: string,
-    resolvedValue: Scene.ComponentProps<Scene.MetaData>
+    resolvedValue: Scene.RawComponentProps<Scene.MetaData>
 }) {
     return (
         <Accordion name={<T.H5>{groupName}</T.H5>} value={groupName}>

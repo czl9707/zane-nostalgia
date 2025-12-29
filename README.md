@@ -11,6 +11,11 @@
  <p align="center">
  Z.Nostalgia is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.
  </p>
+
+ <h3 align="center">More Patterns?</h3>
+ <p align="center">
+  Will be added, when I got bored...
+ </p>
 </p>
 
 
