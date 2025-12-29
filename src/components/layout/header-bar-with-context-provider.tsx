@@ -17,7 +17,6 @@ export default function HeaderBarWithContextProvider({ children }: { children: R
     const [isMenuOpen, setMenuOpen] = React.useState<boolean>(false);
     const [isFullScreen, setFullScreen] = React.useState<boolean>(true);
     const toggleMenu = () => setMenuOpen(isOpen => !isOpen);
-    const toggleFullScreen = () => setFullScreen(isFull => !isFull);
 
     const currentPath = usePathname();
     React.useEffect(() => {
