@@ -28,9 +28,9 @@ export async function generateMetadata(
     const scene = (await params).sceneSlug;
     const sceneModule = sceneModules.filter(s => s.route == scene)[0];
     return {
-        title: `Z.Nostalgia - ${sceneModule.name}`,
-        description: `Dynamic SVG Pattern [${sceneModule.name}] provided by Z.Nostalgia. Z.Nostalgia is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints.`,
-        applicationName: "Z.Nostalgia",
+        title: `Nostalgia - ${sceneModule.name}`,
+        description: `Dynamic SVG Pattern [${sceneModule.name}] provided by Zane. Nostalgia Github Readme is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints.`,
+        applicationName: "Nostalgia",
         keywords: ["svg background", "svg generator", "github readme", "github readme widget"],
         icons: "/favicon.svg",
     }

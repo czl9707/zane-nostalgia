@@ -13,7 +13,7 @@ const NavigationThreadContainer = styled("div")(({ theme }) => ({
     padding: `${theme.size.header.height} 0 ${theme.padding.thread} ${theme.padding.thread}`,
 
     display: "inline-flex", flexDirection: "column", flexWrap: "nowrap",
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.short} ease-in`,
 
     [`@media(min-width: ${theme.breakpoint.lg})`]: {
         width: theme.breakpoint.sm,

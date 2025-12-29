@@ -54,8 +54,8 @@ export default withPigment(
                 h6: { fontFamily: "var(--fonts-serious)", fontWeight: 500, fontSize: '1.25rem', lineHeight: 1.25, },
             },
             transition: {
-                short: ".3s",
-                long: ".6s",
+                short: ".2s",
+                long: ".4s",
             },
             padding: {
                 thread: "min(4rem, 8%)",

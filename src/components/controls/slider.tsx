@@ -37,8 +37,8 @@ const SliderContainer = styled(SliderPrimitive.Root)(({ theme }) => ({
 const SliderThumb = styled(SliderPrimitive.Thumb)(({ theme }) => ({
     position: "absolute", width: "1rem", height: "2rem", top: 0, zIndex: 1,
     transform: "translateX(-50%) translateY(-50%)",
-    transition: `background-color ${theme.transition.short} linear,
-                box-shadow ${theme.transition.short} linear`,
+    transition: `background-color ${theme.transition.short} ease-in,
+                box-shadow ${theme.transition.short} ease-in`,
     backgroundColor: `rgb(${theme.vars.colors.secondary.background})`,
     boxShadow: `0 0 ${theme.boxShadow.thickness.normal} rgb(${theme.vars.colors.secondary.contrastText})`,
 }));

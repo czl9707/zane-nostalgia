@@ -17,7 +17,7 @@ export default async function NavigationThreadContent() {
 
             <T.H4 color="primary"
                 style={{ padding: '1rem', userSelect: "none", }}>
-                Z.Nostalgia
+                Nostalgia
             </T.H4>
             <Divider />
 

@@ -1,7 +1,7 @@
 
 <p align="center">
- <img width="100px" src="./public/favicon.svg" align="center" alt="Z.Nostalgia" />
- <h1 align="center">Z.Nostalgia</h1>
+ <img width="100px" src="./public/favicon.svg" align="center" alt="Nostalgia Github Readme" />
+ <h1 align="center">Nostalgia Github Readme</h1>
  <p align="center">
   Hosted at 
   <a href="https://zane-nostalgia.kiyo-n-zane.com">
@@ -9,7 +9,7 @@
   </a>
  </p>
  <p align="center">
- Z.Nostalgia is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.
+ Nostalgia Github Readme is a web app for generating customizable, animated SVGs. Designed for easy integration into projects, available through HTTP endpoints. Use it to add unique visuals to GitHub READMEs, websites by simply embedding URL.
  </p>
 
  <h3 align="center">More Patterns?</h3>

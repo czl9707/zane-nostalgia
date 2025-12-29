@@ -14,7 +14,7 @@ const InformationThreadContainer = styled("div")(({ theme }) => ({
 
     display: "inline-flex", flexDirection: "column",
     flexWrap: "nowrap", overflowY: "visible", overflowX: "visible",
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.short} ease-in`,
 
     [`@media(min-width: ${theme.breakpoint.lg})`]: {
         width: `100%`,

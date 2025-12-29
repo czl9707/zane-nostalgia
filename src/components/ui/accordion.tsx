@@ -34,10 +34,10 @@ const slideUp = keyframes({
 })
 const AccordionContent = styled(AccordionPrimitive.Content)(({ theme }) => ({
     "&[data-state='open']": {
-        animation: `${slideDown} ${theme.transition.long} linear`,
+        animation: `${slideDown} ${theme.transition.long} ease-in`,
     },
     "&[data-state='closed']": {
-        animation: `${slideUp} ${theme.transition.long} linear`,
+        animation: `${slideUp} ${theme.transition.long} ease-in`,
     },
 }));
 

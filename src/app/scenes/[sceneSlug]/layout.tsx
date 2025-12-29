@@ -28,7 +28,7 @@ const SVGContainerDiv = styled('div')(({ theme }) => ({
         },
     },
 
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.short} ease-in`,
 }))
 
 const SVGWrapper = styled('svg')(({ theme }) => ({
@@ -39,7 +39,7 @@ const SVGWrapper = styled('svg')(({ theme }) => ({
         maxWidth: "1000%", maxHeight: "1000%",
         minWidth: "100%", minHeight: "100%",
     },
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.short} ease-in`,
 }))
 
 // wrapped in Suspense

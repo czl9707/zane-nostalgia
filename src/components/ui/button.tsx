@@ -19,7 +19,7 @@ const ripple = keyframes({
 const OnHoverMask = styled("div")(({ theme }) => ({
     opacity: 0, background: "grey", position: "absolute",
     inset: 0, zIndex: 1,
-    transition: `all ${theme.transition.short} linear`,
+    transition: `all ${theme.transition.short} ease-in`,
 }));
 
 const OnClickMask = styled("div")({

@@ -19,7 +19,7 @@ const ToggleGroupItem = styled(ToggleGroupPrimitive.Item)(({ theme }) => ({
 
     flex: "1 1",
     background: `rgb(${theme.vars.colors.primary.contrastText} / 6%)`,
-    transition: `box-shadow ${theme.transition.short} linear`,
+    transition: `box-shadow ${theme.transition.short} ease-in`,
     "&:hover": {
         boxShadow: `inset 0 0 calc(${theme.boxShadow.thickness.focus} / 2) rgb(${theme.vars.colors.primary.contrastText})`,
     },
