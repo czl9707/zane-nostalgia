@@ -30,7 +30,7 @@ const RandomSeedButton = React.forwardRef<HTMLDivElement, RandomSeedButtonProps 
     }
 )
 
-const TogglePreviewButton = React.forwardRef<HTMLDivElement, {}>(
+const TogglePreviewButton = React.forwardRef<HTMLDivElement, object>(
     function TogglePreviewButton({ }, ref) {
         const { isFullScreen, setFullScreen } = React.useContext(FullScreenContext);
         const toggleFullScreen = () => setFullScreen(!isFullScreen);
