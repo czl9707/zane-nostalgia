@@ -32,7 +32,7 @@ function HeaderBar({ toggleMenu, isMenuOpen }: HeaderBarProps) {
                 before={<DoubleArrow />}
             />
             <div style={{ flex: "1 1" }} />
-            <Link href={"https://github.com/czl9707/zane-nostalgia"} target="_blank" rel="noopener noreferrer">
+            <Link href={"https://github.com/czl9707/nostalgia-gh-banner"} target="_blank" rel="noopener noreferrer">
                 <Github />
             </Link>
         </HeaderBarDiv>
